@@ -1,3 +1,5 @@
+import rawTemplates from "./templates.json";
+
 function normalizeTemplate(rawTemplate, index) {
   const id = String(rawTemplate?.id ?? "").trim() || `template-${index + 1}`;
   const name = String(rawTemplate?.name ?? "").trim() || `Template ${index + 1}`;
@@ -15,13 +17,7 @@ function normalizeTemplate(rawTemplate, index) {
 }
 
 export async function loadRegionTemplates() {
-  const response = await fetch("./src/data/templates.json", { cache: "no-store" });
-  if (!response.ok) {
-    throw new Error(`Template load failed with status ${response.status}`);
-  }
-
-  const raw = await response.json();
-  const templates = Array.isArray(raw) ? raw : [];
+  const templates = Array.isArray(rawTemplates) ? rawTemplates : [];
   return templates.map(normalizeTemplate).filter((template) => template.quotas.length > 0);
 }
 
