@@ -40,6 +40,15 @@ npm run dev
 npm test
 ```
 
+## Deploy on Render
+
+This repo includes [`render.yaml`](./render.yaml) for static deployment.
+
+- Build command: `npm ci && npm run build`
+- Publish directory: `dist`
+
+If you deploy from the Render dashboard manually, use the same values above.
+
 ## File structure
 
 - `index.html`: Application UI structure.

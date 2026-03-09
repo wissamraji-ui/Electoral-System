@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: electoral-system
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
