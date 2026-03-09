@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lebanon Electoral Law Simulator</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="noise-bg"></div>
+    <header class="topbar">
+      <div class="brand">
+        <p class="kicker">Lebanon Electoral Platform</p>
+        <h1>Seat Allocation Simulator</h1>
+      </div>
+      <p class="subtitle">
+        Configure district quotas by sect, enter candidate votes, and simulate winners.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="panel panel-config">
+        <div class="panel-title-row">
+          <h2>District Configuration</h2>
+          <span class="tag">Editable Templates</span>
+        </div>
+
+        <div class="grid-two">
+          <label class="field">
+            <span>Template</span>
+            <select id="templateSelect"></select>
+          </label>
+          <div class="button-row compact">
+            <button id="loadTemplateBtn" class="btn btn-secondary">Load Template</button>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>Region / District Name</span>
+          <input id="regionNameInput" type="text" placeholder="Example: Beirut II" />
+        </label>
+
+        <div class="quota-header">
+          <h3>Seat Quotas By Sect</h3>
+          <p>Total seats: <strong id="totalSeatsValue">0</strong></p>
+        </div>
+
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Sect (1-2 letters)</th>
+                <th>Seats</th>
+                <th class="actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="quotaTableBody"></tbody>
+          </table>
+        </div>
+        <div id="quotaLegend" class="quota-legend"></div>
+      </section>
+
+      <section class="panel panel-candidates">
+        <div class="panel-title-row">
+          <h2>Candidates</h2>
+          <span class="tag">Scenario Inputs</span>
+        </div>
+
+        <div class="candidate-form">
+          <label class="field">
+            <span>Name</span>
+            <input id="candidateNameInput" type="text" placeholder="Candidate full name" />
+          </label>
+          <label class="field">
+            <span>Sect</span>
+            <select id="candidateSectInput"></select>
+          </label>
+          <label class="field">
+            <span>Party / List Name</span>
+            <input id="candidateListInput" type="text" placeholder="Example: Reform List" />
+          </label>
+          <label class="field">
+            <span>Votes</span>
+            <input id="candidateVotesInput" type="number" min="0" step="1" value="0" />
+          </label>
+          <button id="addCandidateBtn" class="btn btn-primary">Add Candidate</button>
+        </div>
+
+        <div class="table-shell candidate-table-shell">
+          <table class="candidate-grid-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Sect</th>
+                <th>Party / List</th>
+                <th>Votes</th>
+                <th class="actions-col candidate-actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="candidateTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="table-shell list-totals-shell">
+          <h3>List Vote Totals (Live)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Party / List</th>
+                <th>Candidates</th>
+                <th>Total Votes</th>
+              </tr>
+            </thead>
+            <tbody id="listVoteTotalsBody"></tbody>
+          </table>
+        </div>
+
+        <div class="button-row">
+          <button id="runSimulationBtn" class="btn btn-accent">Run Simulation</button>
+          <button id="exportBtn" class="btn btn-secondary">Export JSON</button>
+          <button id="exportPdfBtn" class="btn btn-secondary">Export PDF</button>
+          <button id="importBtn" class="btn btn-secondary">Import JSON</button>
+          <button id="resetBtn" class="btn btn-danger">Reset</button>
+          <input id="importFileInput" type="file" accept=".json,application/json" hidden />
+        </div>
+      </section>
+
+      <section class="panel panel-results">
+        <div class="panel-title-row">
+          <h2>Simulation Results</h2>
+          <span class="tag">Deterministic Output</span>
+        </div>
+
+        <div class="metrics" id="metricsGrid"></div>
+        <div id="alertsBox" class="alerts-box"></div>
+
+        <div class="table-shell">
+          <h3>List EQ Allocation</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Party / List</th>
+                <th>Votes</th>
+                <th>EQ Status</th>
+                <th>Seats</th>
+                <th>Base Seats</th>
+                <th>Remainder</th>
+              </tr>
+            </thead>
+            <tbody id="listAllocationBody"></tbody>
+          </table>
+        </div>
+
+        <div class="table-shell">
+          <h3>Winning Candidates</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Seat</th>
+                <th>Sect</th>
+                <th>Candidate</th>
+                <th>Party / List</th>
+                <th>Votes</th>
+                <th>Margin To Next</th>
+              </tr>
+            </thead>
+            <tbody id="winnersTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="table-shell">
+          <h3>Sect Coverage</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Sect</th>
+                <th>Required Seats</th>
+                <th>Elected</th>
+                <th>Remaining</th>
+              </tr>
+            </thead>
+            <tbody id="sectCoverageBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Templates are editable for legal updates. Validate official seat maps before publishing
+        final outcomes.
+      </p>
+    </footer>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>

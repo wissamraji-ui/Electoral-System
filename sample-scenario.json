@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "exportedAt": "2026-03-09T00:00:00.000Z",
+  "scenario": {
+    "regionName": "Beirut II",
+    "quotas": [
+      { "sect": "Sunni", "seats": 6 },
+      { "sect": "Shia", "seats": 2 },
+      { "sect": "Druze", "seats": 1 },
+      { "sect": "Greek Orthodox", "seats": 1 },
+      { "sect": "Evangelical", "seats": 1 }
+    ],
+    "candidates": [
+      { "name": "Candidate A", "sect": "Sunni", "list": "List 1", "votes": 22000 },
+      { "name": "Candidate B", "sect": "Sunni", "list": "List 2", "votes": 21000 },
+      { "name": "Candidate C", "sect": "Shia", "list": "List 1", "votes": 19000 },
+      { "name": "Candidate D", "sect": "Shia", "list": "List 2", "votes": 17000 },
+      { "name": "Candidate E", "sect": "Druze", "list": "List 1", "votes": 9000 },
+      { "name": "Candidate F", "sect": "Greek Orthodox", "list": "List 2", "votes": 8500 },
+      { "name": "Candidate G", "sect": "Evangelical", "list": "List 1", "votes": 4000 }
+    ]
+  }
+}

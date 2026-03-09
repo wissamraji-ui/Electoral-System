@@ -1,0 +1,154 @@
+[
+  {
+    "id": "beirut-i",
+    "name": "Beirut I",
+    "quotas": [
+      { "sect": "Maronite", "seats": 2 },
+      { "sect": "Greek Orthodox", "seats": 1 },
+      { "sect": "Armenian Orthodox", "seats": 1 },
+      { "sect": "Armenian Catholic", "seats": 1 },
+      { "sect": "Minorities", "seats": 1 },
+      { "sect": "Evangelical", "seats": 1 }
+    ]
+  },
+  {
+    "id": "beirut-ii",
+    "name": "Beirut II",
+    "quotas": [
+      { "sect": "Sunni", "seats": 6 },
+      { "sect": "Shia", "seats": 2 },
+      { "sect": "Druze", "seats": 1 },
+      { "sect": "Greek Orthodox", "seats": 1 },
+      { "sect": "Evangelical", "seats": 1 }
+    ]
+  },
+  {
+    "id": "mount-lebanon-i",
+    "name": "Mount Lebanon I (Keserwan - Jbeil)",
+    "quotas": [
+      { "sect": "Maronite", "seats": 7 },
+      { "sect": "Shia", "seats": 1 }
+    ]
+  },
+  {
+    "id": "mount-lebanon-ii",
+    "name": "Mount Lebanon II (Metn)",
+    "quotas": [
+      { "sect": "Maronite", "seats": 4 },
+      { "sect": "Greek Orthodox", "seats": 2 },
+      { "sect": "Armenian Orthodox", "seats": 1 },
+      { "sect": "Armenian Catholic", "seats": 1 }
+    ]
+  },
+  {
+    "id": "mount-lebanon-iii",
+    "name": "Mount Lebanon III (Baabda)",
+    "quotas": [
+      { "sect": "Maronite", "seats": 2 },
+      { "sect": "Shia", "seats": 2 },
+      { "sect": "Druze", "seats": 1 },
+      { "sect": "Greek Orthodox", "seats": 1 }
+    ]
+  },
+  {
+    "id": "mount-lebanon-iv",
+    "name": "Mount Lebanon IV (Aley - Chouf)",
+    "quotas": [
+      { "sect": "Druze", "seats": 4 },
+      { "sect": "Maronite", "seats": 2 },
+      { "sect": "Sunni", "seats": 2 },
+      { "sect": "Greek Orthodox", "seats": 2 },
+      { "sect": "Greek Catholic", "seats": 1 },
+      { "sect": "Shia", "seats": 1 },
+      { "sect": "Evangelical", "seats": 1 }
+    ]
+  },
+  {
+    "id": "north-i",
+    "name": "North I (Akkar)",
+    "quotas": [
+      { "sect": "Sunni", "seats": 3 },
+      { "sect": "Greek Orthodox", "seats": 2 },
+      { "sect": "Maronite", "seats": 1 },
+      { "sect": "Alawite", "seats": 1 }
+    ]
+  },
+  {
+    "id": "north-ii",
+    "name": "North II (Tripoli - Minieh - Dannieh)",
+    "quotas": [
+      { "sect": "Sunni", "seats": 8 },
+      { "sect": "Alawite", "seats": 1 },
+      { "sect": "Maronite", "seats": 1 },
+      { "sect": "Greek Orthodox", "seats": 1 }
+    ]
+  },
+  {
+    "id": "north-iii",
+    "name": "North III (Batroun - Koura - Bcharre - Zgharta)",
+    "quotas": [
+      { "sect": "Maronite", "seats": 7 },
+      { "sect": "Greek Orthodox", "seats": 3 }
+    ]
+  },
+  {
+    "id": "bekaa-i",
+    "name": "Bekaa I (Zahle)",
+    "quotas": [
+      { "sect": "Greek Catholic", "seats": 2 },
+      { "sect": "Sunni", "seats": 1 },
+      { "sect": "Shia", "seats": 1 },
+      { "sect": "Maronite", "seats": 1 },
+      { "sect": "Greek Orthodox", "seats": 1 },
+      { "sect": "Armenian Orthodox", "seats": 1 }
+    ]
+  },
+  {
+    "id": "bekaa-ii",
+    "name": "Bekaa II (West Bekaa - Rashaya)",
+    "quotas": [
+      { "sect": "Sunni", "seats": 2 },
+      { "sect": "Druze", "seats": 1 },
+      { "sect": "Shia", "seats": 1 },
+      { "sect": "Maronite", "seats": 1 },
+      { "sect": "Greek Orthodox", "seats": 1 }
+    ]
+  },
+  {
+    "id": "bekaa-iii",
+    "name": "Bekaa III (Baalbek - Hermel)",
+    "quotas": [
+      { "sect": "Shia", "seats": 6 },
+      { "sect": "Sunni", "seats": 2 },
+      { "sect": "Maronite", "seats": 1 },
+      { "sect": "Greek Catholic", "seats": 1 }
+    ]
+  },
+  {
+    "id": "south-i",
+    "name": "South I (Saida - Jezzine)",
+    "quotas": [
+      { "sect": "Sunni", "seats": 2 },
+      { "sect": "Maronite", "seats": 2 },
+      { "sect": "Greek Catholic", "seats": 1 }
+    ]
+  },
+  {
+    "id": "south-ii",
+    "name": "South II (Tyre - Zahrani)",
+    "quotas": [
+      { "sect": "Shia", "seats": 6 },
+      { "sect": "Greek Catholic", "seats": 1 }
+    ]
+  },
+  {
+    "id": "south-iii",
+    "name": "South III (Nabatieh - Bint Jbeil - Marjeyoun - Hasbaya)",
+    "quotas": [
+      { "sect": "Shia", "seats": 8 },
+      { "sect": "Sunni", "seats": 1 },
+      { "sect": "Druze", "seats": 1 },
+      { "sect": "Greek Orthodox", "seats": 1 }
+    ]
+  }
+]
