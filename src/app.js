@@ -11,7 +11,6 @@ const elements = {
   regionNameInput: document.getElementById("regionNameInput"),
   totalSeatsValue: document.getElementById("totalSeatsValue"),
   quotaTableBody: document.getElementById("quotaTableBody"),
-  quotaLegend: document.getElementById("quotaLegend"),
   listNameInput: document.getElementById("listNameInput"),
   addListBtn: document.getElementById("addListBtn"),
   listBuilderMeta: document.getElementById("listBuilderMeta"),
@@ -444,23 +443,16 @@ function renderQuotaTable() {
   if (state.quotas.length === 0) {
     elements.quotaTableBody.innerHTML =
       '<tr><td colspan="1" class="empty">No seat quotas configured. Load a district template to start.</td></tr>';
-    elements.quotaLegend.innerHTML = "";
     return;
   }
 
-  const abbreviations = buildSectAbbreviations(state.quotas);
-  const quotasLocked = state.quotasLocked === true;
-  const lockNotice = quotasLocked
-    ? '<p class="muted quota-lock-note">Seat quotas are locked after template load to preserve calculation integrity.</p>'
-    : "";
-
   elements.quotaTableBody.innerHTML = state.quotas
     .map(
-      (entry, index) => `
+      (entry) => `
       <tr data-id="${escapeHtml(entry.id)}">
         <td>
           <div class="quota-cell-main">
-            <span class="sect-abbr-badge" title="${escapeHtml(entry.sect)}">${escapeHtml(abbreviations[index]?.abbr || "?")}</span>
+            <span class="quota-sect-name">${escapeHtml(entry.sect)}</span>
             <span class="quota-seat-inline">${entry.seats} seat${entry.seats === 1 ? "" : "s"}</span>
           </div>
         </td>
@@ -468,23 +460,6 @@ function renderQuotaTable() {
     `
     )
     .join("");
-
-  elements.quotaLegend.innerHTML = `
-    ${lockNotice}
-    <p class="quota-legend-title">Abbreviation Key</p>
-    <div class="quota-legend-grid">
-      ${abbreviations
-        .map(
-          (entry) => `
-            <div class="quota-legend-item">
-              <span class="sect-abbr-badge">${escapeHtml(entry.abbr)}</span>
-              <span>${escapeHtml(entry.sect)}</span>
-            </div>
-          `
-        )
-        .join("")}
-    </div>
-  `;
 }
 
 function renderListBuilder() {
@@ -847,85 +822,6 @@ function normalizeSect(value) {
   return String(value ?? "")
     .trim()
     .toLowerCase();
-}
-
-function getSectAbbreviationOptions(sectName) {
-  const words = String(sectName ?? "")
-    .toUpperCase()
-    .match(/[A-Z]+/g) ?? [];
-  const joined = words.join("");
-  const options = [];
-
-  if (joined) {
-    options.push(joined[0]);
-    for (const character of joined.slice(1)) {
-      options.push(character);
-    }
-  }
-
-  if (words.length > 0) {
-    const firstWord = words[0];
-    if (firstWord.length >= 2) {
-      options.push(firstWord.slice(0, 2));
-    }
-  }
-
-  if (words.length >= 2) {
-    options.push(`${words[0][0]}${words[1][0]}`);
-  }
-
-  if (joined.length >= 2) {
-    for (let i = 1; i < joined.length; i += 1) {
-      options.push(`${joined[0]}${joined[i]}`);
-    }
-  }
-
-  return Array.from(
-    new Set(
-      options
-        .map((value) => value.replace(/[^A-Z]/g, ""))
-        .filter((value) => value.length >= 1 && value.length <= 2)
-    )
-  );
-}
-
-function buildSectAbbreviations(quotas) {
-  const used = new Set();
-  const entries = [];
-
-  for (const quota of quotas) {
-    const sect = String(quota?.sect ?? "").trim();
-    const options = getSectAbbreviationOptions(sect);
-    let chosen = options.find((option) => !used.has(option));
-
-    if (!chosen) {
-      for (let first = 65; first <= 90 && !chosen; first += 1) {
-        const oneLetter = String.fromCharCode(first);
-        if (!used.has(oneLetter)) {
-          chosen = oneLetter;
-          break;
-        }
-
-        for (let second = 65; second <= 90; second += 1) {
-          const twoLetters = `${String.fromCharCode(first)}${String.fromCharCode(second)}`;
-          if (!used.has(twoLetters)) {
-            chosen = twoLetters;
-            break;
-          }
-        }
-      }
-    }
-
-    chosen = chosen || "NA";
-    used.add(chosen);
-    entries.push({
-      id: quota.id,
-      sect,
-      abbr: chosen
-    });
-  }
-
-  return entries;
 }
 
 function normalizeState(input) {

@@ -24,7 +24,7 @@ body {
   padding: 0;
   font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   color: var(--text);
-  background: radial-gradient(circle at 15% 10%, #fdfcf8 0%, var(--bg) 55%, #ece7dc 100%);
+  background: #efefef;
   min-height: 100%;
 }
 
@@ -72,7 +72,7 @@ body {
   margin: 0 auto;
   padding: 0 0.7rem 2rem;
   display: grid;
-  grid-template-columns: 0.78fr 2.45fr 0.8fr;
+  grid-template-columns: 1.42fr 1.18fr;
   gap: 1rem;
 }
 
@@ -108,7 +108,7 @@ body {
   white-space: nowrap;
 }
 
-.panel-config .tag {
+.embedded-config .tag {
   font-size: 0.64rem;
   padding: 0.14rem 0.45rem;
 }
@@ -159,6 +159,23 @@ select:focus {
   grid-template-columns: 1fr auto;
   gap: 0.6rem;
   margin-bottom: 0.7rem;
+}
+
+.embedded-config {
+  border: 1px solid #d7d0c1;
+  background: #fffdf8;
+  border-radius: 12px;
+  padding: 0.72rem;
+  margin-bottom: 0.95rem;
+}
+
+.panel-subtitle-row {
+  margin-bottom: 0.6rem;
+}
+
+.panel-subtitle-row h3 {
+  margin: 0;
+  font-size: 0.94rem;
 }
 
 .candidate-form {
@@ -417,6 +434,15 @@ tbody tr:last-child td {
   padding: 0.58rem 0.68rem;
 }
 
+.panel-results .table-shell {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.panel-results table {
+  min-width: 560px;
+}
+
 .panel-results th,
 .panel-results td {
   font-size: 0.74rem;
@@ -441,51 +467,6 @@ tbody tr:last-child td {
   padding: 0.5rem 0.6rem;
 }
 
-.sect-abbr-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2rem;
-  height: 1.7rem;
-  padding: 0 0.42rem;
-  border-radius: 999px;
-  border: 1px solid #c4d1db;
-  background: #eaf2f8;
-  color: #20435d;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-}
-
-.quota-legend {
-  border-top: 1px dashed #d7d0c1;
-  padding-top: 0.6rem;
-  margin-top: -0.1rem;
-  margin-bottom: 0.45rem;
-}
-
-.quota-legend-title {
-  margin: 0 0 0.4rem;
-  font-size: 0.72rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 700;
-}
-
-.quota-legend-grid {
-  display: grid;
-  gap: 0.34rem;
-}
-
-.quota-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.42rem;
-  font-size: 0.77rem;
-  color: #2a3f52;
-}
-
 .quota-cell-main {
   display: flex;
   align-items: center;
@@ -493,13 +474,14 @@ tbody tr:last-child td {
   flex-wrap: wrap;
 }
 
-.quota-seat-inline {
-  color: #153247;
+.quota-sect-name {
+  color: #20435d;
   font-weight: 700;
 }
 
-.quota-lock-note {
-  margin: 0 0 0.4rem;
+.quota-seat-inline {
+  color: #153247;
+  font-weight: 700;
 }
 
 .list-builder-meta {

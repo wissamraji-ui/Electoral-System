@@ -19,49 +19,48 @@
     </header>
 
     <main class="layout">
-      <section class="panel panel-config">
-        <div class="panel-title-row">
-          <h2>District Configuration</h2>
-          <span class="tag">Template Seat Map</span>
-        </div>
-
-        <div class="grid-two">
-          <label class="field">
-            <span>Template</span>
-            <select id="templateSelect"></select>
-          </label>
-          <div class="button-row compact">
-            <button id="loadTemplateBtn" class="btn btn-secondary">Load Template</button>
-          </div>
-        </div>
-
-        <label class="field">
-          <span>Region / District Name</span>
-          <input id="regionNameInput" type="text" placeholder="Example: Beirut II" />
-        </label>
-
-        <div class="quota-header">
-          <h3>Seat Quotas By Sect</h3>
-          <p>Total seats: <strong id="totalSeatsValue">0</strong></p>
-        </div>
-
-        <div class="table-shell">
-          <table>
-            <thead>
-              <tr>
-                <th>Sect Quota</th>
-              </tr>
-            </thead>
-            <tbody id="quotaTableBody"></tbody>
-          </table>
-        </div>
-        <div id="quotaLegend" class="quota-legend"></div>
-      </section>
-
       <section class="panel panel-candidates">
         <div class="panel-title-row">
-          <h2>Candidates</h2>
+          <h2>District & Candidates</h2>
           <span class="tag">Scenario Inputs</span>
+        </div>
+
+        <div class="embedded-config">
+          <div class="panel-title-row panel-subtitle-row">
+            <h3>District Configuration</h3>
+            <span class="tag">Template Seat Map</span>
+          </div>
+
+          <div class="grid-two">
+            <label class="field">
+              <span>Template</span>
+              <select id="templateSelect"></select>
+            </label>
+            <div class="button-row compact">
+              <button id="loadTemplateBtn" class="btn btn-secondary">Load Template</button>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Region / District Name</span>
+            <input id="regionNameInput" type="text" placeholder="Example: Beirut II" />
+          </label>
+
+          <div class="quota-header">
+            <h3>Seat Quotas By Sect</h3>
+            <p>Total seats: <strong id="totalSeatsValue">0</strong></p>
+          </div>
+
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sect Quota</th>
+                </tr>
+              </thead>
+              <tbody id="quotaTableBody"></tbody>
+            </table>
+          </div>
         </div>
 
         <div class="candidate-form">
