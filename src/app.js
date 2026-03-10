@@ -8,6 +8,9 @@ const EXPORT_VERSION = 1;
 const elements = {
   templateSelect: document.getElementById("templateSelect"),
   loadTemplateBtn: document.getElementById("loadTemplateBtn"),
+  districtSelectionNotice: document.getElementById("districtSelectionNotice"),
+  districtConfigDetails: document.getElementById("districtConfigDetails"),
+  simulationInputs: document.getElementById("simulationInputs"),
   regionNameInput: document.getElementById("regionNameInput"),
   totalSeatsValue: document.getElementById("totalSeatsValue"),
   quotaTableBody: document.getElementById("quotaTableBody"),
@@ -26,6 +29,8 @@ const elements = {
   saveScenarioNameInput: document.getElementById("saveScenarioNameInput"),
   saveScenarioBtn: document.getElementById("saveScenarioBtn"),
   savedScenariosList: document.getElementById("savedScenariosList"),
+  resultsSelectionNotice: document.getElementById("resultsSelectionNotice"),
+  resultsWorkspace: document.getElementById("resultsWorkspace"),
   metricsGrid: document.getElementById("metricsGrid"),
   alertsBox: document.getElementById("alertsBox"),
   listAllocationBody: document.getElementById("listAllocationBody"),
@@ -47,7 +52,7 @@ initialize().catch((error) => {
 
 async function initialize() {
   templates = await loadRegionTemplates();
-  state = normalizeState(loadState() ?? (templates.length > 0 ? cloneTemplate(templates[0]) : createEmptyState()));
+  state = normalizeState(loadState() ?? createEmptyState());
   savedScenarios = loadSavedScenarios();
 
   populateTemplateSelect();
@@ -96,9 +101,14 @@ function populateTemplateSelect() {
 
   elements.templateSelect.disabled = false;
   elements.loadTemplateBtn.disabled = false;
-  elements.templateSelect.innerHTML = templates
-    .map((template) => `<option value="${escapeHtml(template.id)}">${escapeHtml(template.name)}</option>`)
-    .join("");
+  const currentTemplateId = getCurrentTemplateId();
+  elements.templateSelect.innerHTML = [
+    '<option value="">Choose a district template</option>',
+    ...templates.map(
+      (template) => `<option value="${escapeHtml(template.id)}">${escapeHtml(template.name)}</option>`
+    )
+  ].join("");
+  elements.templateSelect.value = currentTemplateId;
 }
 
 function onLoadTemplate() {
@@ -107,6 +117,11 @@ function onLoadTemplate() {
   }
 
   const templateId = elements.templateSelect.value;
+  if (!templateId) {
+    window.alert("Select a district template first.");
+    return;
+  }
+
   const template = templates.find((item) => item.id === templateId);
 
   if (!template) {
@@ -428,6 +443,7 @@ function onSavedScenariosListClick(event) {
 
 function renderAll() {
   rebuildListColorIndex();
+  applyDistrictSelectionVisibility();
   elements.regionNameInput.value = state.regionName;
   renderQuotaTable();
   renderListBuilder();
@@ -435,6 +451,55 @@ function renderAll() {
   renderCandidateListVoteTotals();
   renderSavedScenarios();
   renderResults();
+}
+
+function applyDistrictSelectionVisibility() {
+  const hasDistrict = state.quotas.length > 0;
+  elements.districtSelectionNotice.hidden = hasDistrict;
+  elements.resultsSelectionNotice.hidden = hasDistrict;
+  elements.districtConfigDetails.hidden = !hasDistrict;
+  elements.simulationInputs.hidden = !hasDistrict;
+  elements.resultsWorkspace.hidden = !hasDistrict;
+}
+
+function getCurrentTemplateId() {
+  if (state.quotas.length === 0) {
+    return "";
+  }
+
+  const stateSignature = buildQuotaSignature(state.quotas);
+  if (!stateSignature) {
+    return "";
+  }
+
+  const stateRegion = state.regionName.trim().toLowerCase();
+  const exactMatch = templates.find(
+    (template) =>
+      template.name.trim().toLowerCase() === stateRegion &&
+      buildQuotaSignature(template.quotas) === stateSignature
+  );
+
+  if (exactMatch) {
+    return exactMatch.id;
+  }
+
+  const quotaOnlyMatch = templates.find(
+    (template) => buildQuotaSignature(template.quotas) === stateSignature
+  );
+
+  return quotaOnlyMatch?.id ?? "";
+}
+
+function buildQuotaSignature(quotas) {
+  return (Array.isArray(quotas) ? quotas : [])
+    .map((entry) => ({
+      sect: normalizeSect(entry?.sect),
+      seats: clampInteger(entry?.seats, 0)
+    }))
+    .filter((entry) => entry.sect && entry.seats > 0)
+    .sort((a, b) => a.sect.localeCompare(b.sect, "en", { sensitivity: "base" }))
+    .map((entry) => `${entry.sect}:${entry.seats}`)
+    .join("|");
 }
 
 function renderQuotaTable() {

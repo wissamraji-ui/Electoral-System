@@ -41,85 +41,93 @@
             </div>
           </div>
 
-          <label class="field">
-            <span>Region / District Name</span>
-            <input id="regionNameInput" type="text" placeholder="Example: Beirut II" />
-          </label>
+          <p id="districtSelectionNotice" class="selection-notice">
+            Select a district template and click Load Template to continue.
+          </p>
 
-          <div class="quota-header">
-            <h3>Seat Quotas By Sect</h3>
-            <p>Total seats: <strong id="totalSeatsValue">0</strong></p>
+          <div id="districtConfigDetails" hidden>
+            <label class="field">
+              <span>Region / District Name</span>
+              <input id="regionNameInput" type="text" placeholder="Example: Beirut II" />
+            </label>
+
+            <div class="quota-header">
+              <h3>Seat Quotas By Sect</h3>
+              <p>Total seats: <strong id="totalSeatsValue">0</strong></p>
+            </div>
+
+            <div class="table-shell">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Sect Quota</th>
+                  </tr>
+                </thead>
+                <tbody id="quotaTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="simulationInputs" hidden>
+          <div class="candidate-form">
+            <label class="field">
+              <span>Party / List Name</span>
+              <input id="listNameInput" type="text" placeholder="Example: Reform List" />
+            </label>
+            <button id="addListBtn" class="btn btn-primary">Add List Candidates</button>
+          </div>
+          <p id="listBuilderMeta" class="muted list-builder-meta"></p>
+          <div id="listChips" class="list-chip-manager"></div>
+
+          <div class="table-shell candidate-table-shell">
+            <table class="candidate-grid-table">
+              <thead>
+                <tr>
+                  <th>Party / List</th>
+                  <th>Sect</th>
+                  <th>Name</th>
+                  <th>Votes</th>
+                </tr>
+              </thead>
+              <tbody id="candidateTableBody"></tbody>
+            </table>
           </div>
 
-          <div class="table-shell">
+          <div class="table-shell list-totals-shell">
+            <h3>List Vote Totals (Live)</h3>
             <table>
               <thead>
                 <tr>
-                  <th>Sect Quota</th>
+                  <th>Party / List</th>
+                  <th>Filled / Slots</th>
+                  <th>Total Votes</th>
                 </tr>
               </thead>
-              <tbody id="quotaTableBody"></tbody>
+              <tbody id="listVoteTotalsBody"></tbody>
             </table>
           </div>
-        </div>
 
-        <div class="candidate-form">
-          <label class="field">
-            <span>Party / List Name</span>
-            <input id="listNameInput" type="text" placeholder="Example: Reform List" />
-          </label>
-          <button id="addListBtn" class="btn btn-primary">Add List Candidates</button>
-        </div>
-        <p id="listBuilderMeta" class="muted list-builder-meta"></p>
-        <div id="listChips" class="list-chip-manager"></div>
-
-        <div class="table-shell candidate-table-shell">
-          <table class="candidate-grid-table">
-            <thead>
-              <tr>
-                <th>Party / List</th>
-                <th>Sect</th>
-                <th>Name</th>
-                <th>Votes</th>
-              </tr>
-            </thead>
-            <tbody id="candidateTableBody"></tbody>
-          </table>
-        </div>
-
-        <div class="table-shell list-totals-shell">
-          <h3>List Vote Totals (Live)</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Party / List</th>
-                <th>Filled / Slots</th>
-                <th>Total Votes</th>
-              </tr>
-            </thead>
-            <tbody id="listVoteTotalsBody"></tbody>
-          </table>
-        </div>
-
-        <div class="button-row">
-          <button id="runSimulationBtn" class="btn btn-accent">Run Simulation</button>
-          <button id="exportBtn" class="btn btn-secondary">Export JSON</button>
-          <button id="exportPdfBtn" class="btn btn-secondary">Export PDF</button>
-          <button id="importBtn" class="btn btn-secondary">Import JSON</button>
-          <button id="resetBtn" class="btn btn-danger">Reset</button>
-          <input id="importFileInput" type="file" accept=".json,application/json" hidden />
-        </div>
-
-        <div class="saved-simulations">
-          <h3>Saved Simulations</h3>
-          <div class="saved-sim-controls">
-            <label class="field">
-              <span>Save Name (Optional)</span>
-              <input id="saveScenarioNameInput" type="text" placeholder="Example: Beirut II baseline" />
-            </label>
-            <button id="saveScenarioBtn" class="btn btn-secondary">Save Current</button>
+          <div class="button-row">
+            <button id="runSimulationBtn" class="btn btn-accent">Run Simulation</button>
+            <button id="exportBtn" class="btn btn-secondary">Export JSON</button>
+            <button id="exportPdfBtn" class="btn btn-secondary">Export PDF</button>
+            <button id="importBtn" class="btn btn-secondary">Import JSON</button>
+            <button id="resetBtn" class="btn btn-danger">Reset</button>
+            <input id="importFileInput" type="file" accept=".json,application/json" hidden />
           </div>
-          <div id="savedScenariosList" class="saved-sim-list"></div>
+
+          <div class="saved-simulations">
+            <h3>Saved Simulations</h3>
+            <div class="saved-sim-controls">
+              <label class="field">
+                <span>Save Name (Optional)</span>
+                <input id="saveScenarioNameInput" type="text" placeholder="Example: Beirut II baseline" />
+              </label>
+              <button id="saveScenarioBtn" class="btn btn-secondary">Save Current</button>
+            </div>
+            <div id="savedScenariosList" class="saved-sim-list"></div>
+          </div>
         </div>
       </section>
 
@@ -129,56 +137,62 @@
           <span class="tag">Deterministic Output</span>
         </div>
 
-        <div class="metrics" id="metricsGrid"></div>
-        <div id="alertsBox" class="alerts-box"></div>
+        <p id="resultsSelectionNotice" class="selection-notice">
+          Simulation results appear after a district template is loaded.
+        </p>
 
-        <div class="table-shell">
-          <h3>List EQ Allocation</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Party / List</th>
-                <th>Votes</th>
-                <th>EQ Status</th>
-                <th>Seats</th>
-                <th>Base Seats</th>
-                <th>Remainder</th>
-              </tr>
-            </thead>
-            <tbody id="listAllocationBody"></tbody>
-          </table>
-        </div>
+        <div id="resultsWorkspace" hidden>
+          <div class="metrics" id="metricsGrid"></div>
+          <div id="alertsBox" class="alerts-box"></div>
 
-        <div class="table-shell">
-          <h3>Winning Candidates</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Seat</th>
-                <th>Sect</th>
-                <th>Candidate</th>
-                <th>Party / List</th>
-                <th>Votes</th>
-                <th>Margin To Next</th>
-              </tr>
-            </thead>
-            <tbody id="winnersTableBody"></tbody>
-          </table>
-        </div>
+          <div class="table-shell">
+            <h3>List EQ Allocation</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Party / List</th>
+                  <th>Votes</th>
+                  <th>EQ Status</th>
+                  <th>Seats</th>
+                  <th>Base Seats</th>
+                  <th>Remainder</th>
+                </tr>
+              </thead>
+              <tbody id="listAllocationBody"></tbody>
+            </table>
+          </div>
 
-        <div class="table-shell">
-          <h3>Sect Coverage</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Sect</th>
-                <th>Required Seats</th>
-                <th>Elected</th>
-                <th>Remaining</th>
-              </tr>
-            </thead>
-            <tbody id="sectCoverageBody"></tbody>
-          </table>
+          <div class="table-shell">
+            <h3>Winning Candidates</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Seat</th>
+                  <th>Sect</th>
+                  <th>Candidate</th>
+                  <th>Party / List</th>
+                  <th>Votes</th>
+                  <th>Margin To Next</th>
+                </tr>
+              </thead>
+              <tbody id="winnersTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="table-shell">
+            <h3>Sect Coverage</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Sect</th>
+                  <th>Required Seats</th>
+                  <th>Elected</th>
+                  <th>Remaining</th>
+                </tr>
+              </thead>
+              <tbody id="sectCoverageBody"></tbody>
+            </table>
+          </div>
         </div>
       </section>
     </main>

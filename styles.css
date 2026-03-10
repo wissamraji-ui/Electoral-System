@@ -391,6 +391,17 @@ tbody tr:last-child td {
   color: #1e6a51;
 }
 
+.selection-notice {
+  margin: 0.2rem 0 0.65rem;
+  padding: 0.68rem 0.74rem;
+  border: 1px dashed #cbb89a;
+  background: #fffaf0;
+  color: #6f4a1f;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
 .empty {
   color: var(--muted);
   font-style: italic;
