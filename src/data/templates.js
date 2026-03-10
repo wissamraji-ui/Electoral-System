@@ -25,7 +25,8 @@ export function createEmptyState() {
   return {
     regionName: "",
     quotas: [],
-    candidates: []
+    candidates: [],
+    quotasLocked: false
   };
 }
 
@@ -33,6 +34,7 @@ export function cloneTemplate(template) {
   return {
     regionName: template.name,
     quotas: template.quotas.map((entry) => ({ ...entry })),
-    candidates: []
+    candidates: [],
+    quotasLocked: true
   };
 }

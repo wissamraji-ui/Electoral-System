@@ -2,6 +2,7 @@ import { cloneTemplate, createEmptyState, loadRegionTemplates } from "./data/tem
 import { computeResults } from "./engine.js";
 
 const STORAGE_KEY = "lebanon-electoral-simulator:v1";
+const SAVED_SCENARIOS_KEY = "lebanon-electoral-simulator:saved:v1";
 const EXPORT_VERSION = 1;
 
 const elements = {
@@ -11,11 +12,10 @@ const elements = {
   totalSeatsValue: document.getElementById("totalSeatsValue"),
   quotaTableBody: document.getElementById("quotaTableBody"),
   quotaLegend: document.getElementById("quotaLegend"),
-  candidateNameInput: document.getElementById("candidateNameInput"),
-  candidateSectInput: document.getElementById("candidateSectInput"),
-  candidateListInput: document.getElementById("candidateListInput"),
-  candidateVotesInput: document.getElementById("candidateVotesInput"),
-  addCandidateBtn: document.getElementById("addCandidateBtn"),
+  listNameInput: document.getElementById("listNameInput"),
+  addListBtn: document.getElementById("addListBtn"),
+  listBuilderMeta: document.getElementById("listBuilderMeta"),
+  listChips: document.getElementById("listChips"),
   candidateTableBody: document.getElementById("candidateTableBody"),
   listVoteTotalsBody: document.getElementById("listVoteTotalsBody"),
   runSimulationBtn: document.getElementById("runSimulationBtn"),
@@ -24,6 +24,9 @@ const elements = {
   importBtn: document.getElementById("importBtn"),
   importFileInput: document.getElementById("importFileInput"),
   resetBtn: document.getElementById("resetBtn"),
+  saveScenarioNameInput: document.getElementById("saveScenarioNameInput"),
+  saveScenarioBtn: document.getElementById("saveScenarioBtn"),
+  savedScenariosList: document.getElementById("savedScenariosList"),
   metricsGrid: document.getElementById("metricsGrid"),
   alertsBox: document.getElementById("alertsBox"),
   listAllocationBody: document.getElementById("listAllocationBody"),
@@ -35,6 +38,8 @@ let idCounter = Date.now();
 let templates = [];
 let state = createEmptyState();
 let simulation = computeResults(state.quotas, state.candidates);
+const listColorIndexByKey = new Map();
+let savedScenarios = [];
 
 initialize().catch((error) => {
   console.error("Initialization failed:", error);
@@ -43,7 +48,8 @@ initialize().catch((error) => {
 
 async function initialize() {
   templates = await loadRegionTemplates();
-  state = loadState() ?? (templates.length > 0 ? cloneTemplate(templates[0]) : createEmptyState());
+  state = normalizeState(loadState() ?? (templates.length > 0 ? cloneTemplate(templates[0]) : createEmptyState()));
+  savedScenarios = loadSavedScenarios();
 
   populateTemplateSelect();
   bindEvents();
@@ -59,15 +65,16 @@ function bindEvents() {
     renderMetrics();
   });
 
-  elements.quotaTableBody.addEventListener("click", onQuotaTableClick);
-  elements.quotaTableBody.addEventListener("change", onQuotaTableChange);
-
-  elements.addCandidateBtn.addEventListener("click", onAddCandidate);
-  elements.candidateTableBody.addEventListener("click", onCandidateTableClick);
+  elements.addListBtn.addEventListener("click", onAddList);
+  elements.listChips.addEventListener("click", onListChipsClick);
+  elements.candidateTableBody.addEventListener("input", onCandidateTableInput);
   elements.candidateTableBody.addEventListener("change", onCandidateTableChange);
 
   elements.runSimulationBtn.addEventListener("click", () => {
+    syncCandidateTableStateFromDom();
     runSimulation();
+    saveState();
+    renderCandidateListVoteTotals();
     renderResults();
   });
 
@@ -76,6 +83,8 @@ function bindEvents() {
   elements.importBtn.addEventListener("click", () => elements.importFileInput.click());
   elements.importFileInput.addEventListener("change", onImportScenario);
   elements.resetBtn.addEventListener("click", onResetScenario);
+  elements.saveScenarioBtn.addEventListener("click", onSaveScenario);
+  elements.savedScenariosList.addEventListener("click", onSavedScenariosListClick);
 }
 
 function populateTemplateSelect() {
@@ -121,112 +130,68 @@ function onLoadTemplate() {
   renderAll();
 }
 
-function onQuotaTableClick(event) {
-  const target = event.target;
-  if (!(target instanceof HTMLElement)) {
+function onAddList() {
+  const listName = elements.listNameInput.value.trim();
+  if (!listName) {
+    window.alert("Please enter a Party / List name.");
     return;
   }
 
-  if (target.dataset.action === "remove-quota") {
-    const quotaId = target.dataset.id;
-    if (!quotaId) {
-      return;
-    }
-
-    state.quotas = state.quotas.filter((entry) => entry.id !== quotaId);
-    runSimulation();
-    saveState();
-    renderAll();
-  }
-}
-
-function onQuotaTableChange(event) {
-  const target = event.target;
-  if (!(target instanceof HTMLElement)) {
+  const slots = buildCandidateSlotsFromQuotas(state.quotas);
+  if (slots.length === 0) {
+    window.alert("Load a district template with seat quotas first.");
     return;
   }
 
-  const row = target.closest("tr");
-  if (!row) {
+  const listKey = normalizeListKey(listName);
+  const existingListKeys = new Set(
+    state.candidates
+      .map((candidate) => normalizeListKey(candidate?.list))
+      .filter(Boolean)
+  );
+  if (existingListKeys.has(listKey)) {
+    window.alert("This list already exists. Use a new name or remove the existing list.");
     return;
   }
 
-  const quotaId = row.dataset.id;
-  const quota = state.quotas.find((entry) => entry.id === quotaId);
-  if (!quota) {
-    return;
-  }
-
-  if (target.classList.contains("quota-sect")) {
-    const value = target.value.trim();
-    quota.sect = value || quota.sect;
-  }
-
-  if (target.classList.contains("quota-seats")) {
-    quota.seats = clampInteger(target.value, 1);
-  }
-
-  state = normalizeState(state);
-  runSimulation();
-  saveState();
-  renderAll();
-}
-
-function onAddCandidate() {
-  const name = elements.candidateNameInput.value.trim();
-  const sect = elements.candidateSectInput.value.trim();
-  const list = elements.candidateListInput.value.trim();
-  const votes = clampInteger(elements.candidateVotesInput.value, 0);
-
-  if (!name) {
-    window.alert("Please enter the candidate name.");
-    return;
-  }
-
-  if (!sect) {
-    window.alert("Please add at least one seat quota sect first.");
-    return;
-  }
-
-  if (!list) {
-    window.alert("Party / List name is mandatory.");
-    return;
-  }
-
-  state.candidates.push({
-    id: createId("candidate"),
-    name,
-    sect,
-    list,
-    votes
+  slots.forEach((slot) => {
+    state.candidates.push({
+      id: createId("candidate"),
+      name: "",
+      sect: slot.sect,
+      list: listName,
+      votes: 0
+    });
   });
 
-  elements.candidateNameInput.value = "";
-  elements.candidateListInput.value = "";
-  elements.candidateVotesInput.value = "0";
-
+  elements.listNameInput.value = "";
   runSimulation();
   saveState();
   renderAll();
 }
 
-function onCandidateTableClick(event) {
+function onListChipsClick(event) {
   const target = event.target;
   if (!(target instanceof HTMLElement)) {
     return;
   }
 
-  if (target.dataset.action === "remove-candidate") {
-    const candidateId = target.dataset.id;
-    if (!candidateId) {
-      return;
-    }
-
-    state.candidates = state.candidates.filter((candidate) => candidate.id !== candidateId);
-    runSimulation();
-    saveState();
-    renderAll();
+  const button = target.closest("[data-action='remove-list']");
+  if (!(button instanceof HTMLElement)) {
+    return;
   }
+
+  const listKey = button.dataset.listKey;
+  if (!listKey) {
+    return;
+  }
+
+  state.candidates = state.candidates.filter(
+    (candidate) => normalizeListKey(candidate?.list) !== listKey
+  );
+  runSimulation();
+  saveState();
+  renderAll();
 }
 
 function onCandidateTableChange(event) {
@@ -247,23 +212,7 @@ function onCandidateTableChange(event) {
   }
 
   if (target.classList.contains("candidate-name")) {
-    const value = target.value.trim();
-    candidate.name = value || candidate.name;
-  }
-
-  if (target.classList.contains("candidate-sect")) {
-    candidate.sect = target.value.trim();
-  }
-
-  if (target.classList.contains("candidate-list")) {
-    const value = target.value.trim();
-    if (!value) {
-      window.alert("Party / List name is mandatory.");
-      target.value = candidate.list;
-      return;
-    }
-
-    candidate.list = value;
+    candidate.name = target.value.trim();
   }
 
   if (target.classList.contains("candidate-votes")) {
@@ -275,6 +224,65 @@ function onCandidateTableChange(event) {
   renderAll();
 }
 
+function onCandidateTableInput(event) {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  const row = target.closest("tr");
+  if (!row) {
+    return;
+  }
+
+  const candidateId = row.dataset.id;
+  const candidate = state.candidates.find((entry) => entry.id === candidateId);
+  if (!candidate) {
+    return;
+  }
+
+  if (target.classList.contains("candidate-name")) {
+    candidate.name = target.value.trim();
+  }
+
+  if (target.classList.contains("candidate-votes")) {
+    candidate.votes = clampInteger(target.value, 0);
+  }
+
+  runSimulation();
+  renderCandidateListVoteTotals();
+  renderResults();
+}
+
+function syncCandidateTableStateFromDom() {
+  const rows = elements.candidateTableBody.querySelectorAll("tr[data-id]");
+  rows.forEach((row) => {
+    if (!(row instanceof HTMLTableRowElement)) {
+      return;
+    }
+
+    const candidateId = row.dataset.id;
+    if (!candidateId) {
+      return;
+    }
+
+    const candidate = state.candidates.find((entry) => entry.id === candidateId);
+    if (!candidate) {
+      return;
+    }
+
+    const nameInput = row.querySelector(".candidate-name");
+    if (nameInput instanceof HTMLInputElement) {
+      candidate.name = nameInput.value.trim();
+    }
+
+    const votesInput = row.querySelector(".candidate-votes");
+    if (votesInput instanceof HTMLInputElement) {
+      candidate.votes = clampInteger(votesInput.value, 0);
+    }
+  });
+}
+
 function onExportScenario() {
   const payload = {
     version: EXPORT_VERSION,
@@ -282,6 +290,7 @@ function onExportScenario() {
     scenario: {
       regionName: state.regionName,
       quotas: state.quotas.map((entry) => ({ sect: entry.sect, seats: entry.seats })),
+      quotasLocked: state.quotasLocked,
       candidates: state.candidates.map((candidate) => ({
         name: candidate.name,
         sect: candidate.sect,
@@ -336,7 +345,7 @@ async function onImportScenario(event) {
 
     if (skippedCount > 0) {
       window.alert(
-        `${skippedCount} candidate${skippedCount > 1 ? "s were" : " was"} skipped because Party / List is mandatory.`
+        `${skippedCount} candidate${skippedCount > 1 ? "s were" : " was"} skipped because sect and Party / List are mandatory.`
       );
     }
   } catch (error) {
@@ -359,12 +368,73 @@ function onResetScenario() {
   renderAll();
 }
 
+function onSaveScenario() {
+  const snapshot = normalizeState(state);
+  const typedName = elements.saveScenarioNameInput.value.trim();
+  const fallbackName = snapshot.regionName.trim() || `Saved Simulation ${savedScenarios.length + 1}`;
+  const name = typedName || fallbackName;
+
+  savedScenarios.unshift({
+    id: createId("saved"),
+    name,
+    savedAt: new Date().toISOString(),
+    scenario: snapshot
+  });
+
+  saveSavedScenarios();
+  elements.saveScenarioNameInput.value = "";
+  renderSavedScenarios();
+}
+
+function onSavedScenariosListClick(event) {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  const trigger = target.closest("[data-action]");
+  if (!(trigger instanceof HTMLElement)) {
+    return;
+  }
+
+  const savedId = trigger.dataset.id;
+  if (!savedId) {
+    return;
+  }
+
+  const savedEntry = savedScenarios.find((entry) => entry.id === savedId);
+  if (!savedEntry) {
+    return;
+  }
+
+  if (trigger.dataset.action === "open-saved") {
+    state = normalizeState(savedEntry.scenario);
+    runSimulation();
+    saveState();
+    renderAll();
+    return;
+  }
+
+  if (trigger.dataset.action === "delete-saved") {
+    const confirmed = window.confirm(`Delete saved simulation "${savedEntry.name}"?`);
+    if (!confirmed) {
+      return;
+    }
+
+    savedScenarios = savedScenarios.filter((entry) => entry.id !== savedId);
+    saveSavedScenarios();
+    renderSavedScenarios();
+  }
+}
+
 function renderAll() {
+  rebuildListColorIndex();
   elements.regionNameInput.value = state.regionName;
   renderQuotaTable();
-  renderCandidateFormSectOptions();
+  renderListBuilder();
   renderCandidateTable();
   renderCandidateListVoteTotals();
+  renderSavedScenarios();
   renderResults();
 }
 
@@ -373,30 +443,26 @@ function renderQuotaTable() {
 
   if (state.quotas.length === 0) {
     elements.quotaTableBody.innerHTML =
-      '<tr><td colspan="3" class="empty">No seat quotas configured. Load a district template to start.</td></tr>';
+      '<tr><td colspan="1" class="empty">No seat quotas configured. Load a district template to start.</td></tr>';
     elements.quotaLegend.innerHTML = "";
     return;
   }
 
   const abbreviations = buildSectAbbreviations(state.quotas);
-  const abbrByQuotaId = new Map(abbreviations.map((entry) => [entry.id, entry.abbr]));
+  const quotasLocked = state.quotasLocked === true;
+  const lockNotice = quotasLocked
+    ? '<p class="muted quota-lock-note">Seat quotas are locked after template load to preserve calculation integrity.</p>'
+    : "";
 
   elements.quotaTableBody.innerHTML = state.quotas
     .map(
-      (entry) => `
+      (entry, index) => `
       <tr data-id="${escapeHtml(entry.id)}">
         <td>
-          <span class="sect-abbr-badge" title="${escapeHtml(entry.sect)}">${escapeHtml(
-            abbrByQuotaId.get(entry.id) || "?"
-          )}</span>
-        </td>
-        <td><input class="row-edit quota-seats" type="number" min="1" step="1" value="${entry.seats}" /></td>
-        <td>
-          <button class="btn btn-danger btn-small" data-action="remove-quota" data-id="${escapeHtml(
-            entry.id
-          )}">
-            Remove
-          </button>
+          <div class="quota-cell-main">
+            <span class="sect-abbr-badge" title="${escapeHtml(entry.sect)}">${escapeHtml(abbreviations[index]?.abbr || "?")}</span>
+            <span class="quota-seat-inline">${entry.seats} seat${entry.seats === 1 ? "" : "s"}</span>
+          </div>
         </td>
       </tr>
     `
@@ -404,6 +470,7 @@ function renderQuotaTable() {
     .join("");
 
   elements.quotaLegend.innerHTML = `
+    ${lockNotice}
     <p class="quota-legend-title">Abbreviation Key</p>
     <div class="quota-legend-grid">
       ${abbreviations
@@ -420,68 +487,63 @@ function renderQuotaTable() {
   `;
 }
 
-function renderCandidateFormSectOptions() {
-  const sects = getConfiguredSects();
-  if (sects.length === 0) {
-    elements.candidateSectInput.innerHTML = '<option value="">No sects configured</option>';
-    elements.candidateSectInput.disabled = true;
-    elements.addCandidateBtn.disabled = true;
+function renderListBuilder() {
+  const slotsPerList = buildCandidateSlotsFromQuotas(state.quotas).length;
+  if (slotsPerList === 0) {
+    elements.addListBtn.disabled = true;
+    elements.listBuilderMeta.textContent = "Load a district template first to generate list candidate slots.";
+  } else {
+    elements.addListBtn.disabled = false;
+    elements.listBuilderMeta.textContent = `Each list creates ${slotsPerList} slot${slotsPerList > 1 ? "s" : ""} with sects assigned from district quotas.`;
+  }
+
+  const listRows = getConfiguredLists();
+  if (listRows.length === 0) {
+    elements.listChips.innerHTML = '<p class="muted">No lists added yet.</p>';
     return;
   }
 
-  elements.candidateSectInput.disabled = false;
-  elements.addCandidateBtn.disabled = false;
-
-  const currentValue = elements.candidateSectInput.value;
-  elements.candidateSectInput.innerHTML = sects
-    .map((sect) => `<option value="${escapeHtml(sect)}">${escapeHtml(sect)}</option>`)
+  elements.listChips.innerHTML = listRows
+    .map(
+      (row) => `
+        <div class="list-manager-item">
+          ${renderListChip(row.list)}
+          <span class="list-manager-count">${row.slots} slot${row.slots > 1 ? "s" : ""}</span>
+          <button class="btn btn-danger btn-small" data-action="remove-list" data-list-key="${escapeHtml(row.key)}">
+            Remove
+          </button>
+        </div>
+      `
+    )
     .join("");
-
-  if (sects.includes(currentValue)) {
-    elements.candidateSectInput.value = currentValue;
-  }
 }
 
 function renderCandidateTable() {
   if (state.candidates.length === 0) {
     elements.candidateTableBody.innerHTML =
-      '<tr><td colspan="5" class="empty">No candidates entered yet.</td></tr>';
+      '<tr><td colspan="4" class="empty">Add a list to auto-generate candidate slots by sect.</td></tr>';
     return;
   }
 
-  const quotaSects = getConfiguredSects();
+  const slotCounter = new Map();
   elements.candidateTableBody.innerHTML = state.candidates
     .map((candidate) => {
-      const sectOptions = buildCandidateSectOptions(quotaSects, candidate.sect);
+      const listKey = normalizeListKey(candidate.list);
+      const sectKey = normalizeSect(candidate.sect);
+      const counterKey = `${listKey}::${sectKey}`;
+      const slotNumber = (slotCounter.get(counterKey) ?? 0) + 1;
+      slotCounter.set(counterKey, slotNumber);
 
       return `
         <tr data-id="${escapeHtml(candidate.id)}">
+          <td>${renderListChip(candidate.list)}</td>
+          <td><span class="sect-slot-label">${escapeHtml(candidate.sect)} #${slotNumber}</span></td>
           <td class="candidate-name-cell"><input class="row-edit candidate-name" type="text" value="${escapeHtml(
             candidate.name
-          )}" /></td>
-          <td class="candidate-sect-cell">
-            <select class="row-edit candidate-sect">
-              ${sectOptions}
-            </select>
-          </td>
-          <td class="candidate-list-cell">
-            <div class="list-input-wrap">
-              ${renderListSwatch(candidate.list)}
-              <input class="row-edit candidate-list" type="text" value="${escapeHtml(
-                candidate.list || ""
-              )}" placeholder="Party / List" />
-            </div>
-          </td>
+          )}" placeholder="Candidate full name" /></td>
           <td class="candidate-votes-cell"><input class="row-edit candidate-votes" type="number" min="0" step="1" value="${
             candidate.votes
           }" /></td>
-          <td>
-            <button class="btn btn-danger btn-small" data-action="remove-candidate" data-id="${escapeHtml(
-              candidate.id
-            )}">
-              Remove
-            </button>
-          </td>
         </tr>
       `;
     })
@@ -502,13 +564,17 @@ function renderCandidateListVoteTotals() {
       grouped.set(key, {
         list: listName,
         votes: 0,
-        count: 0
+        filled: 0,
+        slots: 0
       });
     }
 
     const row = grouped.get(key);
     row.votes += clampInteger(candidate?.votes, 0);
-    row.count += 1;
+    row.slots += 1;
+    if (String(candidate?.name ?? "").trim()) {
+      row.filled += 1;
+    }
   }
 
   const rows = Array.from(grouped.values()).sort((a, b) => {
@@ -520,12 +586,13 @@ function renderCandidateListVoteTotals() {
 
   if (rows.length === 0) {
     elements.listVoteTotalsBody.innerHTML =
-      '<tr><td colspan="3" class="empty">Add candidates to calculate list vote totals.</td></tr>';
+      '<tr><td colspan="3" class="empty">Add a list to generate candidate slots and list vote totals.</td></tr>';
     return;
   }
 
   const totalVotes = rows.reduce((sum, row) => sum + row.votes, 0);
-  const totalCandidates = rows.reduce((sum, row) => sum + row.count, 0);
+  const totalFilledCandidates = rows.reduce((sum, row) => sum + row.filled, 0);
+  const totalCandidateSlots = rows.reduce((sum, row) => sum + row.slots, 0);
 
   elements.listVoteTotalsBody.innerHTML = `
     ${rows
@@ -533,7 +600,7 @@ function renderCandidateListVoteTotals() {
         (row) => `
           <tr>
             <td>${renderListChip(row.list)}</td>
-            <td>${row.count}</td>
+            <td>${row.filled}/${row.slots}</td>
             <td>${formatNumber(row.votes)}</td>
           </tr>
         `
@@ -541,25 +608,89 @@ function renderCandidateListVoteTotals() {
       .join("")}
     <tr class="list-totals-final-row">
       <td>Grand Total</td>
-      <td>${totalCandidates}</td>
+      <td>${totalFilledCandidates}/${totalCandidateSlots}</td>
       <td>${formatNumber(totalVotes)}</td>
     </tr>
   `;
 }
 
-function buildCandidateSectOptions(quotaSects, selectedSect) {
-  const options = [...quotaSects];
-  if (selectedSect && !options.includes(selectedSect)) {
-    options.push(selectedSect);
+function renderSavedScenarios() {
+  if (savedScenarios.length === 0) {
+    elements.savedScenariosList.innerHTML =
+      '<p class="muted">No saved simulations yet. Save one to reopen it later.</p>';
+    return;
   }
 
-  return options
-    .map((sect) => {
-      const selected = sect === selectedSect ? "selected" : "";
-      const orphanLabel = quotaSects.includes(sect) ? sect : `${sect} (no quota)`;
-      return `<option value="${escapeHtml(sect)}" ${selected}>${escapeHtml(orphanLabel)}</option>`;
+  elements.savedScenariosList.innerHTML = savedScenarios
+    .map((entry) => {
+      const snapshot = normalizeState(entry.scenario);
+      const seats = snapshot.quotas.reduce((sum, quota) => sum + quota.seats, 0);
+      const slots = snapshot.candidates.length;
+      const regionLabel = snapshot.regionName.trim() || "Unnamed region";
+      const savedAt = formatSavedAt(entry.savedAt);
+
+      return `
+        <article class="saved-sim-item">
+          <div class="saved-sim-main">
+            <p class="saved-sim-name">${escapeHtml(entry.name)}</p>
+            <p class="saved-sim-meta">${escapeHtml(
+              `${regionLabel} | ${seats} seats | ${slots} slots | Saved ${savedAt}`
+            )}</p>
+          </div>
+          <div class="saved-sim-actions">
+            <button class="btn btn-secondary btn-small" data-action="open-saved" data-id="${escapeHtml(entry.id)}">
+              Open
+            </button>
+            <button class="btn btn-danger btn-small" data-action="delete-saved" data-id="${escapeHtml(entry.id)}">
+              Delete
+            </button>
+          </div>
+        </article>
+      `;
     })
     .join("");
+}
+
+function buildCandidateSlotsFromQuotas(quotas) {
+  const slots = [];
+  if (!Array.isArray(quotas)) {
+    return slots;
+  }
+
+  quotas.forEach((quota) => {
+    const sect = String(quota?.sect ?? "").trim();
+    const seats = clampInteger(quota?.seats, 0);
+    if (!sect || seats <= 0) {
+      return;
+    }
+
+    for (let index = 1; index <= seats; index += 1) {
+      slots.push({ sect });
+    }
+  });
+
+  return slots;
+}
+
+function getConfiguredLists() {
+  const grouped = new Map();
+  state.candidates.forEach((candidate) => {
+    const list = String(candidate?.list ?? "").trim();
+    if (!list) {
+      return;
+    }
+
+    const key = normalizeListKey(list);
+    if (!grouped.has(key)) {
+      grouped.set(key, { key, list, slots: 0 });
+    }
+
+    grouped.get(key).slots += 1;
+  });
+
+  return Array.from(grouped.values()).sort((a, b) =>
+    a.list.localeCompare(b.list, "en", { sensitivity: "base" })
+  );
 }
 
 function runSimulation() {
@@ -698,10 +829,6 @@ function renderSectCoverageTable() {
     .join("");
 }
 
-function getConfiguredSects() {
-  return state.quotas.map((entry) => entry.sect);
-}
-
 function createId(prefix) {
   idCounter += 1;
   return `${prefix}-${idCounter}`;
@@ -805,7 +932,8 @@ function normalizeState(input) {
   const base = {
     regionName: String(input?.regionName ?? ""),
     quotas: [],
-    candidates: []
+    candidates: [],
+    quotasLocked: input?.quotasLocked === true
   };
 
   const quotaAccumulator = new Map();
@@ -833,7 +961,7 @@ function normalizeState(input) {
       const name = String(raw?.name ?? "").trim();
       const sect = String(raw?.sect ?? "").trim();
       const list = String(raw?.list ?? "").trim();
-      if (!name || !sect || !list) {
+      if (!sect || !list) {
         continue;
       }
 
@@ -879,6 +1007,61 @@ function loadState() {
     console.error("Unable to load state", error);
     return null;
   }
+}
+
+function saveSavedScenarios() {
+  try {
+    localStorage.setItem(SAVED_SCENARIOS_KEY, JSON.stringify(savedScenarios));
+  } catch (error) {
+    console.error("Unable to save saved simulations", error);
+  }
+}
+
+function loadSavedScenarios() {
+  try {
+    const raw = localStorage.getItem(SAVED_SCENARIOS_KEY);
+    if (!raw) {
+      return [];
+    }
+
+    const parsed = JSON.parse(raw);
+    return normalizeSavedScenarios(parsed);
+  } catch (error) {
+    console.error("Unable to load saved simulations", error);
+    return [];
+  }
+}
+
+function normalizeSavedScenarios(input) {
+  if (!Array.isArray(input)) {
+    return [];
+  }
+
+  return input.map((entry, index) => {
+    const scenario = normalizeState(entry?.scenario ?? entry);
+    const name = String(entry?.name ?? "").trim() || scenario.regionName.trim() || `Saved Simulation ${index + 1}`;
+    const savedAtValue = new Date(entry?.savedAt ?? entry?.updatedAt ?? entry?.createdAt ?? "");
+    const savedAt = Number.isNaN(savedAtValue.getTime()) ? new Date().toISOString() : savedAtValue.toISOString();
+
+    return {
+      id: String(entry?.id ?? "").trim() || createId("saved"),
+      name,
+      savedAt,
+      scenario
+    };
+  });
+}
+
+function formatSavedAt(value) {
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return "Unknown date";
+  }
+
+  return parsed.toLocaleString("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  });
 }
 
 function formatNumber(value) {
@@ -1086,14 +1269,20 @@ function normalizeListKey(value) {
     .replace(/\s+/g, " ");
 }
 
-function computeListHash(value) {
-  let hash = 0;
-  for (let i = 0; i < value.length; i += 1) {
-    hash = (hash << 5) - hash + value.charCodeAt(i);
-    hash |= 0;
-  }
+function rebuildListColorIndex() {
+  listColorIndexByKey.clear();
 
-  return Math.abs(hash);
+  const keys = Array.from(
+    new Set(
+      state.candidates
+        .map((candidate) => normalizeListKey(candidate?.list))
+        .filter(Boolean)
+    )
+  ).sort((a, b) => a.localeCompare(b, "en", { sensitivity: "base" }));
+
+  keys.forEach((key, index) => {
+    listColorIndexByKey.set(key, index);
+  });
 }
 
 function getListPalette(listName) {
@@ -1107,14 +1296,14 @@ function getListPalette(listName) {
     };
   }
 
-  const hash = computeListHash(key);
-  const hue = hash % 360;
+  const colorIndex = listColorIndexByKey.get(key) ?? 0;
+  const hue = Math.round((colorIndex * 137.508) % 360);
 
   return {
-    bg: `hsl(${hue} 72% 95%)`,
-    border: `hsl(${hue} 56% 72%)`,
-    text: `hsl(${hue} 56% 28%)`,
-    dot: `hsl(${hue} 66% 44%)`
+    bg: `hsl(${hue} 74% 95%)`,
+    border: `hsl(${hue} 58% 68%)`,
+    text: `hsl(${hue} 60% 26%)`,
+    dot: `hsl(${hue} 72% 42%)`
   };
 }
 
@@ -1127,12 +1316,6 @@ function renderListChip(listName) {
   const palette = getListPalette(value);
   const style = `--list-chip-bg:${palette.bg};--list-chip-border:${palette.border};--list-chip-text:${palette.text};--list-chip-dot:${palette.dot};`;
   return `<span class="list-chip" style="${style}"><span class="list-chip-dot"></span>${escapeHtml(value)}</span>`;
-}
-
-function renderListSwatch(listName) {
-  const palette = getListPalette(listName);
-  const style = `--list-swatch-color:${palette.dot};--list-swatch-border:${palette.border};`;
-  return `<span class="list-swatch" style="${style}" aria-hidden="true"></span>`;
 }
 
 function slugify(value) {

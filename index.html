@@ -22,7 +22,7 @@
       <section class="panel panel-config">
         <div class="panel-title-row">
           <h2>District Configuration</h2>
-          <span class="tag">Editable Templates</span>
+          <span class="tag">Template Seat Map</span>
         </div>
 
         <div class="grid-two">
@@ -49,9 +49,7 @@
           <table>
             <thead>
               <tr>
-                <th>Sect (1-2 letters)</th>
-                <th>Seats</th>
-                <th class="actions-col">Actions</th>
+                <th>Sect Quota</th>
               </tr>
             </thead>
             <tbody id="quotaTableBody"></tbody>
@@ -68,33 +66,22 @@
 
         <div class="candidate-form">
           <label class="field">
-            <span>Name</span>
-            <input id="candidateNameInput" type="text" placeholder="Candidate full name" />
-          </label>
-          <label class="field">
-            <span>Sect</span>
-            <select id="candidateSectInput"></select>
-          </label>
-          <label class="field">
             <span>Party / List Name</span>
-            <input id="candidateListInput" type="text" placeholder="Example: Reform List" />
+            <input id="listNameInput" type="text" placeholder="Example: Reform List" />
           </label>
-          <label class="field">
-            <span>Votes</span>
-            <input id="candidateVotesInput" type="number" min="0" step="1" value="0" />
-          </label>
-          <button id="addCandidateBtn" class="btn btn-primary">Add Candidate</button>
+          <button id="addListBtn" class="btn btn-primary">Add List Candidates</button>
         </div>
+        <p id="listBuilderMeta" class="muted list-builder-meta"></p>
+        <div id="listChips" class="list-chip-manager"></div>
 
         <div class="table-shell candidate-table-shell">
           <table class="candidate-grid-table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sect</th>
                 <th>Party / List</th>
+                <th>Sect</th>
+                <th>Name</th>
                 <th>Votes</th>
-                <th class="actions-col candidate-actions-col">Actions</th>
               </tr>
             </thead>
             <tbody id="candidateTableBody"></tbody>
@@ -107,7 +94,7 @@
             <thead>
               <tr>
                 <th>Party / List</th>
-                <th>Candidates</th>
+                <th>Filled / Slots</th>
                 <th>Total Votes</th>
               </tr>
             </thead>
@@ -122,6 +109,18 @@
           <button id="importBtn" class="btn btn-secondary">Import JSON</button>
           <button id="resetBtn" class="btn btn-danger">Reset</button>
           <input id="importFileInput" type="file" accept=".json,application/json" hidden />
+        </div>
+
+        <div class="saved-simulations">
+          <h3>Saved Simulations</h3>
+          <div class="saved-sim-controls">
+            <label class="field">
+              <span>Save Name (Optional)</span>
+              <input id="saveScenarioNameInput" type="text" placeholder="Example: Beirut II baseline" />
+            </label>
+            <button id="saveScenarioBtn" class="btn btn-secondary">Save Current</button>
+          </div>
+          <div id="savedScenariosList" class="saved-sim-list"></div>
         </div>
       </section>
 
@@ -187,8 +186,8 @@
 
     <footer class="footer">
       <p>
-        Templates are editable for legal updates. Validate official seat maps before publishing
-        final outcomes.
+        Seat quotas are loaded from templates and locked in-app to preserve calculation integrity.
+        Validate official seat maps before publishing final outcomes.
       </p>
     </footer>
 

@@ -4,7 +4,7 @@ A professional web platform to simulate candidate outcomes by district and sect 
 
 ## What it does
 
-- Configure district seats by sect (editable).
+- Configure district seats by sect using district templates (seat quotas are locked after loading).
 - Load prefilled district templates for major Lebanese electoral regions.
 - Add candidates with names, sect, **mandatory party/list**, and votes.
 - Compute winners using list-level EQ qualification and sect quotas.
@@ -23,7 +23,7 @@ This simulator applies:
 2. Seat distribution to qualified lists by largest remainder.
 3. Candidate selection by vote rank subject to both sect quotas and list seat caps.
 
-It is a practical simulation model and not a full legal automation of all Lebanese electoral procedures. You can edit all templates to reflect official updates.
+It is a practical simulation model and not a full legal automation of all Lebanese electoral procedures. You can update templates in `src/data/templates.json` to reflect official seat-map changes.
 
 ## Run locally
 
