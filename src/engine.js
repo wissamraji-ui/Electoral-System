@@ -127,7 +127,6 @@ export function computeResults(quotas, candidates) {
         .filter((entry) => entry.sect && entry.seats > 0)
     : [];
 
-  let unnamedCandidateCounter = 0;
   const safeCandidates = Array.isArray(candidates)
     ? candidates
         .map((candidate) => ({
@@ -137,15 +136,7 @@ export function computeResults(quotas, candidates) {
           list: normalizeName(candidate?.list),
           votes: toVoteNumber(candidate?.votes)
         }))
-        .filter((candidate) => candidate.sect && candidate.list)
-        .map((candidate) => {
-          if (candidate.name) {
-            return candidate;
-          }
-
-          unnamedCandidateCounter += 1;
-          return { ...candidate, name: `Unnamed Candidate ${unnamedCandidateCounter}` };
-        })
+        .filter((candidate) => candidate.name && candidate.sect && candidate.list)
     : [];
 
   const totalSeats = safeQuotas.reduce((sum, entry) => sum + entry.seats, 0);

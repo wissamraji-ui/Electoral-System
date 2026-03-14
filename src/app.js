@@ -7,7 +7,6 @@ const EXPORT_VERSION = 1;
 
 const elements = {
   templateSelect: document.getElementById("templateSelect"),
-  loadTemplateBtn: document.getElementById("loadTemplateBtn"),
   districtSelectionNotice: document.getElementById("districtSelectionNotice"),
   districtConfigDetails: document.getElementById("districtConfigDetails"),
   simulationInputs: document.getElementById("simulationInputs"),
@@ -62,7 +61,7 @@ async function initialize() {
 }
 
 function bindEvents() {
-  elements.loadTemplateBtn.addEventListener("click", onLoadTemplate);
+  elements.templateSelect.addEventListener("change", onTemplateSelectChange);
   elements.regionNameInput.addEventListener("input", () => {
     state.regionName = elements.regionNameInput.value;
     saveState();
@@ -95,12 +94,10 @@ function populateTemplateSelect() {
   if (templates.length === 0) {
     elements.templateSelect.innerHTML = '<option value="">No templates found</option>';
     elements.templateSelect.disabled = true;
-    elements.loadTemplateBtn.disabled = true;
     return;
   }
 
   elements.templateSelect.disabled = false;
-  elements.loadTemplateBtn.disabled = false;
   const currentTemplateId = getCurrentTemplateId();
   elements.templateSelect.innerHTML = [
     '<option value="">Choose a district template</option>',
@@ -111,14 +108,14 @@ function populateTemplateSelect() {
   elements.templateSelect.value = currentTemplateId;
 }
 
-function onLoadTemplate() {
+function onTemplateSelectChange() {
   if (templates.length === 0) {
     return;
   }
 
   const templateId = elements.templateSelect.value;
   if (!templateId) {
-    window.alert("Select a district template first.");
+    elements.templateSelect.value = getCurrentTemplateId();
     return;
   }
 
@@ -134,6 +131,7 @@ function onLoadTemplate() {
       "Loading a template will replace current region, quotas, and candidates. Continue?"
     );
     if (!confirmed) {
+      elements.templateSelect.value = getCurrentTemplateId();
       return;
     }
   }
@@ -444,6 +442,7 @@ function onSavedScenariosListClick(event) {
 function renderAll() {
   rebuildListColorIndex();
   applyDistrictSelectionVisibility();
+  syncTemplateSelection();
   elements.regionNameInput.value = state.regionName;
   renderQuotaTable();
   renderListBuilder();
@@ -451,6 +450,14 @@ function renderAll() {
   renderCandidateListVoteTotals();
   renderSavedScenarios();
   renderResults();
+}
+
+function syncTemplateSelection() {
+  if (!(elements.templateSelect instanceof HTMLSelectElement)) {
+    return;
+  }
+
+  elements.templateSelect.value = getCurrentTemplateId();
 }
 
 function applyDistrictSelectionVisibility() {
@@ -548,7 +555,7 @@ function renderListBuilder() {
       (row) => `
         <div class="list-manager-item">
           ${renderListChip(row.list)}
-          <span class="list-manager-count">${row.slots} slot${row.slots > 1 ? "s" : ""}</span>
+          <span class="list-manager-count">${row.filled} filled</span>
           <button class="btn btn-danger btn-small" data-action="remove-list" data-list-key="${escapeHtml(row.key)}">
             Remove
           </button>
@@ -722,10 +729,14 @@ function getConfiguredLists() {
 
     const key = normalizeListKey(list);
     if (!grouped.has(key)) {
-      grouped.set(key, { key, list, slots: 0 });
+      grouped.set(key, { key, list, slots: 0, filled: 0 });
     }
 
-    grouped.get(key).slots += 1;
+    const row = grouped.get(key);
+    row.slots += 1;
+    if (String(candidate?.name ?? "").trim()) {
+      row.filled += 1;
+    }
   });
 
   return Array.from(grouped.values()).sort((a, b) =>
@@ -748,6 +759,7 @@ function renderResults() {
 function renderMetrics() {
   const summary = simulation.summary;
   const districtLabel = state.regionName.trim() || "Unnamed region";
+  const totalListCount = Array.isArray(simulation.listAllocation) ? simulation.listAllocation.length : 0;
   const cards = [
     { label: "District", value: districtLabel },
     { label: "Total Seats", value: String(summary.totalSeats) },
@@ -756,6 +768,7 @@ function renderMetrics() {
     { label: "Candidates", value: String(summary.totalCandidates) },
     { label: "Total Votes", value: formatNumber(summary.totalVotes) },
     { label: "Electoral Quotient (EQ)", value: summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-" },
+    { label: "Total Lists", value: String(totalListCount) },
     { label: "Qualified Lists", value: String(summary.qualifiedListCount) }
   ];
 
@@ -1040,6 +1053,7 @@ function formatDecimal(value) {
 
 function buildPdfReportLines() {
   const summary = simulation.summary;
+  const totalListCount = Array.isArray(simulation.listAllocation) ? simulation.listAllocation.length : 0;
   const generatedAt = new Date().toLocaleString("en-US", {
     dateStyle: "medium",
     timeStyle: "short"
@@ -1057,6 +1071,7 @@ function buildPdfReportLines() {
     `- Candidates: ${summary.totalCandidates}`,
     `- Total Votes: ${formatNumber(summary.totalVotes)}`,
     `- Electoral Quotient (EQ): ${summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-"}`,
+    `- Total Lists: ${totalListCount}`,
     `- Qualified Lists: ${summary.qualifiedListCount}`,
     "",
     "List EQ Allocation"

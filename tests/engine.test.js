@@ -39,15 +39,15 @@ test("requires list name and ignores candidates without a list", () => {
   assert.equal(result.winners[0].name, "Valid Candidate");
 });
 
-test("includes candidates without a name when sect and list are provided", () => {
+test("ignores candidates without a name even when sect and list are provided", () => {
   const quotas = [{ sect: "Sunni", seats: 1 }];
   const candidates = [{ sect: "Sunni", list: "Alpha", votes: 500 }];
 
   const result = computeResults(quotas, candidates);
-  assert.equal(result.summary.totalCandidates, 1);
-  assert.equal(result.summary.totalVotes, 500);
-  assert.equal(result.winners.length, 1);
-  assert.equal(result.winners[0].list, "Alpha");
+  assert.equal(result.summary.totalCandidates, 0);
+  assert.equal(result.summary.totalVotes, 0);
+  assert.equal(result.summary.filledSeats, 0);
+  assert.equal(result.winners.length, 0);
 });
 
 test("flags ties at cutoff and applies alphabetical tie-break", () => {
