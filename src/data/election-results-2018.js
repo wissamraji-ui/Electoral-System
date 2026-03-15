@@ -2,6 +2,50 @@ import { cloneTemplate } from "./templates.js";
 import { normalizeElectionBaseline } from "./election-results-normalize.js";
 
 const verifiedElectionResults2018ByTemplateId = {
+  // Hand-cleaned from rendered page image of:
+  // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
+  // Page 8, Bekaa 1 (Zahle)
+  "bekaa-i": {
+    candidates: [
+      { name: "Michel Georges Daher", sect: "Greek Catholic", list: "Zahle for Everyone", votes: 9742 },
+      { name: "Assem Fayez Araji", sect: "Sunni", list: "Zahle for Everyone", votes: 7224 },
+      { name: "Salim Georges Aoun", sect: "Maronite", list: "Zahle for Everyone", votes: 5567 },
+      { name: "Nizar Mohsen Dalloul", sect: "Shia", list: "Zahle for Everyone", votes: 3947 },
+      { name: "Marie-Jeane Krikor Mahran Belazkjian", sect: "Armenian Orthodox", list: "Zahle for Everyone", votes: 3851 },
+      { name: "Michel Michel El Skaff", sect: "Greek Catholic", list: "Zahle for Everyone", votes: 987 },
+      { name: "Assad Charles Nakad", sect: "Greek Orthodox", list: "Zahle for Everyone", votes: 4138 },
+
+      { name: "Anwar Hussein Joumaa", sect: "Shia", list: "Zahle Choice & Decision", votes: 15601 },
+      { name: "Nicolas Michel Fattouch", sect: "Greek Catholic", list: "Zahle Choice & Decision", votes: 5737 },
+      { name: "Wajih Mohamad Araji", sect: "Sunni", list: "Zahle Choice & Decision", votes: 592 },
+      { name: "Nassif Elias El Tini", sect: "Greek Orthodox", list: "Zahle Choice & Decision", votes: 528 },
+      { name: "Khalil Georges El Hraoui", sect: "Maronite", list: "Zahle Choice & Decision", votes: 343 },
+      { name: "Eddy Bokhos Demerjian", sect: "Armenian Orthodox", list: "Zahle Choice & Decision", votes: 77 },
+
+      { name: "Georges Elie Okais", sect: "Greek Catholic", list: "Zahle Our Cause", votes: 11363 },
+      { name: "Cesar Naim Risk El Maalouf", sect: "Greek Orthodox", list: "Zahle Our Cause", votes: 3554 },
+      { name: "Mohamad Ali Ahmad Mita", sect: "Sunni", list: "Zahle Our Cause", votes: 1370 },
+      { name: "Elie Michel Marouni", sect: "Maronite", list: "Zahle Our Cause", votes: 1213 },
+      { name: "Michel Elias Fatouch", sect: "Greek Catholic", list: "Zahle Our Cause", votes: 552 },
+      { name: "Bokhos Herabt Kordian", sect: "Armenian Orthodox", list: "Zahle Our Cause", votes: 142 },
+      { name: "Amer Mohamad El Sabouri", sect: "Shia", list: "Zahle Our Cause", votes: 111 },
+
+      { name: "Myriam Gebran Taouk", sect: "Greek Catholic", list: "Popular Bloc", votes: 6348 },
+      { name: "Kork Hamazasb Bouchkian", sect: "Armenian Orthodox", list: "Popular Bloc", votes: 1845 },
+      { name: "Ahmad Abdo El Ajami", sect: "Sunni", list: "Popular Bloc", votes: 1008 },
+      { name: "Paul Jean Charbel", sect: "Maronite", list: "Popular Bloc", votes: 824 },
+      { name: "Nicolas Negib Saba", sect: "Greek Orthodox", list: "Popular Bloc", votes: 271 },
+      { name: "Oussama Mohsen Salhab", sect: "Shia", list: "Popular Bloc", votes: 172 },
+      { name: "Nicolas Nassif El Amouri El Maalouf", sect: "Greek Catholic", list: "Popular Bloc", votes: 95 },
+
+      { name: "Ghassan Georges Maalouf", sect: "Greek Catholic", list: "Kulluna Watani", votes: 651 },
+      { name: "Hanna Fawzi Habib", sect: "Maronite", list: "Kulluna Watani", votes: 287 },
+      { name: "Vanda Edouard Chedid", sect: "Greek Orthodox", list: "Kulluna Watani", votes: 268 },
+      { name: "Hod Nawaf El Taaymeh", sect: "Sunni", list: "Kulluna Watani", votes: 201 },
+      { name: "Mohamad Abbass Hassan", sect: "Shia", list: "Kulluna Watani", votes: 71 }
+    ]
+  },
+
   // Hand-cleaned from:
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 27, Beirut 1
@@ -358,16 +402,16 @@ const verifiedElectionResults2018ByTemplateId = {
   "north-ii": {
     candidates: [
       { name: "Kassem Ali Abdel Aziz", sect: "Sunni", list: "The Future is for the North", votes: 6382 },
-      { name: "Nehmeh Gerges Mahfoud", sect: "Greek Orthodox", list: "The Future is for the North", votes: 4006 },
-      { name: "Layla Hassan Chahoud", sect: "Alawite", list: "The Future is for the North", votes: 131 },
+      { name: "Nehmeh Gerges Mahfoud", sect: "Greek Orthodox", list: "The Future is for the North", votes: 800 },
+      { name: "Layla Hassan Chahoud", sect: "Alawite", list: "The Future is for the North", votes: 443 },
       { name: "Dima Mohamad Rachid El Jamali", sect: "Sunni", list: "The Future is for the North", votes: 2066 },
-      { name: "Mohamd Abdel Latif Kabbara", sect: "Sunni", list: "The Future is for the North", votes: 10221 },
+      { name: "Mohamd Abdel Latif Kabbara", sect: "Sunni", list: "The Future is for the North", votes: 9600 },
       { name: "Sami Ahmad Chaouki Fatfat", sect: "Sunni", list: "The Future is for the North", votes: 7943 },
-      { name: "Samir Adnan El Jisr", sect: "Sunni", list: "The Future is for the North", votes: 9600 },
-      { name: "Osman Mohamad Alameddine", sect: "Sunni", list: "The Future is for the North", votes: 9527 },
+      { name: "Samir Adnan El Jisr", sect: "Sunni", list: "The Future is for the North", votes: 9527 },
+      { name: "Osman Mohamad Alameddine", sect: "Sunni", list: "The Future is for the North", votes: 10221 },
       { name: "Chadi Ghassan Nechabeh", sect: "Sunni", list: "The Future is for the North", votes: 1135 },
-      { name: "Georges Tanios El Bekasini", sect: "Maronite", list: "The Future is for the North", votes: 994 },
-      { name: "Walid Mahmoud El Sawalhi", sect: "Sunni", list: "The Future is for the North", votes: 903 },
+      { name: "Georges Tanios El Bekasini", sect: "Maronite", list: "The Future is for the North", votes: 903 },
+      { name: "Walid Mahmoud El Sawalhi", sect: "Sunni", list: "The Future is for the North", votes: 994 },
 
       { name: "Jihad Mourched El Samad", sect: "Sunni", list: "National Dignity", votes: 11897 },
       { name: "Ahmad Mahmoud Omran", sect: "Alawite", list: "National Dignity", votes: 1286 },
@@ -383,25 +427,62 @@ const verifiedElectionResults2018ByTemplateId = {
       { name: "Nicolas Kamil Nahas", sect: "Greek Orthodox", list: "Determination", votes: 1057 },
       { name: "Kazem Saleh Kheir", sect: "Sunni", list: "Determination", votes: 6754 },
       { name: "Rachid Ibrahim El Moukadem", sect: "Sunni", list: "Determination", votes: 746 },
-      { name: "Mohamad Ahmad Talal El Fadel", sect: "Sunni", list: "Determination", votes: 2246 },
+      { name: "Mohamad Ahmad Talal El Fadel", sect: "Sunni", list: "Determination", votes: 4006 },
       { name: "Mirvat Mohamad Fadel El Houz", sect: "Sunni", list: "Determination", votes: 452 },
-      { name: "Ali Ahmad Darwish", sect: "Alawite", list: "Determination", votes: 281 },
+      { name: "Ali Ahmad Darwish", sect: "Alawite", list: "Determination", votes: 2246 },
       { name: "Mohamad Anas Abdallah Nadim El Jisr", sect: "Sunni", list: "Determination", votes: 1477 },
       { name: "Jihad Ali Youssef", sect: "Sunni", list: "Determination", votes: 131 },
       { name: "Jean Badawi Obeid", sect: "Maronite", list: "Determination", votes: 1136 },
-      { name: "Mohamad Toufic Mohamad Rached Sultan", sect: "Sunni", list: "Determination", votes: 800 },
+      { name: "Mohamad Toufic Mohamad Rached Sultan", sect: "Sunni", list: "Determination", votes: 281 },
 
       { name: "Georges Nicolas El Jalad", sect: "Greek Orthodox", list: "A Sovereign Lebanon", votes: 86 },
       { name: "Mohamad Walid Abdel Kader Kamaredin", sect: "Sunni", list: "A Sovereign Lebanon", votes: 249 },
       { name: "Ashraf Ahmad Rifi", sect: "Sunni", list: "A Sovereign Lebanon", votes: 5931 },
       { name: "Ali Abdel Halim El Ayoubi", sect: "Sunni", list: "A Sovereign Lebanon", votes: 609 },
       { name: "Mohamad Kamaleddine Salhab", sect: "Sunni", list: "A Sovereign Lebanon", votes: 269 },
-      { name: "Halim Naim Zeani", sect: "Maronite", list: "A Sovereign Lebanon", votes: 199 },
-      { name: "Khaled Omar Tadmouri", sect: "Sunni", list: "A Sovereign Lebanon", votes: 43 },
+      { name: "Halim Naim Zeani", sect: "Maronite", list: "A Sovereign Lebanon", votes: 43 },
+      { name: "Khaled Omar Tadmouri", sect: "Sunni", list: "A Sovereign Lebanon", votes: 199 },
       { name: "Ossama Nadim Amoun", sect: "Greek Orthodox", list: "A Sovereign Lebanon", votes: 644 },
-      { name: "Bader Hussein Eid", sect: "Sunni", list: "A Sovereign Lebanon", votes: 277 },
+      { name: "Bader Hussein Eid", sect: "Alawite", list: "A Sovereign Lebanon", votes: 277 },
       { name: "Walid Mohamad El Masri", sect: "Alawite", list: "A Sovereign Lebanon", votes: 344 },
-      { name: "Ragheb Mohamad Faysal Raad", sect: "Sunni", list: "A Sovereign Lebanon", votes: 537 }
+      { name: "Ragheb Mohamad Faysal Raad", sect: "Sunni", list: "A Sovereign Lebanon", votes: 537 },
+
+      { name: "Abdel Salam Ahmad Trad", sect: "Sunni", list: "Independent Decision", votes: 322 },
+      { name: "Antoine Roufael Khalifeh", sect: "Maronite", list: "Independent Decision", votes: 129 },
+      { name: "Mounzeh Gebran Sawan", sect: "Greek Orthodox", list: "Independent Decision", votes: 43 },
+      { name: "Nariman Hilal El Jamal", sect: "Sunni", list: "Independent Decision", votes: 47 },
+      { name: "Ali Farouk El Samad", sect: "Sunni", list: "Independent Decision", votes: 84 },
+      { name: "Wassim Ali Alwan", sect: "Sunni", list: "Independent Decision", votes: 2000 },
+      { name: "Mohamad Mesbah Aouni Ahdab", sect: "Alawite", list: "Independent Decision", votes: 908 },
+      { name: "Mohamad Mahmoud El hajj Ahmad", sect: "Sunni", list: "Independent Decision", votes: 199 },
+      { name: "Hisham Riad Ibrahim", sect: "Sunni", list: "Independent Decision", votes: 68 },
+
+      { name: "Ali Moustafa Harmouch", sect: "Sunni", list: "People's Decision", votes: 146 },
+      { name: "Nistas William El Kochari", sect: "Greek Orthodox", list: "People's Decision", votes: 52 },
+      { name: "Khaled Kamel Roumieh", sect: "Sunni", list: "People's Decision", votes: 192 },
+      { name: "Ahmad Mohamad Chandab", sect: "Sunni", list: "People's Decision", votes: 229 },
+      { name: "Mahmoud Abdel Karim Chehadeh", sect: "Alawite", list: "People's Decision", votes: 282 },
+      { name: "Kamal Mohamad Saleh El Kheir", sect: "Sunni", list: "People's Decision", votes: 2182 },
+      { name: "Tony Farid Marouni", sect: "Maronite", list: "People's Decision", votes: 675 },
+
+      { name: "Samah Yehya El Arja", sect: "Sunni", list: "Independent Civil Society", votes: 5 },
+      { name: "Fadi Bikar El Jamal", sect: "Greek Orthodox", list: "Independent Civil Society", votes: 32 },
+      { name: "Jamal Nassereddine Hamra El Badaoui", sect: "Sunni", list: "Independent Civil Society", votes: 258 },
+      { name: "Ayman Omar Jamal", sect: "Sunni", list: "Independent Civil Society", votes: 18 },
+      { name: "Hiba Issam Naja", sect: "Sunni", list: "Independent Civil Society", votes: 27 },
+      { name: "Abdallah Abdel Kader El Rifai", sect: "Sunni", list: "Independent Civil Society", votes: 13 },
+      { name: "Housan Hassan Khalil", sect: "Alawite", list: "Independent Civil Society", votes: 47 },
+
+      { name: "Nariman Adel El Chamaa", sect: "Sunni", list: "Kulluna Watani", votes: 111 },
+      { name: "Yahi Kamal Mawloud", sect: "Sunni", list: "Kulluna Watani", votes: 909 },
+      { name: "Mohamad Mounzir Ashraf Maaliki", sect: "Sunni", list: "Kulluna Watani", votes: 131 },
+      { name: "Wasek Abdel Razak El Moukadem", sect: "Sunni", list: "Kulluna Watani", votes: 97 },
+      { name: "Malek Faysal Moulawi", sect: "Sunni", list: "Kulluna Watani", votes: 299 },
+      { name: "Zeineddine Noureddine Dib", sect: "Alawite", list: "Kulluna Watani", votes: 36 },
+      { name: "Dani Mahmoud Osman", sect: "Sunni", list: "Kulluna Watani", votes: 297 },
+      { name: "Farah Ibrahim Issa", sect: "Greek Orthodox", list: "Kulluna Watani", votes: 452 },
+      { name: "Moussa Asaad Khoury", sect: "Maronite", list: "Kulluna Watani", votes: 106 },
+      { name: "Ahmad Moustafa El Dhaybi", sect: "Sunni", list: "Kulluna Watani", votes: 51 }
     ]
   },
 
@@ -583,11 +664,14 @@ const verifiedElectionResults2018ByTemplateId = {
 // that have been manually audited against the report page layout.
 const electionResults2018ByTemplateId = {
   "beirut-i": verifiedElectionResults2018ByTemplateId["beirut-i"],
+  "bekaa-i": verifiedElectionResults2018ByTemplateId["bekaa-i"],
   "bekaa-ii": verifiedElectionResults2018ByTemplateId["bekaa-ii"],
   "bekaa-iii": verifiedElectionResults2018ByTemplateId["bekaa-iii"],
   "mount-lebanon-i": verifiedElectionResults2018ByTemplateId["mount-lebanon-i"],
   "mount-lebanon-ii": verifiedElectionResults2018ByTemplateId["mount-lebanon-ii"],
   "mount-lebanon-iii": verifiedElectionResults2018ByTemplateId["mount-lebanon-iii"],
+  "north-i": verifiedElectionResults2018ByTemplateId["north-i"],
+  "north-ii": verifiedElectionResults2018ByTemplateId["north-ii"],
   "north-iii": verifiedElectionResults2018ByTemplateId["north-iii"],
   "south-i": verifiedElectionResults2018ByTemplateId["south-i"],
   "south-ii": verifiedElectionResults2018ByTemplateId["south-ii"]
