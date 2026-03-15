@@ -583,6 +583,7 @@ const verifiedElectionResults2018ByTemplateId = {
 // that have been manually audited against the report page layout.
 const electionResults2018ByTemplateId = {
   "beirut-i": verifiedElectionResults2018ByTemplateId["beirut-i"],
+  "bekaa-ii": verifiedElectionResults2018ByTemplateId["bekaa-ii"],
   "bekaa-iii": verifiedElectionResults2018ByTemplateId["bekaa-iii"],
   "mount-lebanon-i": verifiedElectionResults2018ByTemplateId["mount-lebanon-i"],
   "mount-lebanon-ii": verifiedElectionResults2018ByTemplateId["mount-lebanon-ii"],
