@@ -100,3 +100,43 @@ test("drops lists below EQ even when they have a high-vote candidate", () => {
   assert.equal(result.winners.some((winner) => winner.list === "Cedar"), false);
   assert.match(result.warnings.join(" "), /below EQ/i);
 });
+
+test("includes list-only votes in list totals and EQ", () => {
+  const quotas = [{ sect: "Sunni", seats: 2 }];
+  const candidates = [
+    { name: "A1", sect: "Sunni", list: "Alpha", votes: 60 },
+    { name: "B1", sect: "Sunni", list: "Beta", votes: 55 }
+  ];
+  const listVotes = [
+    { list: "Alpha", votes: 20 },
+    { list: "Beta", votes: 25 }
+  ];
+
+  const result = computeResults(quotas, candidates, listVotes);
+  const byList = new Map(result.listAllocation.map((row) => [row.list, row]));
+
+  assert.equal(result.summary.totalVotes, 160);
+  assert.equal(byList.get("Alpha")?.candidateVotes, 60);
+  assert.equal(byList.get("Alpha")?.listVotes, 20);
+  assert.equal(byList.get("Alpha")?.votes, 80);
+  assert.equal(byList.get("Beta")?.votes, 80);
+  assert.deepEqual(result.winners.map((winner) => winner.name), ["A1", "B1"]);
+});
+
+test("keeps list-only-only lists in EQ calculations", () => {
+  const quotas = [{ sect: "Sunni", seats: 1 }];
+  const candidates = [{ name: "A1", sect: "Sunni", list: "Alpha", votes: 90 }];
+  const listVotes = [
+    { list: "Alpha", votes: 5 },
+    { list: "Beta", votes: 15 }
+  ];
+
+  const result = computeResults(quotas, candidates, listVotes);
+  const byList = new Map(result.listAllocation.map((row) => [row.list, row]));
+
+  assert.equal(result.summary.totalVotes, 110);
+  assert.equal(byList.get("Alpha")?.votes, 95);
+  assert.equal(byList.get("Beta")?.candidateVotes, 0);
+  assert.equal(byList.get("Beta")?.listVotes, 15);
+  assert.equal(byList.get("Beta")?.votes, 15);
+});

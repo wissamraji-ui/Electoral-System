@@ -11,6 +11,13 @@ function normalizeCandidate(candidate) {
   };
 }
 
+function normalizeListKey(value) {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
+}
+
 export function normalizeElectionBaseline(template, baselineCandidates, fallbackListName = "Imported List") {
   const candidates = Array.isArray(baselineCandidates)
     ? baselineCandidates.map(normalizeCandidate).filter((candidate) => candidate.name && candidate.sect)
@@ -71,4 +78,36 @@ export function normalizeElectionBaseline(template, baselineCandidates, fallback
     });
 
   return normalizedCandidates;
+}
+
+export function normalizeElectionBaselineListVotes(normalizedCandidates, baselineListVotes) {
+  const allowedLists = new Map();
+
+  (Array.isArray(normalizedCandidates) ? normalizedCandidates : []).forEach((candidate) => {
+    const listName = String(candidate?.list ?? "").trim();
+    const key = normalizeListKey(listName);
+    if (key && !allowedLists.has(key)) {
+      allowedLists.set(key, listName);
+    }
+  });
+
+  const votesByKey = new Map();
+  (Array.isArray(baselineListVotes) ? baselineListVotes : []).forEach((entry) => {
+    const key = normalizeListKey(entry?.list);
+    const listName = String(entry?.list ?? "").trim();
+    if (!key) {
+      return;
+    }
+
+    if (!allowedLists.has(key)) {
+      allowedLists.set(key, listName || entry?.list || "");
+    }
+
+    votesByKey.set(key, (votesByKey.get(key) ?? 0) + toSafeInteger(entry?.votes));
+  });
+
+  return Array.from(votesByKey.entries()).map(([key, votes]) => ({
+    list: allowedLists.get(key),
+    votes
+  }));
 }

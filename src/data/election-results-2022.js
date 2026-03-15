@@ -1,6 +1,9 @@
 import { cloneTemplate } from "./templates.js";
-import { normalizeElectionBaseline } from "./election-results-normalize.js";
-import generatedElectionResults2022ByTemplateId from "./election-results-2022.generated.json";
+import {
+  normalizeElectionBaseline,
+  normalizeElectionBaselineListVotes
+} from "./election-results-normalize.js";
+import generatedElectionResults2022ByTemplateId from "./election-results-2022.generated.json" with { type: "json" };
 
 // Hand-cleaned overrides for districts already reviewed from the official 2022 PDFs.
 // Remaining districts are loaded from generated official extracts in
@@ -55,6 +58,13 @@ const manualElectionResults2022ByTemplateId = {
       { name: "طارق عمّار", sect: "Greek Orthodox", list: "بيروت مدينتي", votes: 158 },
       { name: "ندى صحناوي", sect: "Greek Catholic", list: "بيروت مدينتي", votes: 362 },
       { name: "ليفون تلويزيان", sect: "Armenian Orthodox", list: "بيروت مدينتي", votes: 125 }
+    ],
+    listVotes: [
+      { list: "لبنان السيادة", votes: 409 },
+      { list: "كنا ورح نبقى لبيروت", votes: 255 },
+      { list: "بيروت، نحن لها", votes: 275 },
+      { list: "لوطني", votes: 259 },
+      { list: "بيروت مدينتي", votes: 58 }
     ]
   },
 
@@ -159,6 +169,18 @@ const manualElectionResults2022ByTemplateId = {
       { name: "ريمه حسيب ابو شقرا", sect: "Druze", list: "بيروت مدينتي", votes: 15 },
       { name: "ناهده محمد خليل", sect: "Shia", list: "بيروت مدينتي", votes: 66 },
       { name: "مها اسعد الراسي", sect: "Evangelical", list: "بيروت مدينتي", votes: 12 }
+    ],
+    listVotes: [
+      { list: "بيروت بدها قلب", votes: 1641 },
+      { list: "هيدي بيروت", votes: 649 },
+      { list: "بيروت تواجه", votes: 621 },
+      { list: "وحدة بيروت", votes: 796 },
+      { list: "لبيروت", votes: 305 },
+      { list: "بيروت التغيير", votes: 908 },
+      { list: "لتبقى بيروت", votes: 128 },
+      { list: "قادرين", votes: 112 },
+      { list: "نعم لبيروت", votes: 24 },
+      { list: "بيروت مدينتي", votes: 59 }
     ]
   },
 
@@ -166,27 +188,50 @@ const manualElectionResults2022ByTemplateId = {
   // https://www.elections.gov.lb/النيابية/2022/نتايج-الانتخابات/مجموع-اصوات-المرشحين-بحسب-الدوائر-لعام-2022/دائرة-الجنوب-الأولى.aspx
   "south-i": {
     candidates: [
-      { name: "يوسف النقيب", sect: "Sunni", list: "نبض الجنوب", votes: 14764 },
-      { name: "عبد الرحمن البزري", sect: "Sunni", list: "نبض الجنوب", votes: 11487 },
-      { name: "سليم خوري", sect: "Maronite", list: "نبض الجنوب", votes: 3718 },
-      { name: "باسم ابو زيد", sect: "Maronite", list: "نبض الجنوب", votes: 205 },
-      { name: "جورج سعادة", sect: "Greek Catholic", list: "نبض الجنوب", votes: 3257 },
+      { name: "Ibrahim Samir Azar", sect: "Maronite", list: "Moderation Is our Strength", votes: 7894 },
+      { name: "Youssef Hanna Skaff", sect: "Greek Catholic", list: "Moderation Is our Strength", votes: 108 },
+      { name: "Nabil Mahmoud Eizzedine El Zaatari", sect: "Sunni", list: "Moderation Is our Strength", votes: 3242 },
 
-      { name: "اسامة سعد", sect: "Sunni", list: "ننتخب للتغيير", votes: 9376 },
-      { name: "حسين حمدان", sect: "Sunni", list: "ننتخب للتغيير", votes: 655 },
-      { name: "ادمون رزق", sect: "Maronite", list: "ننتخب للتغيير", votes: 2336 },
-      { name: "بشارة الاسمر", sect: "Maronite", list: "ننتخب للتغيير", votes: 510 },
-      { name: "مارون عمور", sect: "Greek Catholic", list: "ننتخب للتغيير", votes: 2413 },
+      { name: "Abdel Rahman Nazih El Bizri", sect: "Sunni", list: "We Vote for Change", votes: 8526 },
+      { name: "Osama Maarouf Saad El Masri", sect: "Sunni", list: "We Vote for Change", votes: 7341 },
+      { name: "Charbel Maroun Massaad", sect: "Maronite", list: "We Vote for Change", votes: 984 },
+      { name: "Kamil Farid Serhal", sect: "Maronite", list: "We Vote for Change", votes: 795 },
+      { name: "Jamil Iskandar Dagher", sect: "Greek Catholic", list: "We Vote for Change", votes: 382 },
 
-      { name: "احمد مرعي", sect: "Sunni", list: "معا نحو التغيير", votes: 1553 },
-      { name: "محمد بديع مروة", sect: "Sunni", list: "معا نحو التغيير", votes: 150 },
-      { name: "شربل مسعد", sect: "Maronite", list: "معا نحو التغيير", votes: 5437 },
-      { name: "منصور ضو", sect: "Maronite", list: "معا نحو التغيير", votes: 603 },
-      { name: "سليم سويد", sect: "Greek Catholic", list: "معا نحو التغيير", votes: 6549 },
+      { name: "Ghada Khalil Ayoub", sect: "Greek Catholic", list: "Our Unity in Saida and Jezzine", votes: 7953 },
+      { name: "Youssef Mohamad El Naqib", sect: "Sunni", list: "Our Unity in Saida and Jezzine", votes: 4380 },
+      { name: "Said Sleiman El Asmar", sect: "Maronite", list: "Our Unity in Saida and Jezzine", votes: 1102 },
+      { name: "Wissam Youssef El Tawil", sect: "Maronite", list: "Our Unity in Saida and Jezzine", votes: 108 },
 
-      { name: "امين عفيف", sect: "Sunni", list: "الثنائي الوطني الشيعي", votes: 32 },
-      { name: "ابراهيم عازار", sect: "Maronite", list: "الثنائي الوطني الشيعي", votes: 9979 },
-      { name: "ميشال موسى", sect: "Greek Catholic", list: "الثنائي الوطني الشيعي", votes: 14364 }
+      { name: "Hania Hani Zaatari", sect: "Sunni", list: "We Are The Change", votes: 3028 },
+      { name: "Mohamad Fadi El Zarif", sect: "Sunni", list: "We Are The Change", votes: 369 },
+      { name: "Joseph Elias El Asmar", sect: "Maronite", list: "We Are The Change", votes: 570 },
+      { name: "Sleiman Elias Malek", sect: "Maronite", list: "We Are The Change", votes: 424 },
+      { name: "Robert Elias El Khoury", sect: "Greek Catholic", list: "We Are The Change", votes: 309 },
+
+      { name: "Rana Walid El Tawil", sect: "Sunni", list: "The Voice of Change", votes: 79 },
+      { name: "Mohamad Ali Jamil El Tahira", sect: "Sunni", list: "The Voice of Change", votes: 136 },
+      { name: "Joseph Milad Youssef Metri", sect: "Greek Catholic", list: "The Voice of Change", votes: 82 },
+
+      { name: "Ziad Michel Asouad", sect: "Maronite", list: "Together for Saida and Jezzine", votes: 3639 },
+      { name: "Amal Hekmat Abou Zeid", sect: "Maronite", list: "Together for Saida and Jezzine", votes: 5184 },
+      { name: "Selim Antoine Khoury", sect: "Greek Catholic", list: "Together for Saida and Jezzine", votes: 447 },
+      { name: "Ali Sadek El Cheikh Amar", sect: "Sunni", list: "Together for Saida and Jezzine", votes: 77 },
+      { name: "Mohamad Chaker Souheil El Qawas", sect: "Sunni", list: "Together for Saida and Jezzine", votes: 165 },
+
+      { name: "Ahmad Mohamad Walid El Assi", sect: "Sunni", list: "Capable", votes: 338 },
+      { name: "Ismail Mohamad Dib Haffouda", sect: "Sunni", list: "Capable", votes: 40 },
+      { name: "Emilio Toni Matar", sect: "Maronite", list: "Capable", votes: 210 },
+      { name: "Elie Youssef Abou Tas", sect: "Maronite", list: "Capable", votes: 442 }
+    ],
+    listVotes: [
+      { list: "Moderation Is our Strength", votes: 475 },
+      { list: "We Vote for Change", votes: 755 },
+      { list: "Our Unity in Saida and Jezzine", votes: 405 },
+      { list: "We Are The Change", votes: 219 },
+      { list: "The Voice of Change", votes: 27 },
+      { list: "Together for Saida and Jezzine", votes: 334 },
+      { list: "Capable", votes: 98 }
     ]
   },
 
@@ -219,6 +264,12 @@ const manualElectionResults2022ByTemplateId = {
       { name: "قاسم سليمان داوود", sect: "Shia", list: "القرار الحر", votes: 208 },
       { name: "داوود علي فرج", sect: "Shia", list: "القرار الحر", votes: 320 },
       { name: "روبار ملحم كنعان", sect: "Greek Catholic", list: "القرار الحر", votes: 4238 }
+    ],
+    listVotes: [
+      { list: "الأمل و الوفاء", votes: 4920 },
+      { list: "الدولة الحاضنة", votes: 1459 },
+      { list: "معاً للتغيير", votes: 1057 },
+      { list: "القرار الحر", votes: 474 }
     ]
   },
 
@@ -256,12 +307,200 @@ const manualElectionResults2022ByTemplateId = {
       { name: "رياض حسين عيسى", sect: "Sunni", list: "صوت الجنوب", votes: 18 },
       { name: "محمود حسن شعيب", sect: "Shia", list: "صوت الجنوب", votes: 48 },
       { name: "حسين جهاد الشاعر", sect: "Shia", list: "صوت الجنوب", votes: 192 }
+    ],
+    listVotes: [
+      { list: "الأمل و الوفاء", votes: 6329 },
+      { list: "معاً نحو التغيير", votes: 2318 },
+      { list: "صوت الجنوب", votes: 613 }
     ]
   }
 };
 
+const generatedListVoteOverrides2022ByTemplateId = {
+  "bekaa-i": {
+    listVotes: [
+      { list: "ﺳﻴﺎدﻳﻮن ﻣﺴﺘﻘﻠﻮن", votes: 829 },
+      { list: "زﺣﻠﺔ اﻟﺴﻴﺎدة", votes: 606 },
+      { list: "زﺣﻠﺔ ﺗﻨﺘﻔﺾ", votes: 185 },
+      { list: "اﻟﻘﻮل واﻟﻔﻌﻞ", votes: 26 },
+      { list: "زﺣﻠﺔ اﻟﺮﺳﺎﻟﺔ", votes: 493 },
+      { list: "اﻟﺘﻐﻴﻴﺮ", votes: 52 },
+      { list: "ﻗﺎدرﻳﻦ ﻧﻮاﺟﻪ", votes: 92 },
+      { list: "اﻟﻜﺘﻠﺔ اﻟﺸﻌﺒﻴﺔ", votes: 563 }
+    ]
+  },
+  "bekaa-ii": {
+    listVotes: [
+      { list: "اﻟﻐﺪ اﻷﻓﻀﻞ", votes: 1070 },
+      { list: "ﺑﻘﺎﻋﻨﺎ اوﻻً", votes: 181 },
+      { list: "ﻻﺋﺤﺔ ﺳﻬﻠﻨﺎ و اﻟﺠﺒﻞ", votes: 402 },
+      { list: "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ", votes: 472 },
+      { list: "ﻧﺤﻮ اﻟﺘﻐﻴﻴﺮ", votes: 23 },
+      { list: "ﻗﺎدرﻳﻦ", votes: 40 }
+    ]
+  },
+  "bekaa-iii": {
+    listVotes: [
+      { list: "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد", votes: 501 },
+      { list: "اﻻﻣﻞ و اﻟﻮﻓﺎء", votes: 4649 },
+      { list: "9", votes: 135 },
+      { list: "ﻗﺎدرﻳﻦ", votes: 153 },
+      { list: "ﺑﻨﺎء اﻟﺪوﻟﺔ", votes: 630 },
+      { list: "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ", votes: 300 }
+    ]
+  },
+  "mount-lebanon-i": {
+    listVotes: [
+      { list: "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ", votes: 663 },
+      { list: "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ", votes: 577 },
+      { list: "ﺻﺮﺧﺔ وﻃﻦ", votes: 1554 },
+      { list: "اﻟﺤﺮﻳﺔ ﻗﺮار", votes: 354 }
+    ]
+  },
+  "mount-lebanon-ii": {
+    listVotes: [
+      { list: "ﻣﺘﻦ اﻟﺤﺮﻳّﺔ", votes: 449 },
+      { list: "ﻣﻌﺎً اﻗﻮى", votes: 548 },
+      { list: "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ", votes: 764 },
+      { list: "ﻧﺤﻮ اﻟﺪوﻟﺔ", votes: 269 },
+      { list: "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ", votes: 470 }
+    ]
+  },
+  "mount-lebanon-iii": {
+    listVotes: [
+      { list: "ﻣﻌﺎً ﻧﺴﺘﻄﻴﻊ", votes: 67 },
+      { list: "ﺑﻌﺒﺪا اﻟﺴﻴﺎدة واﻟﻘﺮار", votes: 671 },
+      { list: "ﺑﻌﺒﺪا ﺗﻨﺘﻔﺾ", votes: 132 },
+      { list: "ﺑﻌﺒﺪا اﻟﺘﻐﻴﻴﺮ", votes: 421 },
+      { list: "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ", votes: 40 },
+      { list: "ﻗﺎدرﻳﻦ", votes: 117 },
+      { list: "ﻻﺋﺤﺔ اﻟﻮﻓﺎق اﻟﻮﻃﻨﻲ", votes: 945 }
+    ]
+  },
+  "mount-lebanon-iv": {
+    listVotes: [
+      { list: "اﻟﺸﺮاﻛﺔ واﻻرادة", votes: 2365 },
+      { list: "ﺻﻮﺗﻚ ﺛﻮرة", votes: 303 },
+      { list: "ﻻﺋﺤﺔ اﻟﺠﺒﻞ", votes: 1049 },
+      { list: "ﻗﺎدرﻳﻦ", votes: 210 },
+      { list: "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ", votes: 1484 },
+      { list: "ﺳﻴﺎدة وﻃﻦ", votes: 88 },
+      { list: "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ", votes: 78 }
+    ]
+  },
+  "north-i": {
+    candidates: [
+      { name: "ﻋﻠﻲ ﻣﺤﻤﺪ ﻃﻠﻴﺲ", sect: "Sunni", list: "اﻟﻮﻓﺎء ﻟﻌﻜﺎﺭ", votes: 6645 },
+      { name: "ﻫﻴﺜﻢ ﻣﺤﻤﺪ ﻋﺰ اﻟﺪﻳﻦ", sect: "Sunni", list: "اﻟﻮﻓﺎء ﻟﻌﻜﺎﺭ", votes: 3588 },
+      { name: "ﻋﻤﺎﺭ ﺳﻌﺪ ﷲ ﺳﻌﺪ ﷲ ﻣﺤﻤﺪ رﺷﻴﺪ", sect: "Sunni", list: "اﻟﻮﻓﺎء ﻟﻌﻜﺎﺭ", votes: 242 },
+      { name: "ﺟﻮزﻑ ﺟﺒﺮاﺋﻴﻞ ﻣﺨﺎﻳﻞ", sect: "Maronite", list: "اﻟﻮﻓﺎء ﻟﻌﻜﺎﺭ", votes: 581 },
+      { name: "اﻳﻠﻲ اﺳﻌﺪ ﺳﻌﺪ", sect: "Greek Orthodox", list: "اﻟﻮﻓﺎء ﻟﻌﻜﺎﺭ", votes: 1171 },
+      { name: "اﻳﻠﻲ ﺣﻤﻴﺪ ﺩﻳﺐ", sect: "Greek Orthodox", list: "اﻟﻮﻓﺎء ﻟﻌﻜﺎﺭ", votes: 319 },
+      { name: "اﺣﻤﺪ اﺑﺮاﻫﻴﻢ اﻟﻬﻀﺎﻡ", sect: "Alawite", list: "اﻟﻮﻓﺎء ﻟﻌﻜﺎﺭ", votes: 455 },
+
+      { name: "وﻟﻴﺪ وﺟﻴﻪ اﻟﺒﻌﺮﻳﻨﻲ", sect: "Sunni", list: "ﻻﺋﺤﺔ اﻻﻋﺘﺪاﻝ اﻟﻮﻃﻨﻲ", votes: 11099 },
+      { name: "ﻣﺤﻤﺪ ﻣﺼﻄﻔﻰ ﺳﻠﻴﻤﺎﻥ", sect: "Sunni", list: "ﻻﺋﺤﺔ اﻻﻋﺘﺪاﻝ اﻟﻮﻃﻨﻲ", votes: 11340 },
+      { name: "اﺑﺮاﻫﻴﻢ ﻋﺒﺪﷲ اﻟﻤﺼﻮﻣﻌﻲ", sect: "Sunni", list: "ﻻﺋﺤﺔ اﻻﻋﺘﺪاﻝ اﻟﻮﻃﻨﻲ", votes: 7370 },
+      { name: "اﺣﻤﺪ ﻣﺤﻤﺪ رﺳﺘﻢ", sect: "Alawite", list: "ﻻﺋﺤﺔ اﻻﻋﺘﺪاﻝ اﻟﻮﻃﻨﻲ", votes: 324 },
+      { name: "ﺳﺠﻴﻊ ﻣﺨﺎﻳﻞ ﻋﻄﻴﻪ", sect: "Greek Orthodox", list: "ﻻﺋﺤﺔ اﻻﻋﺘﺪاﻝ اﻟﻮﻃﻨﻲ", votes: 1948 },
+      { name: "ﺣﻨﺎﺟﻮﻟﻲ اﻟﻴﺎﺱ", sect: "Greek Orthodox", list: "ﻻﺋﺤﺔ اﻻﻋﺘﺪاﻝ اﻟﻮﻃﻨﻲ", votes: 1264 },
+      { name: "ﻫﺎﺩﻱ ﻓﻮﺯﻱ ﺣﺒﻴﺶ", sect: "Maronite", list: "ﻻﺋﺤﺔ اﻻﻋﺘﺪاﻝ اﻟﻮﻃﻨﻲ", votes: 7546 },
+
+      { name: "ﻃﻼﻝ ﺧﺎﻟﺪ ﺑﻚ ﻋﺒﺪ اﻟﻘﺎﺩﺭ اﻟﻤﺮﻋﺒﻲ", sect: "Sunni", list: "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ", votes: 3159 },
+      { name: "ﺧﺎﻟﺪ ﻣﺤﻤﺪ ﺿﺎﻫﺮ", sect: "Sunni", list: "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ", votes: 2479 },
+      { name: "ﻣﺤﻤﺪ ﻋﺠﺎﺝ اﺑﺮاﻫﻴﻢ", sect: "Sunni", list: "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ", votes: 3481 },
+      { name: "وﺳﺎﻡ ﺭﻳﺎﺽ ﻣﻨﺼﻮﺭ", sect: "Greek Orthodox", list: "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ", votes: 8264 },
+      { name: "ﺯﻳﺎﺩ ﺭﻳﺎﺽ ﺭﺣﺎﻝ", sect: "Greek Orthodox", list: "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ", votes: 464 },
+      { name: "ﻓﻮاﺯ ﻣﺤﻤﺪ ﻣﺤﻤﺪ", sect: "Alawite", list: "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ", votes: 153 },
+      { name: "ﻣﻴﺸﺎﻝ اﻧﻄﻮﻥ اﻟﺨﻮﺭﻱ", sect: "Maronite", list: "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ", votes: 893 },
+
+      { name: "ﺭوﻟﻰ ﻣﺤﻤﺪ اﻟﻤﺮاﺩ", sect: "Sunni", list: "ﻋﻜﺎﺭ", votes: 496 },
+      { name: "ﺭاﻟﻒ ﺟﻮﺭﺝ ﺿﺎﻫﺮ", sect: "Maronite", list: "ﻋﻜﺎﺭ", votes: 774 },
+      { name: "ﻣﻴﺸﺎﻝ ﺟﺮﺟﺲ ﻃﻌﻮﻡ", sect: "Greek Orthodox", list: "ﻋﻜﺎﺭ", votes: 834 },
+      { name: "اﺣﻤﺪ ﻣﺼﻄﻔﻰ ﻣﺼﻄﻔﻰ", sect: "Sunni", list: "ﻋﻜﺎﺭ", votes: 489 },
+      { name: "ﻧﺰﻳﻪ ﻋﻔﻴﻒ اﺑﺮاﻫﻴﻢ", sect: "Greek Orthodox", list: "ﻋﻜﺎﺭ", votes: 91 },
+      { name: "ﻏﻴﺚ ﺧﺎﻟﺪ ﺣﻤﻮﺩ", sect: "Sunni", list: "ﻋﻜﺎﺭ", votes: 361 },
+
+      { name: "ﻋﺒﺪ اﻟﺮﺯاﻕ ﻣﺤﻤﻮﺩ اﻟﻜﻴﻼﻧﻲ", sect: "Sunni", list: "ﻋﻜﺎﺭ ﺗﻨﺘﻔﺾ", votes: 64 },
+      { name: "ﺧﺎﻟﺪ ﺣﺴﻦ ﺿﺎﻫﺮ", sect: "Sunni", list: "ﻋﻜﺎﺭ ﺗﻨﺘﻔﺾ", votes: 1038 },
+      { name: "ﻣﺤﻤﺪ ﺧﺎﻟﺪ ﻣﺴﻠﻤﺎﻧﻲ", sect: "Sunni", list: "ﻋﻜﺎﺭ ﺗﻨﺘﻔﺾ", votes: 97 },
+      { name: "ﺭﻳﻦ ﺳﻴﻤﻮﻥ ﺻﻮاﻥ", sect: "Maronite", list: "ﻋﻜﺎﺭ ﺗﻨﺘﻔﺾ", votes: 72 },
+      { name: "ﻧﺰاﺭ ﻫﺎﺷﻢ اﺑﺮاﻫﻴﻢ", sect: "Alawite", list: "ﻋﻜﺎﺭ ﺗﻨﺘﻔﺾ", votes: 15 },
+
+      { name: "ﻣﺤﻤﺪ ﻛﺎﻣﻞ ﺑﺪﺭﺓ", sect: "Sunni", list: "ﻋﻜﺎﺭ اﻟﺘﻐﻴﻴﺮ", votes: 9302 },
+      { name: "ﺑﺮﻱ ﻋﺴﻜﺮ اﻻﺳﻌﺪ", sect: "Sunni", list: "ﻋﻜﺎﺭ اﻟﺘﻐﻴﻴﺮ", votes: 1111 },
+      { name: "ﺧﺎﻟﺪ ﻣﺤﻤﻮﺩ ﻋﻠﻮﺵ", sect: "Sunni", list: "ﻋﻜﺎﺭ اﻟﺘﻐﻴﻴﺮ", votes: 1435 },
+      { name: "ﻟﻮﺭﻳﺲ اﺩﻳﺐ اﻟﺮاﻋﻲ", sect: "Greek Orthodox", list: "ﻋﻜﺎﺭ اﻟﺘﻐﻴﻴﺮ", votes: 390 },
+      { name: "ﻭﻓﺎء ﻛﻤﻴﻞ ﺟﻤﻴﻞ", sect: "Greek Orthodox", list: "ﻋﻜﺎﺭ اﻟﺘﻐﻴﻴﺮ", votes: 176 },
+      { name: "اﺩﻛﺎﺭ ﺟﻮزة ﻃﻨﻮﺱ ﺿﺎﻫﺮ", sect: "Maronite", list: "ﻋﻜﺎﺭ اﻟﺘﻐﻴﻴﺮ", votes: 947 },
+      { name: "ﺟﻨﺎﻥ اﺣﻤﺪ ﺣﻤﺪاﻥ", sect: "Alawite", list: "ﻋﻜﺎﺭ اﻟﺘﻐﻴﻴﺮ", votes: 361 },
+
+      { name: "ﻭﺳﻴﻢ ﻏﺎﻧﺪﻱ اﻟﻤﺮﻋﺒﻲ", sect: "Sunni", list: "اﻟﻨﻬﻮﺽ ﻟﻌﻜﺎﺭ", votes: 5000 },
+      { name: "ﺳﻌﺪ ﷲ ﻣﺤﻲ اﻟﺪﻳﻦ اﻟﺤﻤﺪ", sect: "Sunni", list: "اﻟﻨﻬﻮﺽ ﻟﻌﻜﺎﺭ", votes: 29 },
+      { name: "ﻣﺤﻤﻮﺩ ﺧﻀﺮ ﺣﺪاﺭﺓ", sect: "Sunni", list: "اﻟﻨﻬﻮﺽ ﻟﻌﻜﺎﺭ", votes: 5017 },
+      { name: "ﻫﺸﺎﻡ اﻟﻴﺎﺱ ﺷﺒﻴﺐ", sect: "Greek Orthodox", list: "اﻟﻨﻬﻮﺽ ﻟﻌﻜﺎﺭ", votes: 775 },
+      { name: "ﻧﺎﻓﺬ ﻟﻄﻒ ﷲ ﻭﺭاﻕ", sect: "Greek Orthodox", list: "اﻟﻨﻬﻮﺽ ﻟﻌﻜﺎﺭ", votes: 155 },
+      { name: "ﻃﺎﻧﻴﻮﺱ ﺧﻠﻴﻞ اﻟﺨﻮﺭﻱ", sect: "Maronite", list: "اﻟﻨﻬﻮﺽ ﻟﻌﻜﺎﺭ", votes: 233 },
+      { name: "ﻣﺤﺴﻦ اﺣﻤﺪ ﺣﺴﻴﻦ", sect: "Alawite", list: "اﻟﻨﻬﻮﺽ ﻟﻌﻜﺎﺭ", votes: 282 },
+
+      { name: "ﻣﺤﻤﺪ ﻳﺤﻴﻪ ﻳﺤﻴﻪ", sect: "Sunni", list: "ﻋﻜﺎﺭ اﻭﻻً", votes: 15142 },
+      { name: "ﻛﺮﻡ اﺣﻤﺪ اﻟﻀﺎﻫﺮ", sect: "Sunni", list: "ﻋﻜﺎﺭ اﻭﻻً", votes: 1528 },
+      { name: "ﺣﺎﺗﻢ ﺧﻀﺮ ﺳﻌﺪ اﻟﺪﻳﻦ", sect: "Sunni", list: "ﻋﻜﺎﺭ اﻭﻻً", votes: 1864 },
+      { name: "اﺳﻌﺪ ﺭاﻣﺰ ﺩﺭﻏﺎﻡ", sect: "Greek Orthodox", list: "ﻋﻜﺎﺭ اﻭﻻً", votes: 5754 },
+      { name: "ﺷﻜﻴﺐ ﻧﻌﻴﻢ ﻋﺒﻮﺩ", sect: "Greek Orthodox", list: "ﻋﻜﺎﺭ اﻭﻻً", votes: 3384 },
+      { name: "ﺟﻴﻤﻲ ﺟﻮﺭﺝ ﺟﺒﻮﺭ", sect: "Maronite", list: "ﻋﻜﺎﺭ اﻭﻻً", votes: 8986 },
+      { name: "ﺣﻴﺪﺭ ﺯﻫﺮ اﻟﺪﻳﻦ ﻋﻴﺴﻰ", sect: "Alawite", list: "ﻋﻜﺎﺭ اﻭﻻً", votes: 3948 }
+    ],
+    listVotes: [
+      { list: "اﻟﻮﻓﺎء ﻟﻌﻜﺎﺭ", votes: 618 },
+      { list: "ﻻﺋﺤﺔ اﻻﻋﺘﺪاﻝ اﻟﻮﻃﻨﻲ", votes: 957 },
+      { list: "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ", votes: 441 },
+      { list: "ﻋﻜﺎﺭ", votes: 109 },
+      { list: "ﻋﻜﺎﺭ ﺗﻨﺘﻔﺾ", votes: 85 },
+      { list: "ﻋﻜﺎﺭ اﻟﺘﻐﻴﻴﺮ", votes: 423 },
+      { list: "اﻟﻨﻬﻮﺽ ﻟﻌﻜﺎﺭ", votes: 394 },
+      { list: "ﻋﻜﺎﺭ اﻭﻻً", votes: 1155 }
+    ]
+  },
+  "north-ii": {
+    listVotes: [
+      { list: "اﻻرادة اﻟﺸﻌﺒﻴﺔ", votes: 1493 },
+      { list: "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ", votes: 453 },
+      { list: "ﻃﻤﻮح اﻟﺸﺒﺎب", votes: 40 },
+      { list: "إﻧﻘﺎذ وﻃﻦ", votes: 1482 },
+      { list: "ﻟﻠﻨﺎس", votes: 690 },
+      { list: "ﻟﺒﻨﺎن ﻟﻨﺎ", votes: 716 },
+      { list: "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ", votes: 66 },
+      { list: "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء", votes: 55 },
+      { list: "ﻗﺎدرﻳﻦ", votes: 191 }
+    ]
+  },
+  "north-iii": {
+    listVotes: [
+      { list: "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ", votes: 605 },
+      { list: "رح ﻧﺒﻘﻰ ﻫﻮن", votes: 574 }
+    ]
+  }
+};
+
+const generatedElectionResults2022ByTemplateIdWithOverrides = Object.fromEntries(
+  Object.entries(generatedElectionResults2022ByTemplateId).map(([templateId, baseline]) => {
+    const override = generatedListVoteOverrides2022ByTemplateId[templateId];
+    if (!override) {
+      return [templateId, baseline];
+    }
+    return [
+      templateId,
+      {
+        ...baseline,
+        ...override
+      }
+    ];
+  })
+);
+
 const electionResults2022ByTemplateId = {
-  ...generatedElectionResults2022ByTemplateId,
+  ...generatedElectionResults2022ByTemplateIdWithOverrides,
   ...manualElectionResults2022ByTemplateId
 };
 
@@ -278,6 +517,7 @@ export function loadElectionResults2022(template) {
 
   const scenario = cloneTemplate(template);
   scenario.candidates = normalizeElectionBaseline(template, baseline.candidates, "2022 Imported List");
+  scenario.listVotes = normalizeElectionBaselineListVotes(scenario.candidates, baseline.listVotes);
 
   return scenario;
 }

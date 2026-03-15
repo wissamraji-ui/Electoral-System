@@ -1,5 +1,8 @@
 import { cloneTemplate } from "./templates.js";
-import { normalizeElectionBaseline } from "./election-results-normalize.js";
+import {
+  normalizeElectionBaseline,
+  normalizeElectionBaselineListVotes
+} from "./election-results-normalize.js";
 
 const verifiedElectionResults2018ByTemplateId = {
   // Hand-cleaned from rendered page image of:
@@ -95,6 +98,17 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Pages 29-30, Beirut 2
   "beirut-ii": {
+    listVotes: [
+      { list: "Future for Beirut", votes: 2028 },
+      { list: "Beirut's Unity", votes: 2621 },
+      { list: "Lebanon is Worthy", votes: 832 },
+      { list: "Beirut The Homeland", votes: 151 },
+      { list: "Kulluna Beirut", votes: 205 },
+      { list: "People's Voice", votes: 66 },
+      { list: "Dignity of Beirut", votes: 50 },
+      { list: "Beirutis Opposition", votes: 33 },
+      { list: "Independent Beirutis", votes: 29 }
+    ],
     candidates: [
       { name: "Saad Eddine Rafik Al Hariri", sect: "Sunni", list: "Future for Beirut", votes: 20751 },
       { name: "Ali Kamal Al Shaer", sect: "Shia", list: "Future for Beirut", votes: 2462 },
@@ -194,6 +208,13 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 12, Bekaa 3 (Baalback - Hermel)
   "bekaa-iii": {
+    listVotes: [
+      { list: "Hope and Loyalty", votes: 3181 },
+      { list: "National Cedars", votes: 32 },
+      { list: "Dignity and Development", votes: 902 },
+      { list: "The Independent", votes: 157 },
+      { list: "Development and Change", votes: 147 }
+    ],
     candidates: [
       { name: "Jamil Mohamad Amin Amin El Sayed", sect: "Shia", list: "Hope and Loyalty", votes: 33223 },
       { name: "Hussein Ali El Hajj Hassan", sect: "Shia", list: "Hope and Loyalty", votes: 15662 },
@@ -253,6 +274,12 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 20, North 1 (Akkar)
   "north-i": {
+    listVotes: [
+      { list: "Future for Akkar", votes: 1684 },
+      { list: "Decision to Akkar", votes: 312 },
+      { list: "Akkar's Decision", votes: 65 },
+      { list: "Strong Akkar", votes: 622 }
+    ],
     candidates: [
       { name: "Walid Wajih El Baarini", sect: "Sunni", list: "Future for Akkar", votes: 20426 },
       { name: "Wehbe Khalil Khalil Katicha", sect: "Greek Orthodox", list: "Future for Akkar", votes: 7911 },
@@ -303,6 +330,10 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 16, South 2 (Tyre - Saida Villages)
   "south-ii": {
+    listVotes: [
+      { list: "Hope and Loyalty", votes: 2836 },
+      { list: "Together towards Change", votes: 1156 }
+    ],
     candidates: [
       { name: "Nabih Moustafa Berri", sect: "Shia", list: "Hope and Loyalty", votes: 42137 },
       { name: "Nouaf Mahmoud El Mousawi", sect: "Shia", list: "Hope and Loyalty", votes: 24379 },
@@ -385,6 +416,12 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 14, South 1 (Jezzine - Saida)
   "south-i": {
+    listVotes: [
+      { list: "For Everyone", votes: 473 },
+      { list: "Saida & Jezzine Together", votes: 420 },
+      { list: "Power of Change", votes: 174 },
+      { list: "Integrity and Dignity", votes: 588 }
+    ],
     candidates: [
       { name: "Ibrahim Samir Azar", sect: "Maronite", list: "For Everyone", votes: 11663 },
       { name: "Abdel Kader Nazih El Bisat", sect: "Sunni", list: "For Everyone", votes: 36 },
@@ -463,6 +500,12 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 34, Mount Lebanon 2 (Metn)
   "mount-lebanon-ii": {
+    listVotes: [
+      { list: "Metn Heart of Lebanon", votes: 266 },
+      { list: "Metn Pulse", votes: 624 },
+      { list: "Strong Metn", votes: 832 },
+      { list: "Metn Loyalty", votes: 467 }
+    ],
     candidates: [
       { name: "Georges Naim Al Rahbani", sect: "Greek Orthodox", list: "Kulluna Watani", votes: 175 },
       { name: "Adib Youssef Tohme", sect: "Maronite", list: "Kulluna Watani", votes: 326 },
@@ -510,6 +553,9 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 25, North 3 (Batroun - Koura - Bcharreh - Zgharta)
   "north-iii": {
+    listVotes: [
+      { list: "Kulluna Watani", votes: 73 }
+    ],
     candidates: [
       { name: "Boutros Joseph El Khoury Hareb", sect: "Maronite", list: "Together for North and Lebanon", votes: 6155 },
       { name: "Salim Abdallah Saade", sect: "Greek Orthodox", list: "Together for North and Lebanon", votes: 5263 },
@@ -559,6 +605,13 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 22, North 2 (Minnieh - Dinnieh - Tripoli)
   "north-ii": {
+    listVotes: [
+      { list: "The Future is for the North", votes: 1923 },
+      { list: "National Dignity", votes: 911 },
+      { list: "Determination", votes: 2433 },
+      { list: "A Sovereign Lebanon", votes: 468 },
+      { list: "People's Decision", votes: 426 }
+    ],
     candidates: [
       { name: "Kassem Ali Abdel Aziz", sect: "Sunni", list: "The Future is for the North", votes: 6382 },
       { name: "Nehmeh Gerges Mahfoud", sect: "Greek Orthodox", list: "The Future is for the North", votes: 800 },
@@ -649,6 +702,11 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 10, Bekaa 2 (West Bekaa - Rashaya)
   "bekaa-ii": {
+    listVotes: [
+      { list: "Better Tomorrow", votes: 792 },
+      { list: "Future for W. Bekaa and Rashaya", votes: 660 },
+      { list: "Civil Society", votes: 113 }
+    ],
     candidates: [
       { name: "Faysal Salim Daoud", sect: "Druze", list: "Better Tomorrow", votes: 2041 },
       { name: "Abdel Rahim Youssef Mrad", sect: "Sunni", list: "Better Tomorrow", votes: 15111 },
@@ -709,6 +767,12 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Pages 37-38, Mount Lebanon 4 (Chouf, Aley)
   "mount-lebanon-iv": {
+    listVotes: [
+      { list: "Reconciliation", votes: 2293 },
+      { list: "Mount Lebanon's Guaranteed change", votes: 788 },
+      { list: "Kulluna Watani", votes: 588 },
+      { list: "Madaniya", votes: 195 }
+    ],
     candidates: [
       { name: "Akram Hussein Sheyab", sect: "Druze", list: "Reconciliation", votes: 14088 },
       { name: "Taymour Walid Joumblatt", sect: "Druze", list: "Reconciliation", votes: 11478 },
@@ -821,6 +885,7 @@ export function loadElectionResults2018(template) {
 
   const scenario = cloneTemplate(template);
   scenario.candidates = normalizeElectionBaseline(template, baseline.candidates, "2018 Report Unassigned List");
+  scenario.listVotes = normalizeElectionBaselineListVotes(scenario.candidates, baseline.listVotes);
 
   return scenario;
 }

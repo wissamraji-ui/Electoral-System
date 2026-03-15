@@ -80,6 +80,8 @@ function bindEvents() {
   elements.listChips.addEventListener("click", onListChipsClick);
   elements.candidateTableBody.addEventListener("input", onCandidateTableInput);
   elements.candidateTableBody.addEventListener("change", onCandidateTableChange);
+  elements.listVoteTotalsBody.addEventListener("input", onListVoteTotalsInput);
+  elements.listVoteTotalsBody.addEventListener("change", onListVoteTotalsChange);
 
   elements.runSimulationBtn.addEventListener("click", () => {
     syncCandidateTableStateFromDom();
@@ -265,9 +267,41 @@ function onListChipsClick(event) {
   state.candidates = state.candidates.filter(
     (candidate) => normalizeListKey(candidate?.list) !== listKey
   );
+  state.listVotes = state.listVotes.filter((entry) => normalizeListKey(entry?.list) !== listKey);
   runSimulation();
   saveState();
   renderAll();
+}
+
+function onListVoteTotalsInput(event) {
+  updateListVoteEntryFromEvent(event, false);
+}
+
+function onListVoteTotalsChange(event) {
+  updateListVoteEntryFromEvent(event, true);
+}
+
+function updateListVoteEntryFromEvent(event, persist) {
+  const target = event.target;
+  if (!(target instanceof HTMLInputElement) || !target.classList.contains("list-only-votes")) {
+    return;
+  }
+
+  const listKey = target.dataset.listKey;
+  if (!listKey) {
+    return;
+  }
+
+  setListOnlyVotes(listKey, target.dataset.listName ?? "", target.value);
+  runSimulation();
+
+  if (persist) {
+    saveState();
+    renderAll();
+    return;
+  }
+
+  renderResults();
 }
 
 function onCandidateTableChange(event) {
@@ -367,6 +401,10 @@ function onExportScenario() {
       regionName: state.regionName,
       quotas: state.quotas.map((entry) => ({ sect: entry.sect, seats: entry.seats })),
       quotasLocked: state.quotasLocked,
+      listVotes: state.listVotes.map((entry) => ({
+        list: entry.list,
+        votes: entry.votes
+      })),
       candidates: state.candidates.map((candidate) => ({
         name: candidate.name,
         sect: candidate.sect,
@@ -700,46 +738,17 @@ function renderCandidateTable() {
 }
 
 function renderCandidateListVoteTotals() {
-  const grouped = new Map();
-
-  for (const candidate of state.candidates) {
-    const listName = String(candidate?.list ?? "").trim();
-    if (!listName) {
-      continue;
-    }
-
-    const key = normalizeListKey(listName);
-    if (!grouped.has(key)) {
-      grouped.set(key, {
-        list: listName,
-        votes: 0,
-        filled: 0,
-        slots: 0
-      });
-    }
-
-    const row = grouped.get(key);
-    row.votes += clampInteger(candidate?.votes, 0);
-    row.slots += 1;
-    if (String(candidate?.name ?? "").trim()) {
-      row.filled += 1;
-    }
-  }
-
-  const rows = Array.from(grouped.values()).sort((a, b) => {
-    if (b.votes !== a.votes) {
-      return b.votes - a.votes;
-    }
-    return a.list.localeCompare(b.list, "en", { sensitivity: "base" });
-  });
+  const rows = getListVoteRows();
 
   if (rows.length === 0) {
     elements.listVoteTotalsBody.innerHTML =
-      '<tr><td colspan="3" class="empty">Add a list to generate candidate slots and list vote totals.</td></tr>';
+      '<tr><td colspan="5" class="empty">Add a list to generate candidate slots and list vote totals.</td></tr>';
     return;
   }
 
-  const totalVotes = rows.reduce((sum, row) => sum + row.votes, 0);
+  const totalCandidateVotes = rows.reduce((sum, row) => sum + row.candidateVotes, 0);
+  const totalListOnlyVotes = rows.reduce((sum, row) => sum + row.listOnlyVotes, 0);
+  const totalVotes = rows.reduce((sum, row) => sum + row.totalVotes, 0);
   const totalFilledCandidates = rows.reduce((sum, row) => sum + row.filled, 0);
   const totalCandidateSlots = rows.reduce((sum, row) => sum + row.slots, 0);
 
@@ -750,7 +759,11 @@ function renderCandidateListVoteTotals() {
           <tr>
             <td>${renderListChip(row.list)}</td>
             <td>${row.filled}/${row.slots}</td>
-            <td>${formatNumber(row.votes)}</td>
+            <td>${formatNumber(row.candidateVotes)}</td>
+            <td class="candidate-votes-cell"><input class="row-edit list-only-votes" data-list-key="${escapeHtml(
+              row.key
+            )}" data-list-name="${escapeHtml(row.list)}" type="number" min="0" step="1" value="${row.listOnlyVotes}" /></td>
+            <td>${formatNumber(row.totalVotes)}</td>
           </tr>
         `
       )
@@ -758,6 +771,8 @@ function renderCandidateListVoteTotals() {
     <tr class="list-totals-final-row">
       <td>Grand Total</td>
       <td>${totalFilledCandidates}/${totalCandidateSlots}</td>
+      <td>${formatNumber(totalCandidateVotes)}</td>
+      <td>${formatNumber(totalListOnlyVotes)}</td>
       <td>${formatNumber(totalVotes)}</td>
     </tr>
   `;
@@ -847,7 +862,7 @@ function getConfiguredLists() {
 }
 
 function runSimulation() {
-  simulation = computeResults(state.quotas, state.candidates);
+  simulation = computeResults(state.quotas, state.candidates, state.listVotes);
 }
 
 function renderResults() {
@@ -1007,6 +1022,7 @@ function normalizeState(input) {
     regionName: String(input?.regionName ?? ""),
     quotas: [],
     candidates: [],
+    listVotes: [],
     quotasLocked: input?.quotasLocked === true
   };
 
@@ -1048,6 +1064,31 @@ function normalizeState(input) {
       });
     }
   }
+
+  const listNamesByKey = new Map();
+  base.candidates.forEach((candidate) => {
+    const key = normalizeListKey(candidate.list);
+    if (key && !listNamesByKey.has(key)) {
+      listNamesByKey.set(key, candidate.list);
+    }
+  });
+
+  const listVoteAccumulator = new Map();
+  if (Array.isArray(input?.listVotes)) {
+    for (const raw of input.listVotes) {
+      const key = normalizeListKey(raw?.list);
+      if (!key || !listNamesByKey.has(key)) {
+        continue;
+      }
+
+      listVoteAccumulator.set(key, (listVoteAccumulator.get(key) ?? 0) + clampInteger(raw?.votes, 0));
+    }
+  }
+
+  base.listVotes = Array.from(listNamesByKey.entries()).map(([key, list]) => ({
+    list,
+    votes: listVoteAccumulator.get(key) ?? 0
+  }));
 
   return base;
 }
@@ -1178,6 +1219,11 @@ function buildPdfReportLines() {
     `- Seat Coverage: ${summary.coveragePct}%`,
     `- Candidates: ${summary.totalCandidates}`,
     `- Total Votes: ${formatNumber(summary.totalVotes)}`,
+    `- List-Only Votes: ${formatNumber(
+      Array.isArray(state.listVotes)
+        ? state.listVotes.reduce((sum, entry) => sum + clampInteger(entry?.votes, 0), 0)
+        : 0
+    )}`,
     `- Electoral Quotient (EQ): ${summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-"}`,
     `- Total Lists: ${totalListCount}`,
     `- Qualified Lists: ${summary.qualifiedListCount}`,
@@ -1202,7 +1248,9 @@ function buildPdfReportLines() {
   } else {
     listRows.forEach((row) => {
       lines.push(
-        `- ${row.list}: votes ${formatNumber(row.votes)} | ${row.qualified ? "Qualified" : "Below EQ"} | seats ${row.seats} | base ${row.baseSeats}`
+        `- ${row.list}: total ${formatNumber(row.votes)} | candidate ${formatNumber(
+          row.candidateVotes
+        )} | list-only ${formatNumber(row.listVotes)} | ${row.qualified ? "Qualified" : "Below EQ"} | seats ${row.seats} | base ${row.baseSeats}`
       );
     });
   }
@@ -1351,6 +1399,97 @@ function normalizeListKey(value) {
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ");
+}
+
+function getListVoteRows() {
+  const grouped = new Map();
+
+  for (const candidate of state.candidates) {
+    const listName = String(candidate?.list ?? "").trim();
+    if (!listName) {
+      continue;
+    }
+
+    const key = normalizeListKey(listName);
+    if (!grouped.has(key)) {
+      grouped.set(key, {
+        key,
+        list: listName,
+        candidateVotes: 0,
+        listOnlyVotes: 0,
+        totalVotes: 0,
+        filled: 0,
+        slots: 0
+      });
+    }
+
+    const row = grouped.get(key);
+    row.candidateVotes += clampInteger(candidate?.votes, 0);
+    row.slots += 1;
+    if (String(candidate?.name ?? "").trim()) {
+      row.filled += 1;
+    }
+  }
+
+  state.listVotes.forEach((entry) => {
+    const key = normalizeListKey(entry?.list);
+    const row = grouped.get(key);
+    if (row) {
+      row.listOnlyVotes = clampInteger(entry?.votes, 0);
+      return;
+    }
+
+    const listName = String(entry?.list ?? "").trim();
+    if (!listName) {
+      return;
+    }
+
+    grouped.set(key, {
+      list: listName,
+      candidateVotes: 0,
+      listOnlyVotes: clampInteger(entry?.votes, 0),
+      totalVotes: 0,
+      filled: 0,
+      seats: 0
+    });
+  });
+
+  const rows = Array.from(grouped.values());
+  rows.forEach((row) => {
+    row.totalVotes = row.candidateVotes + row.listOnlyVotes;
+  });
+
+  return rows.sort((a, b) => {
+    if (b.totalVotes !== a.totalVotes) {
+      return b.totalVotes - a.totalVotes;
+    }
+    return a.list.localeCompare(b.list, "en", { sensitivity: "base" });
+  });
+}
+
+function setListOnlyVotes(listKey, fallbackName, value) {
+  const key = normalizeListKey(listKey);
+  if (!key) {
+    return;
+  }
+
+  const canonicalName =
+    state.candidates.find((candidate) => normalizeListKey(candidate?.list) === key)?.list ||
+    state.listVotes.find((entry) => normalizeListKey(entry?.list) === key)?.list ||
+    String(fallbackName ?? "").trim();
+  const votes = clampInteger(value, 0);
+  const existing = state.listVotes.find((entry) => normalizeListKey(entry?.list) === key);
+
+  if (existing) {
+    existing.list = canonicalName;
+    existing.votes = votes;
+    return;
+  }
+
+  state.listVotes.push({
+    list: canonicalName,
+    votes
+  });
 }
 
 function rebuildListColorIndex() {

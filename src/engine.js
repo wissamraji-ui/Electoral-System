@@ -13,6 +13,13 @@ function toVoteNumber(value) {
   return Number.isFinite(numeric) && numeric >= 0 ? Math.floor(numeric) : 0;
 }
 
+function normalizeListKey(value) {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
+}
+
 function compareCandidates(a, b) {
   if (b.votes !== a.votes) {
     return b.votes - a.votes;
@@ -117,7 +124,7 @@ function runMinCostMaxFlow(graph, source, sink) {
   return { flow };
 }
 
-export function computeResults(quotas, candidates) {
+export function computeResults(quotas, candidates, listVotes = []) {
   const safeQuotas = Array.isArray(quotas)
     ? quotas
         .map((entry) => ({
@@ -139,16 +146,40 @@ export function computeResults(quotas, candidates) {
         .filter((candidate) => candidate.name && candidate.sect && candidate.list)
     : [];
 
-  const totalSeats = safeQuotas.reduce((sum, entry) => sum + entry.seats, 0);
-  const totalVotes = safeCandidates.reduce((sum, candidate) => sum + candidate.votes, 0);
-  const electoralQuotient = totalSeats > 0 && totalVotes > 0 ? totalVotes / totalSeats : 0;
   const warnings = [];
+
+  const candidateListsByKey = new Map();
+  safeCandidates.forEach((candidate) => {
+    const key = normalizeListKey(candidate.list);
+    if (key && !candidateListsByKey.has(key)) {
+      candidateListsByKey.set(key, candidate.list);
+    }
+  });
+
+  const extraListVotesByKey = new Map();
+  const listNamesByKey = new Map(candidateListsByKey);
+  if (Array.isArray(listVotes)) {
+    listVotes.forEach((entry) => {
+      const key = normalizeListKey(entry?.list);
+      if (!key) {
+        return;
+      }
+
+      if (!listNamesByKey.has(key)) {
+        listNamesByKey.set(key, normalizeName(entry?.list));
+      }
+      extraListVotesByKey.set(key, (extraListVotesByKey.get(key) ?? 0) + toVoteNumber(entry?.votes));
+    });
+  }
 
   const listStatsMap = new Map();
   safeCandidates.forEach((candidate) => {
-    if (!listStatsMap.has(candidate.list)) {
-      listStatsMap.set(candidate.list, {
+    const key = normalizeListKey(candidate.list);
+    if (!listStatsMap.has(key)) {
+      listStatsMap.set(key, {
         list: candidate.list,
+        candidateVotes: 0,
+        listVotes: extraListVotesByKey.get(key) ?? 0,
         votes: 0,
         baseSeats: 0,
         remainderVotes: 0,
@@ -156,8 +187,27 @@ export function computeResults(quotas, candidates) {
         qualified: false
       });
     }
-    const stats = listStatsMap.get(candidate.list);
-    stats.votes += candidate.votes;
+    const stats = listStatsMap.get(key);
+    stats.candidateVotes += candidate.votes;
+  });
+
+  extraListVotesByKey.forEach((votes, key) => {
+    if (!listStatsMap.has(key)) {
+      listStatsMap.set(key, {
+        list: listNamesByKey.get(key) ?? key,
+        candidateVotes: 0,
+        listVotes: votes,
+        votes,
+        baseSeats: 0,
+        remainderVotes: 0,
+        seats: 0,
+        qualified: false
+      });
+    }
+  });
+
+  listStatsMap.forEach((entry) => {
+    entry.votes = entry.candidateVotes + entry.listVotes;
   });
 
   const listAllocation = Array.from(listStatsMap.values()).sort((a, b) => {
@@ -167,6 +217,10 @@ export function computeResults(quotas, candidates) {
 
     return a.list.localeCompare(b.list, "en", { sensitivity: "base" });
   });
+
+  const totalSeats = safeQuotas.reduce((sum, entry) => sum + entry.seats, 0);
+  const totalVotes = listAllocation.reduce((sum, entry) => sum + entry.votes, 0);
+  const electoralQuotient = totalSeats > 0 && totalVotes > 0 ? totalVotes / totalSeats : 0;
 
   if (totalSeats > 0 && totalVotes === 0 && safeCandidates.length > 0) {
     warnings.push("No votes entered. EQ cannot be applied until vote totals are above zero.");
@@ -350,6 +404,8 @@ export function computeResults(quotas, candidates) {
     winners,
     listAllocation: listAllocation.map((entry) => ({
       list: entry.list,
+      candidateVotes: entry.candidateVotes,
+      listVotes: entry.listVotes,
       votes: entry.votes,
       qualified: entry.qualified,
       seats: entry.seats,
