@@ -51,7 +51,8 @@ initialize().catch((error) => {
 
 async function initialize() {
   templates = await loadRegionTemplates();
-  state = normalizeState(loadState() ?? createEmptyState());
+  clearState();
+  state = createEmptyState();
   savedScenarios = loadSavedScenarios();
 
   populateTemplateSelect();
@@ -980,6 +981,14 @@ function loadState() {
   } catch (error) {
     console.error("Unable to load state", error);
     return null;
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (error) {
+    console.error("Unable to clear state", error);
   }
 }
 
