@@ -8,7 +8,7 @@ import {
   loadElectionResults2018
 } from "../src/data/election-results-2018.js";
 
-const VERIFIED_2018_TEMPLATE_IDS = ["beirut-i", "bekaa-i", "bekaa-ii", "bekaa-iii", "mount-lebanon-i", "mount-lebanon-ii", "mount-lebanon-iii", "north-i", "north-ii", "north-iii", "south-i", "south-ii"];
+const VERIFIED_2018_TEMPLATE_IDS = ["beirut-i", "beirut-ii", "bekaa-i", "bekaa-ii", "bekaa-iii", "mount-lebanon-i", "mount-lebanon-ii", "mount-lebanon-iii", "mount-lebanon-iv", "north-i", "north-ii", "north-iii", "south-i", "south-ii", "south-iii"];
 
 test("2018 baselines are exposed only for verified districts", () => {
   assert.deepEqual(getElectionResults2018TemplateIds(), VERIFIED_2018_TEMPLATE_IDS);
@@ -19,15 +19,15 @@ test("2018 baselines are exposed only for verified districts", () => {
   assert.equal(hasElectionResults2018("mount-lebanon-i"), true);
   assert.equal(hasElectionResults2018("mount-lebanon-ii"), true);
   assert.equal(hasElectionResults2018("mount-lebanon-iii"), true);
+  assert.equal(hasElectionResults2018("mount-lebanon-iv"), true);
   assert.equal(hasElectionResults2018("beirut-i"), true);
+  assert.equal(hasElectionResults2018("beirut-ii"), true);
   assert.equal(hasElectionResults2018("bekaa-i"), true);
   assert.equal(hasElectionResults2018("bekaa-ii"), true);
   assert.equal(hasElectionResults2018("bekaa-iii"), true);
   assert.equal(hasElectionResults2018("north-i"), true);
   assert.equal(hasElectionResults2018("north-ii"), true);
-  assert.equal(hasElectionResults2018("beirut-ii"), false);
-  assert.equal(hasElectionResults2018("mount-lebanon-iv"), false);
-  assert.equal(hasElectionResults2018("south-iii"), false);
+  assert.equal(hasElectionResults2018("south-iii"), true);
 });
 
 test("2018 baselines load only for manually audited districts", async () => {
