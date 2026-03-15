@@ -1,0 +1,3168 @@
+{
+  "bekaa-i": {
+    "source_pdf": "205514D4-DD07-4525-9EC9-7B57EE9D5E03.pdf",
+    "caption": "دائرة البقاع الأولى",
+    "candidate_count": 44,
+    "candidates": [
+      {
+        "name": "ﻣﻴﺸﺎل ﺟﻮرج ﺿﺎﻫﺮ",
+        "sect": "Greek Catholic",
+        "list": "ﺳﻴﺎدﻳﻮن ﻣﺴﺘﻘﻠﻮن",
+        "votes": 9229
+      },
+      {
+        "name": "ﻋﻤﺮ ﻋﻠﻲ ﺣﻠﺒﻠﺐ",
+        "sect": "Sunni",
+        "list": "ﺳﻴﺎدﻳﻮن ﻣﺴﺘﻘﻠﻮن",
+        "votes": 3126
+      },
+      {
+        "name": "ﺳﻤﻴﺮ اﻧﻄﻮان ﺻﺎدر",
+        "sect": "Maronite",
+        "list": "ﺳﻴﺎدﻳﻮن ﻣﺴﺘﻘﻠﻮن",
+        "votes": 1307
+      },
+      {
+        "name": "ﻳﻮﺳﻒ ﻣﻴﺸﺎل ﻗﺮﻋﻮﻧﻲ",
+        "sect": "Greek Orthodox",
+        "list": "ﺳﻴﺎدﻳﻮن ﻣﺴﺘﻘﻠﻮن",
+        "votes": 297
+      },
+      {
+        "name": "ﻓﺮاس ﻣﺸﻬﻮر اﺑﻮ ﺣﻤﺪان",
+        "sect": "Shia",
+        "list": "ﺳﻴﺎدﻳﻮن ﻣﺴﺘﻘﻠﻮن",
+        "votes": 585
+      },
+      {
+        "name": "ﻣﺎرﺗﻴﻦ اﻧﺪره دﻣﺮﺟﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "ﺳﻴﺎدﻳﻮن ﻣﺴﺘﻘﻠﻮن",
+        "votes": 104
+      },
+      {
+        "name": "ﺟﻮرج اﻳﻠﻲ ﻋﻘﻴﺺ",
+        "sect": "Greek Catholic",
+        "list": "زﺣﻠﺔ اﻟﺴﻴﺎدة",
+        "votes": 11921
+      },
+      {
+        "name": "اﻟﻴﺎس اﻧﺪره اﺳﻄﻔﺎن",
+        "sect": "Greek Orthodox",
+        "list": "زﺣﻠﺔ اﻟﺴﻴﺎدة",
+        "votes": 6758
+      },
+      {
+        "name": "ﺑﻼل ﻣﻠﺤﻢ اﻟﺤﺸﻴﻤﻲ",
+        "sect": "Sunni",
+        "list": "زﺣﻠﺔ اﻟﺴﻴﺎدة",
+        "votes": 3865
+      },
+      {
+        "name": "ﻣﻴﺸﺎل روﻛﺲ اﻟﺘﻨﻮري",
+        "sect": "Maronite",
+        "list": "زﺣﻠﺔ اﻟﺴﻴﺎدة",
+        "votes": 1794
+      },
+      {
+        "name": "ﺳﺎﺑﻴﻦ ﺑﻴﺎر اﻟﻘﺎﺻﻮف",
+        "sect": "Greek Catholic",
+        "list": "زﺣﻠﺔ اﻟﺴﻴﺎدة",
+        "votes": 213
+      },
+      {
+        "name": "دﻳﻤﻪ ﺣﺴﻴﻦ اﺑﻮ دﻳﻪ",
+        "sect": "Shia",
+        "list": "زﺣﻠﺔ اﻟﺴﻴﺎدة",
+        "votes": 225
+      },
+      {
+        "name": "ﺑﻴﺎر ﺳﺮﻛﻴﺲ دﻣﺮﺟﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "زﺣﻠﺔ اﻟﺴﻴﺎدة",
+        "votes": 264
+      },
+      {
+        "name": "ﺟﻬﺎد ﻧﺪره اﻟﺘﺮك",
+        "sect": "Greek Catholic",
+        "list": "زﺣﻠﺔ ﺗﻨﺘﻔﺾ",
+        "votes": 258
+      },
+      {
+        "name": "ﺣﻤﺰه ﻏﺎزي ﻣﻴﺘﺎ",
+        "sect": "Sunni",
+        "list": "زﺣﻠﺔ ﺗﻨﺘﻔﺾ",
+        "votes": 2387
+      },
+      {
+        "name": "ﻋﺎﻣﺮ ﻣﺤﻤﺪ اﻟﺼﺒﻮري",
+        "sect": "Shia",
+        "list": "زﺣﻠﺔ ﺗﻨﺘﻔﺾ",
+        "votes": 259
+      },
+      {
+        "name": "ارﻣﻴﻦ ﺟﻮرج اﺻﻔﻬﺎﻧﻲ",
+        "sect": "Armenian Orthodox",
+        "list": "زﺣﻠﺔ ﺗﻨﺘﻔﺾ",
+        "votes": 108
+      },
+      {
+        "name": "ﻋﻴﺪ اﻟﻴﺎس ﻋﺎزر",
+        "sect": "Greek Orthodox",
+        "list": "زﺣﻠﺔ ﺗﻨﺘﻔﺾ",
+        "votes": 4516
+      },
+      {
+        "name": "ﻓﺆاد ﺳﻌﻴﺪ ﺧﻮري",
+        "sect": "Greek Catholic",
+        "list": "اﻟﻘﻮل واﻟﻔﻌﻞ",
+        "votes": 100
+      },
+      {
+        "name": "ﻋﻤﺎد ﺳﻤﻴﺮ ﺷﻤﻌﻮن",
+        "sect": "Maronite",
+        "list": "اﻟﻘﻮل واﻟﻔﻌﻞ",
+        "votes": 31
+      },
+      {
+        "name": "ﻋﻤﺮ اﻟﺨﻴﺎم ﻏﺴﺎن ﻣﻌﻠﻮف",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﻘﻮل واﻟﻔﻌﻞ",
+        "votes": 50
+      },
+      {
+        "name": "ﺳﻤﺮ ﻋﺒﺪ اﻟﺮزاق ادﻫﻢ",
+        "sect": "Sunni",
+        "list": "اﻟﻘﻮل واﻟﻔﻌﻞ",
+        "votes": 53
+      },
+      {
+        "name": "ﻋﻠﻲ ﺣﺴﻨﻲ ﻣﻬﺪي",
+        "sect": "Shia",
+        "list": "اﻟﻘﻮل واﻟﻔﻌﻞ",
+        "votes": 72
+      },
+      {
+        "name": "وﻫﻴﺐ ﻋﺎﺻﻲرﺑﻴﻊ",
+        "sect": "Greek Catholic",
+        "list": "زﺣﻠﺔ اﻟﺮﺳﺎﻟﺔ",
+        "votes": 148
+      },
+      {
+        "name": "ﺳﻠﻴﻢ ﺟﻮرج ﻋﻮن",
+        "sect": "Maronite",
+        "list": "زﺣﻠﺔ اﻟﺮﺳﺎﻟﺔ",
+        "votes": 5554
+      },
+      {
+        "name": "ﺣﺴﻴﻦ دﻳﺐ ﺻﺎﻟﺢ",
+        "sect": "Sunni",
+        "list": "زﺣﻠﺔ اﻟﺮﺳﺎﻟﺔ",
+        "votes": 2465
+      },
+      {
+        "name": "اﻧﻄﻮان ﺳﻠﻴﻢ اﻟﺸﻘﻴﻪ",
+        "sect": "Greek Orthodox",
+        "list": "زﺣﻠﺔ اﻟﺮﺳﺎﻟﺔ",
+        "votes": 105
+      },
+      {
+        "name": "راﻣﻲ اﻧﻴﺲ اﺑﻮ ﺣﻤﺪان",
+        "sect": "Shia",
+        "list": "زﺣﻠﺔ اﻟﺮﺳﺎﻟﺔ",
+        "votes": 16539
+      },
+      {
+        "name": "ﻛﻮرك اﻟﻤﻌﺮوف ﺑﺠﻮرج ﻫﺎﻣﺎزاﺳﺐ ﺑﻮﺷﻜﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "زﺣﻠﺔ اﻟﺮﺳﺎﻟﺔ",
+        "votes": 2568
+      },
+      {
+        "name": "ﺧﻠﻴﻞ ﻧﺒﻴﻪ ﻳﻮﻧﺲ",
+        "sect": "Greek Catholic",
+        "list": "اﻟﺘﻐﻴﻴﺮ",
+        "votes": 99
+      },
+      {
+        "name": "رﺿﺎ ﺧﺎﻟﺪ اﻟﻤﻴﺲ",
+        "sect": "Sunni",
+        "list": "اﻟﺘﻐﻴﻴﺮ",
+        "votes": 1142
+      },
+      {
+        "name": "ﻃﺎﻧﻮس ﻧﺼﺮي اﻟﺨﻮري",
+        "sect": "Maronite",
+        "list": "اﻟﺘﻐﻴﻴﺮ",
+        "votes": 32
+      },
+      {
+        "name": "ﺣﺴﻴﻦ ﻋﺒﺪ ﷲ اﻟﺨﻄﻴﺐ",
+        "sect": "Shia",
+        "list": "اﻟﺘﻐﻴﻴﺮ",
+        "votes": 13
+      },
+      {
+        "name": "ﻟﻴﻨﺎ ﻣﺎﻧﻮك ﻛﻮﻛﺠﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "اﻟﺘﻐﻴﻴﺮ",
+        "votes": 102
+      },
+      {
+        "name": "ﺑﺘﺮا ﺧﻠﻴﻞ ﺳﻤﺎﺣﻪ",
+        "sect": "Greek Catholic",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻮاﺟﻪ",
+        "votes": 628
+      },
+      {
+        "name": "راﻣﻲ روﻛﺲ اﺑﻮ ﻋﻴﺪ",
+        "sect": "Greek Catholic",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻮاﺟﻪ",
+        "votes": 72
+      },
+      {
+        "name": "ﻏﺴﺎن ﻋﺒﺪو ﺣﻤﻴﻤﺺ",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻮاﺟﻪ",
+        "votes": 272
+      },
+      {
+        "name": "راﻧﻴﺎ ﺷﺤﺎده اﻟﻤﻴﺲ",
+        "sect": "Sunni",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻮاﺟﻪ",
+        "votes": 252
+      },
+      {
+        "name": "ﻣﻴﺮﻳﻢ ﺟﺒﺮان ﻃﻮق ﺳﻜﺎف",
+        "sect": "Greek Catholic",
+        "list": "اﻟﻜﺘﻠﺔ اﻟﺸﻌﺒﻴﺔ",
+        "votes": 4825
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﺷﻔﻴﻖ ﺣﻤﻮد",
+        "sect": "Sunni",
+        "list": "اﻟﻜﺘﻠﺔ اﻟﺸﻌﺒﻴﺔ",
+        "votes": 5869
+      },
+      {
+        "name": "ﻣﺎرون ﺳﺎﺳﻴﻦ ﻣﺨﻮل",
+        "sect": "Maronite",
+        "list": "اﻟﻜﺘﻠﺔ اﻟﺸﻌﺒﻴﺔ",
+        "votes": 317
+      },
+      {
+        "name": "ﺳﺎﻣﻲ ﻓﻮزي ﻧﺒﻬﺎن",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﻜﺘﻠﺔ اﻟﺸﻌﺒﻴﺔ",
+        "votes": 274
+      },
+      {
+        "name": "ﻓﻮزات دﻳﺎب دﻟﻮل",
+        "sect": "Shia",
+        "list": "اﻟﻜﺘﻠﺔ اﻟﺸﻌﺒﻴﺔ",
+        "votes": 83
+      },
+      {
+        "name": "ﻧﺎرﻳﻚ ﺑﺎﻧﻮس اﺑﺮاﻫﻤﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "اﻟﻜﺘﻠﺔ اﻟﺸﻌﺒﻴﺔ",
+        "votes": 133
+      }
+    ]
+  },
+  "bekaa-iii": {
+    "source_pdf": "22254A1B-6097-4EF0-B2CB-BDE9B28CC929.pdf",
+    "caption": "دائرة البقاع الثالثة",
+    "candidate_count": 48,
+    "candidates": [
+      {
+        "name": "ﻫﺎﻧﻲ ﻋﻠﻲ ﺷﻤﺺ",
+        "sect": "Shia",
+        "list": "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد",
+        "votes": 212
+      },
+      {
+        "name": "ﻋﻤﺎد اﺣﻤﺪ ﻧﺎﺻﺮ اﻟﺪﻳﻦ",
+        "sect": "Shia",
+        "list": "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد",
+        "votes": 580
+      },
+      {
+        "name": "ﺣﺴﻦ ﺗﻮﻓﻴﻖ ﻣﻈﻠﻮم",
+        "sect": "Shia",
+        "list": "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد",
+        "votes": 247
+      },
+      {
+        "name": "ﺣﺴﻴﻦ ﻋﻠﻲ دروﻳﺶ",
+        "sect": "Shia",
+        "list": "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد",
+        "votes": 159
+      },
+      {
+        "name": "اﻟﺴﻴﺪ اﺣﻤﺪ اﻟﺴﻴﺪ ﻣﺤﻤﺪ ﺷﻜﺮ",
+        "sect": "Shia",
+        "list": "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد",
+        "votes": 53
+      },
+      {
+        "name": "ﻋﻠﻲ ﻋﻤﺮان ﻋﺒﺪ اﻟﺤﻤﻴﺪ",
+        "sect": "Sunni",
+        "list": "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد",
+        "votes": 319
+      },
+      {
+        "name": "اﺣﻤﺪ ﺷﺤﺎده ﻛﺮﻧﺒﻲ",
+        "sect": "Sunni",
+        "list": "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد",
+        "votes": 554
+      },
+      {
+        "name": "ﺷﻮﻗﻲ ﻃﻨﻮس اﻟﻔﺨﺮي",
+        "sect": "Maronite",
+        "list": "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد",
+        "votes": 87
+      },
+      {
+        "name": "ﻋﺒﺪ ﷲ ﻓﺮج ﻋﺎد",
+        "sect": "Greek Catholic",
+        "list": "ﻣﺴﺘﻘﻠﻮن ﺿﺪ اﻟﻔﺴﺎد",
+        "votes": 107
+      },
+      {
+        "name": "ﺣﺴﻴﻦ ﻋﻠﻲ اﻟﺤﺎج ﺣﺴﻦ",
+        "sect": "Shia",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 23120
+      },
+      {
+        "name": "ﻏﺎزي ﻣﺤﻤﺪ زﻋﻴﺘﺮ",
+        "sect": "Shia",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 22058
+      },
+      {
+        "name": "ﻋﻠﻲ ﻣﺤﻤﺪ ﺳﻠﻤﺎن ﺑﺸﻴﺮ اﻟﻤﻘﺪاد",
+        "sect": "Shia",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 20356
+      },
+      {
+        "name": "اﺑﺮاﻫﻴﻢ ﻋﻠﻲ اﻟﻤﻮﺳﻮي",
+        "sect": "Shia",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 19627
+      },
+      {
+        "name": "اﻳﻬﺎب ﻋﺮوه ﺣﻤﺎده",
+        "sect": "Shia",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 20844
+      },
+      {
+        "name": "ﺟﻤﻴﻞ ﻣﺤﻤﺪ اﻣﻴﻦ اﻣﻴﻦ اﻟﺴﻴﺪ",
+        "sect": "Shia",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 11705
+      },
+      {
+        "name": "ﺳﺎﻣﺮ اﺳﻌﺪ اﻟﺘﻮم",
+        "sect": "Greek Catholic",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 11343
+      },
+      {
+        "name": "ﻋﻘﻴﺪ ﺣﻨﺎ ﺣﺪﺷﻴﺘﻲ",
+        "sect": "Maronite",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 4767
+      },
+      {
+        "name": "ﻳﻨﺎل ﻣﺤﻤﺪ ﺻﻠﺢ",
+        "sect": "Sunni",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 8764
+      },
+      {
+        "name": "ﻣﻠﺤﻢ ﻣﺤﻤﺪ اﻟﺤﺠﻴﺮي",
+        "sect": "Sunni",
+        "list": "اﻻﻣﻞ و اﻟﻮﻓﺎء",
+        "votes": 7125
+      },
+      {
+        "name": "ﻣﺪﺣﺖ رﺷﺪي زﻋﻴﺘﺮ",
+        "sect": "Shia",
+        "list": "9",
+        "votes": 31
+      },
+      {
+        "name": "ﺣﺴﻦ ﻣﺤﻤﺪ اﻟﻤﺼﺮي",
+        "sect": "Shia",
+        "list": "9",
+        "votes": 510
+      },
+      {
+        "name": "ﻣﺤﻤﺪ اﺣﻤﺪ ﻓﻠﻴﻄﻲ",
+        "sect": "Sunni",
+        "list": "9",
+        "votes": 701
+      },
+      {
+        "name": "ﻣﺤﻤﺪ دﻳﺐ ﺣﻴﺪر ﻋﺜﻤﺎن",
+        "sect": "Shia",
+        "list": "9",
+        "votes": 36
+      },
+      {
+        "name": "ﺷﻬﺮازد ﻋﻠﻲ ﺣﻤﻴﻪ",
+        "sect": "Shia",
+        "list": "9",
+        "votes": 9
+      },
+      {
+        "name": "ﻋﻠﻲ ﻛﻠﻴﺐ اﻟﻤﻮﻟﻰ",
+        "sect": "Sunni",
+        "list": "9",
+        "votes": 69
+      },
+      {
+        "name": "ﺳﺎره ﻣﻨﺼﻮر زﻋﻴﺘﺮ",
+        "sect": "Shia",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 1082
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﺣﺴﻴﻦ اﻟﺠﺒﺎوي",
+        "sect": "Shia",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 171
+      },
+      {
+        "name": "ﺿﺎﻫﺮ ﺻﺎدق اﻣﻬﺰ",
+        "sect": "Shia",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 70
+      },
+      {
+        "name": "ﻣﻴﺸﺎل ﺟﻮرج ﻣﻬﻨﺎ",
+        "sect": "Greek Catholic",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 461
+      },
+      {
+        "name": "ﻋﺒﺎس ﺣﺴﻴﻦ اﻟﺠﻮﻫﺮي",
+        "sect": "Shia",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 658
+      },
+      {
+        "name": "اﻧﻄﻮان اﻟﺒﺪوي ﺣﺒﺸﻲ",
+        "sect": "Maronite",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 17000
+      },
+      {
+        "name": "راﻣﺰ ﻧﺎﺻﺮ ﻗﻤﻬﺰ",
+        "sect": "Shia",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 14
+      },
+      {
+        "name": "زﻳﺪان ﻣﺤﻤﺪ اﻟﺤﺠﻴﺮي",
+        "sect": "Sunni",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 1827
+      },
+      {
+        "name": "رﻓﻌﺖ ﻧﺎﻳﻒ اﻟﻤﺼﺮي",
+        "sect": "Shia",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 62
+      },
+      {
+        "name": "ﺻﺎﻟﺢ ﻣﺤﻤﺪ اﻟﺸﻞ",
+        "sect": "Sunni",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 1343
+      },
+      {
+        "name": "ﺣﺴﻴﻦ ﻋﻠﻲ رﻋﺪ",
+        "sect": "Shia",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 30
+      },
+      {
+        "name": "ﻫﻴﻤﻦ ﻋﺒﺎس ﻣﺸﻴﻚ",
+        "sect": "Shia",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 5
+      },
+      {
+        "name": "ﻣﻮﺻﻮف اﻟﺒﻴﻄﺎراﻳﻠﻲ",
+        "sect": "Greek Catholic",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 1694
+      },
+      {
+        "name": "رﺷﻴﺪ ﻋﻠﻲ ﻋﻴﺴﻰ",
+        "sect": "Shia",
+        "list": "ﺑﻨﺎء اﻟﺪوﻟﺔ",
+        "votes": 45
+      },
+      {
+        "name": "ﻋﺒﺎس ﻣﺤﻤﺪ ﻳﺎﻏﻲ",
+        "sect": "Shia",
+        "list": "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ",
+        "votes": 252
+      },
+      {
+        "name": "اﻟﺸﺮﻳﻒ ﺳﻤﻴﺮ ﺳﻠﻴﻤﺎن",
+        "sect": "Shia",
+        "list": "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ",
+        "votes": 1259
+      },
+      {
+        "name": "ﺳﺎﻣﻲ ﻣﺪﺣﺖ اﻟﻄﻔﻴﻠﻲ",
+        "sect": "Shia",
+        "list": "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ",
+        "votes": 284
+      },
+      {
+        "name": "اﺳﺎﻣﺔ ﻧﺠﻴﺐ ﺷﻤﺺ",
+        "sect": "Shia",
+        "list": "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ",
+        "votes": 112
+      },
+      {
+        "name": "ﻋﻠﻲ ﺣﺴﻴﻦ اﺑﻲ رﻋﺪ",
+        "sect": "Shia",
+        "list": "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ",
+        "votes": 266
+      },
+      {
+        "name": "ﺧﺎﻟﺪ ﻋﻠﻲ ﺻﻠﺢ",
+        "sect": "Sunni",
+        "list": "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ",
+        "votes": 819
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻣﺤﻤﻮد اﻟﺤﺠﻴﺮي",
+        "sect": "Sunni",
+        "list": "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ",
+        "votes": 1518
+      },
+      {
+        "name": "ﻃﻼل اﻟﻴﺎس اﻟﻤﻘﺪﺳﻲ",
+        "sect": "Greek Catholic",
+        "list": "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ",
+        "votes": 551
+      },
+      {
+        "name": "ﻳﻮﺳﻒ ﻣﻠﺤﻢ اﻟﻔﺨﺮي",
+        "sect": "Maronite",
+        "list": "اﺋﺘﻼف اﻟﺘﻐﻴﻴﺮ",
+        "votes": 272
+      }
+    ]
+  },
+  "bekaa-ii": {
+    "source_pdf": "5EED4922-CE06-42F8-84AA-480DF5ACF46E.pdf",
+    "caption": "دائرة البقاع الثانية",
+    "candidate_count": 29,
+    "candidates": [
+      {
+        "name": "ﻣﺮادﺣﺴﻦ ﻋﺒﺪ اﻟﺮﺣﻴﻢ",
+        "sect": "Sunni",
+        "list": "اﻟﻐﺪ اﻷﻓﻀﻞ",
+        "votes": 9157
+      },
+      {
+        "name": "ﻗﺒﻼن ﻋﺒﺪ اﻟﻤﻨﻌﻢ ﻗﺒﻼن",
+        "sect": "Shia",
+        "list": "اﻟﻐﺪ اﻷﻓﻀﻞ",
+        "votes": 10143
+      },
+      {
+        "name": "اﻳﻠﻲ ﻧﺠﻴﺐ ﻓﺮزﻟﻲ",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﻐﺪ اﻷﻓﻀﻞ",
+        "votes": 2304
+      },
+      {
+        "name": "ﻃﺎرق ﺳﻠﻴﻢ داود",
+        "sect": "Druze",
+        "list": "اﻟﻐﺪ اﻷﻓﻀﻞ",
+        "votes": 2670
+      },
+      {
+        "name": "ﺷﺮﺑﻞ ﻛﻤﻴﻞ ﻣﺎرون",
+        "sect": "Maronite",
+        "list": "اﻟﻐﺪ اﻷﻓﻀﻞ",
+        "votes": 3576
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﺣﺴﻴﻦ ﻗﺪوره",
+        "sect": "Sunni",
+        "list": "ﺑﻘﺎﻋﻨﺎ اوﻻً",
+        "votes": 70
+      },
+      {
+        "name": "ﺧﺎﻟﺪ ﻣﺤﻤﺪ اﻟﻌﺴﻜﺮ",
+        "sect": "Sunni",
+        "list": "ﺑﻘﺎﻋﻨﺎ اوﻻً",
+        "votes": 21
+      },
+      {
+        "name": "ﺟﻮرج اﺑﺮاﻫﻴﻢ ﻋﺒﻮد",
+        "sect": "Greek Orthodox",
+        "list": "ﺑﻘﺎﻋﻨﺎ اوﻻً",
+        "votes": 191
+      },
+      {
+        "name": "داﻧﻲ ﻧﺒﻴﻪ ﺧﺎﻃﺮ",
+        "sect": "Maronite",
+        "list": "ﺑﻘﺎﻋﻨﺎ اوﻻً",
+        "votes": 4761
+      },
+      {
+        "name": "ﻏﻨﻮه ﺣﺴﻴﻦ اﺳﻌﺪ",
+        "sect": "Shia",
+        "list": "ﺑﻘﺎﻋﻨﺎ اوﻻً",
+        "votes": 92
+      },
+      {
+        "name": "ﻳﺎﺳﻴﻦ اﺣﻤﺪ ﻳﺎﺳﻴﻦ",
+        "sect": "Sunni",
+        "list": "ﻻﺋﺤﺔ ﺳﻬﻠﻨﺎ و اﻟﺠﺒﻞ",
+        "votes": 6004
+      },
+      {
+        "name": "ﺣﺎﺗﻢ ﺣﺴﻴﻦ اﻟﺨﺸﻦ",
+        "sect": "Shia",
+        "list": "ﻻﺋﺤﺔ ﺳﻬﻠﻨﺎ و اﻟﺠﺒﻞ",
+        "votes": 565
+      },
+      {
+        "name": "ﻣﺎﻛﻲ ﺑﺪﻳﻊ ﻋﻮن",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ ﺳﻬﻠﻨﺎ و اﻟﺠﺒﻞ",
+        "votes": 1825
+      },
+      {
+        "name": "ﺳﺎﻟﻲ ﻓﻮزي ﺷﺎﻣﻴﻪ",
+        "sect": "Greek Orthodox",
+        "list": "ﻻﺋﺤﺔ ﺳﻬﻠﻨﺎ و اﻟﺠﺒﻞ",
+        "votes": 992
+      },
+      {
+        "name": "ﺑﻬﺎء اﻟﺪﻳﻦ ﺣﺴﻴﻦ دﻻل",
+        "sect": "Druze",
+        "list": "ﻻﺋﺤﺔ ﺳﻬﻠﻨﺎ و اﻟﺠﺒﻞ",
+        "votes": 1609
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻗﺎﺳﻢ اﻟﻘﺮﻋﺎوي",
+        "sect": "Sunni",
+        "list": "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ",
+        "votes": 4811
+      },
+      {
+        "name": "واﺋﻞ وﻫﺒﻲ اﺑﻮ ﻓﺎﻋﻮر",
+        "sect": "Druze",
+        "list": "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ",
+        "votes": 9202
+      },
+      {
+        "name": "ﻏﺴﺎن ﺳﻠﻴﻤﺎن اﻟﺴﻜﺎف",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ",
+        "votes": 776
+      },
+      {
+        "name": "ﻋﻠﻲ ﻣﺤﻤﺪ اﺑﻮ ﻳﺎﺳﻴﻦ",
+        "sect": "Sunni",
+        "list": "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ",
+        "votes": 2928
+      },
+      {
+        "name": "ﻋﺒﺎس ﻣﺤﻤﺪ ﻋﻴﺪي",
+        "sect": "Shia",
+        "list": "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ",
+        "votes": 294
+      },
+      {
+        "name": "ﺟﻬﺎد ﻣﻠﺤﻢ اﻟﺰرزور",
+        "sect": "Maronite",
+        "list": "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ",
+        "votes": 571
+      },
+      {
+        "name": "اﻟﺸﻤﺎﻟﻲﻋﻼء اﻟﺪﻳﻦ ﻋﻤﺮ",
+        "sect": "Sunni",
+        "list": "ﻧﺤﻮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 57
+      },
+      {
+        "name": "ﺷﻮﻗﻲ ﻓﺮﻳﺪ اﺑﻮ ﻏﻮش",
+        "sect": "Druze",
+        "list": "ﻧﺤﻮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 19
+      },
+      {
+        "name": "ﻛﻴﺘﺎ داود اﻟﻌﺠﻴﻞ",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 86
+      },
+      {
+        "name": "ﻋﺎﻣﺮ ﻣﺤﻤﺪ ﻗﺪوره",
+        "sect": "Sunni",
+        "list": "ﻧﺤﻮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 7
+      },
+      {
+        "name": "ﻓﺮح رﻳﺎض ﻗﺎﺳﻢ",
+        "sect": "Shia",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 358
+      },
+      {
+        "name": "ﻏﺎده ﺟﻮرج ﻏﺎﻧﻢ",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 105
+      },
+      {
+        "name": "اﺳﺎﻣﻪ ﺳﻌﺪ اﺑﻮ زﻳﺪ",
+        "sect": "Sunni",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 39
+      },
+      {
+        "name": "ﻣﺎﻏﻲ ﻋﺎرف ﻣﻬﻨﺎ",
+        "sect": "Druze",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 111
+      }
+    ]
+  },
+  "north-i": {
+    "source_pdf": "9E987849-2FDD-413D-80CD-327F08B5C5F7.pdf",
+    "caption": "دائرة الشمال الأولى",
+    "candidate_count": 53,
+    "candidates": [
+      {
+        "name": "ﻋﻠﻲ ﻣﺤﻤﺪ ﻃﻠﻴﺲ",
+        "sect": "Sunni",
+        "list": "اﻟﻮﻓﺎء ﻟﻌﻜﺎر",
+        "votes": 6645
+      },
+      {
+        "name": "ﻫﻴﺜﻢ ﻣﺤﻤﺪ ﻋﺰ اﻟﺪﻳﻦ",
+        "sect": "Sunni",
+        "list": "اﻟﻮﻓﺎء ﻟﻌﻜﺎر",
+        "votes": 3588
+      },
+      {
+        "name": "ﻋﻤﺎر ﺳﻌﺪ ﷲ ﺳﻌﺪ ﷲ ﻣﺤﻤﺪ رﺷﻴﺪ",
+        "sect": "Sunni",
+        "list": "اﻟﻮﻓﺎء ﻟﻌﻜﺎر",
+        "votes": 242
+      },
+      {
+        "name": "ﺟﻮزف ﺟﺒﺮاﺋﻴﻞ ﻣﺨﺎﻳﻞ",
+        "sect": "Maronite",
+        "list": "اﻟﻮﻓﺎء ﻟﻌﻜﺎر",
+        "votes": 581
+      },
+      {
+        "name": "اﻳﻠﻲ اﺳﻌﺪ ﺳﻌﺪ",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﻮﻓﺎء ﻟﻌﻜﺎر",
+        "votes": 1171
+      },
+      {
+        "name": "اﻳﻠﻲ ﺣﻤﻴﺪ دﻳﺐ",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﻮﻓﺎء ﻟﻌﻜﺎر",
+        "votes": 319
+      },
+      {
+        "name": "اﺣﻤﺪ اﺑﺮاﻫﻴﻢ اﻟﻬﻀﺎم",
+        "sect": "Alawite",
+        "list": "اﻟﻮﻓﺎء ﻟﻌﻜﺎر",
+        "votes": 455
+      },
+      {
+        "name": "وﻟﻴﺪ وﺟﻴﻪ اﻟﺒﻌﺮﻳﻨﻲ",
+        "sect": "Sunni",
+        "list": "ﻻﺋﺤﺔ اﻻﻋﺘﺪال اﻟﻮﻃﻨﻲ",
+        "votes": 11099
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻣﺼﻄﻔﻰ ﺳﻠﻴﻤﺎن",
+        "sect": "Sunni",
+        "list": "ﻻﺋﺤﺔ اﻻﻋﺘﺪال اﻟﻮﻃﻨﻲ",
+        "votes": 11340
+      },
+      {
+        "name": "اﺑﺮاﻫﻴﻢ ﻋﺒﺪﷲ اﻟﻤﺼﻮﻣﻌﻲ",
+        "sect": "Sunni",
+        "list": "ﻻﺋﺤﺔ اﻻﻋﺘﺪال اﻟﻮﻃﻨﻲ",
+        "votes": 7370
+      },
+      {
+        "name": "اﺣﻤﺪ ﻣﺤﻤﺪ رﺳﺘﻢ",
+        "sect": "Alawite",
+        "list": "ﻻﺋﺤﺔ اﻻﻋﺘﺪال اﻟﻮﻃﻨﻲ",
+        "votes": 324
+      },
+      {
+        "name": "ﺳﺠﻴﻊ ﻣﺨﺎﻳﻞ ﻋﻄﻴﻪ",
+        "sect": "Greek Orthodox",
+        "list": "ﻻﺋﺤﺔ اﻻﻋﺘﺪال اﻟﻮﻃﻨﻲ",
+        "votes": 1948
+      },
+      {
+        "name": "ﺣﻨﺎﺟﻮﻟﻲ اﻟﻴﺎس",
+        "sect": "Greek Orthodox",
+        "list": "ﻻﺋﺤﺔ اﻻﻋﺘﺪال اﻟﻮﻃﻨﻲ",
+        "votes": 1264
+      },
+      {
+        "name": "ﻫﺎدي ﻓﻮزي ﺣﺒﻴﺶ",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ اﻻﻋﺘﺪال اﻟﻮﻃﻨﻲ",
+        "votes": 7546
+      },
+      {
+        "name": "ﻃﻼل ﺧﺎﻟﺪ ﺑﻚ ﻋﺒﺪ اﻟﻘﺎدر اﻟﻤﺮﻋﺒﻲ",
+        "sect": "Sunni",
+        "list": "ﻋﻜﺎر",
+        "votes": 3159
+      },
+      {
+        "name": "ﺧﺎﻟﺪ ﻣﺤﻤﺪ ﺿﺎﻫﺮ",
+        "sect": "Sunni",
+        "list": "ﻋﻜﺎر",
+        "votes": 2479
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻋﺠﺎج اﺑﺮاﻫﻴﻢ",
+        "sect": "Sunni",
+        "list": "ﻋﻜﺎر",
+        "votes": 3481
+      },
+      {
+        "name": "وﺳﺎم رﻳﺎض ﻣﻨﺼﻮر",
+        "sect": "Greek Orthodox",
+        "list": "ﻋﻜﺎر",
+        "votes": 8264
+      },
+      {
+        "name": "زﻳﺎد رﻳﺎض رﺣﺎل",
+        "sect": "Greek Orthodox",
+        "list": "ﻋﻜﺎر",
+        "votes": 464
+      },
+      {
+        "name": "ﻓﻮاز ﻣﺤﻤﺪ ﻣﺤﻤﺪ",
+        "sect": "Alawite",
+        "list": "ﻋﻜﺎر",
+        "votes": 153
+      },
+      {
+        "name": "ﻣﻴﺸﺎل اﻧﻄﻮن اﻟﺨﻮري",
+        "sect": "Maronite",
+        "list": "ﻋﻜﺎر",
+        "votes": 893
+      },
+      {
+        "name": "روﻟﻰ ﻣﺤﻤﺪ اﻟﻤﺮاد",
+        "sect": "Sunni",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 496
+      },
+      {
+        "name": "راﻟﻒ ﺟﻮرج ﺿﺎﻫﺮ",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 774
+      },
+      {
+        "name": "ﻣﻴﺸﺎل ﺟﺮﺟﺲ ﻃﻌﻮم",
+        "sect": "Greek Orthodox",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 834
+      },
+      {
+        "name": "ﻣﺼﻄﻔﻰ ﻣﺼﻄﻔﻰاﺣﻤﺪ",
+        "sect": "Sunni",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 489
+      },
+      {
+        "name": "ﻧﺰﻳﻪ ﻋﻔﻴﻒ اﺑﺮاﻫﻴﻢ",
+        "sect": "Greek Orthodox",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 91
+      },
+      {
+        "name": "ﻏﻴﺚ ﺧﺎﻟﺪ ﺣﻤﻮد",
+        "sect": "Sunni",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 361
+      },
+      {
+        "name": "5ﺗﻨﺘﻔﺾ- ﻋﻜﺎر1371 ﻋﺒﺪ اﻟﺮزاق ﻣﺤﻤﻮد اﻟﻜﻴﻼﻧﻲ",
+        "sect": "Sunni",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 64
+      },
+      {
+        "name": "ﺧﺎﻟﺪ ﺣﺴﻦ ﺿﺎﻫﺮ",
+        "sect": "Sunni",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 1038
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﺧﺎﻟﺪ ﻣﺴﻠﻤﺎﻧﻲ",
+        "sect": "Sunni",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 97
+      },
+      {
+        "name": "ران ﺳﻴﻤﻮن ﺻﻮان",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 72
+      },
+      {
+        "name": "ﻫﺎﺷﻢ اﺑﺮاﻫﻴﻢﻧﺰار",
+        "sect": "Alawite",
+        "list": "ﻧﺤﻮ اﻟﻤﻮاﻃﻨﺔ",
+        "votes": 15
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻛﺎﻣﻞ ﺑﺪره",
+        "sect": "Sunni",
+        "list": "ﻋﻜﺎر اﻟﺘﻐﻴﻴﺮ",
+        "votes": 9302
+      },
+      {
+        "name": "ﺑﺮي ﻋﺴﻜﺮ اﻻﺳﻌﺪ",
+        "sect": "Sunni",
+        "list": "ﻋﻜﺎر اﻟﺘﻐﻴﻴﺮ",
+        "votes": 1111
+      },
+      {
+        "name": "ﺧﺎﻟﺪ ﻣﺤﻤﻮد ﻋﻠﻮش",
+        "sect": "Sunni",
+        "list": "ﻋﻜﺎر اﻟﺘﻐﻴﻴﺮ",
+        "votes": 1435
+      },
+      {
+        "name": "ﻟﻮرﻳﺲ ادﻳﺐ اﻟﺮاﻋﻲ",
+        "sect": "Greek Orthodox",
+        "list": "ﻋﻜﺎر اﻟﺘﻐﻴﻴﺮ",
+        "votes": 390
+      },
+      {
+        "name": "وﻓﺎء ﻛﻤﻴﻞ ﺟﻤﻴﻞ",
+        "sect": "Greek Orthodox",
+        "list": "ﻋﻜﺎر اﻟﺘﻐﻴﻴﺮ",
+        "votes": 176
+      },
+      {
+        "name": "ادﻛﺎر ﺟﻮزة ﻃﻨﻮس ﺿﺎﻫﺮ",
+        "sect": "Maronite",
+        "list": "ﻋﻜﺎر اﻟﺘﻐﻴﻴﺮ",
+        "votes": 947
+      },
+      {
+        "name": "ﺟﻨﺎن اﺣﻤﺪ ﺣﻤﺪان",
+        "sect": "Alawite",
+        "list": "ﻋﻜﺎر اﻟﺘﻐﻴﻴﺮ",
+        "votes": 361
+      },
+      {
+        "name": "وﺳﻴﻢ ﻏﺎﻧﺪي اﻟﻤﺮﻋﺒﻲ",
+        "sect": "Sunni",
+        "list": "اﻟﻨﻬﻮض ﻟﻌﻜﺎر",
+        "votes": 5000
+      },
+      {
+        "name": "ﺳﻌﺪ ﷲ ﻣﺤﻲ اﻟﺪﻳﻦ اﻟﺤﻤﺪ",
+        "sect": "Sunni",
+        "list": "اﻟﻨﻬﻮض ﻟﻌﻜﺎر",
+        "votes": 29
+      },
+      {
+        "name": "ﻣﺤﻤﻮد ﺧﻀﺮ ﺣﺪاره",
+        "sect": "Sunni",
+        "list": "اﻟﻨﻬﻮض ﻟﻌﻜﺎر",
+        "votes": 5017
+      },
+      {
+        "name": "اﻟﻴﺎس ﺷﺒﻴﺐﻫﺸﺎم",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﻨﻬﻮض ﻟﻌﻜﺎر",
+        "votes": 775
+      },
+      {
+        "name": "ﻧﺎﻓﺬ ﻟﻄﻒ ﷲ وراق",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﻨﻬﻮض ﻟﻌﻜﺎر",
+        "votes": 155
+      },
+      {
+        "name": "ﻃﺎﻧﻴﻮس ﺧﻠﻴﻞ اﻟﺨﻮري",
+        "sect": "Maronite",
+        "list": "اﻟﻨﻬﻮض ﻟﻌﻜﺎر",
+        "votes": 233
+      },
+      {
+        "name": "ﻣﺤﺴﻦ اﺣﻤﺪ ﺣﺴﻴﻦ",
+        "sect": "Alawite",
+        "list": "اﻟﻨﻬﻮض ﻟﻌﻜﺎر",
+        "votes": 282
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻳﺤﻴﻪ ﻳﺤﻴﻪ",
+        "sect": "Sunni",
+        "list": "ﻋﻜﺎر اوﻻً",
+        "votes": 15142
+      },
+      {
+        "name": "ﻛﺮم اﺣﻤﺪ اﻟﻀﺎﻫﺮ",
+        "sect": "Sunni",
+        "list": "ﻋﻜﺎر اوﻻً",
+        "votes": 1528
+      },
+      {
+        "name": "ﺣﺎﺗﻢ ﺧﻀﺮ ﺳﻌﺪ اﻟﺪﻳﻦ",
+        "sect": "Sunni",
+        "list": "ﻋﻜﺎر اوﻻً",
+        "votes": 1864
+      },
+      {
+        "name": "اﺳﻌﺪ راﻣﺰ درﻏﺎم",
+        "sect": "Greek Orthodox",
+        "list": "ﻋﻜﺎر اوﻻً",
+        "votes": 5754
+      },
+      {
+        "name": "ﺷﻜﻴﺐ ﻧﻌﻴﻢ ﻋﺒﻮد",
+        "sect": "Greek Orthodox",
+        "list": "ﻋﻜﺎر اوﻻً",
+        "votes": 3384
+      },
+      {
+        "name": "ﺟﻴﻤﻲ ﺟﻮرج ﺟﺒﻮر",
+        "sect": "Maronite",
+        "list": "ﻋﻜﺎر اوﻻً",
+        "votes": 8986
+      },
+      {
+        "name": "ﺣﻴﺪر زﻫﺮ اﻟﺪﻳﻦ ﻋﻴﺴﻰ",
+        "sect": "Alawite",
+        "list": "ﻋﻜﺎر اوﻻً",
+        "votes": 3948
+      }
+    ]
+  },
+  "north-iii": {
+    "source_pdf": "746962A8-F185-459E-B9D4-BD17BD35E915.pdf",
+    "caption": "دائرة الشمال الثالثة",
+    "candidate_count": 55,
+    "candidates": [
+      {
+        "name": "ﻟﻴﺎل ﺳﻤﻌﺎن ﺑﻮ ﻣﻮﺳﻰ",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 2058
+      },
+      {
+        "name": "رﺑﻴﻊ ﺟﺮﺟﺲ اﻟﺸﺎﻋﺮ",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 1955
+      },
+      {
+        "name": "رﻳﺎض ﻣﻄﺎﻧﻴﻮس ﻃﻮق",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 1406
+      },
+      {
+        "name": "ﻗﺰﺣﻴﺎ اﻟﻴﺎس ﺳﺎﺳﻴﻦ",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 155
+      },
+      {
+        "name": "ﺷﺎدن اﻟﻴﺎس اﻟﻀﻌﻴﻒ",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 1701
+      },
+      {
+        "name": "ﺟﻴﺴﺘﺎل رﻳﻤﻮن ﺳﻤﻌﺎن",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 686
+      },
+      {
+        "name": "ﻣﻴﺸﺎل ﺷﻮﻗﻲ اﻟﺪوﻳﻬﻲ",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 1768
+      },
+      {
+        "name": "ﺳﻤﻌﺎن ﺧﻠﻴﻞ اﻟﺒﺸﻮاﺗﻲ",
+        "sect": "Greek Orthodox",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 1255
+      },
+      {
+        "name": "ﺟﻬﺎد ﻧﺼﺮ ﻓﺮح",
+        "sect": "Greek Orthodox",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 1052
+      },
+      {
+        "name": "ﻓﺪوى ﻓﺎﻳﺰ ﻧﺎﺻﻴﻒ",
+        "sect": "Greek Orthodox",
+        "list": "ﺷﻤﺎﻟﻨﺎ",
+        "votes": 1017
+      },
+      {
+        "name": "ﺳﺘﺮﻳﺪا اﻟﻴﺎس ﻃﻮق",
+        "sect": "Maronite",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 7924
+      },
+      {
+        "name": "ﺟﻮزاف ﺟﺮﺟﺲ اﺳﺤﻖ",
+        "sect": "Maronite",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 6391
+      },
+      {
+        "name": "ﻣﺨﺎﻳﻞ ﺳﺮﻛﻴﺲ اﻟﺪوﻳﻬﻲ",
+        "sect": "Maronite",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 3849
+      },
+      {
+        "name": "ﻣﺎﻏﻲ اﻧﻄﻮن ﻃﻮﺑﻴﺎ",
+        "sect": "Maronite",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 89
+      },
+      {
+        "name": "ﻓﺆاد ﺷﺎﻣﻞ ﺑﻮﻟﺲ",
+        "sect": "Maronite",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 53
+      },
+      {
+        "name": "ﻓﺎدي ﻋﺒﺪﷲ ﻛﺮم",
+        "sect": "Greek Orthodox",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 9226
+      },
+      {
+        "name": "ﺳﺎﻣﻲ ﺣﺒﻴﺐ رﻳﺤﺎﻧﺎ",
+        "sect": "Greek Orthodox",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 153
+      },
+      {
+        "name": "راﻣﻲ اﺳﻜﻨﺪر ﺳﻠﻮم",
+        "sect": "Greek Orthodox",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 98
+      },
+      {
+        "name": "ﻏﻴﺎث ﻣﻴﺸﺎل ﻣﻴﺸﺎل ﻳﺰﺑﻚ",
+        "sect": "Maronite",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 11094
+      },
+      {
+        "name": "ﻟﻴﺎل ﻃﻮﻧﻲ ﻧﻌﻤﻪ",
+        "sect": "Maronite",
+        "list": "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ",
+        "votes": 129
+      },
+      {
+        "name": "ﻣﺠﺪ ﺑﻄﺮس اﻟﺨﻮري ﺣﺮب",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ",
+        "votes": 7076
+      },
+      {
+        "name": "ﺟﻮال ﻣﻴﺸﺎل اﻟﺤﻮﻳﻚ",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ",
+        "votes": 53
+      },
+      {
+        "name": "ادﻳﺐ ﺟﺮﺟﺲ ﻋﺒﺪ اﻟﻤﺴﻴﺢ",
+        "sect": "Greek Orthodox",
+        "list": "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ",
+        "votes": 1815
+      },
+      {
+        "name": "اﻣﻴﻞ رﺷﺎد ﻓﻴﺎض",
+        "sect": "Greek Orthodox",
+        "list": "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ",
+        "votes": 1366
+      },
+      {
+        "name": "ﺑﺮﻳﺠﻴﺖ ﺑﻨﻴﺎﻣﻴﻦ ﺧﻴﺮ",
+        "sect": "Greek Orthodox",
+        "list": "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ",
+        "votes": 95
+      },
+      {
+        "name": "رﺷﻴﺪ ﻧﺠﻴﺐ ﺧﻠﻴﻔﻪ رﺣﻤﻪ",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ",
+        "votes": 264
+      },
+      {
+        "name": "ﻃﻮﻧﻲ اﻟﻴﺎس اﻟﻤﺎردﻳﻨﻲ",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ",
+        "votes": 43
+      },
+      {
+        "name": "ﺟﻮاد ﺳﻴﻤﻮن ﺑﻮﻟﺲ",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ",
+        "votes": 2035
+      },
+      {
+        "name": "ﻣﻴﺸﺎل راﻧﻪ ﻣﻌﻮض",
+        "sect": "Maronite",
+        "list": "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ",
+        "votes": 9261
+      },
+      {
+        "name": "ﻣﺎرون اﻧﻄﻮﻧﻴﻮس ﻣﺤﻔﻮض",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻐﻴّﺮ",
+        "votes": 169
+      },
+      {
+        "name": "ﻣﻴﺮي ﺟﻮ ﻣﻴﺸﺎل ﻣﻄﺮ",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻐﻴّﺮ",
+        "votes": 64
+      },
+      {
+        "name": "اﻧﻴﺲ ﻓﻮزي ﻧﻌﻤﻪ",
+        "sect": "Greek Orthodox",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻐﻴّﺮ",
+        "votes": 326
+      },
+      {
+        "name": "ﺑﺎﺳﻢ ﻣﻴﺸﺎل ﺻﻨﻴﺞ",
+        "sect": "Greek Orthodox",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻐﻴّﺮ",
+        "votes": 19
+      },
+      {
+        "name": "زاﻧﻪ ﻋﺒﺪﷲ اﻟﻨﺒﺘﻲ",
+        "sect": "Greek Orthodox",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻐﻴّﺮ",
+        "votes": 47
+      },
+      {
+        "name": "ﺟﺎن اﻧﻄﻮن ﺧﻴﺮ ﷲ",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ ﻧﻐﻴّﺮ",
+        "votes": 251
+      },
+      {
+        "name": "ﻣﻴﺮﻧﺎ ﺷﺮﺑﻞ اﻟﺨﻮري ﺣﻨﺎ",
+        "sect": "Maronite",
+        "list": "وﻋﻲ ﺻﻮﺗﻚ",
+        "votes": 24
+      },
+      {
+        "name": "ﺟﻮرج ﺑﺪوي ﺑﻄﺮس",
+        "sect": "Maronite",
+        "list": "وﻋﻲ ﺻﻮﺗﻚ",
+        "votes": 23
+      },
+      {
+        "name": "اﻧﻄﻮان ﻳﻮﺳﻒ ﻳﻤﻴﻦ",
+        "sect": "Maronite",
+        "list": "وﻋﻲ ﺻﻮﺗﻚ",
+        "votes": 36
+      },
+      {
+        "name": "ﺑﺴﺎم ﻧﺪﻳﻢ ﻏﻨﻄﻮس",
+        "sect": "Greek Orthodox",
+        "list": "وﻋﻲ ﺻﻮﺗﻚ",
+        "votes": 50
+      },
+      {
+        "name": "ﻣﻮﺳﻰ ﻧﻘﻮﻻ ﻟﻮﻗﺎ",
+        "sect": "Greek Orthodox",
+        "list": "وﻋﻲ ﺻﻮﺗﻚ",
+        "votes": 24
+      },
+      {
+        "name": "اﺳﻄﻔﺎن ﺑﻄﺮس اﻟﺪوﻳﻬﻲ",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل",
+        "votes": 4320
+      },
+      {
+        "name": "ﻃﻮﻧﻲ ﺳﻠﻴﻤﺎن ﻓﺮﻧﺠﻴﻪ",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل",
+        "votes": 8945
+      },
+      {
+        "name": "ﻛﺎرول ادﻣﻮن دﺣﺪح",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل",
+        "votes": 510
+      },
+      {
+        "name": "روي ﺑﻬﺠﺖ ﻋﻴﺴﻰ اﻟﺨﻮري",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل",
+        "votes": 16
+      },
+      {
+        "name": "ﻣﻠﺤﻢ ﺟﺒﺮان ﻃﻮق",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل",
+        "votes": 3566
+      },
+      {
+        "name": "ﺳﻠﻴﻢ ﻋﺒﺪﷲ ﺳﻌﺎده",
+        "sect": "Greek Orthodox",
+        "list": "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل",
+        "votes": 2836
+      },
+      {
+        "name": "ﻓﺎدي ﻣﻴﺸﺎل ﻏﺼﻦ",
+        "sect": "Greek Orthodox",
+        "list": "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل",
+        "votes": 3695
+      },
+      {
+        "name": "ﺟﻮزف ﻣﻴﺸﺎل ﻧﺠﻢ",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل",
+        "votes": 1908
+      },
+      {
+        "name": "ﺟﺒﺮان ﺟﺮﺟﻲ ﺑﺎﺳﻴﻞ",
+        "sect": "Maronite",
+        "list": "رح ﻧﺒﻘﻰ ﻫﻮن",
+        "votes": 8922
+      },
+      {
+        "name": "وﻟﻴﺪ ﺟﺮﺟﺲ ﺣﺮب",
+        "sect": "Maronite",
+        "list": "رح ﻧﺒﻘﻰ ﻫﻮن",
+        "votes": 324
+      },
+      {
+        "name": "ﻃﻮﻧﻲ ﺟﻮرج ﻣﺘﻰ",
+        "sect": "Maronite",
+        "list": "رح ﻧﺒﻘﻰ ﻫﻮن",
+        "votes": 681
+      },
+      {
+        "name": "ﻧﻌﻴﻢ ﻋﻄﺎ ﷲﺟﻮرج",
+        "sect": "Greek Orthodox",
+        "list": "رح ﻧﺒﻘﻰ ﻫﻮن",
+        "votes": 2698
+      },
+      {
+        "name": "وﻟﻴﺪ ﺟﺮﺟﺲ اﻟﻌﺎزار",
+        "sect": "Greek Orthodox",
+        "list": "رح ﻧﺒﻘﻰ ﻫﻮن",
+        "votes": 1427
+      },
+      {
+        "name": "ﻏﺴﺎن ﺗﻮﻓﻴﻖ ﻛﺮم",
+        "sect": "Greek Orthodox",
+        "list": "رح ﻧﺒﻘﻰ ﻫﻮن",
+        "votes": 154
+      },
+      {
+        "name": "ﺑﻴﺎر ﺟﺮﺟﺲ رﻓﻮل",
+        "sect": "Maronite",
+        "list": "رح ﻧﺒﻘﻰ ﻫﻮن",
+        "votes": 2297
+      }
+    ]
+  },
+  "north-ii": {
+    "source_pdf": "DB8533B3-3101-4848-BF3A-F3A91EADBBAC.pdf",
+    "caption": "دائرة الشمال الثانية",
+    "candidate_count": 100,
+    "candidates": [
+      {
+        "name": "ﻛﺮاﻣﻰﻓﻴﺼﻞ ﻋﻤﺮ",
+        "sect": "Sunni",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 6494
+      },
+      {
+        "name": "ﻧﺎﺟﻲﻋﻄﻔﺖ ﻃﻪ",
+        "sect": "Sunni",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 7407
+      },
+      {
+        "name": "اﺣﻤﺪ ﻋﺒﺪ اﻟﻘﺎدر اﻣﻴﻦ",
+        "sect": "Sunni",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 506
+      },
+      {
+        "name": "راﻣﻲ ﻣﺤﻤﺪ ﻇﻬﻴﺮ اﺳﻮم",
+        "sect": "Sunni",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 186
+      },
+      {
+        "name": "ﻋﻠﻲ ﺣﺴﻦ ﻧﻮر",
+        "sect": "Sunni",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 588
+      },
+      {
+        "name": "ﺟﻮرج ادﻣﻮن ﺷﺒﻄﻴﻨﻲ",
+        "sect": "Maronite",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 338
+      },
+      {
+        "name": "رﻓﻠﻲ اﻧﻄﻮن دﻳﺎب",
+        "sect": "Greek Orthodox",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 2294
+      },
+      {
+        "name": "ﻣﺤﻤﺪ اﺣﻤﺪ اﻟﻄﺮاﺑﻠﺴﻲ",
+        "sect": "Alawite",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 1021
+      },
+      {
+        "name": "اﻟﺼﻤﺪﺟﻬﺎد ﻣﺮﺷﺪ",
+        "sect": "Sunni",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 7824
+      },
+      {
+        "name": "ﻧﺒﺮاس ﺑﺸﻴﺮ ﻋﻠﻢ اﻟﺪﻳﻦ",
+        "sect": "Sunni",
+        "list": "اﻻرادة اﻟﺸﻌﺒﻴﺔ",
+        "votes": 1126
+      },
+      {
+        "name": "ﻋﻤﺮ ﻣﺤﻤﺪ ﻋﺪﻧﺎن ﺣﺮﻓﻮش",
+        "sect": "Sunni",
+        "list": "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ",
+        "votes": 1003
+      },
+      {
+        "name": "ﺟﺎﻧﻴﺖ ﻳﻮﺳﻒ ﻓﺮﻧﺠﻴﻪ",
+        "sect": "Maronite",
+        "list": "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ",
+        "votes": 58
+      },
+      {
+        "name": "ﺿﺤﻪ ﻣﺤﻤﺪ اﺣﻤﺪ",
+        "sect": "Sunni",
+        "list": "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ",
+        "votes": 58
+      },
+      {
+        "name": "دﻳﺎﻻ ﺧﻀﺮ اﻻﺳﻄﻪ",
+        "sect": "Sunni",
+        "list": "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ",
+        "votes": 9
+      },
+      {
+        "name": "اﻟﻔﺮﻳﺪ اﻧﻄﻮن دوره",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ",
+        "votes": 1285
+      },
+      {
+        "name": "ﻋﺒﺪ اﻟﺮﺣﻴﻢ ﺳﺎﻟﻢ درﻏﺎم",
+        "sect": "Sunni",
+        "list": "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ",
+        "votes": 35
+      },
+      {
+        "name": "اﺣﻤﺪ ﻋﻠﻲ ﻋﻠﻲ",
+        "sect": "Alawite",
+        "list": "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ",
+        "votes": 146
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻋﻤﺮ زرﻳﻘﻪ",
+        "sect": "Sunni",
+        "list": "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ",
+        "votes": 150
+      },
+      {
+        "name": "ﻧﺰﻳﻪ ﻧﺎﻓﺬ زود",
+        "sect": "Sunni",
+        "list": "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ",
+        "votes": 121
+      },
+      {
+        "name": "ﻋﺪﻧﺎن اﺣﻤﺪ ﺑﻜﻮر",
+        "sect": "Sunni",
+        "list": "ﻃﻤﻮح اﻟﺸﺒﺎب",
+        "votes": 18
+      },
+      {
+        "name": "ﻣﺼﻄﻔﻰ ﻣﺤﻤﺪ ﻛﻨﺠﻮ ﺣﺴﻴﻦ",
+        "sect": "Sunni",
+        "list": "ﻃﻤﻮح اﻟﺸﺒﺎب",
+        "votes": 9
+      },
+      {
+        "name": "ﻣﺤﻤﻮد ﺧﻀﺮ اﻟﻤﻴﺮ",
+        "sect": "Sunni",
+        "list": "ﻃﻤﻮح اﻟﺸﺒﺎب",
+        "votes": 4
+      },
+      {
+        "name": "راﺋﺪ ﻋﻠﻲ اﻟﻄﺒﺎع",
+        "sect": "Sunni",
+        "list": "ﻃﻤﻮح اﻟﺸﺒﺎب",
+        "votes": 3
+      },
+      {
+        "name": "رأﻓﺖ اﻟﻤﺼﺮيﻋﻤﺮ",
+        "sect": "Sunni",
+        "list": "ﻃﻤﻮح اﻟﺸﺒﺎب",
+        "votes": 5
+      },
+      {
+        "name": "اﺷﺮف اﺣﻤﺪ رﻳﻔﻲ",
+        "sect": "Sunni",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 11593
+      },
+      {
+        "name": "اﻣﻴﻦ ﻣﺤﻤﺪ ﺑﺸﻴﺮ",
+        "sect": "Sunni",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 69
+      },
+      {
+        "name": "اﻳﻤﺎن ﻋﺼﺎم درﻧﻴﻘﻪ",
+        "sect": "Sunni",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 205
+      },
+      {
+        "name": "ﺻﺎﻟﺢ ﻏﺴﺎن اﻟﻤﻘﺪم",
+        "sect": "Sunni",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 696
+      },
+      {
+        "name": "ﻓﻮزي ﻣﺤﻤﺪ ﻋﺰت اﻟﻔﺮي",
+        "sect": "Sunni",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 384
+      },
+      {
+        "name": "اﻟﺨﻮرياﻟﻴﺎس ﻓﻮآد",
+        "sect": "Maronite",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 3426
+      },
+      {
+        "name": "ﺟﻤﻴﻞ ﻋﺒﻮد ﻋﺒﻮد",
+        "sect": "Greek Orthodox",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 79
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻋﺒﺪ اﻟﺤﻤﻴﺪ ﺷﻤﺴﻴﻦ",
+        "sect": "Alawite",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 216
+      },
+      {
+        "name": "ﻋﺜﻤﺎن ﻣﺤﻤﺪ ﻋﻠﻢ اﻟﺪﻳﻦ",
+        "sect": "Sunni",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 5469
+      },
+      {
+        "name": "ﺑﻼل ﺣﺴﻴﻦ ﻫﺮﻣﻮش",
+        "sect": "Sunni",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 6263
+      },
+      {
+        "name": "اﻟﻜﺮﻣﻪﻋﻮض ﻋﻮض اﺣﻤﺪ",
+        "sect": "Sunni",
+        "list": "إﻧﻘﺎذ وﻃﻦ",
+        "votes": 124
+      },
+      {
+        "name": "ﻋﺒﺪ اﻟﻜﺮﻳﻢ ﻣﺤﻤﺪ ﻛﺒﺎره",
+        "sect": "Sunni",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 5023
+      },
+      {
+        "name": "اﻟﻴﺴﺎر ﺧﺎﻟﺪ ﻳﺴﻦ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 270
+      },
+      {
+        "name": "وﻫﻴﺐ اﺣﻤﺪ ﻃﻄﺮ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 166
+      },
+      {
+        "name": "ﺟﻼل ﻋﻠﻲ اﻟﺒﻘﺎر",
+        "sect": "Sunni",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 912
+      },
+      {
+        "name": "ﻋﻔﺮاء ﻣﺤﻤﺪ ﻋﻴﺪ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 170
+      },
+      {
+        "name": "ﻋﻠﻲ اﺣﻤﺪ دروﻳﺶ",
+        "sect": "Alawite",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 831
+      },
+      {
+        "name": "ﺳﻠﻴﻤﺎن ﺟﺎن ﻋﺒﻴﺪ",
+        "sect": "Maronite",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 1409
+      },
+      {
+        "name": "ﻗﻴﺼﺮ ﻓﻴﻜﺘﻮر ﺧﻼط",
+        "sect": "Greek Orthodox",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 211
+      },
+      {
+        "name": "ﺑﺮاء اﺳﻌﺪ ﻫﺮﻣﻮش",
+        "sect": "Sunni",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 1642
+      },
+      {
+        "name": "ﻋﻠﻲ اﺣﻤﺪ ﻋﺒﺪ اﻟﻌﺰﻳﺰ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 854
+      },
+      {
+        "name": "ﻛﺎﻇﻢ ﺻﺎﻟﺢ ﺧﻴﺮ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﻨﺎس",
+        "votes": 4037
+      },
+      {
+        "name": "ﻣﺼﻄﻔﻰ ﻣﺤﻤﺪ اﺳﻤﺎﻋﻴﻞ ﻋﻠﻮش",
+        "sect": "Sunni",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 3730
+      },
+      {
+        "name": "ﻓﻬﺪ ﺣﺴﺎم ﻣﻘﺪم",
+        "sect": "Sunni",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 254
+      },
+      {
+        "name": "رﺑﻰ ﻋﺒﺪ اﻟﺮﺣﻤﻦ اﻟﺪاﻻﺗﻲ",
+        "sect": "Sunni",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 288
+      },
+      {
+        "name": "ﻋﻠﻲ ﻋﺒﺪاﻟﺤﻠﻴﻢ اﻻﻳﻮﺑﻲ",
+        "sect": "Sunni",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 965
+      },
+      {
+        "name": "ﺧﺎﻟﺪ ﺣﻤﺪ ﻣﺮﻋﻲ",
+        "sect": "Sunni",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 142
+      },
+      {
+        "name": "ﺷﻴﺒﺎن ﻓﻮاد ﻫﻴﻜﻞ",
+        "sect": "Greek Orthodox",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 31
+      },
+      {
+        "name": "ﻃﻮﻧﻲ اﺑﺮاﻫﻴﻢ ﺷﺎﻫﻴﻦ",
+        "sect": "Maronite",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 77
+      },
+      {
+        "name": "ﺑﺪر ﺣﺴﻴﻦ ﻋﻴﺪ",
+        "sect": "Alawite",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 797
+      },
+      {
+        "name": "ﺳﺎﻣﻲ اﺣﻤﺪ ﺷﻮﻗﻲ ﻓﺘﻔﺖ",
+        "sect": "Sunni",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 5790
+      },
+      {
+        "name": "ﻋﺒﺪ اﻟﻌﺰﻳﺰ اﺑﺮاﻫﻴﻢ اﻟﺼﻤﺪ",
+        "sect": "Sunni",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 9151
+      },
+      {
+        "name": "اﺣﻤﺪ ﻣﺤﻤﻮد اﻟﺨﻴﺮ",
+        "sect": "Sunni",
+        "list": "ﻟﺒﻨﺎن ﻟﻨﺎ",
+        "votes": 6100
+      },
+      {
+        "name": "راﻣﻲ ﺳﻌﺪ ﷲ ﻓﻨﺞ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ",
+        "votes": 5009
+      },
+      {
+        "name": "اﻟﻌﻮﻳﻚﻣﺼﻄﻔﻰ ﻣﺤﻤﺪ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ",
+        "votes": 780
+      },
+      {
+        "name": "ﻫﻨﺪ ﻣﺤﻤﺪ اﻟﺼﻮﻓﻲ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ",
+        "votes": 1149
+      },
+      {
+        "name": "زﻛﺮﻳﺎ اﺑﺮاﻫﻴﻢ ﻣﺴﻴﻜﻪ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ",
+        "votes": 2135
+      },
+      {
+        "name": "ﻣﺎﻟﻚ ﻓﻴﺼﻞ ﻣﻮﻟﻮي",
+        "sect": "Sunni",
+        "list": "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ",
+        "votes": 1198
+      },
+      {
+        "name": "ﻛﻤﻴﻞ ﺳﻤﻴﺮ ﻣﻮراﻧﻲ",
+        "sect": "Maronite",
+        "list": "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ",
+        "votes": 1724
+      },
+      {
+        "name": "ﺣﻴﺪر آﺻﻒ ﻧﺎﺻﺮ",
+        "sect": "Alawite",
+        "list": "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ",
+        "votes": 313
+      },
+      {
+        "name": "ﻏﺎﻟﺐ ﺧﻀﺮ ﻋﺜﻤﺎن",
+        "sect": "Sunni",
+        "list": "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ",
+        "votes": 426
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻧﻮر اﻟﺪﻳﻦ اﺣﻤﺪ ﻋﻠﻲ ﺧﻠﻴﻞ",
+        "sect": "Sunni",
+        "list": "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ",
+        "votes": 746
+      },
+      {
+        "name": "اﻳﻬﺎب ﻣﺤﻤﺪ ﻣﻄﺮ",
+        "sect": "Sunni",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 6518
+      },
+      {
+        "name": "ﻓﺮح ﻋﻠﻲ اﻟﺤﺪاد",
+        "sect": "Sunni",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 306
+      },
+      {
+        "name": "ﻋﺰام اﺳﻌﺪ اﻳﻮﺑﻲ",
+        "sect": "Sunni",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 4569
+      },
+      {
+        "name": "اﺣﻤﺪ ﻋﺒﺪ اﻟﻮﻫﺎب اﻟﻤﺮج",
+        "sect": "Sunni",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 173
+      },
+      {
+        "name": "زﻳﻦ ﺧﺎﻟﺪ ﻣﺼﻄﻔﻰ",
+        "sect": "Sunni",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 117
+      },
+      {
+        "name": "ﻣﻄﺎﻧﻴﻮس ﻋﻴﺴﻰ ﻧﻘﻮﻻ ﻣﺤﻔﻮض",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 250
+      },
+      {
+        "name": "ﺑﻮل ﺣﻨﺎ اﻟﺤﺎﻣﺾ",
+        "sect": "Maronite",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 15
+      },
+      {
+        "name": "ﻓﺮاس اﺣﻤﺪ اﻟﺴﻠﻮم",
+        "sect": "Alawite",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 370
+      },
+      {
+        "name": "ﻣﺤﻤﻮد اﺣﻤﺪ اﻟﺴﻴﺪ",
+        "sect": "Sunni",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 2271
+      },
+      {
+        "name": "ﺳﻤﻴﺮ اﺣﻤﺪ ﻃﺎﻟﺐ",
+        "sect": "Sunni",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 648
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﺳﻴﻒ اﻟﺪﻳﻦ دﻫﺒﻲ",
+        "sect": "Sunni",
+        "list": "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ",
+        "votes": 1052
+      },
+      {
+        "name": "ﺑﻼل ﻣﺤﻤﺪ ﺷﻌﺒﺎن",
+        "sect": "Sunni",
+        "list": "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 323
+      },
+      {
+        "name": "ﻋﺒﺪ اﻟﻌﺰﻳﺰ ﻣﺤﻤﻮد ﻏﺎزي ﻃﺮﻃﻮﺳﻲ",
+        "sect": "Sunni",
+        "list": "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 155
+      },
+      {
+        "name": "رﺑﻴﻊ ﻣﺤﻤﺪ ﺳﻌﻴﺪ اﻟﺴﺒﺎﻋﻲ",
+        "sect": "Sunni",
+        "list": "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 24
+      },
+      {
+        "name": "ﻫﺸﺎم رﻳﺎض اﺑﺮاﻫﻴﻢ",
+        "sect": "Alawite",
+        "list": "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 24
+      },
+      {
+        "name": "اﻧﻄﻮﻧﻲ ﺟﻮزﻳﻒ ﻋﻴﺪ",
+        "sect": "Maronite",
+        "list": "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 39
+      },
+      {
+        "name": "ﻣﺤﻤﺪ اﺣﻤﺪ ﻋﻠﻢ اﻟﺪﻳﻦ",
+        "sect": "Sunni",
+        "list": "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 37
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻃﻪ ﺟﺒﺎره",
+        "sect": "Sunni",
+        "list": "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 4
+      },
+      {
+        "name": "ﺑﺎﺳﻞ ﻫﻴﺜﻢ اﻻﺳﻄﻪ",
+        "sect": "Sunni",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 207
+      },
+      {
+        "name": "ﻣﺎﻳﺰ اﺳﻌﺪ اﻟﺠﻨﺪى",
+        "sect": "Sunni",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 70
+      },
+      {
+        "name": "ﻳﻮﻧﺲ ﻣﺤﻤﺪ اﻟﺤﺴﻦ",
+        "sect": "Sunni",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 29
+      },
+      {
+        "name": "دﻳﻤﺎ ﻣﻌﻦ ﺿﻨﺎوي",
+        "sect": "Sunni",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 5
+      },
+      {
+        "name": "ﻛﺴﺤﻪﺳﻮﺳﻦ ﻣﺤﻤﺪ راﺷﺪ",
+        "sect": "Sunni",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 11
+      },
+      {
+        "name": "ﻣﻴﺸﺎل ﻣﺠﻴﺪ اﻟﺨﻮري",
+        "sect": "Maronite",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 12
+      },
+      {
+        "name": "ﺻﺎﻟﺢ وﻫﻴﺐ اﻟﺪﻳﺐ",
+        "sect": "Alawite",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 717
+      },
+      {
+        "name": "اﻟﺨﻴﺮﻓﺎدي ﻣﺎﻟﻚ",
+        "sect": "Sunni",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 157
+      },
+      {
+        "name": "ﻋﺒﺪ اﻟﻘﺎدر ﻣﺤﻤﺪ اﻟﺸﺎﻣﻲ",
+        "sect": "Sunni",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 10
+      },
+      {
+        "name": "ﻛﺎﻣﻞ ﻋﻠﻲ ﺑﻜﻮر",
+        "sect": "Sunni",
+        "list": "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء",
+        "votes": 33
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻣﺼﻄﻔﻰ زرﻳﻘﺔ",
+        "sect": "Sunni",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 185
+      },
+      {
+        "name": "ﺷﻔﻴﻖ ﻣﺤﻤﺪ ﺣﺴﻮن",
+        "sect": "Sunni",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 186
+      },
+      {
+        "name": "ﻋﺒﻴﺪه ﻧﺎﺻﺮ ﺗﻜﺮﻳﺘﻲ",
+        "sect": "Sunni",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 830
+      },
+      {
+        "name": "ﻣﺼﺒﺎح ﻋﺰﻣﻲ رﺟﺐ",
+        "sect": "Sunni",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 104
+      },
+      {
+        "name": "ﻧﻀﺎل ﻋﻠﻲ ﻋﺒﺪ اﻟﺮﺣﻤﻦ",
+        "sect": "Alawite",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 26
+      },
+      {
+        "name": "ﻣﻨﻴﺮ ﻣﻮرﻳﺲ ﻗﺴﻄﻨﻄﻴﻦ دوﻣﺎﻧﻲ",
+        "sect": "Greek Orthodox",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 317
+      }
+    ]
+  },
+  "mount-lebanon-iii": {
+    "source_pdf": "6140EC3E-E5D5-4B87-B775-B54E6218E124.pdf",
+    "caption": "دائرة جبل لبنان الثالثة",
+    "candidate_count": 33,
+    "candidates": [
+      {
+        "name": "ﻋﺒﺪه ﻃﺎﻧﻴﻮس ﺻﻌﺐ ﺳﻌﺎده",
+        "sect": "Maronite",
+        "list": "ﻣﻌﺎً ﻧﺴﺘﻄﻴﻊ",
+        "votes": 104
+      },
+      {
+        "name": "اﻣﻞ ﻓﺆاد اﺑﻮ ﻓﺮﺣﺎت",
+        "sect": "Maronite",
+        "list": "ﻣﻌﺎً ﻧﺴﺘﻄﻴﻊ",
+        "votes": 56
+      },
+      {
+        "name": "ﺑﺎﺗﺮﻳﻚ ﺳﻌﻴﺪ اﺑﻮ ﺷﻘﺮا",
+        "sect": "Maronite",
+        "list": "ﻣﻌﺎً ﻧﺴﺘﻄﻴﻊ",
+        "votes": 84
+      },
+      {
+        "name": "ﺑﻼل ﻋﺪﻧﺎن ﻋﻼﻣﻪ",
+        "sect": "Shia",
+        "list": "ﻣﻌﺎً ﻧﺴﺘﻄﻴﻊ",
+        "votes": 70
+      },
+      {
+        "name": "ﻳﻮﺳﻒ اﺣﻤﺪ اﻟﺸﻌﺎﺑﻴﻦ",
+        "sect": "Shia",
+        "list": "ﻣﻌﺎً ﻧﺴﺘﻄﻴﻊ",
+        "votes": 12
+      },
+      {
+        "name": "ﻓﺎدي ﻧﺠﻴﺐ اﻻﻋﻮر",
+        "sect": "Druze",
+        "list": "ﻣﻌﺎً ﻧﺴﺘﻄﻴﻊ",
+        "votes": 24
+      },
+      {
+        "name": "ﺑﻴﺎر رﺷﻴﺪ ﺑﻮ ﻋﺎﺻﻲ",
+        "sect": "Maronite",
+        "list": "ﺑﻌﺒﺪا اﻟﺴﻴﺎدة واﻟﻘﺮار",
+        "votes": 14756
+      },
+      {
+        "name": "ﻫﺎدي ﻣﺤﻤﺪ رﻓﻴﻖ اﺑﻮ اﻟﺤﺴﻦ",
+        "sect": "Druze",
+        "list": "ﺑﻌﺒﺪا اﻟﺴﻴﺎدة واﻟﻘﺮار",
+        "votes": 10767
+      },
+      {
+        "name": "ﻣﻴﺸﺎل دوري ﺷﻤﻌﻮنﻛﻤﻴﻞ",
+        "sect": "Maronite",
+        "list": "ﺑﻌﺒﺪا اﻟﺴﻴﺎدة واﻟﻘﺮار",
+        "votes": 1876
+      },
+      {
+        "name": "ﺳﻌﺪ ﻣﺼﻄﻔﻰ ﺳﻠﻴﻢ",
+        "sect": "Shia",
+        "list": "ﺑﻌﺒﺪا اﻟﺴﻴﺎدة واﻟﻘﺮار",
+        "votes": 200
+      },
+      {
+        "name": "اﻟﻜﺴﻨﺪر ﻃﺎﻧﻴﻮس ﻛﺮم",
+        "sect": "Maronite",
+        "list": "ﺑﻌﺒﺪا اﻟﺴﻴﺎدة واﻟﻘﺮار",
+        "votes": 1450
+      },
+      {
+        "name": "ﺳﻌﻴﺪ ﻣﺤﻤﺪ ﻋﻼﻣﻪ",
+        "sect": "Shia",
+        "list": "ﺑﻌﺒﺪا اﻟﺴﻴﺎدة واﻟﻘﺮار",
+        "votes": 81
+      },
+      {
+        "name": "ﺟﺎن ﻋﺒﺪه اﺑﻲ ﻳﻮﻧﺲ",
+        "sect": "Maronite",
+        "list": "ﺑﻌﺒﺪا ﺗﻨﺘﻔﺾ",
+        "votes": 265
+      },
+      {
+        "name": "ﺧﻠﻴﻞ اﻟﺪﻛﺘﻮر اﻣﻴﻦ اﻟﺤﻠﻮ",
+        "sect": "Maronite",
+        "list": "ﺑﻌﺒﺪا ﺗﻨﺘﻔﺾ",
+        "votes": 3819
+      },
+      {
+        "name": "ﻧﻌﻴﻢ اﻟﻴﺎس ﻋﻮن",
+        "sect": "Maronite",
+        "list": "ﺑﻌﺒﺪا ﺗﻨﺘﻔﺾ",
+        "votes": 566
+      },
+      {
+        "name": "رﻣﺰي رﺳﺘﻢ ﻛﻨﺞ",
+        "sect": "Shia",
+        "list": "ﺑﻌﺒﺪا ﺗﻨﺘﻔﺾ",
+        "votes": 228
+      },
+      {
+        "name": "ﻣﻴﺸﺎل ﺳﻠﻴﻢ ﻓﻴﻠﻴﺐ ﺣﻠﻮ",
+        "sect": "Maronite",
+        "list": "ﺑﻌﺒﺪا اﻟﺘﻐﻴﻴﺮ",
+        "votes": 5483
+      },
+      {
+        "name": "روﺑﻴﺮ ﻓﻮاد ﺧﻠﻴﻔﻪ",
+        "sect": "Maronite",
+        "list": "ﺑﻌﺒﺪا اﻟﺘﻐﻴﻴﺮ",
+        "votes": 313
+      },
+      {
+        "name": "ﻋﺒﻴﺮ ﻳﺤﻲ ﻧﺎﺟﻲ",
+        "sect": "Druze",
+        "list": "ﺑﻌﺒﺪا اﻟﺘﻐﻴﻴﺮ",
+        "votes": 928
+      },
+      {
+        "name": "واﺻﻒ ﺣﺒﻴﺐ اﻟﺤﺮﻛﻪ",
+        "sect": "Shia",
+        "list": "ﺑﻌﺒﺪا اﻟﺘﻐﻴﻴﺮ",
+        "votes": 4092
+      },
+      {
+        "name": "زﻳﺎد ﻣﺨﺎﻳﻞ ﻋﻘﻞ",
+        "sect": "Maronite",
+        "list": "ﺑﻌﺒﺪا اﻟﺘﻐﻴﻴﺮ",
+        "votes": 1964
+      },
+      {
+        "name": "ﺑﻴﺎر ﻳﻮﺳﻒ ﺑﻌﻘﻠﻴﻨﻲ",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 272
+      },
+      {
+        "name": "ﻣﻴﺸﺎل ﺟﻮرج ﺷﻤﻌﻮن",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 409
+      },
+      {
+        "name": "اوﺳﺎﻣﻪ ﺳﺎﻣﻲ اﻻﻋﻮر",
+        "sect": "Druze",
+        "list": "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 45
+      },
+      {
+        "name": "راﻧﻲ ﻓﺎﻳﻖ اﻟﺮﺟﻲ",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 219
+      },
+      {
+        "name": "ﻋﻠﻲ ﺣﺴﻦ دروﻳﺶ",
+        "sect": "Shia",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 560
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﺣﺴﻦ ﺻﻘﺮ",
+        "sect": "Shia",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 56
+      },
+      {
+        "name": "اﻵن ﺟﻮزف ﻋﻮن",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ اﻟﻮﻓﺎق اﻟﻮﻃﻨﻲ",
+        "votes": 8457
+      },
+      {
+        "name": "ﻋﻠﻲ ﻓﻀﻞ ﻋﻤﺎر",
+        "sect": "Shia",
+        "list": "ﻻﺋﺤﺔ اﻟﻮﻓﺎق اﻟﻮﻃﻨﻲ",
+        "votes": 14852
+      },
+      {
+        "name": "ﻓﺎدي ﻓﺨﺮي ﻋﻼﻣﻪ",
+        "sect": "Shia",
+        "list": "ﻻﺋﺤﺔ اﻟﻮﻓﺎق اﻟﻮﻃﻨﻲ",
+        "votes": 4862
+      },
+      {
+        "name": "ﻓﺎدي ﺟﻮزف اﺑﻮ رﺣﺎل",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ اﻟﻮﻓﺎق اﻟﻮﻃﻨﻲ",
+        "votes": 1773
+      },
+      {
+        "name": "ﻓﺎروق ﺧﻠﻴﻞ اﻻﻋﻮر",
+        "sect": "Druze",
+        "list": "ﻻﺋﺤﺔ اﻟﻮﻓﺎق اﻟﻮﻃﻨﻲ",
+        "votes": 1037
+      },
+      {
+        "name": "ﺷﺎدي ﺣﺒﻴﺐ واﻛﺪ",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ اﻟﻮﻓﺎق اﻟﻮﻃﻨﻲ",
+        "votes": 2036
+      }
+    ]
+  },
+  "mount-lebanon-ii": {
+    "source_pdf": "16738141-E09C-4269-B560-CD4594D393B6.pdf",
+    "caption": "دائرة جبل لبنان الثانية",
+    "candidate_count": 39,
+    "candidates": [
+      {
+        "name": "ﻣﻠﺤﻢ اﻧﻄﻮن رﻳﺎﺷﻲ",
+        "sect": "Greek Catholic",
+        "list": "ﻣﺘﻦ اﻟﺤﺮﻳّﺔ",
+        "votes": 15254
+      },
+      {
+        "name": "رازي ودﻳﻊ اﻟﺤﺎج",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻦ اﻟﺤﺮﻳّﺔ",
+        "votes": 3459
+      },
+      {
+        "name": "رﺷﻴﺪ ﺧﻠﻴﻞ ﺳﻌﺪ اﺑﻮ ﺟﻮده",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻦ اﻟﺤﺮﻳّﺔ",
+        "votes": 279
+      },
+      {
+        "name": "ﻫﺎﻧﻲ ﻃﺎﻧﻴﻮس ﺻﻠﻴﺒﺎ",
+        "sect": "Greek Orthodox",
+        "list": "ﻣﺘﻦ اﻟﺤﺮﻳّﺔ",
+        "votes": 1404
+      },
+      {
+        "name": "ﺳﻠﻴﻢ اﺑﺮاﻫﻴﻢ اﻟﺠﻠﺦ",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻦ اﻟﺤﺮﻳّﺔ",
+        "votes": 112
+      },
+      {
+        "name": "ﻓﺮﻳﺪ اﻧﻄﻮان زﻳﻨﻮن",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻦ اﻟﺤﺮﻳّﺔ",
+        "votes": 107
+      },
+      {
+        "name": "آرا راﻓﻲ ﺑﺎرداﻗﺠﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "ﻣﺘﻦ اﻟﺤﺮﻳّﺔ",
+        "votes": 237
+      },
+      {
+        "name": "ﺑﻮل ﺳﻠﻴﻢ ﻧﺎﻛﻮزي",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن",
+        "votes": 155
+      },
+      {
+        "name": "روﻣﺎﻧﻮس ﻋﺰﻳﺰ رﻋﺪ",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن",
+        "votes": 75
+      },
+      {
+        "name": "اﻟﻔﺮد اﻣﻴﻞ اﻟﺮﻳﺎﺷﻲ",
+        "sect": "Greek Catholic",
+        "list": "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن",
+        "votes": 100
+      },
+      {
+        "name": "ﺷﺎدي ﺟﻮزف ﺑﺸﺎره",
+        "sect": "Greek Orthodox",
+        "list": "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن",
+        "votes": 76
+      },
+      {
+        "name": "واﺋﻞ رﻳﺸﺎر ﺻﻘﺮ",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن",
+        "votes": 11
+      },
+      {
+        "name": "ﺷﺎﻧﻂ ﻫﺮﻧﺪ ﺻﺮاﻓﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن",
+        "votes": 29
+      },
+      {
+        "name": "ﺷﺮﺑﻞ ﺳﻤﻌﺎن اﺑﻮ ﺟﻮده",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن",
+        "votes": 166
+      },
+      {
+        "name": "ﻣﻴﺸﺎل اﻟﻴﺎس اﻟﻤﺮ",
+        "sect": "Greek Orthodox",
+        "list": "ﻣﻌﺎً اﻗﻮى",
+        "votes": 8607
+      },
+      {
+        "name": "اﻏﻮب اوﻫﺎﻧﺲ اﻏﻮب ﺑﺎﻗﺮادوﻧﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "ﻣﻌﺎً اﻗﻮى",
+        "votes": 4973
+      },
+      {
+        "name": "اﻧﻄﻮان ﺧﻠﻴﻞ ﺧﻠﻴﻞ",
+        "sect": "Maronite",
+        "list": "ﻣﻌﺎً اﻗﻮى",
+        "votes": 1370
+      },
+      {
+        "name": "ﻋﺒﻮدرﻧﺪا ﻋﺒﺪ ﷲ",
+        "sect": "Maronite",
+        "list": "ﻣﻌﺎً اﻗﻮى",
+        "votes": 198
+      },
+      {
+        "name": "ﻣﺎرون ﻓﺮﻋﻮن اﺑﻮ دﻳﻮان",
+        "sect": "Maronite",
+        "list": "ﻣﻌﺎً اﻗﻮى",
+        "votes": 83
+      },
+      {
+        "name": "ﻣﺎرون ﺟﻮرج رزق ﷲ",
+        "sect": "Maronite",
+        "list": "ﻣﻌﺎً اﻗﻮى",
+        "votes": 42
+      },
+      {
+        "name": "ﺟﻮﻳﺲ ادﻣﻮن ﺟﻤﺎل",
+        "sect": "Greek Orthodox",
+        "list": "ﻣﻌﺎً اﻗﻮى",
+        "votes": 40
+      },
+      {
+        "name": "ﻟﻴﺎ ﻣﻴﺸﺎل ﺑﻮ ﺷﻌﻴﺎ",
+        "sect": "Greek Catholic",
+        "list": "ﻣﻌﺎً اﻗﻮى",
+        "votes": 136
+      },
+      {
+        "name": "ﺳﺎﻣﻲ اﻣﻴﻦ اﻟﺠﻤﻴﻞ",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 10466
+      },
+      {
+        "name": "اﻟﻴﺎس راﺋﻴﻒ ﺣﻨﻜﺶ",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 6148
+      },
+      {
+        "name": "ﻣﻨﻰ ﻓﻬﺪ ﺳﻜﺮ",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 636
+      },
+      {
+        "name": "ﺳﻤﻌﺎن ﺷﺎﻫﻴﻦ ﺑﻮ ﻓﺎﺿﻞ",
+        "sect": "Maronite",
+        "list": "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 715
+      },
+      {
+        "name": "رﻳﻤﺎ ﻓﺆاد ﻧﺠﻴﻢ",
+        "sect": "Greek Catholic",
+        "list": "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 364
+      },
+      {
+        "name": "ﺳﻤﻴﺮ ﻣﻴﺸﺎل ﺻﻠﻴﺒﺎ",
+        "sect": "Greek Orthodox",
+        "list": "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 3219
+      },
+      {
+        "name": "ﻛﺮﻳﻜﻮر ﺟﻮزف ﻣﺎردﻳﻜﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 211
+      },
+      {
+        "name": "ﻓﻴﺮﻳﻨﺎ رﺷﺎد اﻟﻌﻤﻴﻞ",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻮ اﻟﺪوﻟﺔ",
+        "votes": 855
+      },
+      {
+        "name": "ﻟﻮﺳﻴﺎن ﺟﺮﺟﺲ ﺑﻮ رﺟﻴﻠﻲ",
+        "sect": "Greek Catholic",
+        "list": "ﻧﺤﻮ اﻟﺪوﻟﺔ",
+        "votes": 1149
+      },
+      {
+        "name": "ﻣﻴﺮﻳﻢ اﻳﻠﻲ ﺟﺒﺮ",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻮ اﻟﺪوﻟﺔ",
+        "votes": 618
+      },
+      {
+        "name": "ﺷﺎدن رﻓﻴﻖ ﻣﻌﻠﻮف",
+        "sect": "Greek Orthodox",
+        "list": "ﻧﺤﻮ اﻟﺪوﻟﺔ",
+        "votes": 138
+      },
+      {
+        "name": "ﺟﺎد اﻣﻴﻞ رﻳﺸﺎ ﻏﺼﻦ",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻮ اﻟﺪوﻟﺔ",
+        "votes": 8526
+      },
+      {
+        "name": "اﻟﻴﺎس ﻧﻘﻮﻻ ﺑﻮﺻﻌﺐ",
+        "sect": "Greek Orthodox",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ",
+        "votes": 4050
+      },
+      {
+        "name": "اﺑﺮاﻫﻴﻢ ﻳﻮﺳﻒ ﻛﻨﻌﺎن",
+        "sect": "Maronite",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ",
+        "votes": 5513
+      },
+      {
+        "name": "ادﻛﺎر ﺑﻮﻟﺲ ﻣﻌﻠﻮف",
+        "sect": "Greek Catholic",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ",
+        "votes": 10006
+      },
+      {
+        "name": "ﻧﺼﺮي ﺑﻚ ﻧﺼﺮي ﻟﺤﻮد",
+        "sect": "Maronite",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ",
+        "votes": 414
+      },
+      {
+        "name": "رﻳﻜﺎردو واﻫﻴﻪ ﻣﻼﻛﻴﺎن",
+        "sect": "Armenian Orthodox",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ",
+        "votes": 80
+      }
+    ]
+  },
+  "mount-lebanon-iv": {
+    "source_pdf": "2C85308C-6600-4585-87D2-F071F862C1E8.pdf",
+    "caption": "دائرة جبل لبنان الرابعة",
+    "candidate_count": 68,
+    "candidates": [
+      {
+        "name": "ﺗﻴﻤﻮر وﻟﻴﺪ ﺟﻨﺒﻼط",
+        "sect": "Druze",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 12917
+      },
+      {
+        "name": "ﺟﻮرج ﺟﻤﻴﻞ ﻋﺪوان",
+        "sect": "Maronite",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 11433
+      },
+      {
+        "name": "ﻣﺮوان ﻣﺤﻤﺪ ﺣﻤﺎده",
+        "sect": "Druze",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 11121
+      },
+      {
+        "name": "ﺑﻼل اﺣﻤﺪ ﻋﺒﺪ ﷲ",
+        "sect": "Sunni",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 8186
+      },
+      {
+        "name": "ﺳﻌﺪ اﻟﺪﻳﻦ وﺳﻴﻢ اﻟﺨﻄﻴﺐ",
+        "sect": "Sunni",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 3656
+      },
+      {
+        "name": "ﺣﺒﻮﺑﻪ ﻳﻮﺳﻒ ﻋﻮن",
+        "sect": "Maronite",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 681
+      },
+      {
+        "name": "اﻳﻠﻲ ﻣﺨﺎﻳﻞ ﻗﺮداﺣﻲ",
+        "sect": "Maronite",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 1914
+      },
+      {
+        "name": "ﻓﺎدي ﻓﺎرس اﻟﻤﻌﻠﻮف",
+        "sect": "Greek Catholic",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 1482
+      },
+      {
+        "name": "اﻛﺮم ﺣﺴﻴﻦ ﺷﻬﻴﺐ",
+        "sect": "Druze",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 11373
+      },
+      {
+        "name": "ﻧﺰﻳﻪ اﻣﻴﻦ ﻣﺘﻰ",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 9191
+      },
+      {
+        "name": "راﺟﻲ ﻧﺠﻴﺐ اﻟﺴﻌﺪ",
+        "sect": "Maronite",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 8503
+      },
+      {
+        "name": "ﺟﻮال ﺟﻮزاف ﻓﻀﻮل",
+        "sect": "Maronite",
+        "list": "اﻟﺸﺮاﻛﺔ واﻻرادة",
+        "votes": 567
+      },
+      {
+        "name": "ﻋﻤﺎد ﻣﺎرون اﻟﺤﺎج اﻟﻤﻠﻘﺐ ﺑﺎﻟﻤﻌﻠﻢ",
+        "sect": "Maronite",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 874
+      },
+      {
+        "name": "وﺳﻴﻢ ﻋﻔﻴﻒ ﺣﻴﺪر",
+        "sect": "Druze",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 218
+      },
+      {
+        "name": "راﺋﺪ زﻳﺎد ﻋﺒﺪ اﻟﺨﺎﻟﻖ",
+        "sect": "Druze",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 115
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﺳﺎﻣﻲ اﻟﺤﺠﺎر",
+        "sect": "Sunni",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 1301
+      },
+      {
+        "name": "ﺳﻤﻴﺮ ﺣﺴﻦ ﻋﺎﻛﻮم",
+        "sect": "Sunni",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 207
+      },
+      {
+        "name": "ﻛﺎﺑﻲ اﻟﻴﺎس اﻟﻘﺰي",
+        "sect": "Maronite",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 105
+      },
+      {
+        "name": "ﺟﻬﺎد ﻧﺒﻴﻞ ذﺑﻴﺎن",
+        "sect": "Druze",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 32
+      },
+      {
+        "name": "ﺟﻤﺎل اﻧﻄﻮان ﻣﺮﻫﺞ",
+        "sect": "Maronite",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 95
+      },
+      {
+        "name": "ﻣﻴﺸﺎل ﺧﻠﻴﻞ اﺑﻮ ﺳﻠﻴﻤﺎن",
+        "sect": "Maronite",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 186
+      },
+      {
+        "name": "ﻣﻌﻀﺎد ﺣﺴﻦ اﺑﻮ ﻋﻠﻲ",
+        "sect": "Druze",
+        "list": "ﺻﻮﺗﻚ ﺛﻮرة",
+        "votes": 2
+      },
+      {
+        "name": "اﻻﻣﻴﺮ ﻃﻼل اﻻﻣﻴﺮ ﻣﺠﻴﺪ ارﺳﻼن",
+        "sect": "Druze",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 9008
+      },
+      {
+        "name": "ﺳﻴﺰار رﻳﻤﻮن اﺑﻲ ﺧﻠﻴﻞ",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 5698
+      },
+      {
+        "name": "ﻃﺎرق وﻟﻴﺪ ﺧﻴﺮ ﷲ",
+        "sect": "Greek Orthodox",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 1271
+      },
+      {
+        "name": "اﻧﻄﻮان ﻣﻴﺸﺎل ﺑﺴﺘﺎﻧﻲ",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 67
+      },
+      {
+        "name": "ﻧﺎﺟﻲ ﻧﺒﻴﻪ اﻟﺒﺴﺘﺎﻧﻲ",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 2588
+      },
+      {
+        "name": "وﺋﺎم ﻣﺎﻫﺮ ﻧﺠﻴﺐ وﻫﺎب",
+        "sect": "Druze",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 10228
+      },
+      {
+        "name": "ﻏﺴﺎن اﻣﺎل ﻋﻄﺎ ﷲ",
+        "sect": "Greek Catholic",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 5149
+      },
+      {
+        "name": "ﻓﺮﻳﺪ ﺟﻮرج ﻓﻴﻠﻴﺐ اﻟﺒﺴﺘﺎﻧﻲ",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 4347
+      },
+      {
+        "name": "اﺣﻤﺪ ﺣﻠﻤﻲ ﻧﺠﻢ اﻟﺪﻳﻦ",
+        "sect": "Sunni",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 1432
+      },
+      {
+        "name": "اﺳﺎﻣﻪ ﻣﺤﻤﺪ اﻟﻤﻌﻮش",
+        "sect": "Sunni",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 435
+      },
+      {
+        "name": "اﻧﻄﻮان ﺑﺸﺎره ﻋﺒﻮد",
+        "sect": "Maronite",
+        "list": "ﻻﺋﺤﺔ اﻟﺠﺒﻞ",
+        "votes": 273
+      },
+      {
+        "name": "ﻧﻐﻢ ﻧﺎﺟﻲ اﻟﺤﻠﺒﻲ",
+        "sect": "Druze",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 275
+      },
+      {
+        "name": "ﻣﺮوان ﻛﻤﻴﻞ ﻋﻤﺎد",
+        "sect": "Druze",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 330
+      },
+      {
+        "name": "ﺟﻮزف اﺳﻌﺪ ﻃﻌﻤﻪ",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 144
+      },
+      {
+        "name": "اﻳﻤﻦ ﻏﺎزي زﻳﻦ اﻟﺪﻳﻦ",
+        "sect": "Druze",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 276
+      },
+      {
+        "name": "ﺧﺎﻟﺪ اﺑﺮاﻫﻴﻢ ﺳﻌﺪ",
+        "sect": "Sunni",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 341
+      },
+      {
+        "name": "ﻋﻤﺎد ﻣﺤﻤﺪ اﻟﻔﺮان",
+        "sect": "Sunni",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 20
+      },
+      {
+        "name": "ﻏﺎده ﻏﺎزي ﻣﺎروﻧﻲ ﻋﻴﺪ",
+        "sect": "Maronite",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 2982
+      },
+      {
+        "name": "ﻧﺠﺎة ﺧﻄﺎر ﻋﻮن",
+        "sect": "Maronite",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 9332
+      },
+      {
+        "name": "راﻧﻴﻪ ﻋﺎدل ﻏﻴﺚ",
+        "sect": "Druze",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 1978
+      },
+      {
+        "name": "ﺻﻌﻮد ﻛﺮﻳﻢ اﺑﻮ ﺷﺒﻞ",
+        "sect": "Maronite",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 854
+      },
+      {
+        "name": "ﺣﻠﻴﻤﻪ اﺑﺮاﻫﻴﻢ اﻟﻘﻌﻘﻮر",
+        "sect": "Sunni",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 6684
+      },
+      {
+        "name": "ﻋﻤﺎد وﻓﻴﻖ ﺳﻴﻒ اﻟﺪﻳﻦ",
+        "sect": "Sunni",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 1860
+      },
+      {
+        "name": "ﺷﻜﺮي ﻳﻮﺳﻒ ﺣﺪاد",
+        "sect": "Greek Catholic",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 390
+      },
+      {
+        "name": "زوﻳﺎ ﻧﺠﻴﺐ ﺟﺮﻳﺪﻳﻨﻲ",
+        "sect": "Greek Orthodox",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 2084
+      },
+      {
+        "name": "ﻣﺎرك ﺑﻬﺠﺎت ﺿﻮ",
+        "sect": "Druze",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 11656
+      },
+      {
+        "name": "ﻋﻼء اﻧﻮر اﻟﺼﺎﻳﻎ",
+        "sect": "Druze",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 1565
+      },
+      {
+        "name": "ﻓﺎدي ﻓﺎﻳﺰ اﺑﻲ ﻋﻼم",
+        "sect": "Maronite",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 603
+      },
+      {
+        "name": "اﻧﻄﻮن ﺑﺠﺎﻧﻲﺟﺎد",
+        "sect": "Maronite",
+        "list": "ﺗﻮﺣﺪﻧﺎ ﻟﻠﺘﻐﻴﻴﺮ",
+        "votes": 605
+      },
+      {
+        "name": "دﻋﺪ ﻧﺎﺻﻴﻒ اﻟﻘﺰي",
+        "sect": "Maronite",
+        "list": "ﺳﻴﺎدة وﻃﻦ",
+        "votes": 334
+      },
+      {
+        "name": "ﻣﺤﻤﺪ ﻋﻤﺎر اﺑﺮاﻫﻴﻢ اﻟﺸﻤﻌﻪ",
+        "sect": "Sunni",
+        "list": "ﺳﻴﺎدة وﻃﻦ",
+        "votes": 5119
+      },
+      {
+        "name": "ﺟﻮﻳﺲ ﺟﻮزف ﻣﺎرون",
+        "sect": "Maronite",
+        "list": "ﺳﻴﺎدة وﻃﻦ",
+        "votes": 32
+      },
+      {
+        "name": "ﻣﺄﻣﻮن اﺣﻤﺪ اﻟﻤﺄﻣﻮن ﻣﻠﻚ",
+        "sect": "Sunni",
+        "list": "ﺳﻴﺎدة وﻃﻦ",
+        "votes": 279
+      },
+      {
+        "name": "ﻫﺸﺎم ﻋﺰات ذﺑﻴﺎن",
+        "sect": "Druze",
+        "list": "ﺳﻴﺎدة وﻃﻦ",
+        "votes": 79
+      },
+      {
+        "name": "ﺟﻮرج ادوار ﺳﻠﻮان",
+        "sect": "Maronite",
+        "list": "ﺳﻴﺎدة وﻃﻦ",
+        "votes": 25
+      },
+      {
+        "name": "ﻋﻄﺎﻟﻠﻪ ﻛﺎﻣﻞ وﻫﺒﻲ",
+        "sect": "Druze",
+        "list": "ﺳﻴﺎدة وﻃﻦ",
+        "votes": 12
+      },
+      {
+        "name": "ﻧﺒﻴﻞ ادﻣﻮن ﻳﺰﺑﻚ",
+        "sect": "Maronite",
+        "list": "ﺳﻴﺎدة وﻃﻦ",
+        "votes": 36
+      },
+      {
+        "name": "وﻟﻴﺪ ﺟﺎن ﺷﺎﻫﻴﻦ",
+        "sect": "Maronite",
+        "list": "ﺳﻴﺎدة وﻃﻦ",
+        "votes": 78
+      },
+      {
+        "name": "زﻳﻨﻪ ﺷﻮﻗﻲ ﻣﻨﺼﻮر",
+        "sect": "Druze",
+        "list": "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ",
+        "votes": 35
+      },
+      {
+        "name": "ﻧﺒﻴﻞ ﺧﻠﻴﻞ ﻣﺸﻨﺘﻒ",
+        "sect": "Maronite",
+        "list": "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ",
+        "votes": 31
+      },
+      {
+        "name": "ﻋﺒﺪ ﷲ ﻳﻮﺳﻒ اﺑﻮ ﻋﺒﺪ ﷲ",
+        "sect": "Maronite",
+        "list": "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ",
+        "votes": 233
+      },
+      {
+        "name": "اﻛﺮم ﻋﻠﻲ ﺑﺮﻳﺶ",
+        "sect": "Druze",
+        "list": "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ",
+        "votes": 26
+      },
+      {
+        "name": "ﻟﻴﻮن ﺳﻮرﻳﻦ ﺳﻴﻮﻓﻲ",
+        "sect": "Greek Orthodox",
+        "list": "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ",
+        "votes": 24
+      },
+      {
+        "name": "ﺗﺎﺑﺖ ﺟﻮرج ﺗﺎﺑﺖ",
+        "sect": "Maronite",
+        "list": "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ",
+        "votes": 32
+      },
+      {
+        "name": "ﺳﻠﻤﺎن ﻓﺆاد ﻋﺒﺪ اﻟﺨﺎﻟﻖ",
+        "sect": "Druze",
+        "list": "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ",
+        "votes": 2
+      },
+      {
+        "name": "ﻣﺤﺴﻦ ﻓﺮﺣﺎن اﻟﻌﺮﻳﻀﻲ",
+        "sect": "Druze",
+        "list": "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ",
+        "votes": 30
+      }
+    ]
+  },
+  "mount-lebanon-i": {
+    "source_pdf": "CA584F2A-A77D-4BB3-8887-8CEF18B3F36E.pdf",
+    "caption": "دائرة جبل لبنان الأولى",
+    "candidate_count": 47,
+    "candidates": [
+      {
+        "name": "ﺷﻮﻗﻲ ﺟﺮﺟﻲ اﻟﺪﻛﺎش",
+        "sect": "Maronite",
+        "list": "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ",
+        "votes": 9129
+      },
+      {
+        "name": "اﻧﻄﻮان زﺧﻴﺎ ﺻﻔﻴﺮ",
+        "sect": "Maronite",
+        "list": "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ",
+        "votes": 1330
+      },
+      {
+        "name": "ﻛﺎرن ﺑﻴﺎﺗﺮﻳﺲ رﻳﻤﻮن اﻟﺒﺴﺘﺎﻧﻲ",
+        "sect": "Maronite",
+        "list": "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ",
+        "votes": 432
+      },
+      {
+        "name": "ﺷﺎدي ﻧﺼﺮ ﷲ ﻓﻴﺎض",
+        "sect": "Maronite",
+        "list": "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ",
+        "votes": 2211
+      },
+      {
+        "name": "ﺟﻮ ﺳﺎﻣﻲ رﻋﻴﺪي",
+        "sect": "Maronite",
+        "list": "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ",
+        "votes": 117
+      },
+      {
+        "name": "زﻳﺎد ﺣﻠﻴﻢ اﻟﺤﻮاط",
+        "sect": "Maronite",
+        "list": "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ",
+        "votes": 13078
+      },
+      {
+        "name": "ﺣﺒﻴﺐ ﺑﻄﺮس ﺑﺮﻛﺎت",
+        "sect": "Maronite",
+        "list": "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ",
+        "votes": 471
+      },
+      {
+        "name": "ﻣﺤﻤﻮد اﺑﺮاﻫﻴﻢ ﻋﻮاد",
+        "sect": "Shia",
+        "list": "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ",
+        "votes": 508
+      },
+      {
+        "name": "ﻓﺮﻳﺪ ﻫﻴﻜﻞ اﻟﺨﺎزن",
+        "sect": "Maronite",
+        "list": "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ",
+        "votes": 9056
+      },
+      {
+        "name": "ﺷﺎﻣﻞ رﺷﻴﺪ روﻛﺰ",
+        "sect": "Maronite",
+        "list": "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ",
+        "votes": 623
+      },
+      {
+        "name": "ﺷﺎﻛﺮ اﻟﻴﺎس ﺳﻼﻣﻪ",
+        "sect": "Maronite",
+        "list": "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ",
+        "votes": 215
+      },
+      {
+        "name": "ﺳﻠﻴﻢ ﺳﻤﻴﺮ ﻫﺎﻧﻲ",
+        "sect": "Maronite",
+        "list": "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ",
+        "votes": 533
+      },
+      {
+        "name": "ﺗﻮﻓﻴﻖ ﺟﺎن ﺳﻠﻮم",
+        "sect": "Maronite",
+        "list": "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ",
+        "votes": 178
+      },
+      {
+        "name": "اﻣﻴﻞ ﺑﻄﺮس ﻧﻮﻓﻞ",
+        "sect": "Maronite",
+        "list": "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ",
+        "votes": 2413
+      },
+      {
+        "name": "ﻃﻮﻧﻲ ﻳﻮﺳﻒ ﺧﻴﺮﷲ",
+        "sect": "Maronite",
+        "list": "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ",
+        "votes": 455
+      },
+      {
+        "name": "اﺣﻤﺪ ﻫﺎﻧﻲ اﻟﻤﻘﺪاد",
+        "sect": "Shia",
+        "list": "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ",
+        "votes": 929
+      },
+      {
+        "name": "ﻧﻌﻤﻪ ﺟﻮرج اﻓﺮام",
+        "sect": "Maronite",
+        "list": "ﺻﺮﺧﺔ وﻃﻦ",
+        "votes": 10743
+      },
+      {
+        "name": "ﺳﻠﻴﻢ ﺑﻄﺮس اﻟﺼﺎﻳﻎ",
+        "sect": "Maronite",
+        "list": "ﺻﺮﺧﺔ وﻃﻦ",
+        "votes": 3477
+      },
+      {
+        "name": "ﺟﻮﻟﻲ ﻓﻮزي اﻟﺪﻛﺎش",
+        "sect": "Maronite",
+        "list": "ﺻﺮﺧﺔ وﻃﻦ",
+        "votes": 769
+      },
+      {
+        "name": "وﺟﺪي ﺧﻠﻴﻞ ﺗﺎﺑﺖ",
+        "sect": "Maronite",
+        "list": "ﺻﺮﺧﺔ وﻃﻦ",
+        "votes": 1179
+      },
+      {
+        "name": "اﻧﻄﻮان زﻏﻴﺐﺟﻮزﻓﻴﻦ",
+        "sect": "Maronite",
+        "list": "ﺻﺮﺧﺔ وﻃﻦ",
+        "votes": 1303
+      },
+      {
+        "name": "ﻧﺠﻮى ﻓﻴﻜﺘﻮر ﺑﺎﺳﻴﻞ",
+        "sect": "Maronite",
+        "list": "ﺻﺮﺧﺔ وﻃﻦ",
+        "votes": 2525
+      },
+      {
+        "name": "اﻣﻴﺮ ﻣﺤﻤﺪ ﻋﺒﺪ اﻟﻜﺮﻳﻢ اﻟﻤﻘﺪاد",
+        "sect": "Shia",
+        "list": "ﺻﺮﺧﺔ وﻃﻦ",
+        "votes": 952
+      },
+      {
+        "name": "ﻧﻮﻓﻞ ﻳﻮﺳﻒ ﻧﻮﻓﻞ",
+        "sect": "Maronite",
+        "list": "ﺻﺮﺧﺔ وﻃﻦ",
+        "votes": 3211
+      },
+      {
+        "name": "ﻏﺎﻧﻢ اﻟﺒﻮنﻣﻨﺼﻮر ﻓﺆاد",
+        "sect": "Maronite",
+        "list": "اﻟﺤﺮﻳﺔ ﻗﺮار",
+        "votes": 5581
+      },
+      {
+        "name": "ﺑﻬﺠﺖ اﻧﻄﻮان ﺳﻼﻣﻪ",
+        "sect": "Maronite",
+        "list": "اﻟﺤﺮﻳﺔ ﻗﺮار",
+        "votes": 42
+      },
+      {
+        "name": "ﻣﻮﺳﻲ ﻣﻨﺼﻮر زﻏﻴﺐ",
+        "sect": "Maronite",
+        "list": "اﻟﺤﺮﻳﺔ ﻗﺮار",
+        "votes": 53
+      },
+      {
+        "name": "ﻓﺎرس اﻧﻄﻮن ﺳﻌﻴﺪ",
+        "sect": "Maronite",
+        "list": "اﻟﺤﺮﻳﺔ ﻗﺮار",
+        "votes": 4957
+      },
+      {
+        "name": "اﺳﻌﺪ ﺳﻠﻴﻢ رﺷﺪان",
+        "sect": "Maronite",
+        "list": "اﻟﺤﺮﻳﺔ ﻗﺮار",
+        "votes": 59
+      },
+      {
+        "name": "ﻣﺸﻬﻮر ﺣﺴﻦ ﺣﻴﺪر اﺣﻤﺪ",
+        "sect": "Shia",
+        "list": "اﻟﺤﺮﻳﺔ ﻗﺮار",
+        "votes": 246
+      },
+      {
+        "name": "دوﻣﻴﻨﻴﻚ ﺑﻮﻟﺲ ﻃﺮﺑﻴﻪ",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 490
+      },
+      {
+        "name": "ﻓﺮح ﻛﺎﻣﻞ ﻧﺎﺻﺮ",
+        "sect": "Shia",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 220
+      },
+      {
+        "name": "ﺷﺮﺑﻞ ﻋﺎدل ﻓﺮﻳﺤﻪ",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 261
+      },
+      {
+        "name": "ﺑﻄﺮس اﻟﻴﺎس ﺧﻠﻴﻞ",
+        "sect": "Maronite",
+        "list": "ﻗﺎدرﻳﻦ",
+        "votes": 692
+      },
+      {
+        "name": "ﻧﺪى ﻧﻬﺎد اﻟﺒﺴﺘﺎﻧﻲ",
+        "sect": "Maronite",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ",
+        "votes": 11338
+      },
+      {
+        "name": "ﻃﻮﻧﻲ وﻫﺒﻪ اﻟﻜﺮﻳﺪي",
+        "sect": "Maronite",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ",
+        "votes": 413
+      },
+      {
+        "name": "رﺑﻴﻊ ﻣﻮﺳﻲ زﻏﻴﺐ",
+        "sect": "Maronite",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ",
+        "votes": 367
+      },
+      {
+        "name": "وﺳﻴﻢ راﻣﺢ ﺳﻼﻣﻪ",
+        "sect": "Maronite",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ",
+        "votes": 1155
+      },
+      {
+        "name": "ﻋﻤﺎد ﺷﺮﺑﻞ ﻋﺎزار",
+        "sect": "Maronite",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ",
+        "votes": 366
+      },
+      {
+        "name": "ﺳﻴﻤﻮن ﻓﺮﻳﺪ اﺑﻲ رﻣﻴﺎ",
+        "sect": "Maronite",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ",
+        "votes": 6239
+      },
+      {
+        "name": "وﻟﻴﺪ ﻧﺠﻴﺐ اﻟﺨﻮري",
+        "sect": "Maronite",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ",
+        "votes": 4149
+      },
+      {
+        "name": "راﺋﺪ ﻋﻜﻴﻒ ﺑﺮّو",
+        "sect": "Shia",
+        "list": "ﻛﻨﺎ ورح ﻧﺒﻘﻰ",
+        "votes": 9508
+      },
+      {
+        "name": "ﻃﻼل ﻣﺤﺴﻦ ﻣﻘﺪاد",
+        "sect": "Shia",
+        "list": "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 88
+      },
+      {
+        "name": "ﻏﺴﺎن ﻏﺎزي ﻳﻮﺳﻒ ﺟﺮﻣﺎﻧﻮس",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 515
+      },
+      {
+        "name": "راﻧﻴﺎ ﻓﻴﻜﺘﻮر ﺑﺎﺳﻴﻞ",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 242
+      },
+      {
+        "name": "زﻳﻨﻪ ﺟﻮزاف اﻟﻜﻼًب",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 413
+      },
+      {
+        "name": "ﺳﻴﻤﻮن ﺣﺒﻴﺐ ﺻﻔﻴﺮ",
+        "sect": "Maronite",
+        "list": "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ",
+        "votes": 142
+      }
+    ]
+  }
+}

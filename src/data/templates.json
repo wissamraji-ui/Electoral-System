@@ -3,12 +3,12 @@
     "id": "beirut-i",
     "name": "Beirut I",
     "quotas": [
-      { "sect": "Maronite", "seats": 2 },
+      { "sect": "Maronite", "seats": 1 },
       { "sect": "Greek Orthodox", "seats": 1 },
-      { "sect": "Armenian Orthodox", "seats": 1 },
+      { "sect": "Greek Catholic", "seats": 1 },
+      { "sect": "Armenian Orthodox", "seats": 2 },
       { "sect": "Armenian Catholic", "seats": 1 },
-      { "sect": "Minorities", "seats": 1 },
-      { "sect": "Evangelical", "seats": 1 }
+      { "sect": "Minorities", "seats": 1 }
     ]
   },
   {

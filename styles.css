@@ -161,6 +161,11 @@ select:focus {
   margin-bottom: 0.7rem;
 }
 
+.preset-status-note {
+  margin: 0 0 0.7rem;
+  font-size: 0.78rem;
+}
+
 .embedded-config {
   border: 1px solid #d7d0c1;
   background: #fffdf8;
@@ -188,6 +193,11 @@ select:focus {
 
 #addListBtn {
   min-width: 190px;
+}
+
+#load2022PresetBtn {
+  align-self: end;
+  min-width: 170px;
 }
 
 .quota-header {

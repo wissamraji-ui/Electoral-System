@@ -1,4 +1,5 @@
 import { cloneTemplate, createEmptyState, loadRegionTemplates } from "./data/templates.js";
+import { hasElectionResults2022, loadElectionResults2022 } from "./data/election-results-2022.js";
 import { computeResults } from "./engine.js";
 
 const STORAGE_KEY = "lebanon-electoral-simulator:v1";
@@ -7,6 +8,8 @@ const EXPORT_VERSION = 1;
 
 const elements = {
   templateSelect: document.getElementById("templateSelect"),
+  load2022PresetBtn: document.getElementById("load2022PresetBtn"),
+  presetStatusNote: document.getElementById("presetStatusNote"),
   districtSelectionNotice: document.getElementById("districtSelectionNotice"),
   districtConfigDetails: document.getElementById("districtConfigDetails"),
   simulationInputs: document.getElementById("simulationInputs"),
@@ -63,6 +66,7 @@ async function initialize() {
 
 function bindEvents() {
   elements.templateSelect.addEventListener("change", onTemplateSelectChange);
+  elements.load2022PresetBtn.addEventListener("click", onLoad2022Preset);
   elements.regionNameInput.addEventListener("input", () => {
     state.regionName = elements.regionNameInput.value;
     saveState();
@@ -138,6 +142,46 @@ function onTemplateSelectChange() {
   }
 
   state = normalizeState(cloneTemplate(template));
+  runSimulation();
+  saveState();
+  renderAll();
+}
+
+function onLoad2022Preset() {
+  const templateId = getCurrentTemplateId();
+  if (!templateId) {
+    window.alert("Choose a district template first.");
+    return;
+  }
+
+  const template = templates.find((entry) => entry.id === templateId);
+  if (!template) {
+    window.alert("The selected district template could not be found.");
+    return;
+  }
+
+  if (!hasElectionResults2022(templateId)) {
+    window.alert("No 2022 baseline has been added for this district yet.");
+    return;
+  }
+
+  const hasCustomCandidateData = state.candidates.length > 0;
+  if (hasCustomCandidateData) {
+    const confirmed = window.confirm(
+      "Loading the 2022 baseline will replace the current lists, candidates, and votes for this district. Continue?"
+    );
+    if (!confirmed) {
+      return;
+    }
+  }
+
+  const scenario = loadElectionResults2022(template);
+  if (!scenario) {
+    window.alert("The 2022 baseline could not be loaded for this district.");
+    return;
+  }
+
+  state = normalizeState(scenario);
   runSimulation();
   saveState();
   renderAll();
@@ -444,6 +488,7 @@ function renderAll() {
   rebuildListColorIndex();
   applyDistrictSelectionVisibility();
   syncTemplateSelection();
+  renderPresetStatus();
   elements.regionNameInput.value = state.regionName;
   renderQuotaTable();
   renderListBuilder();
@@ -451,6 +496,29 @@ function renderAll() {
   renderCandidateListVoteTotals();
   renderSavedScenarios();
   renderResults();
+}
+
+function renderPresetStatus() {
+  const templateId = getCurrentTemplateId();
+  const hasDistrict = Boolean(templateId);
+  const hasPreset = hasDistrict && hasElectionResults2022(templateId);
+
+  elements.load2022PresetBtn.disabled = !hasPreset;
+
+  if (!hasDistrict) {
+    elements.presetStatusNote.textContent =
+      "Choose a district template to check whether a 2022 baseline is available.";
+    return;
+  }
+
+  if (hasPreset) {
+    elements.presetStatusNote.textContent =
+      "2022 baseline available. Load it, then edit votes manually, remove lists, or add new ones.";
+    return;
+  }
+
+  elements.presetStatusNote.textContent =
+    "No 2022 baseline has been added for this district yet. The app is ready to support it once the data is filled in.";
 }
 
 function syncTemplateSelection() {
