@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lebanon Electoral Law Simulator</title>
-    <script type="module" crossorigin src="/assets/index-DS7cp8Ad.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BMx7hfOV.css">
+    <script type="module" crossorigin src="/assets/index-CPMtgRmc.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-nIeG9AfI.css">
   </head>
   <body>
     <div class="noise-bg"></div>
@@ -37,9 +37,14 @@
               <span>Template</span>
               <select id="templateSelect"></select>
             </label>
-            <button id="load2022PresetBtn" class="btn btn-secondary" type="button">
-              Load 2022 Results
-            </button>
+            <div class="preset-actions">
+              <button id="load2022PresetBtn" class="btn btn-secondary" type="button">
+                Load 2022 Results
+              </button>
+              <button id="load2018PresetBtn" class="btn btn-secondary" type="button">
+                Load 2018 Results
+              </button>
+            </div>
           </div>
 
           <p id="presetStatusNote" class="muted preset-status-note">
@@ -160,7 +165,6 @@
                   <th>EQ Status</th>
                   <th>Seats</th>
                   <th>Base Seats</th>
-                  <th>Remainder</th>
                 </tr>
               </thead>
               <tbody id="listAllocationBody"></tbody>
@@ -177,7 +181,6 @@
                   <th>Candidate</th>
                   <th>Party / List</th>
                   <th>Votes</th>
-                  <th>Margin To Next</th>
                 </tr>
               </thead>
               <tbody id="winnersTableBody"></tbody>

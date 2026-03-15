@@ -1,4 +1,5 @@
 import { cloneTemplate } from "./templates.js";
+import { normalizeElectionBaseline } from "./election-results-normalize.js";
 import generatedElectionResults2022ByTemplateId from "./election-results-2022.generated.json";
 
 // Hand-cleaned overrides for districts already reviewed from the official 2022 PDFs.
@@ -276,14 +277,7 @@ export function loadElectionResults2022(template) {
   }
 
   const scenario = cloneTemplate(template);
-  scenario.candidates = Array.isArray(baseline.candidates)
-    ? baseline.candidates.map((candidate) => ({
-        name: String(candidate?.name ?? "").trim(),
-        sect: String(candidate?.sect ?? "").trim(),
-        list: String(candidate?.list ?? "").trim(),
-        votes: Math.max(0, Math.floor(Number(candidate?.votes) || 0))
-      }))
-    : [];
+  scenario.candidates = normalizeElectionBaseline(template, baseline.candidates, "2022 Imported List");
 
   return scenario;
 }

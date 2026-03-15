@@ -161,6 +161,11 @@ select:focus {
   margin-bottom: 0.7rem;
 }
 
+.preset-actions {
+  display: grid;
+  gap: 0.45rem;
+}
+
 .preset-status-note {
   margin: 0 0 0.7rem;
   font-size: 0.78rem;
@@ -195,7 +200,8 @@ select:focus {
   min-width: 190px;
 }
 
-#load2022PresetBtn {
+#load2022PresetBtn,
+#load2018PresetBtn {
   align-self: end;
   min-width: 170px;
 }

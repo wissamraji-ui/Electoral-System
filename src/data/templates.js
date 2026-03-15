@@ -1,4 +1,4 @@
-import rawTemplates from "./templates.json";
+import rawTemplates from "./templates.json" with { type: "json" };
 
 function normalizeTemplate(rawTemplate, index) {
   const id = String(rawTemplate?.id ?? "").trim() || `template-${index + 1}`;

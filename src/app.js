@@ -1,5 +1,6 @@
 import { cloneTemplate, createEmptyState, loadRegionTemplates } from "./data/templates.js";
 import { hasElectionResults2022, loadElectionResults2022 } from "./data/election-results-2022.js";
+import { hasElectionResults2018, loadElectionResults2018 } from "./data/election-results-2018.js";
 import { computeResults } from "./engine.js";
 
 const STORAGE_KEY = "lebanon-electoral-simulator:v1";
@@ -9,6 +10,7 @@ const EXPORT_VERSION = 1;
 const elements = {
   templateSelect: document.getElementById("templateSelect"),
   load2022PresetBtn: document.getElementById("load2022PresetBtn"),
+  load2018PresetBtn: document.getElementById("load2018PresetBtn"),
   presetStatusNote: document.getElementById("presetStatusNote"),
   districtSelectionNotice: document.getElementById("districtSelectionNotice"),
   districtConfigDetails: document.getElementById("districtConfigDetails"),
@@ -67,6 +69,7 @@ async function initialize() {
 function bindEvents() {
   elements.templateSelect.addEventListener("change", onTemplateSelectChange);
   elements.load2022PresetBtn.addEventListener("click", onLoad2022Preset);
+  elements.load2018PresetBtn.addEventListener("click", onLoad2018Preset);
   elements.regionNameInput.addEventListener("input", () => {
     state.regionName = elements.regionNameInput.value;
     saveState();
@@ -148,6 +151,22 @@ function onTemplateSelectChange() {
 }
 
 function onLoad2022Preset() {
+  loadPreset({
+    yearLabel: "2022",
+    hasResults: hasElectionResults2022,
+    loadResults: loadElectionResults2022
+  });
+}
+
+function onLoad2018Preset() {
+  loadPreset({
+    yearLabel: "2018",
+    hasResults: hasElectionResults2018,
+    loadResults: loadElectionResults2018
+  });
+}
+
+function loadPreset({ yearLabel, hasResults, loadResults }) {
   const templateId = getCurrentTemplateId();
   if (!templateId) {
     window.alert("Choose a district template first.");
@@ -160,24 +179,24 @@ function onLoad2022Preset() {
     return;
   }
 
-  if (!hasElectionResults2022(templateId)) {
-    window.alert("No 2022 baseline has been added for this district yet.");
+  if (!hasResults(templateId)) {
+    window.alert(`No ${yearLabel} baseline has been added for this district yet.`);
     return;
   }
 
   const hasCustomCandidateData = state.candidates.length > 0;
   if (hasCustomCandidateData) {
     const confirmed = window.confirm(
-      "Loading the 2022 baseline will replace the current lists, candidates, and votes for this district. Continue?"
+      `Loading the ${yearLabel} baseline will replace the current lists, candidates, and votes for this district. Continue?`
     );
     if (!confirmed) {
       return;
     }
   }
 
-  const scenario = loadElectionResults2022(template);
+  const scenario = loadResults(template);
   if (!scenario) {
-    window.alert("The 2022 baseline could not be loaded for this district.");
+    window.alert(`The ${yearLabel} baseline could not be loaded for this district.`);
     return;
   }
 
@@ -501,24 +520,38 @@ function renderAll() {
 function renderPresetStatus() {
   const templateId = getCurrentTemplateId();
   const hasDistrict = Boolean(templateId);
-  const hasPreset = hasDistrict && hasElectionResults2022(templateId);
+  const hasPreset2022 = hasDistrict && hasElectionResults2022(templateId);
+  const hasPreset2018 = hasDistrict && hasElectionResults2018(templateId);
 
-  elements.load2022PresetBtn.disabled = !hasPreset;
+  elements.load2022PresetBtn.disabled = !hasPreset2022;
+  elements.load2018PresetBtn.disabled = !hasPreset2018;
 
   if (!hasDistrict) {
     elements.presetStatusNote.textContent =
-      "Choose a district template to check whether a 2022 baseline is available.";
+      "Choose a district template to check whether 2018 or 2022 baselines are available.";
     return;
   }
 
-  if (hasPreset) {
+  if (hasPreset2018 && hasPreset2022) {
     elements.presetStatusNote.textContent =
-      "2022 baseline available. Load it, then edit votes manually, remove lists, or add new ones.";
+      "Verified 2018 and 2022 baselines are available. Load either one, then edit votes manually, remove lists, or add new ones.";
+    return;
+  }
+
+  if (hasPreset2022) {
+    elements.presetStatusNote.textContent =
+      "Verified 2022 baseline available. Load it, then edit votes manually, remove lists, or add new ones.";
+    return;
+  }
+
+  if (hasPreset2018) {
+    elements.presetStatusNote.textContent =
+      "Verified 2018 baseline available from the report. Load it, then edit votes manually, remove lists, or add new ones.";
     return;
   }
 
   elements.presetStatusNote.textContent =
-    "No 2022 baseline has been added for this district yet. The app is ready to support it once the data is filled in.";
+    "No verified 2018 baseline is currently exposed. 2022 remains available where loaded, and 2018 will stay disabled until the report mappings are manually audited.";
 }
 
 function syncTemplateSelection() {
@@ -874,7 +907,7 @@ function renderListAllocationTable() {
   const rows = Array.isArray(simulation.listAllocation) ? simulation.listAllocation : [];
   if (rows.length === 0) {
     elements.listAllocationBody.innerHTML =
-      '<tr><td colspan="6" class="empty">Add candidates with party/list names to compute EQ allocation.</td></tr>';
+      '<tr><td colspan="5" class="empty">Add candidates with party/list names to compute EQ allocation.</td></tr>';
     return;
   }
 
@@ -900,7 +933,6 @@ function renderListAllocationTable() {
           <td><span class="${statusClass}">${statusLabel}</span></td>
           <td>${row.seats}</td>
           <td>${row.baseSeats}</td>
-          <td>${formatDecimal(row.remainderVotes)}</td>
         </tr>
       `;
     })
@@ -910,7 +942,7 @@ function renderListAllocationTable() {
 function renderWinnersTable() {
   if (simulation.winners.length === 0) {
     elements.winnersTableBody.innerHTML =
-      '<tr><td colspan="6" class="empty">Run with valid quotas and candidates to display winners.</td></tr>';
+      '<tr><td colspan="5" class="empty">Run with valid quotas and candidates to display winners.</td></tr>';
     return;
   }
 
@@ -923,7 +955,6 @@ function renderWinnersTable() {
         <td>${escapeHtml(winner.name)}</td>
         <td>${renderListChip(winner.list)}</td>
         <td>${formatNumber(winner.votes)}</td>
-        <td>${winner.margin === null ? "-" : formatNumber(winner.margin)}</td>
       </tr>
     `
     )
@@ -1171,7 +1202,7 @@ function buildPdfReportLines() {
   } else {
     listRows.forEach((row) => {
       lines.push(
-        `- ${row.list}: votes ${formatNumber(row.votes)} | ${row.qualified ? "Qualified" : "Below EQ"} | seats ${row.seats} | base ${row.baseSeats} | remainder ${formatDecimal(row.remainderVotes)}`
+        `- ${row.list}: votes ${formatNumber(row.votes)} | ${row.qualified ? "Qualified" : "Below EQ"} | seats ${row.seats} | base ${row.baseSeats}`
       );
     });
   }
@@ -1182,7 +1213,7 @@ function buildPdfReportLines() {
   } else {
     simulation.winners.forEach((winner) => {
       lines.push(
-        `- Seat #${winner.seatNumber} (${winner.sect}): ${winner.name} | ${winner.list} | votes ${formatNumber(winner.votes)} | margin ${winner.margin === null ? "-" : formatNumber(winner.margin)}`
+        `- Seat #${winner.seatNumber} (${winner.sect}): ${winner.name} | ${winner.list} | votes ${formatNumber(winner.votes)}`
       );
     });
   }

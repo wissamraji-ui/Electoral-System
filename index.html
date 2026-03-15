@@ -36,9 +36,14 @@
               <span>Template</span>
               <select id="templateSelect"></select>
             </label>
-            <button id="load2022PresetBtn" class="btn btn-secondary" type="button">
-              Load 2022 Results
-            </button>
+            <div class="preset-actions">
+              <button id="load2022PresetBtn" class="btn btn-secondary" type="button">
+                Load 2022 Results
+              </button>
+              <button id="load2018PresetBtn" class="btn btn-secondary" type="button">
+                Load 2018 Results
+              </button>
+            </div>
           </div>
 
           <p id="presetStatusNote" class="muted preset-status-note">
@@ -159,7 +164,6 @@
                   <th>EQ Status</th>
                   <th>Seats</th>
                   <th>Base Seats</th>
-                  <th>Remainder</th>
                 </tr>
               </thead>
               <tbody id="listAllocationBody"></tbody>
@@ -176,7 +180,6 @@
                   <th>Candidate</th>
                   <th>Party / List</th>
                   <th>Votes</th>
-                  <th>Margin To Next</th>
                 </tr>
               </thead>
               <tbody id="winnersTableBody"></tbody>
