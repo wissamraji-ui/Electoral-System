@@ -129,6 +129,27 @@ test("2018 baselines can preload official list-only votes from the report", () =
         .reduce((sum, entry) => sum + entry.votes, 0),
     5027
   );
+  const bekaaTwo = loadElectionResults2018(byId.get("bekaa-ii"));
+  assert.ok(bekaaTwo);
+  assert.deepEqual(bekaaTwo.quotas, [
+    { sect: "Sunni", seats: 2, minorDistrict: "West Bekaa" },
+    { sect: "Shia", seats: 1, minorDistrict: "West Bekaa" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "West Bekaa" },
+    { sect: "Druze", seats: 1, minorDistrict: "Rashaya" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Rashaya" }
+  ]);
+  assert.equal(
+    bekaaTwo.candidates.find((candidate) => candidate.name === "Wael Wehbe Abou Faour")?.minorDistrict,
+    "Rashaya"
+  );
+  assert.equal(
+    bekaaTwo.candidates.find((candidate) => candidate.name === "Abdel Rahim Youssef Mrad")?.minorDistrict,
+    "West Bekaa"
+  );
+  assert.equal(
+    bekaaTwo.candidates.find((candidate) => candidate.name === "Naji Nabih Ghanem")?.minorDistrict,
+    "Rashaya"
+  );
 
   const mountLebanonThree = loadElectionResults2018(byId.get("mount-lebanon-iii"));
   assert.ok(mountLebanonThree);

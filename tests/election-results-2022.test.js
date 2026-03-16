@@ -221,6 +221,25 @@ test("2022 generated districts can also preload official list-only votes via ove
         .reduce((sum, entry) => sum + entry.votes, 0),
     11397
   );
+  assert.deepEqual(bekaaTwo.quotas, [
+    { sect: "Sunni", seats: 2, minorDistrict: "West Bekaa" },
+    { sect: "Shia", seats: 1, minorDistrict: "West Bekaa" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "West Bekaa" },
+    { sect: "Druze", seats: 1, minorDistrict: "Rashaya" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Rashaya" }
+  ]);
+  assert.equal(
+    bekaaTwo.candidates.find((candidate) => candidate.name === "واﺋﻞ وﻫﺒﻲ اﺑﻮ ﻓﺎﻋﻮر")?.minorDistrict,
+    "Rashaya"
+  );
+  assert.equal(
+    bekaaTwo.candidates.find((candidate) => candidate.name === "ﻣﺮادﺣﺴﻦ ﻋﺒﺪ اﻟﺮﺣﻴﻢ")?.minorDistrict,
+    "West Bekaa"
+  );
+  assert.equal(
+    bekaaTwo.candidates.find((candidate) => candidate.name === "ﺷﺮﺑﻞ ﻛﻤﻴﻞ ﻣﺎرون")?.minorDistrict,
+    "Rashaya"
+  );
 
   const northTwo = loadElectionResults2022(byId.get("north-ii"));
   assert.deepEqual(

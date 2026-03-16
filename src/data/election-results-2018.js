@@ -927,6 +927,13 @@ const quotaOverrides2018ByTemplateId = {
     { sect: "Druze", seats: 1, minorDistrict: "Hasbaya" },
     { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun" }
   ],
+  "bekaa-ii": [
+    { sect: "Sunni", seats: 2, minorDistrict: "West Bekaa" },
+    { sect: "Shia", seats: 1, minorDistrict: "West Bekaa" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "West Bekaa" },
+    { sect: "Druze", seats: 1, minorDistrict: "Rashaya" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Rashaya" }
+  ],
   "north-ii": [
     { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
     { sect: "Sunni", seats: 2, minorDistrict: "Dinnieh" },
@@ -1048,6 +1055,26 @@ const candidateMinorDistrictOverrides2018ByTemplateId = {
     "Rabah Kazem Abi Haidar": "Nabatieh",
     "Maneeh Elias Saab": "Marjeyoun",
     "Kanj Mahmoud Alameddine": "Hasbaya"
+  },
+  "bekaa-ii": {
+    "Faysal Salim Daoud": "Rashaya",
+    "Abdel Rahim Youssef Mrad": "West Bekaa",
+    "Mohamad Dib Nasrallah": "West Bekaa",
+    "Elie Nagib Ferzli": "West Bekaa",
+    "Naji Nabih Ghanem": "Rashaya",
+
+    "Joseph Gerges Ayoub": "West Bekaa",
+    "Faysal Omar Rahal": "West Bekaa",
+    "Aladdine Omar El Chemali": "West Bekaa",
+    "Ali Sobhi Sobeh": "West Bekaa",
+    "Maguy Badih Aoun": "Rashaya",
+
+    "Wael Wehbe Abou Faour": "Rashaya",
+    "Mohamad Kassem El Karaaoui": "West Bekaa",
+    "Ziad Nazem El Kadri": "West Bekaa",
+    "Henry Youssef Chedid": "Rashaya",
+    "Amin Mohamad Wehbe": "West Bekaa",
+    "Ghassan Sleiman El Skaff": "West Bekaa"
   },
   "north-ii": {
     "Kassem Ali Abdel Aziz": "Dinnieh",

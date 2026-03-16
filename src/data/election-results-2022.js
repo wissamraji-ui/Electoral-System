@@ -608,6 +608,44 @@ const generatedCandidateOverrides2022ByTemplateId = {
       "نزار ابراهيم رمال": "Marjeyoun"
     }
   },
+  "bekaa-ii": {
+    minorDistrictByCandidateName: {
+      "ﻣﺮادﺣﺴﻦ ﻋﺒﺪ اﻟﺮﺣﻴﻢ": "West Bekaa",
+      "ﻗﺒﻼن ﻋﺒﺪ اﻟﻤﻨﻌﻢ ﻗﺒﻼن": "West Bekaa",
+      "اﻳﻠﻲ ﻧﺠﻴﺐ ﻓﺮزﻟﻲ": "West Bekaa",
+      "ﻃﺎرق ﺳﻠﻴﻢ داود": "Rashaya",
+      "ﺷﺮﺑﻞ ﻛﻤﻴﻞ ﻣﺎرون": "Rashaya",
+
+      "ﻣﺤﻤﺪ ﻗﺎﺳﻢ اﻟﻘﺮﻋﺎوي": "West Bekaa",
+      "واﺋﻞ وﻫﺒﻲ اﺑﻮ ﻓﺎﻋﻮر": "Rashaya",
+      "ﻏﺴﺎن ﺳﻠﻴﻤﺎن اﻟﺴﻜﺎف": "West Bekaa",
+      "ﻋﻠﻲ ﻣﺤﻤﺪ اﺑﻮ ﻳﺎﺳﻴﻦ": "West Bekaa",
+      "ﻋﺒﺎس ﻣﺤﻤﺪ ﻋﻴﺪي": "West Bekaa",
+      "ﺟﻬﺎد ﻣﻠﺤﻢ اﻟﺰرزور": "Rashaya",
+
+      "ﻣﺤﻤﺪ ﺣﺴﻴﻦ ﻗﺪوره": "West Bekaa",
+      "ﺧﺎﻟﺪ ﻣﺤﻤﺪ اﻟﻌﺴﻜﺮ": "West Bekaa",
+      "ﺟﻮرج اﺑﺮاﻫﻴﻢ ﻋﺒﻮد": "West Bekaa",
+      "داﻧﻲ ﻧﺒﻴﻪ ﺧﺎﻃﺮ": "Rashaya",
+      "ﻏﻨﻮه ﺣﺴﻴﻦ اﺳﻌﺪ": "West Bekaa",
+
+      "ﻓﺮح رﻳﺎض ﻗﺎﺳﻢ": "West Bekaa",
+      "ﻏﺎده ﺟﻮرج ﻏﺎﻧﻢ": "Rashaya",
+      "اﺳﺎﻣﻪ ﺳﻌﺪ اﺑﻮ زﻳﺪ": "West Bekaa",
+      "ﻣﺎﻏﻲ ﻋﺎرف ﻣﻬﻨﺎ": "Rashaya",
+
+      "ﻳﺎﺳﻴﻦ اﺣﻤﺪ ﻳﺎﺳﻴﻦ": "West Bekaa",
+      "ﺣﺎﺗﻢ ﺣﺴﻴﻦ اﻟﺨﺸﻦ": "West Bekaa",
+      "ﻣﺎﻛﻲ ﺑﺪﻳﻊ ﻋﻮن": "Rashaya",
+      "ﺳﺎﻟﻲ ﻓﻮزي ﺷﺎﻣﻴﻪ": "West Bekaa",
+      "ﺑﻬﺎء اﻟﺪﻳﻦ ﺣﺴﻴﻦ دﻻل": "Rashaya",
+
+      "اﻟﺸﻤﺎﻟﻲﻋﻼء اﻟﺪﻳﻦ ﻋﻤﺮ": "West Bekaa",
+      "ﺷﻮﻗﻲ ﻓﺮﻳﺪ اﺑﻮ ﻏﻮش": "Rashaya",
+      "ﻛﻴﺘﺎ داود اﻟﻌﺠﻴﻞ": "Rashaya",
+      "ﻋﺎﻣﺮ ﻣﺤﻤﺪ ﻗﺪوره": "West Bekaa"
+    }
+  },
   "north-ii": {
     minorDistrictByCandidateName: {
       "اﺷﺮف اﺣﻤﺪ رﻳﻔﻲ": "Tripoli",
@@ -943,6 +981,13 @@ const quotaOverrides2022ByTemplateId = {
     { sect: "Sunni", seats: 1, minorDistrict: "Hasbaya" },
     { sect: "Druze", seats: 1, minorDistrict: "Hasbaya" },
     { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun" }
+  ],
+  "bekaa-ii": [
+    { sect: "Sunni", seats: 2, minorDistrict: "West Bekaa" },
+    { sect: "Shia", seats: 1, minorDistrict: "West Bekaa" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "West Bekaa" },
+    { sect: "Druze", seats: 1, minorDistrict: "Rashaya" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Rashaya" }
   ],
   "north-ii": [
     { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
