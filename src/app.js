@@ -59,8 +59,7 @@ const elements = {
   metricsGrid: document.getElementById("metricsGrid"),
   alertsBox: document.getElementById("alertsBox"),
   listAllocationBody: document.getElementById("listAllocationBody"),
-  winnersTableBody: document.getElementById("winnersTableBody"),
-  sectCoverageBody: document.getElementById("sectCoverageBody")
+  winnersTableBody: document.getElementById("winnersTableBody")
 };
 
 let idCounter = Date.now();
@@ -900,7 +899,6 @@ function renderResults() {
   renderAlerts();
   renderListAllocationTable();
   renderWinnersTable();
-  renderSectCoverageTable();
 }
 
 function renderMetrics() {
@@ -1003,27 +1001,6 @@ function renderWinnersTable() {
         <td>${escapeHtml(winner.name)}</td>
         <td>${renderListChip(winner.list)}</td>
         <td>${formatNumber(winner.votes)}</td>
-      </tr>
-    `
-    )
-    .join("");
-}
-
-function renderSectCoverageTable() {
-  if (simulation.sectCoverage.length === 0) {
-    elements.sectCoverageBody.innerHTML =
-      '<tr><td colspan="4" class="empty">Seat coverage appears after sect quotas are configured.</td></tr>';
-    return;
-  }
-
-  elements.sectCoverageBody.innerHTML = simulation.sectCoverage
-    .map(
-      (entry) => `
-      <tr>
-        <td>${escapeHtml(entry.sect)}</td>
-        <td>${entry.requiredSeats}</td>
-        <td>${entry.electedSeats}</td>
-        <td>${entry.remaining}</td>
       </tr>
     `
     )
@@ -1287,9 +1264,9 @@ function buildPrintableReportHtml(fileName) {
         color-scheme: light;
         --ink: #16202a;
         --muted: #5f6b76;
-        --line: #d6dde5;
-        --panel: #f7f9fb;
-        --accent: #0f5b8d;
+        --line: #cfd6dd;
+        --panel: #eceff3;
+        --accent: #4f6578;
       }
 
       * {
@@ -1300,7 +1277,7 @@ function buildPrintableReportHtml(fileName) {
         margin: 0;
         padding: 24px;
         color: var(--ink);
-        background: #fff;
+        background: #f1f3f5;
         font: 14px/1.45 "Arial Unicode MS", "Geeza Pro", "Diwan Kufi", "Noto Naskh Arabic", Arial, sans-serif;
       }
 

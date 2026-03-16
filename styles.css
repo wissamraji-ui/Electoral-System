@@ -162,8 +162,9 @@ select:focus {
 }
 
 .preset-actions {
-  display: grid;
-  gap: 0.45rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
 .preset-status-note {
@@ -203,7 +204,36 @@ select:focus {
 #load2022PresetBtn,
 #load2018PresetBtn {
   align-self: end;
-  min-width: 170px;
+  min-width: 120px;
+  height: 2rem;
+  padding: 0 0.8rem;
+  border: 1px solid #c8d3dc;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f7fafc 0%, #e6edf2 100%);
+  color: #264255;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 2px rgba(28, 45, 58, 0.08);
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+#load2022PresetBtn:hover,
+#load2018PresetBtn:hover {
+  border-color: #aebdca;
+  background: linear-gradient(180deg, #ffffff 0%, #e9f0f5 100%);
+  box-shadow: 0 4px 12px rgba(28, 45, 58, 0.1);
+}
+
+#load2022PresetBtn:disabled,
+#load2018PresetBtn:disabled {
+  background: #edf1f4;
+  border-color: #d6dde3;
+  box-shadow: none;
 }
 
 .quota-header {
