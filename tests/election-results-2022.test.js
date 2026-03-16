@@ -140,6 +140,20 @@ test("2022 generated districts can also preload official list-only votes via ove
     ]
   );
 
+  const northThree = loadElectionResults2022(byId.get("north-iii"));
+  assert.deepEqual(
+    northThree.listVotes,
+    [
+      { list: "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ", votes: 605 },
+      { list: "رح ﻧﺒﻘﻰ ﻫﻮن", votes: 574 },
+      { list: "ﺷﻤﺎﻟﻨﺎ", votes: 1068 },
+      { list: "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ", votes: 838 },
+      { list: "ﻗﺎدرﻳﻦ ﻧﻐﻴّﺮ", votes: 98 },
+      { list: "وﻋﻲ ﺻﻮﺗﻚ", votes: 73 },
+      { list: "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل", votes: 679 }
+    ]
+  );
+
   const metn = loadElectionResults2022(byId.get("mount-lebanon-ii"));
   assert.deepEqual(
     metn.listVotes,

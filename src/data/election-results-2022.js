@@ -497,7 +497,12 @@ const generatedListVoteOverrides2022ByTemplateId = {
   "north-iii": {
     listVotes: [
       { list: "ﺷﻤﺎل اﻟﻤﻮاﺟﻬﺔ", votes: 605 },
-      { list: "رح ﻧﺒﻘﻰ ﻫﻮن", votes: 574 }
+      { list: "رح ﻧﺒﻘﻰ ﻫﻮن", votes: 574 },
+      { list: "ﺷﻤﺎﻟﻨﺎ", votes: 1068 },
+      { list: "ﻧﺒﺾ اﻟﺠﻤﻬﻮرﻳﺔ اﻟﻘﻮﻳﺔ", votes: 838 },
+      { list: "ﻗﺎدرﻳﻦ ﻧﻐﻴّﺮ", votes: 98 },
+      { list: "وﻋﻲ ﺻﻮﺗﻚ", votes: 73 },
+      { list: "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل", votes: 679 }
     ]
   }
 };
