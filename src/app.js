@@ -4,6 +4,7 @@ import {
   getTemplatesDataVersion,
   loadRegionTemplates
 } from "./data/templates.js";
+import { getElectionMiscVotesDataVersion } from "./data/election-misc-votes.js";
 import {
   getElectionResults2022DataVersion,
   hasElectionResults2022,
@@ -18,10 +19,11 @@ import { computeResults } from "./engine.js";
 
 const STORAGE_KEY = "lebanon-electoral-simulator:v1";
 const SAVED_SCENARIOS_KEY = "lebanon-electoral-simulator:saved:v1";
-const EXPORT_VERSION = 1;
-const STATE_SCHEMA_VERSION = 2;
+const EXPORT_VERSION = 2;
+const STATE_SCHEMA_VERSION = 3;
 const CURRENT_DATA_VERSION = [
   `templates:${getTemplatesDataVersion()}`,
+  `misc-votes:${getElectionMiscVotesDataVersion()}`,
   `results-2018:${getElectionResults2018DataVersion()}`,
   `results-2022:${getElectionResults2022DataVersion()}`
 ].join("|");
@@ -64,7 +66,7 @@ const elements = {
 let idCounter = Date.now();
 let templates = [];
 let state = createEmptyState();
-let simulation = computeResults(state.quotas, state.candidates);
+let simulation = computeResults(state.quotas, state.candidates, state.listVotes, state.blankVotes, state.invalidVotes);
 const listColorIndexByKey = new Map();
 let savedScenarios = [];
 
@@ -419,6 +421,8 @@ function onExportScenario() {
       regionName: state.regionName,
       quotas: state.quotas.map((entry) => ({ sect: entry.sect, seats: entry.seats })),
       quotasLocked: state.quotasLocked,
+      blankVotes: state.blankVotes,
+      invalidVotes: state.invalidVotes,
       listVotes: state.listVotes.map((entry) => ({
         list: entry.list,
         votes: entry.votes
@@ -880,7 +884,13 @@ function getConfiguredLists() {
 }
 
 function runSimulation() {
-  simulation = computeResults(state.quotas, state.candidates, state.listVotes);
+  simulation = computeResults(
+    state.quotas,
+    state.candidates,
+    state.listVotes,
+    state.blankVotes,
+    state.invalidVotes
+  );
 }
 
 function renderResults() {
@@ -902,6 +912,9 @@ function renderMetrics() {
     { label: "Seat Coverage", value: `${summary.coveragePct}%` },
     { label: "Candidates", value: String(summary.totalCandidates) },
     { label: "Total Votes", value: formatNumber(summary.totalVotes) },
+    { label: "Blank Votes", value: formatNumber(summary.blankVotes) },
+    { label: "EQ Vote Base", value: formatNumber(summary.eqVotes) },
+    { label: "Invalid Votes", value: formatNumber(summary.invalidVotes) },
     { label: "Electoral Quotient (EQ)", value: summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-" },
     { label: "Total Lists", value: String(totalListCount) },
     { label: "Qualified Lists", value: String(summary.qualifiedListCount) }
@@ -1041,6 +1054,8 @@ function normalizeState(input) {
     quotas: [],
     candidates: [],
     listVotes: [],
+    blankVotes: clampInteger(input?.blankVotes, 0),
+    invalidVotes: clampInteger(input?.invalidVotes, 0),
     quotasLocked: input?.quotasLocked === true
   };
 
@@ -1253,6 +1268,8 @@ function buildPdfReportLines() {
     `- Seat Coverage: ${summary.coveragePct}%`,
     `- Candidates: ${summary.totalCandidates}`,
     `- Total Votes: ${formatNumber(summary.totalVotes)}`,
+    `- Blank Votes: ${formatNumber(summary.blankVotes)}`,
+    `- Invalid Votes: ${formatNumber(summary.invalidVotes)}`,
     `- List-Only Votes: ${formatNumber(
       Array.isArray(state.listVotes)
         ? state.listVotes.reduce((sum, entry) => sum + clampInteger(entry?.votes, 0), 0)

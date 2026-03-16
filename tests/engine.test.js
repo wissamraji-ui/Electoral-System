@@ -140,3 +140,24 @@ test("keeps list-only-only lists in EQ calculations", () => {
   assert.equal(byList.get("Beta")?.listVotes, 15);
   assert.equal(byList.get("Beta")?.votes, 15);
 });
+
+test("includes blank votes in EQ but excludes invalid votes from EQ", () => {
+  const quotas = [{ sect: "Sunni", seats: 2 }];
+  const candidates = [
+    { name: "A1", sect: "Sunni", list: "Alpha", votes: 60 },
+    { name: "B1", sect: "Sunni", list: "Beta", votes: 50 },
+    { name: "C1", sect: "Sunni", list: "Cedar", votes: 41 }
+  ];
+
+  const result = computeResults(quotas, candidates, [], 49, 999);
+  const byList = new Map(result.listAllocation.map((row) => [row.list, row]));
+
+  assert.equal(result.summary.totalVotes, 151);
+  assert.equal(result.summary.blankVotes, 49);
+  assert.equal(result.summary.invalidVotes, 999);
+  assert.equal(result.summary.eqVotes, 200);
+  assert.equal(result.summary.electoralQuotient, 100);
+  assert.equal(byList.get("Alpha")?.qualified, false);
+  assert.equal(byList.get("Beta")?.qualified, false);
+  assert.equal(byList.get("Cedar")?.qualified, false);
+});

@@ -12,6 +12,8 @@ test("2022 baselines keep list-only vote support available even when a district 
 
   assert.ok(loaded);
   assert.ok(Array.isArray(loaded.listVotes));
+  assert.equal(loaded.blankVotes, 395);
+  assert.equal(loaded.invalidVotes, 1615);
 });
 
 test("2022 audited districts preload official list-only votes from the report totals", () => {

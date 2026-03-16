@@ -124,7 +124,7 @@ function runMinCostMaxFlow(graph, source, sink) {
   return { flow };
 }
 
-export function computeResults(quotas, candidates, listVotes = []) {
+export function computeResults(quotas, candidates, listVotes = [], blankVotes = 0, invalidVotes = 0) {
   const safeQuotas = Array.isArray(quotas)
     ? quotas
         .map((entry) => ({
@@ -220,9 +220,12 @@ export function computeResults(quotas, candidates, listVotes = []) {
 
   const totalSeats = safeQuotas.reduce((sum, entry) => sum + entry.seats, 0);
   const totalVotes = listAllocation.reduce((sum, entry) => sum + entry.votes, 0);
-  const electoralQuotient = totalSeats > 0 && totalVotes > 0 ? totalVotes / totalSeats : 0;
+  const safeBlankVotes = toVoteNumber(blankVotes);
+  const safeInvalidVotes = toVoteNumber(invalidVotes);
+  const eqVotes = totalVotes + safeBlankVotes;
+  const electoralQuotient = totalSeats > 0 && eqVotes > 0 ? eqVotes / totalSeats : 0;
 
-  if (totalSeats > 0 && totalVotes === 0 && safeCandidates.length > 0) {
+  if (totalSeats > 0 && eqVotes === 0 && safeCandidates.length > 0) {
     warnings.push("No votes entered. EQ cannot be applied until vote totals are above zero.");
   }
 
@@ -419,6 +422,9 @@ export function computeResults(quotas, candidates, listVotes = []) {
       filledSeats,
       totalCandidates: safeCandidates.length,
       totalVotes,
+      blankVotes: safeBlankVotes,
+      invalidVotes: safeInvalidVotes,
+      eqVotes,
       coveragePct,
       electoralQuotient,
       qualifiedListCount: qualifiedLists.length,

@@ -38,6 +38,8 @@ test("2018 baselines load only for manually audited districts", async () => {
     const loaded = loadElectionResults2018(byId.get(templateId));
     assert.ok(loaded, `${templateId} should load`);
     assert.ok(loaded.candidates.length > 0, `${templateId} should include candidates`);
+    assert.equal(typeof loaded.blankVotes, "number", `${templateId} should include blank votes`);
+    assert.equal(typeof loaded.invalidVotes, "number", `${templateId} should include invalid votes`);
   }
 
   for (const template of rawTemplates) {
@@ -69,6 +71,8 @@ test("2018 baselines can preload official list-only votes from the report", () =
   const zahle = loadElectionResults2018(byId.get("bekaa-i"));
   assert.ok(zahle);
   assert.deepEqual(zahle.listVotes, []);
+  assert.equal(zahle.blankVotes, 545);
+  assert.equal(zahle.invalidVotes, 2414);
 
   const mountLebanonOne = loadElectionResults2018(byId.get("mount-lebanon-i"));
   assert.ok(mountLebanonOne);
