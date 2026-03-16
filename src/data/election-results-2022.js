@@ -4,6 +4,7 @@ import {
   normalizeElectionBaselineListVotes
 } from "./election-results-normalize.js";
 import generatedElectionResults2022ByTemplateId from "./election-results-2022.generated.json" with { type: "json" };
+import { getInvalidVotes } from "./invalid-votes.js";
 
 function hashVersionPayload(value) {
   const json = JSON.stringify(value);
@@ -540,6 +541,7 @@ export function loadElectionResults2022(template) {
   const scenario = cloneTemplate(template);
   scenario.candidates = normalizeElectionBaseline(template, baseline.candidates, "2022 Imported List");
   scenario.listVotes = normalizeElectionBaselineListVotes(scenario.candidates, baseline.listVotes);
+  scenario.invalidVotes = getInvalidVotes(2022, templateId);
 
   return scenario;
 }
