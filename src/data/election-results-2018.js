@@ -469,15 +469,18 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 32, Mount Lebanon 1 (Jbeil - Keserwan)
   "mount-lebanon-i": {
+    listVotes: [
+      { list: "Definite Change", votes: 404 }
+    ],
     candidates: [
-      { name: "Mahmoud Ibrahim Awad", sect: "Shia", list: "Definite Change", votes: 259 },
-      { name: "Rock Antoine Tanios Mhenna", sect: "Maronite", list: "Definite Change", votes: 759 },
+      { name: "Mahmoud Ibrahim Awad", sect: "Shia", list: "Definite Change", votes: 787 },
+      { name: "Rock Antoine Tanios Mhenna", sect: "Maronite", list: "Definite Change", votes: 259 },
       { name: "Ziad Habib Khalife Hashem", sect: "Maronite", list: "Definite Change", votes: 136 },
       { name: "Patricia Jean Elias", sect: "Maronite", list: "Definite Change", votes: 183 },
       { name: "Ziad Halim Al Hawwat", sect: "Maronite", list: "Definite Change", votes: 14424 },
       { name: "Shawki Gergi Al Dakash", sect: "Maronite", list: "Definite Change", votes: 10032 },
-      { name: "Fadi Nagib Rouhana-Sakr", sect: "Maronite", list: "Definite Change", votes: 385 },
-      { name: "Naaman Joseph Mrad", sect: "Maronite", list: "Definite Change", votes: 134 },
+      { name: "Fadi Nagib Rouhana-Sakr", sect: "Maronite", list: "Definite Change", votes: 481 },
+      { name: "Naaman Joseph Mrad", sect: "Maronite", list: "Definite Change", votes: 274 },
 
       { name: "Rabih Khalil Awad", sect: "Shia", list: "Strong Lebanon", votes: 891 },
       { name: "Nehme Georges Efrem", sect: "Maronite", list: "Strong Lebanon", votes: 10717 },

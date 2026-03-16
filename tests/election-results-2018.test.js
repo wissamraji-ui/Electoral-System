@@ -70,6 +70,19 @@ test("2018 baselines can preload official list-only votes from the report", () =
   assert.ok(zahle);
   assert.deepEqual(zahle.listVotes, []);
 
+  const mountLebanonOne = loadElectionResults2018(byId.get("mount-lebanon-i"));
+  assert.ok(mountLebanonOne);
+  assert.deepEqual(mountLebanonOne.listVotes, [{ list: "Definite Change", votes: 404 }]);
+  assert.equal(
+    mountLebanonOne.candidates
+      .filter((candidate) => candidate.list === "Definite Change")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      mountLebanonOne.listVotes
+        .filter((entry) => entry.list === "Definite Change")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    26980
+  );
+
   const beirutTwo = loadElectionResults2018(byId.get("beirut-ii"));
   assert.ok(beirutTwo);
   assert.deepEqual(

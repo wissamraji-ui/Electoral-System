@@ -132,6 +132,20 @@ test("2022 generated districts can also preload official list-only votes via ove
     ]
   );
 
+  const keserwanJbeil = loadElectionResults2022(byId.get("mount-lebanon-i"));
+  assert.deepEqual(
+    keserwanJbeil.listVotes,
+    [
+      { list: "ﻣﻌﻜﻢ ﻓﻴﻨﺎ ﻟﻶﺧﺮ", votes: 663 },
+      { list: "ﻗﻠﺐ ﻟﺒﻨﺎن اﻟﻤﺴﺘﻘﻞ", votes: 577 },
+      { list: "ﺻﺮﺧﺔ وﻃﻦ", votes: 1554 },
+      { list: "اﻟﺤﺮﻳﺔ ﻗﺮار", votes: 354 },
+      { list: "ﻧﺤﻨﺎ اﻟﺘﻐﻴﻴﺮ", votes: 281 },
+      { list: "ﻗﺎدرﻳﻦ", votes: 263 },
+      { list: "ﻛﻨﺎ ورح ﻧﺒﻘﻰ", votes: 657 }
+    ]
+  );
+
   const baalbackHermel = loadElectionResults2022(byId.get("bekaa-iii"));
   assert.deepEqual(
     baalbackHermel.listVotes,
