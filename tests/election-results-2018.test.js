@@ -132,23 +132,23 @@ test("2018 baselines can preload official list-only votes from the report", () =
   const bekaaTwo = loadElectionResults2018(byId.get("bekaa-ii"));
   assert.ok(bekaaTwo);
   assert.deepEqual(bekaaTwo.quotas, [
-    { sect: "Sunni", seats: 2, minorDistrict: "West Bekaa" },
-    { sect: "Shia", seats: 1, minorDistrict: "West Bekaa" },
-    { sect: "Greek Orthodox", seats: 1, minorDistrict: "West Bekaa" },
-    { sect: "Druze", seats: 1, minorDistrict: "Rashaya" },
-    { sect: "Maronite", seats: 1, minorDistrict: "Rashaya" }
+    { sect: "Sunni", seats: 2 },
+    { sect: "Druze", seats: 1 },
+    { sect: "Shia", seats: 1 },
+    { sect: "Maronite", seats: 1 },
+    { sect: "Greek Orthodox", seats: 1 }
   ]);
   assert.equal(
     bekaaTwo.candidates.find((candidate) => candidate.name === "Wael Wehbe Abou Faour")?.minorDistrict,
-    "Rashaya"
+    ""
   );
   assert.equal(
     bekaaTwo.candidates.find((candidate) => candidate.name === "Abdel Rahim Youssef Mrad")?.minorDistrict,
-    "West Bekaa"
+    ""
   );
   assert.equal(
     bekaaTwo.candidates.find((candidate) => candidate.name === "Naji Nabih Ghanem")?.minorDistrict,
-    "Rashaya"
+    ""
   );
 
   const mountLebanonThree = loadElectionResults2018(byId.get("mount-lebanon-iii"));
@@ -380,11 +380,10 @@ test("2018 baselines can preload official list-only votes from the report", () =
   assert.deepEqual(southThree.quotas, [
     { sect: "Shia", seats: 3, minorDistrict: "Nabatieh" },
     { sect: "Shia", seats: 3, minorDistrict: "Bint Jbeil" },
-    { sect: "Shia", seats: 1, minorDistrict: "Marjeyoun" },
-    { sect: "Shia", seats: 1, minorDistrict: "Hasbaya" },
-    { sect: "Sunni", seats: 1, minorDistrict: "Hasbaya" },
-    { sect: "Druze", seats: 1, minorDistrict: "Hasbaya" },
-    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun" }
+    { sect: "Shia", seats: 2, minorDistrict: "Marjeyoun-Hasbaya" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Marjeyoun-Hasbaya" },
+    { sect: "Druze", seats: 1, minorDistrict: "Marjeyoun-Hasbaya" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun-Hasbaya" }
   ]);
   assert.equal(
     southThree.candidates.find((candidate) => candidate.name === "Mohamad Hassan Raad")?.minorDistrict,
@@ -396,11 +395,11 @@ test("2018 baselines can preload official list-only votes from the report", () =
   );
   assert.equal(
     southThree.candidates.find((candidate) => candidate.name === "Assad Halim Hardan")?.minorDistrict,
-    "Marjeyoun"
+    "Marjeyoun-Hasbaya"
   );
   assert.equal(
     southThree.candidates.find((candidate) => candidate.name === "Kassem Omar Hachem")?.minorDistrict,
-    "Hasbaya"
+    "Marjeyoun-Hasbaya"
   );
 });
 

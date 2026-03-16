@@ -95,11 +95,10 @@ test("2022 audited districts preload official list-only votes from the report to
   assert.deepEqual(southThree.quotas, [
     { sect: "Shia", seats: 3, minorDistrict: "Nabatieh" },
     { sect: "Shia", seats: 3, minorDistrict: "Bint Jbeil" },
-    { sect: "Shia", seats: 1, minorDistrict: "Marjeyoun" },
-    { sect: "Shia", seats: 1, minorDistrict: "Hasbaya" },
-    { sect: "Sunni", seats: 1, minorDistrict: "Hasbaya" },
-    { sect: "Druze", seats: 1, minorDistrict: "Hasbaya" },
-    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun" }
+    { sect: "Shia", seats: 2, minorDistrict: "Marjeyoun-Hasbaya" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Marjeyoun-Hasbaya" },
+    { sect: "Druze", seats: 1, minorDistrict: "Marjeyoun-Hasbaya" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun-Hasbaya" }
   ]);
   assert.equal(
     southThree.candidates.find((candidate) => candidate.name === "محمد حسن رعد")?.minorDistrict,
@@ -111,11 +110,11 @@ test("2022 audited districts preload official list-only votes from the report to
   );
   assert.equal(
     southThree.candidates.find((candidate) => candidate.name === "الياس فارس جراده")?.minorDistrict,
-    "Marjeyoun"
+    "Marjeyoun-Hasbaya"
   );
   assert.equal(
     southThree.candidates.find((candidate) => candidate.name === "فراس اسماعيل حمدان")?.minorDistrict,
-    "Hasbaya"
+    "Marjeyoun-Hasbaya"
   );
 
   const southOne = loadElectionResults2022(byId.get("south-i"));
@@ -222,23 +221,23 @@ test("2022 generated districts can also preload official list-only votes via ove
     11397
   );
   assert.deepEqual(bekaaTwo.quotas, [
-    { sect: "Sunni", seats: 2, minorDistrict: "West Bekaa" },
-    { sect: "Shia", seats: 1, minorDistrict: "West Bekaa" },
-    { sect: "Greek Orthodox", seats: 1, minorDistrict: "West Bekaa" },
-    { sect: "Druze", seats: 1, minorDistrict: "Rashaya" },
-    { sect: "Maronite", seats: 1, minorDistrict: "Rashaya" }
+    { sect: "Sunni", seats: 2 },
+    { sect: "Druze", seats: 1 },
+    { sect: "Shia", seats: 1 },
+    { sect: "Maronite", seats: 1 },
+    { sect: "Greek Orthodox", seats: 1 }
   ]);
   assert.equal(
     bekaaTwo.candidates.find((candidate) => candidate.name === "واﺋﻞ وﻫﺒﻲ اﺑﻮ ﻓﺎﻋﻮر")?.minorDistrict,
-    "Rashaya"
+    ""
   );
   assert.equal(
     bekaaTwo.candidates.find((candidate) => candidate.name === "ﻣﺮادﺣﺴﻦ ﻋﺒﺪ اﻟﺮﺣﻴﻢ")?.minorDistrict,
-    "West Bekaa"
+    ""
   );
   assert.equal(
     bekaaTwo.candidates.find((candidate) => candidate.name === "ﺷﺮﺑﻞ ﻛﻤﻴﻞ ﻣﺎرون")?.minorDistrict,
-    "Rashaya"
+    ""
   );
 
   const northTwo = loadElectionResults2022(byId.get("north-ii"));
