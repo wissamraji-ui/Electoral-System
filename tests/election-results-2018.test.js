@@ -111,6 +111,27 @@ test("2018 baselines can preload official list-only votes from the report", () =
     26500
   );
 
+  const mountLebanonFour = loadElectionResults2018(byId.get("mount-lebanon-iv"));
+  assert.ok(mountLebanonFour);
+  assert.equal(
+    mountLebanonFour.candidates
+      .filter((candidate) => candidate.list === "National Unity")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      mountLebanonFour.listVotes
+        .filter((entry) => entry.list === "National Unity")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    12796
+  );
+  assert.equal(
+    mountLebanonFour.candidates
+      .filter((candidate) => candidate.list === "Free Decision")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      mountLebanonFour.listVotes
+        .filter((entry) => entry.list === "Free Decision")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    5446
+  );
+
   const beirutTwo = loadElectionResults2018(byId.get("beirut-ii"));
   assert.ok(beirutTwo);
   assert.deepEqual(

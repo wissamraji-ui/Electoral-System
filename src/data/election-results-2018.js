@@ -796,7 +796,9 @@ const verifiedElectionResults2018ByTemplateId = {
     listVotes: [
       { list: "Reconciliation", votes: 2293 },
       { list: "Mount Lebanon's Guaranteed change", votes: 788 },
+      { list: "National Unity", votes: 466 },
       { list: "Kulluna Watani", votes: 588 },
+      { list: "Free Decision", votes: 181 },
       { list: "Madaniya", votes: 195 }
     ],
     candidates: [
