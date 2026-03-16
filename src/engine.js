@@ -58,6 +58,174 @@ function compareListsByRemainder(a, b) {
   return a.list.localeCompare(b.list, "en", { sensitivity: "base" });
 }
 
+function cloneInputsWithListVoteDelta(candidates, listVotes, targetList, delta) {
+  const targetKey = normalizeListKey(targetList);
+  if (!targetKey) {
+    return null;
+  }
+
+  const nextCandidates = Array.isArray(candidates) ? candidates.map((candidate) => ({ ...candidate })) : [];
+  const nextListVotes = Array.isArray(listVotes) ? listVotes.map((entry) => ({ ...entry })) : [];
+
+  if (delta >= 0) {
+    const existingEntry = nextListVotes.find((entry) => normalizeListKey(entry?.list) === targetKey);
+    if (existingEntry) {
+      existingEntry.votes = toVoteNumber(existingEntry.votes) + delta;
+    } else {
+      nextListVotes.push({ list: targetList, votes: delta });
+    }
+
+    return { candidates: nextCandidates, listVotes: nextListVotes };
+  }
+
+  let remaining = Math.abs(delta);
+  nextListVotes
+    .filter((entry) => normalizeListKey(entry?.list) === targetKey)
+    .forEach((entry) => {
+      if (remaining <= 0) {
+        return;
+      }
+
+      const available = toVoteNumber(entry.votes);
+      const reduction = Math.min(available, remaining);
+      entry.votes = available - reduction;
+      remaining -= reduction;
+    });
+
+  nextCandidates
+    .filter((candidate) => normalizeListKey(candidate?.list) === targetKey)
+    .sort((a, b) => toVoteNumber(b.votes) - toVoteNumber(a.votes))
+    .forEach((candidate) => {
+      if (remaining <= 0) {
+        return;
+      }
+
+      const available = toVoteNumber(candidate.votes);
+      const reduction = Math.min(available, remaining);
+      candidate.votes = available - reduction;
+      remaining -= reduction;
+    });
+
+  if (remaining > 0) {
+    return null;
+  }
+
+  return { candidates: nextCandidates, listVotes: nextListVotes };
+}
+
+function getSeatCountForList(result, listName) {
+  const listKey = normalizeListKey(listName);
+  return result.listAllocation.find((entry) => normalizeListKey(entry.list) === listKey)?.seats ?? 0;
+}
+
+function findVoteDeltaForSeatChange(
+  quotas,
+  candidates,
+  listVotes,
+  blankVotes,
+  invalidVotes,
+  listName,
+  baseSeats,
+  direction,
+  totalSeats
+) {
+  if (direction > 0 && baseSeats >= totalSeats) {
+    return null;
+  }
+
+  if (direction < 0 && baseSeats <= 0) {
+    return null;
+  }
+
+  const maxSearch =
+    direction > 0
+      ? Math.max(1, totalSeats) * Math.max(1, candidates.reduce((sum, candidate) => sum + toVoteNumber(candidate?.votes), 0) + listVotes.reduce((sum, entry) => sum + toVoteNumber(entry?.votes), 0) + toVoteNumber(blankVotes) + 1)
+      : Math.max(
+          0,
+          candidates
+            .filter((candidate) => normalizeListKey(candidate?.list) === normalizeListKey(listName))
+            .reduce((sum, candidate) => sum + toVoteNumber(candidate?.votes), 0) +
+            listVotes
+              .filter((entry) => normalizeListKey(entry?.list) === normalizeListKey(listName))
+              .reduce((sum, entry) => sum + toVoteNumber(entry?.votes), 0)
+        );
+
+  let low = 1;
+  let high = direction > 0 ? 1 : maxSearch;
+
+  if (direction > 0) {
+    while (high <= maxSearch) {
+      const adjustedInputs = cloneInputsWithListVoteDelta(candidates, listVotes, listName, high);
+      if (!adjustedInputs) {
+        break;
+      }
+
+      const adjusted = computeResults(
+        quotas,
+        adjustedInputs.candidates,
+        adjustedInputs.listVotes,
+        blankVotes,
+        invalidVotes
+      );
+      if (getSeatCountForList(adjusted, listName) > baseSeats) {
+        break;
+      }
+
+      low = high + 1;
+      high *= 2;
+    }
+
+    if (high > maxSearch) {
+      const adjustedInputs = cloneInputsWithListVoteDelta(candidates, listVotes, listName, maxSearch);
+      if (!adjustedInputs) {
+        return null;
+      }
+
+      const adjusted = computeResults(
+        quotas,
+        adjustedInputs.candidates,
+        adjustedInputs.listVotes,
+        blankVotes,
+        invalidVotes
+      );
+      if (getSeatCountForList(adjusted, listName) <= baseSeats) {
+        return null;
+      }
+
+      high = maxSearch;
+    }
+  }
+
+  let answer = null;
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    const adjustedInputs = cloneInputsWithListVoteDelta(candidates, listVotes, listName, direction * mid);
+    if (!adjustedInputs) {
+      high = mid - 1;
+      continue;
+    }
+
+    const adjusted = computeResults(
+      quotas,
+      adjustedInputs.candidates,
+      adjustedInputs.listVotes,
+      blankVotes,
+      invalidVotes
+    );
+    const seats = getSeatCountForList(adjusted, listName);
+    const changed = direction > 0 ? seats > baseSeats : seats < baseSeats;
+
+    if (changed) {
+      answer = mid;
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+
+  return answer;
+}
+
 function createGraph(size) {
   return Array.from({ length: size }, () => []);
 }
@@ -449,4 +617,42 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
       disqualifiedListCount: disqualifiedLists.length
     }
   };
+}
+
+export function computeSeatChangeThresholds(
+  quotas,
+  candidates,
+  listVotes = [],
+  blankVotes = 0,
+  invalidVotes = 0
+) {
+  const baseline = computeResults(quotas, candidates, listVotes, blankVotes, invalidVotes);
+  const rows = baseline.listAllocation.filter((row) => row.votes > 0);
+
+  return rows.map((row) => ({
+    list: row.list,
+    seats: row.seats,
+    toGainSeat: findVoteDeltaForSeatChange(
+      quotas,
+      candidates,
+      listVotes,
+      blankVotes,
+      invalidVotes,
+      row.list,
+      row.seats,
+      1,
+      baseline.summary.totalSeats
+    ),
+    seatAtRisk: findVoteDeltaForSeatChange(
+      quotas,
+      candidates,
+      listVotes,
+      blankVotes,
+      invalidVotes,
+      row.list,
+      row.seats,
+      -1,
+      baseline.summary.totalSeats
+    )
+  }));
 }

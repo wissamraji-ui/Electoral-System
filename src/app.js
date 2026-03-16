@@ -16,7 +16,7 @@ import {
   loadElectionResults2018
 } from "./data/election-results-2018.js";
 import { BUILD_ID } from "./generated/build-meta.js";
-import { computeResults } from "./engine.js";
+import { computeResults, computeSeatChangeThresholds } from "./engine.js";
 
 const STORAGE_KEY = "lebanon-electoral-simulator:v1";
 const SAVED_SCENARIOS_KEY = "lebanon-electoral-simulator:saved:v1";
@@ -1292,45 +1292,19 @@ function getClosestRacesData() {
 }
 
 function getSeatThresholdRows() {
-  const rows = Array.isArray(simulation.listAllocation)
-    ? simulation.listAllocation.filter((row) => row.votes > 0).sort((a, b) => b.votes - a.votes)
-    : [];
-  const qualifiedRows = rows.filter((row) => row.qualified);
-  const awardedByRemainder = qualifiedRows.filter((row) => row.seats > row.baseSeats);
-  const nonAwardedQualified = qualifiedRows.filter((row) => row.seats === row.baseSeats);
-  const lowestWinningRemainder = awardedByRemainder.length
-    ? Math.min(...awardedByRemainder.map((row) => row.remainderVotes))
-    : null;
-  const highestLosingRemainder = nonAwardedQualified.length
-    ? Math.max(...nonAwardedQualified.map((row) => row.remainderVotes))
-    : null;
-
-  return rows.map((row) => {
-    let toGainSeat = null;
-    let seatAtRisk = null;
-
-    if (!row.qualified) {
-      toGainSeat = simulation.summary.electoralQuotient > 0 ? Math.max(0, Math.ceil(simulation.summary.electoralQuotient - row.votes)) : null;
-    } else if (lowestWinningRemainder !== null) {
-      toGainSeat = Math.max(0, Math.floor(lowestWinningRemainder - row.remainderVotes) + 1);
+  return computeSeatChangeThresholds(
+    state.quotas,
+    state.candidates,
+    state.listVotes,
+    state.blankVotes,
+    state.invalidVotes
+  ).sort((a, b) => {
+    const seatsDelta = b.seats - a.seats;
+    if (seatsDelta !== 0) {
+      return seatsDelta;
     }
 
-    if (row.seats > row.baseSeats && highestLosingRemainder !== null) {
-      seatAtRisk = Math.max(0, Math.floor(row.remainderVotes - highestLosingRemainder) + 1);
-    } else if (row.baseSeats > 0) {
-      seatAtRisk = Math.max(1, Math.floor(row.remainderVotes) + 1);
-    }
-
-    if (toGainSeat === 0) {
-      toGainSeat = row.seats > 0 ? 1 : 0;
-    }
-
-    return {
-      list: row.list,
-      seats: row.seats,
-      toGainSeat,
-      seatAtRisk
-    };
+    return a.list.localeCompare(b.list, "en", { sensitivity: "base" });
   });
 }
 

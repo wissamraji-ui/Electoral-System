@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { computeResults } from "../src/engine.js";
+import { computeResults, computeSeatChangeThresholds } from "../src/engine.js";
 
 test("allocates seats to lists by EQ before selecting candidate winners", () => {
   const quotas = [{ sect: "Sunni", seats: 3 }];
@@ -241,4 +241,24 @@ test("assigns split-district seats by ranked order rather than raw vote maximiza
     "Bcharre Other List",
     "Koura Winner"
   ]);
+});
+
+test("computes seat gain thresholds by exact resimulation rather than remainder-only estimates", () => {
+  const quotas = [{ sect: "Sunni", seats: 3 }];
+  const candidates = [
+    { name: "A1", sect: "Sunni", list: "Alpha", votes: 50 },
+    { name: "B1", sect: "Sunni", list: "Beta", votes: 51 },
+    { name: "C1", sect: "Sunni", list: "Cedar", votes: 51 }
+  ];
+
+  const thresholds = computeSeatChangeThresholds(quotas, candidates);
+  const betaThreshold = thresholds.find((row) => row.list === "Beta");
+
+  assert.equal(betaThreshold?.toGainSeat, 2);
+
+  const plusOne = computeResults(quotas, candidates, [{ list: "Beta", votes: 1 }]);
+  const plusTwo = computeResults(quotas, candidates, [{ list: "Beta", votes: 2 }]);
+
+  assert.equal(plusOne.listAllocation.find((row) => row.list === "Beta")?.seats, 2);
+  assert.equal(plusTwo.listAllocation.find((row) => row.list === "Beta")?.seats, 3);
 });
