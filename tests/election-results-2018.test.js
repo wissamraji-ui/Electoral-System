@@ -316,6 +316,23 @@ test("2018 baselines can preload official list-only votes from the report", () =
       { list: "Integrity and Dignity", votes: 588 }
     ]
   );
+  assert.deepEqual(southOne.quotas, [
+    { sect: "Sunni", seats: 2, minorDistrict: "Saida" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Jezzine" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Jezzine" }
+  ]);
+  assert.equal(
+    southOne.candidates.find((candidate) => candidate.name === "Oussama Maarouf Saad El Masri")?.minorDistrict,
+    "Saida"
+  );
+  assert.equal(
+    southOne.candidates.find((candidate) => candidate.name === "Ibrahim Samir Azar")?.minorDistrict,
+    "Jezzine"
+  );
+  assert.equal(
+    southOne.candidates.find((candidate) => candidate.name === "Ajaj Jerji Haddad")?.minorDistrict,
+    "Jezzine"
+  );
 });
 
 test("2018 North II simulation matches the published winner set", () => {

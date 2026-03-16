@@ -78,6 +78,23 @@ test("2022 audited districts preload official list-only votes from the report to
       { list: "Capable", votes: 98 }
     ]
   );
+  assert.deepEqual(southOne.quotas, [
+    { sect: "Sunni", seats: 2, minorDistrict: "Saida" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Jezzine" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Jezzine" }
+  ]);
+  assert.equal(
+    southOne.candidates.find((candidate) => candidate.name === "Abdel Rahman Nazih El Bizri")?.minorDistrict,
+    "Saida"
+  );
+  assert.equal(
+    southOne.candidates.find((candidate) => candidate.name === "Ibrahim Samir Azar")?.minorDistrict,
+    "Jezzine"
+  );
+  assert.equal(
+    southOne.candidates.find((candidate) => candidate.name === "Ghada Khalil Ayoub")?.minorDistrict,
+    "Jezzine"
+  );
   assert.equal(new Set(southOne.candidates.map((candidate) => candidate.list)).size, 7);
 
   const southThree = loadElectionResults2022(byId.get("south-iii"));

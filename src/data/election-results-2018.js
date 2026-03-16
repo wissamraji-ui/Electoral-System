@@ -908,6 +908,11 @@ const electionResults2018ByTemplateId = {
 };
 
 const quotaOverrides2018ByTemplateId = {
+  "south-i": [
+    { sect: "Sunni", seats: 2, minorDistrict: "Saida" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Jezzine" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Jezzine" }
+  ],
   "north-ii": [
     { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
     { sect: "Sunni", seats: 2, minorDistrict: "Dinnieh" },
@@ -939,6 +944,28 @@ const quotaOverrides2018ByTemplateId = {
 };
 
 const candidateMinorDistrictOverrides2018ByTemplateId = {
+  "south-i": {
+    "Ibrahim Samir Azar": "Jezzine",
+    "Abdel Kader Nazih El Bisat": "Saida",
+    "Oussama Maarouf Saad El Masri": "Saida",
+    "Youssef Hanna Bechara Hanna Saad El Skaff": "Jezzine",
+
+    "Bahia Bahaa El din El Hariri": "Saida",
+    "Robert Elias El Khoury": "Jezzine",
+    "Hassan Mohamad Selim Chamseddine": "Saida",
+    "Angele Bechara El Khawand": "Jezzine",
+    "Amin Edmond Risk": "Jezzine",
+
+    "Ajaj Jerji Haddad": "Jezzine",
+    "Samir Mohamad El Bizri": "Saida",
+    "Joseph Elias Nohra": "Jezzine",
+
+    "Ziad Michel Assouad": "Jezzine",
+    "Amal Hekmat Abou Zeid": "Jezzine",
+    "Abdel Rahman Nazih El Bizri": "Saida",
+    "Selim Antoine Khoury": "Jezzine",
+    "Bassam Ibrahim Hammoud": "Saida"
+  },
   "north-ii": {
     "Kassem Ali Abdel Aziz": "Dinnieh",
     "Nehmeh Gerges Mahfoud": "Tripoli",

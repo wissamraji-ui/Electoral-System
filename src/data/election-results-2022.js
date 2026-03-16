@@ -201,41 +201,41 @@ const manualElectionResults2022ByTemplateId = {
   // https://www.elections.gov.lb/النيابية/2022/نتايج-الانتخابات/مجموع-اصوات-المرشحين-بحسب-الدوائر-لعام-2022/دائرة-الجنوب-الأولى.aspx
   "south-i": {
     candidates: [
-      { name: "Ibrahim Samir Azar", sect: "Maronite", list: "Moderation Is our Strength", votes: 7894 },
-      { name: "Youssef Hanna Skaff", sect: "Greek Catholic", list: "Moderation Is our Strength", votes: 108 },
-      { name: "Nabil Mahmoud Eizzedine El Zaatari", sect: "Sunni", list: "Moderation Is our Strength", votes: 3242 },
+      { name: "Ibrahim Samir Azar", sect: "Maronite", list: "Moderation Is our Strength", votes: 7894, minorDistrict: "Jezzine" },
+      { name: "Youssef Hanna Skaff", sect: "Greek Catholic", list: "Moderation Is our Strength", votes: 108, minorDistrict: "Jezzine" },
+      { name: "Nabil Mahmoud Eizzedine El Zaatari", sect: "Sunni", list: "Moderation Is our Strength", votes: 3242, minorDistrict: "Saida" },
 
-      { name: "Abdel Rahman Nazih El Bizri", sect: "Sunni", list: "We Vote for Change", votes: 8526 },
-      { name: "Osama Maarouf Saad El Masri", sect: "Sunni", list: "We Vote for Change", votes: 7341 },
-      { name: "Charbel Maroun Massaad", sect: "Maronite", list: "We Vote for Change", votes: 984 },
-      { name: "Kamil Farid Serhal", sect: "Maronite", list: "We Vote for Change", votes: 795 },
-      { name: "Jamil Iskandar Dagher", sect: "Greek Catholic", list: "We Vote for Change", votes: 382 },
+      { name: "Abdel Rahman Nazih El Bizri", sect: "Sunni", list: "We Vote for Change", votes: 8526, minorDistrict: "Saida" },
+      { name: "Osama Maarouf Saad El Masri", sect: "Sunni", list: "We Vote for Change", votes: 7341, minorDistrict: "Saida" },
+      { name: "Charbel Maroun Massaad", sect: "Maronite", list: "We Vote for Change", votes: 984, minorDistrict: "Jezzine" },
+      { name: "Kamil Farid Serhal", sect: "Maronite", list: "We Vote for Change", votes: 795, minorDistrict: "Jezzine" },
+      { name: "Jamil Iskandar Dagher", sect: "Greek Catholic", list: "We Vote for Change", votes: 382, minorDistrict: "Jezzine" },
 
-      { name: "Ghada Khalil Ayoub", sect: "Greek Catholic", list: "Our Unity in Saida and Jezzine", votes: 7953 },
-      { name: "Youssef Mohamad El Naqib", sect: "Sunni", list: "Our Unity in Saida and Jezzine", votes: 4380 },
-      { name: "Said Sleiman El Asmar", sect: "Maronite", list: "Our Unity in Saida and Jezzine", votes: 1102 },
-      { name: "Wissam Youssef El Tawil", sect: "Maronite", list: "Our Unity in Saida and Jezzine", votes: 108 },
+      { name: "Ghada Khalil Ayoub", sect: "Greek Catholic", list: "Our Unity in Saida and Jezzine", votes: 7953, minorDistrict: "Jezzine" },
+      { name: "Youssef Mohamad El Naqib", sect: "Sunni", list: "Our Unity in Saida and Jezzine", votes: 4380, minorDistrict: "Saida" },
+      { name: "Said Sleiman El Asmar", sect: "Maronite", list: "Our Unity in Saida and Jezzine", votes: 1102, minorDistrict: "Jezzine" },
+      { name: "Wissam Youssef El Tawil", sect: "Maronite", list: "Our Unity in Saida and Jezzine", votes: 108, minorDistrict: "Jezzine" },
 
-      { name: "Hania Hani Zaatari", sect: "Sunni", list: "We Are The Change", votes: 3028 },
-      { name: "Mohamad Fadi El Zarif", sect: "Sunni", list: "We Are The Change", votes: 369 },
-      { name: "Joseph Elias El Asmar", sect: "Maronite", list: "We Are The Change", votes: 570 },
-      { name: "Sleiman Elias Malek", sect: "Maronite", list: "We Are The Change", votes: 424 },
-      { name: "Robert Elias El Khoury", sect: "Greek Catholic", list: "We Are The Change", votes: 309 },
+      { name: "Hania Hani Zaatari", sect: "Sunni", list: "We Are The Change", votes: 3028, minorDistrict: "Saida" },
+      { name: "Mohamad Fadi El Zarif", sect: "Sunni", list: "We Are The Change", votes: 369, minorDistrict: "Saida" },
+      { name: "Joseph Elias El Asmar", sect: "Maronite", list: "We Are The Change", votes: 570, minorDistrict: "Jezzine" },
+      { name: "Sleiman Elias Malek", sect: "Maronite", list: "We Are The Change", votes: 424, minorDistrict: "Jezzine" },
+      { name: "Robert Elias El Khoury", sect: "Greek Catholic", list: "We Are The Change", votes: 309, minorDistrict: "Jezzine" },
 
-      { name: "Rana Walid El Tawil", sect: "Sunni", list: "The Voice of Change", votes: 79 },
-      { name: "Mohamad Ali Jamil El Tahira", sect: "Sunni", list: "The Voice of Change", votes: 136 },
-      { name: "Joseph Milad Youssef Metri", sect: "Greek Catholic", list: "The Voice of Change", votes: 82 },
+      { name: "Rana Walid El Tawil", sect: "Sunni", list: "The Voice of Change", votes: 79, minorDistrict: "Saida" },
+      { name: "Mohamad Ali Jamil El Tahira", sect: "Sunni", list: "The Voice of Change", votes: 136, minorDistrict: "Saida" },
+      { name: "Joseph Milad Youssef Metri", sect: "Greek Catholic", list: "The Voice of Change", votes: 82, minorDistrict: "Jezzine" },
 
-      { name: "Ziad Michel Asouad", sect: "Maronite", list: "Together for Saida and Jezzine", votes: 3639 },
-      { name: "Amal Hekmat Abou Zeid", sect: "Maronite", list: "Together for Saida and Jezzine", votes: 5184 },
-      { name: "Selim Antoine Khoury", sect: "Greek Catholic", list: "Together for Saida and Jezzine", votes: 447 },
-      { name: "Ali Sadek El Cheikh Amar", sect: "Sunni", list: "Together for Saida and Jezzine", votes: 77 },
-      { name: "Mohamad Chaker Souheil El Qawas", sect: "Sunni", list: "Together for Saida and Jezzine", votes: 165 },
+      { name: "Ziad Michel Asouad", sect: "Maronite", list: "Together for Saida and Jezzine", votes: 3639, minorDistrict: "Jezzine" },
+      { name: "Amal Hekmat Abou Zeid", sect: "Maronite", list: "Together for Saida and Jezzine", votes: 5184, minorDistrict: "Jezzine" },
+      { name: "Selim Antoine Khoury", sect: "Greek Catholic", list: "Together for Saida and Jezzine", votes: 447, minorDistrict: "Jezzine" },
+      { name: "Ali Sadek El Cheikh Amar", sect: "Sunni", list: "Together for Saida and Jezzine", votes: 77, minorDistrict: "Saida" },
+      { name: "Mohamad Chaker Souheil El Qawas", sect: "Sunni", list: "Together for Saida and Jezzine", votes: 165, minorDistrict: "Saida" },
 
-      { name: "Ahmad Mohamad Walid El Assi", sect: "Sunni", list: "Capable", votes: 338 },
-      { name: "Ismail Mohamad Dib Haffouda", sect: "Sunni", list: "Capable", votes: 40 },
-      { name: "Emilio Toni Matar", sect: "Maronite", list: "Capable", votes: 210 },
-      { name: "Elie Youssef Abou Tas", sect: "Maronite", list: "Capable", votes: 442 }
+      { name: "Ahmad Mohamad Walid El Assi", sect: "Sunni", list: "Capable", votes: 338, minorDistrict: "Saida" },
+      { name: "Ismail Mohamad Dib Haffouda", sect: "Sunni", list: "Capable", votes: 40, minorDistrict: "Saida" },
+      { name: "Emilio Toni Matar", sect: "Maronite", list: "Capable", votes: 210, minorDistrict: "Jezzine" },
+      { name: "Elie Youssef Abou Tas", sect: "Maronite", list: "Capable", votes: 442, minorDistrict: "Jezzine" }
     ],
     listVotes: [
       { list: "Moderation Is our Strength", votes: 475 },
@@ -508,6 +508,45 @@ const generatedListVoteOverrides2022ByTemplateId = {
 };
 
 const generatedCandidateOverrides2022ByTemplateId = {
+  "south-i": {
+    minorDistrictByCandidateName: {
+      "Ahmad Mohamad Walid El Assi": "Saida",
+      "Ismail Mohamad Dib Haffouda": "Saida",
+      "Emilio Toni Matar": "Jezzine",
+      "Elie Youssef Abou Tas": "Jezzine",
+
+      "Ibrahim Samir Azar": "Jezzine",
+      "Youssef Hanna Skaff": "Jezzine",
+      "Nabil Mahmoud Eizzedine El Zaatari": "Saida",
+
+      "Ghada Khalil Ayoub": "Jezzine",
+      "Youssef Mohamad El Naqib": "Saida",
+      "Said Sleiman El Asmar": "Jezzine",
+      "Wissam Youssef El Tawil": "Jezzine",
+
+      "Rana Walid El Tawil": "Saida",
+      "Mohamad Ali Jamil El Tahira": "Saida",
+      "Joseph Milad Youssef Metri": "Jezzine",
+
+      "Ziad Michel Asouad": "Jezzine",
+      "Amal Hekmat Abou Zeid": "Jezzine",
+      "Selim Antoine Khoury": "Jezzine",
+      "Ali Sadek El Cheikh Amar": "Saida",
+      "Mohamad Chaker Souheil El Qawas": "Saida",
+
+      "Hania Hani Zaatari": "Saida",
+      "Mohamad Fadi El Zarif": "Saida",
+      "Joseph Elias El Asmar": "Jezzine",
+      "Sleiman Elias Malek": "Jezzine",
+      "Robert Elias El Khoury": "Jezzine",
+
+      "Abdel Rahman Nazih El Bizri": "Saida",
+      "Osama Maarouf Saad El Masri": "Saida",
+      "Charbel Maroun Massaad": "Jezzine",
+      "Kamil Farid Serhal": "Jezzine",
+      "Jamil Iskandar Dagher": "Jezzine"
+    }
+  },
   "north-ii": {
     minorDistrictByCandidateName: {
       "اﺷﺮف اﺣﻤﺪ رﻳﻔﻲ": "Tripoli",
@@ -825,6 +864,11 @@ const generatedCandidateOverrides2022ByTemplateId = {
 };
 
 const quotaOverrides2022ByTemplateId = {
+  "south-i": [
+    { sect: "Sunni", seats: 2, minorDistrict: "Saida" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Jezzine" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Jezzine" }
+  ],
   "north-ii": [
     { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
     { sect: "Sunni", seats: 2, minorDistrict: "Dinnieh" },
