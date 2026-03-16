@@ -161,3 +161,84 @@ test("includes blank votes in EQ but excludes invalid votes from EQ", () => {
   assert.equal(byList.get("Beta")?.qualified, false);
   assert.equal(byList.get("Cedar")?.qualified, false);
 });
+
+test("ranks candidates by minor-district vote share when a district is split", () => {
+  const quotas = [
+    { sect: "Maronite", seats: 1, minorDistrict: "Aley" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Chouf" }
+  ];
+  const candidates = [
+    { name: "Chouf Candidate", sect: "Maronite", list: "Alpha", votes: 600, minorDistrict: "Chouf" },
+    { name: "Aley Candidate", sect: "Maronite", list: "Beta", votes: 500, minorDistrict: "Aley" },
+    { name: "Chouf Running Mate", sect: "Sunni", list: "Alpha", votes: 1400, minorDistrict: "Chouf" },
+    { name: "Aley Running Mate", sect: "Sunni", list: "Beta", votes: 500, minorDistrict: "Aley" }
+  ];
+  const listVotes = [
+    { list: "Alpha", votes: 0 },
+    { list: "Beta", votes: 1000 }
+  ];
+
+  const result = computeResults(quotas, candidates, listVotes);
+
+  assert.deepEqual(result.winners.map((winner) => winner.name), ["Aley Candidate", "Chouf Candidate"]);
+});
+
+test("respects sect quotas split across multiple minor districts", () => {
+  const quotas = [
+    { sect: "Maronite", seats: 1, minorDistrict: "Aley" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Chouf" }
+  ];
+  const candidates = [
+    { name: "Aley Winner", sect: "Maronite", list: "Alpha", votes: 500, minorDistrict: "Aley" },
+    { name: "Chouf Winner", sect: "Maronite", list: "Alpha", votes: 400, minorDistrict: "Chouf" },
+    { name: "Aley Loser", sect: "Maronite", list: "Beta", votes: 450, minorDistrict: "Aley" },
+    { name: "Chouf Loser", sect: "Maronite", list: "Beta", votes: 350, minorDistrict: "Chouf" }
+  ];
+  const listVotes = [
+    { list: "Alpha", votes: 500 },
+    { list: "Beta", votes: 500 }
+  ];
+
+  const result = computeResults(quotas, candidates, listVotes);
+
+  assert.deepEqual(
+    result.winners.map((winner) => `${winner.name}:${winner.minorDistrict}`),
+    ["Aley Winner:Aley", "Chouf Winner:Chouf"]
+  );
+});
+
+test("assigns split-district seats by ranked order rather than raw vote maximization", () => {
+  const quotas = [
+    { sect: "Maronite", seats: 1, minorDistrict: "Batroun" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Bcharre" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Koura" }
+  ];
+  const candidates = [
+    { name: "Batroun High Share", sect: "Maronite", list: "Alpha", votes: 6000, minorDistrict: "Batroun" },
+    { name: "Bcharre Higher Raw Votes", sect: "Maronite", list: "Alpha", votes: 6500, minorDistrict: "Bcharre" },
+    { name: "Koura Winner", sect: "Greek Orthodox", list: "Alpha", votes: 5000, minorDistrict: "Koura" },
+    { name: "Alpha Batroun Running Mate", sect: "Greek Orthodox", list: "Alpha", votes: 1000, minorDistrict: "Batroun" },
+    { name: "Alpha Bcharre Running Mate", sect: "Greek Orthodox", list: "Alpha", votes: 15000, minorDistrict: "Bcharre" },
+    { name: "Batroun Other List", sect: "Maronite", list: "Beta", votes: 5900, minorDistrict: "Batroun" },
+    { name: "Bcharre Other List", sect: "Maronite", list: "Beta", votes: 3000, minorDistrict: "Bcharre" },
+    { name: "Koura Other List", sect: "Greek Orthodox", list: "Beta", votes: 1000, minorDistrict: "Koura" },
+    { name: "Beta Batroun Running Mate", sect: "Greek Orthodox", list: "Beta", votes: 1000, minorDistrict: "Batroun" },
+    { name: "Beta Bcharre Running Mate", sect: "Greek Orthodox", list: "Beta", votes: 15500, minorDistrict: "Bcharre" }
+  ];
+  const listVotes = [
+    { list: "Alpha", votes: 3000 },
+    { list: "Beta", votes: 3000 }
+  ];
+
+  const result = computeResults(quotas, candidates, listVotes);
+
+  assert.deepEqual(result.listAllocation.map((row) => [row.list, row.seats]), [
+    ["Alpha", 2],
+    ["Beta", 1]
+  ]);
+  assert.deepEqual(result.winners.map((winner) => winner.name), [
+    "Batroun High Share",
+    "Bcharre Other List",
+    "Koura Winner"
+  ]);
+});

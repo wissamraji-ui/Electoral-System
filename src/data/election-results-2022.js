@@ -507,16 +507,379 @@ const generatedListVoteOverrides2022ByTemplateId = {
   }
 };
 
+const generatedCandidateOverrides2022ByTemplateId = {
+  "north-ii": {
+    minorDistrictByCandidateName: {
+      "اﺷﺮف اﺣﻤﺪ رﻳﻔﻲ": "Tripoli",
+      "اﻣﻴﻦ ﻣﺤﻤﺪ ﺑﺸﻴﺮ": "Tripoli",
+      "اﻳﻤﺎن ﻋﺼﺎم درﻧﻴﻘﻪ": "Tripoli",
+      "ﺻﺎﻟﺢ ﻏﺴﺎن اﻟﻤﻘﺪم": "Tripoli",
+      "ﻓﻮزي ﻣﺤﻤﺪ ﻋﺰت اﻟﻔﺮي": "Tripoli",
+      "اﻟﺨﻮرياﻟﻴﺎس ﻓﻮآد": "Tripoli",
+      "ﺟﻤﻴﻞ ﻋﺒﻮد ﻋﺒﻮد": "Tripoli",
+      "ﻣﺤﻤﺪ ﻋﺒﺪ اﻟﺤﻤﻴﺪ ﺷﻤﺴﻴﻦ": "Tripoli",
+      "ﻋﺜﻤﺎن ﻣﺤﻤﺪ ﻋﻠﻢ اﻟﺪﻳﻦ": "Minnieh",
+      "ﺑﻼل ﺣﺴﻴﻦ ﻫﺮﻣﻮش": "Dinnieh",
+      "اﻟﻜﺮﻣﻪﻋﻮض ﻋﻮض اﺣﻤﺪ": "Tripoli",
+
+      "ﺑﺎﺳﻞ ﻫﻴﺜﻢ اﻻﺳﻄﻪ": "Tripoli",
+      "ﻣﺎﻳﺰ اﺳﻌﺪ اﻟﺠﻨﺪى": "Tripoli",
+      "ﻳﻮﻧﺲ ﻣﺤﻤﺪ اﻟﺤﺴﻦ": "Tripoli",
+      "دﻳﻤﺎ ﻣﻌﻦ ﺿﻨﺎوي": "Tripoli",
+      "ﻛﺴﺤﻪﺳﻮﺳﻦ ﻣﺤﻤﺪ راﺷﺪ": "Tripoli",
+      "ﻣﻴﺸﺎل ﻣﺠﻴﺪ اﻟﺨﻮري": "Tripoli",
+      "ﺻﺎﻟﺢ وﻫﻴﺐ اﻟﺪﻳﺐ": "Tripoli",
+      "اﻟﺨﻴﺮﻓﺎدي ﻣﺎﻟﻚ": "Minnieh",
+      "ﻋﺒﺪ اﻟﻘﺎدر ﻣﺤﻤﺪ اﻟﺸﺎﻣﻲ": "Tripoli",
+      "ﻛﺎﻣﻞ ﻋﻠﻲ ﺑﻜﻮر": "Tripoli",
+
+      "ﻛﺮاﻣﻰﻓﻴﺼﻞ ﻋﻤﺮ": "Tripoli",
+      "ﻧﺎﺟﻲﻋﻄﻔﺖ ﻃﻪ": "Tripoli",
+      "اﺣﻤﺪ ﻋﺒﺪ اﻟﻘﺎدر اﻣﻴﻦ": "Tripoli",
+      "راﻣﻲ ﻣﺤﻤﺪ ﻇﻬﻴﺮ اﺳﻮم": "Tripoli",
+      "ﻋﻠﻲ ﺣﺴﻦ ﻧﻮر": "Tripoli",
+      "ﺟﻮرج ادﻣﻮن ﺷﺒﻄﻴﻨﻲ": "Tripoli",
+      "رﻓﻠﻲ اﻧﻄﻮن دﻳﺎب": "Tripoli",
+      "ﻣﺤﻤﺪ اﺣﻤﺪ اﻟﻄﺮاﺑﻠﺴﻲ": "Tripoli",
+      "اﻟﺼﻤﺪﺟﻬﺎد ﻣﺮﺷﺪ": "Dinnieh",
+      "ﻧﺒﺮاس ﺑﺸﻴﺮ ﻋﻠﻢ اﻟﺪﻳﻦ": "Minnieh",
+
+      "اﻳﻬﺎب ﻣﺤﻤﺪ ﻣﻄﺮ": "Tripoli",
+      "ﻓﺮح ﻋﻠﻲ اﻟﺤﺪاد": "Tripoli",
+      "ﻋﺰام اﺳﻌﺪ اﻳﻮﺑﻲ": "Tripoli",
+      "اﺣﻤﺪ ﻋﺒﺪ اﻟﻮﻫﺎب اﻟﻤﺮج": "Tripoli",
+      "زﻳﻦ ﺧﺎﻟﺪ ﻣﺼﻄﻔﻰ": "Tripoli",
+      "ﻣﻄﺎﻧﻴﻮس ﻋﻴﺴﻰ ﻧﻘﻮﻻ ﻣﺤﻔﻮض": "Tripoli",
+      "ﺑﻮل ﺣﻨﺎ اﻟﺤﺎﻣﺾ": "Tripoli",
+      "ﻓﺮاس اﺣﻤﺪ اﻟﺴﻠﻮم": "Tripoli",
+      "ﻣﺤﻤﻮد اﺣﻤﺪ اﻟﺴﻴﺪ": "Tripoli",
+      "ﺳﻤﻴﺮ اﺣﻤﺪ ﻃﺎﻟﺐ": "Tripoli",
+      "ﻣﺤﻤﺪ ﺳﻴﻒ اﻟﺪﻳﻦ دﻫﺒﻲ": "Tripoli",
+
+      "ﻋﻤﺮ ﻣﺤﻤﺪ ﻋﺪﻧﺎن ﺣﺮﻓﻮش": "Tripoli",
+      "ﺟﺎﻧﻴﺖ ﻳﻮﺳﻒ ﻓﺮﻧﺠﻴﻪ": "Tripoli",
+      "ﺿﺤﻪ ﻣﺤﻤﺪ اﺣﻤﺪ": "Tripoli",
+      "دﻳﺎﻻ ﺧﻀﺮ اﻻﺳﻄﻪ": "Tripoli",
+      "اﻟﻔﺮﻳﺪ اﻧﻄﻮن دوره": "Tripoli",
+      "ﻋﺒﺪ اﻟﺮﺣﻴﻢ ﺳﺎﻟﻢ درﻏﺎم": "Tripoli",
+      "اﺣﻤﺪ ﻋﻠﻲ ﻋﻠﻲ": "Tripoli",
+      "ﻣﺤﻤﺪ ﻋﻤﺮ زرﻳﻘﻪ": "Tripoli",
+      "ﻧﺰﻳﻪ ﻧﺎﻓﺬ زود": "Tripoli",
+
+      "ﻋﺪﻧﺎن اﺣﻤﺪ ﺑﻜﻮر": "Tripoli",
+      "ﻣﺼﻄﻔﻰ ﻣﺤﻤﺪ ﻛﻨﺠﻮ ﺣﺴﻴﻦ": "Tripoli",
+      "ﻣﺤﻤﻮد ﺧﻀﺮ اﻟﻤﻴﺮ": "Tripoli",
+      "راﺋﺪ ﻋﻠﻲ اﻟﻄﺒﺎع": "Tripoli",
+      "رأﻓﺖ اﻟﻤﺼﺮيﻋﻤﺮ": "Tripoli",
+
+      "ﺑﻼل ﻣﺤﻤﺪ ﺷﻌﺒﺎن": "Tripoli",
+      "ﻋﺒﺪ اﻟﻌﺰﻳﺰ ﻣﺤﻤﻮد ﻏﺎزي ﻃﺮﻃﻮﺳﻲ": "Tripoli",
+      "رﺑﻴﻊ ﻣﺤﻤﺪ ﺳﻌﻴﺪ اﻟﺴﺒﺎﻋﻲ": "Tripoli",
+      "ﻫﺸﺎم رﻳﺎض اﺑﺮاﻫﻴﻢ": "Tripoli",
+      "اﻧﻄﻮﻧﻲ ﺟﻮزﻳﻒ ﻋﻴﺪ": "Tripoli",
+      "ﻣﺤﻤﺪ اﺣﻤﺪ ﻋﻠﻢ اﻟﺪﻳﻦ": "Minnieh",
+      "ﻣﺤﻤﺪ ﻃﻪ ﺟﺒﺎره": "Tripoli",
+
+      "ﻣﺤﻤﺪ ﻣﺼﻄﻔﻰ زرﻳﻘﺔ": "Tripoli",
+      "ﺷﻔﻴﻖ ﻣﺤﻤﺪ ﺣﺴﻮن": "Tripoli",
+      "ﻋﺒﻴﺪه ﻧﺎﺻﺮ ﺗﻜﺮﻳﺘﻲ": "Tripoli",
+      "ﻣﺼﺒﺎح ﻋﺰﻣﻲ رﺟﺐ": "Tripoli",
+      "ﻧﻀﺎل ﻋﻠﻲ ﻋﺒﺪ اﻟﺮﺣﻤﻦ": "Tripoli",
+      "ﻣﻨﻴﺮ ﻣﻮرﻳﺲ ﻗﺴﻄﻨﻄﻴﻦ دوﻣﺎﻧﻲ": "Tripoli",
+
+      "ﻣﺼﻄﻔﻰ ﻣﺤﻤﺪ اﺳﻤﺎﻋﻴﻞ ﻋﻠﻮش": "Tripoli",
+      "ﻓﻬﺪ ﺣﺴﺎم ﻣﻘﺪم": "Tripoli",
+      "رﺑﻰ ﻋﺒﺪ اﻟﺮﺣﻤﻦ اﻟﺪاﻻﺗﻲ": "Tripoli",
+      "ﻋﻠﻲ ﻋﺒﺪاﻟﺤﻠﻴﻢ اﻻﻳﻮﺑﻲ": "Tripoli",
+      "ﺧﺎﻟﺪ ﺣﻤﺪ ﻣﺮﻋﻲ": "Tripoli",
+      "ﺷﻴﺒﺎن ﻓﻮاد ﻫﻴﻜﻞ": "Tripoli",
+      "ﻃﻮﻧﻲ اﺑﺮاﻫﻴﻢ ﺷﺎﻫﻴﻦ": "Tripoli",
+      "ﺑﺪر ﺣﺴﻴﻦ ﻋﻴﺪ": "Tripoli",
+      "ﺳﺎﻣﻲ اﺣﻤﺪ ﺷﻮﻗﻲ ﻓﺘﻔﺖ": "Dinnieh",
+      "ﻋﺒﺪ اﻟﻌﺰﻳﺰ اﺑﺮاﻫﻴﻢ اﻟﺼﻤﺪ": "Dinnieh",
+      "اﺣﻤﺪ ﻣﺤﻤﻮد اﻟﺨﻴﺮ": "Minnieh",
+
+      "راﻣﻲ ﺳﻌﺪ ﷲ ﻓﻨﺞ": "Tripoli",
+      "اﻟﻌﻮﻳﻚﻣﺼﻄﻔﻰ ﻣﺤﻤﺪ": "Tripoli",
+      "ﻫﻨﺪ ﻣﺤﻤﺪ اﻟﺼﻮﻓﻲ": "Tripoli",
+      "زﻛﺮﻳﺎ اﺑﺮاﻫﻴﻢ ﻣﺴﻴﻜﻪ": "Tripoli",
+      "ﻣﺎﻟﻚ ﻓﻴﺼﻞ ﻣﻮﻟﻮي": "Tripoli",
+      "ﻛﻤﻴﻞ ﺳﻤﻴﺮ ﻣﻮراﻧﻲ": "Tripoli",
+      "ﺣﻴﺪر آﺻﻒ ﻧﺎﺻﺮ": "Tripoli",
+      "ﻏﺎﻟﺐ ﺧﻀﺮ ﻋﺜﻤﺎن": "Tripoli",
+      "ﻣﺤﻤﺪ ﻧﻮر اﻟﺪﻳﻦ اﺣﻤﺪ ﻋﻠﻲ ﺧﻠﻴﻞ": "Tripoli",
+
+      "ﻋﺒﺪ اﻟﻜﺮﻳﻢ ﻣﺤﻤﺪ ﻛﺒﺎره": "Tripoli",
+      "اﻟﻴﺴﺎر ﺧﺎﻟﺪ ﻳﺴﻦ": "Tripoli",
+      "وﻫﻴﺐ اﺣﻤﺪ ﻃﻄﺮ": "Tripoli",
+      "ﺟﻼل ﻋﻠﻲ اﻟﺒﻘﺎر": "Tripoli",
+      "ﻋﻔﺮاء ﻣﺤﻤﺪ ﻋﻴﺪ": "Tripoli",
+      "ﻋﻠﻲ اﺣﻤﺪ دروﻳﺶ": "Tripoli",
+      "ﺳﻠﻴﻤﺎن ﺟﺎن ﻋﺒﻴﺪ": "Tripoli",
+      "ﻗﻴﺼﺮ ﻓﻴﻜﺘﻮر ﺧﻼط": "Tripoli",
+      "ﺑﺮاء اﺳﻌﺪ ﻫﺮﻣﻮش": "Dinnieh",
+      "ﻋﻠﻲ اﺣﻤﺪ ﻋﺒﺪ اﻟﻌﺰﻳﺰ": "Tripoli",
+      "ﻛﺎﻇﻢ ﺻﺎﻟﺢ ﺧﻴﺮ": "Minnieh"
+    }
+  },
+  "north-iii": {
+    minorDistrictByCandidateName: {
+      "ﻟﻴﺎل ﺳﻤﻌﺎن ﺑﻮ ﻣﻮﺳﻰ": "Batroun",
+      "رﺑﻴﻊ ﺟﺮﺟﺲ اﻟﺸﺎﻋﺮ": "Batroun",
+      "رﻳﺎض ﻣﻄﺎﻧﻴﻮس ﻃﻮق": "Bcharre",
+      "ﻗﺰﺣﻴﺎ اﻟﻴﺎس ﺳﺎﺳﻴﻦ": "Bcharre",
+      "ﺷﺎدن اﻟﻴﺎس اﻟﻀﻌﻴﻒ": "Zgharta",
+      "ﺟﻴﺴﺘﺎل رﻳﻤﻮن ﺳﻤﻌﺎن": "Zgharta",
+      "ﻣﻴﺸﺎل ﺷﻮﻗﻲ اﻟﺪوﻳﻬﻲ": "Zgharta",
+      "ﺳﻤﻌﺎن ﺧﻠﻴﻞ اﻟﺒﺸﻮاﺗﻲ": "Koura",
+      "ﺟﻬﺎد ﻧﺼﺮ ﻓﺮح": "Koura",
+      "ﻓﺪوى ﻓﺎﻳﺰ ﻧﺎﺻﻴﻒ": "Koura",
+
+      "ﺳﺘﺮﻳﺪا اﻟﻴﺎس ﻃﻮق": "Bcharre",
+      "ﺟﻮزاف ﺟﺮﺟﺲ اﺳﺤﻖ": "Bcharre",
+      "ﻣﺨﺎﻳﻞ ﺳﺮﻛﻴﺲ اﻟﺪوﻳﻬﻲ": "Zgharta",
+      "ﻣﺎﻏﻲ اﻧﻄﻮن ﻃﻮﺑﻴﺎ": "Zgharta",
+      "ﻓﺆاد ﺷﺎﻣﻞ ﺑﻮﻟﺲ": "Zgharta",
+      "ﻓﺎدي ﻋﺒﺪﷲ ﻛﺮم": "Koura",
+      "ﺳﺎﻣﻲ ﺣﺒﻴﺐ رﻳﺤﺎﻧﺎ": "Koura",
+      "راﻣﻲ اﺳﻜﻨﺪر ﺳﻠﻮم": "Koura",
+      "ﻏﻴﺎث ﻣﻴﺸﺎل ﻣﻴﺸﺎل ﻳﺰﺑﻚ": "Batroun",
+      "ﻟﻴﺎل ﻃﻮﻧﻲ ﻧﻌﻤﻪ": "Batroun",
+
+      "ﻣﺠﺪ ﺑﻄﺮس اﻟﺨﻮري ﺣﺮب": "Batroun",
+      "ﺟﻮال ﻣﻴﺸﺎل اﻟﺤﻮﻳﻚ": "Batroun",
+      "ادﻳﺐ ﺟﺮﺟﺲ ﻋﺒﺪ اﻟﻤﺴﻴﺢ": "Koura",
+      "اﻣﻴﻞ رﺷﺎد ﻓﻴﺎض": "Koura",
+      "ﺑﺮﻳﺠﻴﺖ ﺑﻨﻴﺎﻣﻴﻦ ﺧﻴﺮ": "Koura",
+      "رﺷﻴﺪ ﻧﺠﻴﺐ ﺧﻠﻴﻔﻪ رﺣﻤﻪ": "Bcharre",
+      "ﻃﻮﻧﻲ اﻟﻴﺎس اﻟﻤﺎردﻳﻨﻲ": "Zgharta",
+      "ﺟﻮاد ﺳﻴﻤﻮن ﺑﻮﻟﺲ": "Zgharta",
+      "ﻣﻴﺸﺎل راﻧﻪ ﻣﻌﻮض": "Zgharta",
+
+      "ﻣﺎرون اﻧﻄﻮﻧﻴﻮس ﻣﺤﻔﻮض": "Zgharta",
+      "ﻣﻴﺮي ﺟﻮ ﻣﻴﺸﺎل ﻣﻄﺮ": "Bcharre",
+      "اﻧﻴﺲ ﻓﻮزي ﻧﻌﻤﻪ": "Koura",
+      "ﺑﺎﺳﻢ ﻣﻴﺸﺎل ﺻﻨﻴﺞ": "Koura",
+      "زاﻧﻪ ﻋﺒﺪﷲ اﻟﻨﺒﺘﻲ": "Koura",
+      "ﺟﺎن اﻧﻄﻮن ﺧﻴﺮ ﷲ": "Batroun",
+
+      "ﻣﻴﺮﻧﺎ ﺷﺮﺑﻞ اﻟﺨﻮري ﺣﻨﺎ": "Batroun",
+      "ﺟﻮرج ﺑﺪوي ﺑﻄﺮس": "Bcharre",
+      "اﻧﻄﻮان ﻳﻮﺳﻒ ﻳﻤﻴﻦ": "Zgharta",
+      "ﺑﺴﺎم ﻧﺪﻳﻢ ﻏﻨﻄﻮس": "Koura",
+      "ﻣﻮﺳﻰ ﻧﻘﻮﻻ ﻟﻮﻗﺎ": "Koura",
+
+      "اﺳﻄﻔﺎن ﺑﻄﺮس اﻟﺪوﻳﻬﻲ": "Zgharta",
+      "ﻃﻮﻧﻲ ﺳﻠﻴﻤﺎن ﻓﺮﻧﺠﻴﻪ": "Zgharta",
+      "ﻛﺎرول ادﻣﻮن دﺣﺪح": "Zgharta",
+      "روي ﺑﻬﺠﺖ ﻋﻴﺴﻰ اﻟﺨﻮري": "Bcharre",
+      "ﻣﻠﺤﻢ ﺟﺒﺮان ﻃﻮق": "Bcharre",
+      "ﺳﻠﻴﻢ ﻋﺒﺪﷲ ﺳﻌﺎده": "Koura",
+      "ﻓﺎدي ﻣﻴﺸﺎل ﻏﺼﻦ": "Koura",
+      "ﺟﻮزف ﻣﻴﺸﺎل ﻧﺠﻢ": "Batroun",
+
+      "ﺟﺒﺮان ﺟﺮﺟﻲ ﺑﺎﺳﻴﻞ": "Batroun",
+      "وﻟﻴﺪ ﺟﺮﺟﺲ ﺣﺮب": "Batroun",
+      "ﻃﻮﻧﻲ ﺟﻮرج ﻣﺘﻰ": "Bcharre",
+      "ﻧﻌﻴﻢ ﻋﻄﺎ ﷲﺟﻮرج": "Koura",
+      "وﻟﻴﺪ ﺟﺮﺟﺲ اﻟﻌﺎزار": "Koura",
+      "ﻏﺴﺎن ﺗﻮﻓﻴﻖ ﻛﺮم": "Koura",
+      "ﺑﻴﺎر ﺟﺮﺟﺲ رﻓﻮل": "Zgharta"
+    }
+  },
+  "mount-lebanon-i": {
+    minorDistrictByCandidateName: {
+      "ﺷﻮﻗﻲ ﺟﺮﺟﻲ اﻟﺪﻛﺎش": "Keserwan",
+      "اﻧﻄﻮان زﺧﻴﺎ ﺻﻔﻴﺮ": "Jbeil",
+      "ﻛﺎرن ﺑﻴﺎﺗﺮﻳﺲ رﻳﻤﻮن اﻟﺒﺴﺘﺎﻧﻲ": "Keserwan",
+      "ﺷﺎدي ﻧﺼﺮ ﷲ ﻓﻴﺎض": "Keserwan",
+      "ﺟﻮ ﺳﺎﻣﻲ رﻋﻴﺪي": "Keserwan",
+      "زﻳﺎد ﺣﻠﻴﻢ اﻟﺤﻮاط": "Jbeil",
+      "ﺣﺒﻴﺐ ﺑﻄﺮس ﺑﺮﻛﺎت": "Keserwan",
+      "ﻣﺤﻤﻮد اﺑﺮاﻫﻴﻢ ﻋﻮاد": "Jbeil",
+
+      "ﻓﺮﻳﺪ ﻫﻴﻜﻞ اﻟﺨﺎزن": "Keserwan",
+      "ﺷﺎﻣﻞ رﺷﻴﺪ روﻛﺰ": "Keserwan",
+      "ﺷﺎﻛﺮ اﻟﻴﺎس ﺳﻼﻣﻪ": "Keserwan",
+      "ﺳﻠﻴﻢ ﺳﻤﻴﺮ ﻫﺎﻧﻲ": "Keserwan",
+      "ﺗﻮﻓﻴﻖ ﺟﺎن ﺳﻠﻮم": "Keserwan",
+      "اﻣﻴﻞ ﺑﻄﺮس ﻧﻮﻓﻞ": "Jbeil",
+      "ﻃﻮﻧﻲ ﻳﻮﺳﻒ ﺧﻴﺮﷲ": "Jbeil",
+      "اﺣﻤﺪ ﻫﺎﻧﻲ اﻟﻤﻘﺪاد": "Jbeil",
+
+      "ﻧﻌﻤﻪ ﺟﻮرج اﻓﺮام": "Keserwan",
+      "ﺳﻠﻴﻢ ﺑﻄﺮس اﻟﺼﺎﻳﻎ": "Keserwan",
+      "ﺟﻮﻟﻲ ﻓﻮزي اﻟﺪﻛﺎش": "Keserwan",
+      "وﺟﺪي ﺧﻠﻴﻞ ﺗﺎﺑﺖ": "Keserwan",
+      "اﻧﻄﻮان زﻏﻴﺐﺟﻮزﻓﻴﻦ": "Keserwan",
+      "ﻧﺠﻮى ﻓﻴﻜﺘﻮر ﺑﺎﺳﻴﻞ": "Jbeil",
+      "اﻣﻴﺮ ﻣﺤﻤﺪ ﻋﺒﺪ اﻟﻜﺮﻳﻢ اﻟﻤﻘﺪاد": "Jbeil",
+      "ﻧﻮﻓﻞ ﻳﻮﺳﻒ ﻧﻮﻓﻞ": "Jbeil",
+
+      "ﻏﺎﻧﻢ اﻟﺒﻮنﻣﻨﺼﻮر ﻓﺆاد": "Keserwan",
+      "ﺑﻬﺠﺖ اﻧﻄﻮان ﺳﻼﻣﻪ": "Keserwan",
+      "ﻣﻮﺳﻲ ﻣﻨﺼﻮر زﻏﻴﺐ": "Keserwan",
+      "ﻓﺎرس اﻧﻄﻮن ﺳﻌﻴﺪ": "Jbeil",
+      "اﺳﻌﺪ ﺳﻠﻴﻢ رﺷﺪان": "Jbeil",
+      "ﻣﺸﻬﻮر ﺣﺴﻦ ﺣﻴﺪر اﺣﻤﺪ": "Jbeil",
+
+      "دوﻣﻴﻨﻴﻚ ﺑﻮﻟﺲ ﻃﺮﺑﻴﻪ": "Jbeil",
+      "ﻓﺮح ﻛﺎﻣﻞ ﻧﺎﺻﺮ": "Jbeil",
+      "ﺷﺮﺑﻞ ﻋﺎدل ﻓﺮﻳﺤﻪ": "Keserwan",
+      "ﺑﻄﺮس اﻟﻴﺎس ﺧﻠﻴﻞ": "Jbeil",
+
+      "ﻧﺪى ﻧﻬﺎد اﻟﺒﺴﺘﺎﻧﻲ": "Keserwan",
+      "ﻃﻮﻧﻲ وﻫﺒﻪ اﻟﻜﺮﻳﺪي": "Keserwan",
+      "رﺑﻴﻊ ﻣﻮﺳﻲ زﻏﻴﺐ": "Keserwan",
+      "وﺳﻴﻢ راﻣﺢ ﺳﻼﻣﻪ": "Keserwan",
+      "ﻋﻤﺎد ﺷﺮﺑﻞ ﻋﺎزار": "Keserwan",
+      "ﺳﻴﻤﻮن ﻓﺮﻳﺪ اﺑﻲ رﻣﻴﺎ": "Jbeil",
+      "وﻟﻴﺪ ﻧﺠﻴﺐ اﻟﺨﻮري": "Jbeil",
+      "راﺋﺪ ﻋﻜﻴﻒ ﺑﺮّو": "Jbeil",
+
+      "ﻃﻼل ﻣﺤﺴﻦ ﻣﻘﺪاد": "Jbeil",
+      "ﻏﺴﺎن ﻏﺎزي ﻳﻮﺳﻒ ﺟﺮﻣﺎﻧﻮس": "Keserwan",
+      "راﻧﻴﺎ ﻓﻴﻜﺘﻮر ﺑﺎﺳﻴﻞ": "Jbeil",
+      "زﻳﻨﻪ ﺟﻮزاف اﻟﻜﻼًب": "Keserwan",
+      "ﺳﻴﻤﻮن ﺣﺒﻴﺐ ﺻﻔﻴﺮ": "Jbeil"
+    }
+  },
+  "mount-lebanon-iv": {
+    minorDistrictByCandidateName: {
+      "ﺗﻴﻤﻮر وﻟﻴﺪ ﺟﻨﺒﻼط": "Chouf",
+      "ﺟﻮرج ﺟﻤﻴﻞ ﻋﺪوان": "Chouf",
+      "ﻣﺮوان ﻣﺤﻤﺪ ﺣﻤﺎده": "Chouf",
+      "ﺑﻼل اﺣﻤﺪ ﻋﺒﺪ ﷲ": "Chouf",
+      "ﺳﻌﺪ اﻟﺪﻳﻦ وﺳﻴﻢ اﻟﺨﻄﻴﺐ": "Chouf",
+      "ﺣﺒﻮﺑﻪ ﻳﻮﺳﻒ ﻋﻮن": "Aley",
+      "اﻳﻠﻲ ﻣﺨﺎﻳﻞ ﻗﺮداﺣﻲ": "Chouf",
+      "ﻓﺎدي ﻓﺎرس اﻟﻤﻌﻠﻮف": "Chouf",
+      "اﻛﺮم ﺣﺴﻴﻦ ﺷﻬﻴﺐ": "Aley",
+      "ﻧﺰﻳﻪ اﻣﻴﻦ ﻣﺘﻰ": "Aley",
+      "راﺟﻲ ﻧﺠﻴﺐ اﻟﺴﻌﺪ": "Aley",
+      "ﺟﻮال ﺟﻮزاف ﻓﻀﻮل": "Chouf",
+
+      "ﻋﻤﺎد ﻣﺎرون اﻟﺤﺎج اﻟﻤﻠﻘﺐ ﺑﺎﻟﻤﻌﻠﻢ": "Aley",
+      "وﺳﻴﻢ ﻋﻔﻴﻒ ﺣﻴﺪر": "Aley",
+      "راﺋﺪ زﻳﺎد ﻋﺒﺪ اﻟﺨﺎﻟﻖ": "Chouf",
+      "ﻣﺤﻤﺪ ﺳﺎﻣﻲ اﻟﺤﺠﺎر": "Chouf",
+      "ﺳﻤﻴﺮ ﺣﺴﻦ ﻋﺎﻛﻮم": "Chouf",
+      "ﻛﺎﺑﻲ اﻟﻴﺎس اﻟﻘﺰي": "Chouf",
+      "ﺟﻬﺎد ﻧﺒﻴﻞ ذﺑﻴﺎن": "Aley",
+      "ﺟﻤﺎل اﻧﻄﻮان ﻣﺮﻫﺞ": "Chouf",
+      "ﻣﻴﺸﺎل ﺧﻠﻴﻞ اﺑﻮ ﺳﻠﻴﻤﺎن": "Aley",
+      "ﻣﻌﻀﺎد ﺣﺴﻦ اﺑﻮ ﻋﻠﻲ": "Chouf",
+
+      "اﻻﻣﻴﺮ ﻃﻼل اﻻﻣﻴﺮ ﻣﺠﻴﺪ ارﺳﻼن": "Aley",
+      "ﺳﻴﺰار رﻳﻤﻮن اﺑﻲ ﺧﻠﻴﻞ": "Aley",
+      "ﻃﺎرق وﻟﻴﺪ ﺧﻴﺮ ﷲ": "Aley",
+      "اﻧﻄﻮان ﻣﻴﺸﺎل ﺑﺴﺘﺎﻧﻲ": "Aley",
+      "ﻧﺎﺟﻲ ﻧﺒﻴﻪ اﻟﺒﺴﺘﺎﻧﻲ": "Chouf",
+      "وﺋﺎم ﻣﺎﻫﺮ ﻧﺠﻴﺐ وﻫﺎب": "Chouf",
+      "ﻏﺴﺎن اﻣﺎل ﻋﻄﺎ ﷲ": "Chouf",
+      "ﻓﺮﻳﺪ ﺟﻮرج ﻓﻴﻠﻴﺐ اﻟﺒﺴﺘﺎﻧﻲ": "Chouf",
+      "اﺣﻤﺪ ﺣﻠﻤﻲ ﻧﺠﻢ اﻟﺪﻳﻦ": "Chouf",
+      "اﺳﺎﻣﻪ ﻣﺤﻤﺪ اﻟﻤﻌﻮش": "Chouf",
+      "اﻧﻄﻮان ﺑﺸﺎره ﻋﺒﻮد": "Chouf",
+
+      "ﻧﻐﻢ ﻧﺎﺟﻲ اﻟﺤﻠﺒﻲ": "Chouf",
+      "ﻣﺮوان ﻛﻤﻴﻞ ﻋﻤﺎد": "Aley",
+      "ﺟﻮزف اﺳﻌﺪ ﻃﻌﻤﻪ": "Chouf",
+      "اﻳﻤﻦ ﻏﺎزي زﻳﻦ اﻟﺪﻳﻦ": "Aley",
+      "ﺧﺎﻟﺪ اﺑﺮاﻫﻴﻢ ﺳﻌﺪ": "Chouf",
+      "ﻋﻤﺎد ﻣﺤﻤﺪ اﻟﻔﺮان": "Chouf",
+
+      "ﻏﺎده ﻏﺎزي ﻣﺎروﻧﻲ ﻋﻴﺪ": "Chouf",
+      "ﻧﺠﺎة ﺧﻄﺎر ﻋﻮن": "Chouf",
+      "راﻧﻴﻪ ﻋﺎدل ﻏﻴﺚ": "Chouf",
+      "ﺻﻌﻮد ﻛﺮﻳﻢ اﺑﻮ ﺷﺒﻞ": "Chouf",
+      "ﺣﻠﻴﻤﻪ اﺑﺮاﻫﻴﻢ اﻟﻘﻌﻘﻮر": "Chouf",
+      "ﻋﻤﺎد وﻓﻴﻖ ﺳﻴﻒ اﻟﺪﻳﻦ": "Chouf",
+      "ﺷﻜﺮي ﻳﻮﺳﻒ ﺣﺪاد": "Chouf",
+      "زوﻳﺎ ﻧﺠﻴﺐ ﺟﺮﻳﺪﻳﻨﻲ": "Aley",
+      "ﻣﺎرك ﺑﻬﺠﺎت ﺿﻮ": "Aley",
+      "ﻋﻼء اﻧﻮر اﻟﺼﺎﻳﻎ": "Aley",
+      "ﻓﺎدي ﻓﺎﻳﺰ اﺑﻲ ﻋﻼم": "Chouf",
+      "اﻧﻄﻮن ﺑﺠﺎﻧﻲﺟﺎد": "Aley",
+
+      "دﻋﺪ ﻧﺎﺻﻴﻒ اﻟﻘﺰي": "Chouf",
+      "ﻣﺤﻤﺪ ﻋﻤﺎر اﺑﺮاﻫﻴﻢ اﻟﺸﻤﻌﻪ": "Chouf",
+      "ﺟﻮﻳﺲ ﺟﻮزف ﻣﺎرون": "Aley",
+      "ﻣﺄﻣﻮن اﺣﻤﺪ اﻟﻤﺄﻣﻮن ﻣﻠﻚ": "Chouf",
+      "ﻫﺸﺎم ﻋﺰات ذﺑﻴﺎن": "Aley",
+      "ﺟﻮرج ادوار ﺳﻠﻮان": "Chouf",
+      "ﻋﻄﺎﻟﻠﻪ ﻛﺎﻣﻞ وﻫﺒﻲ": "Chouf",
+      "ﻧﺒﻴﻞ ادﻣﻮن ﻳﺰﺑﻚ": "Aley",
+      "وﻟﻴﺪ ﺟﺎن ﺷﺎﻫﻴﻦ": "Aley",
+
+      "زﻳﻨﻪ ﺷﻮﻗﻲ ﻣﻨﺼﻮر": "Aley",
+      "ﻧﺒﻴﻞ ﺧﻠﻴﻞ ﻣﺸﻨﺘﻒ": "Chouf",
+      "ﻋﺒﺪ ﷲ ﻳﻮﺳﻒ اﺑﻮ ﻋﺒﺪ ﷲ": "Chouf",
+      "اﻛﺮم ﻋﻠﻲ ﺑﺮﻳﺶ": "Aley",
+      "ﻟﻴﻮن ﺳﻮرﻳﻦ ﺳﻴﻮﻓﻲ": "Aley",
+      "ﺗﺎﺑﺖ ﺟﻮرج ﺗﺎﺑﺖ": "Aley",
+      "ﺳﻠﻤﺎن ﻓﺆاد ﻋﺒﺪ اﻟﺨﺎﻟﻖ": "Chouf",
+      "ﻣﺤﺴﻦ ﻓﺮﺣﺎن اﻟﻌﺮﻳﻀﻲ": "Chouf"
+    }
+  }
+};
+
+const quotaOverrides2022ByTemplateId = {
+  "north-ii": [
+    { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
+    { sect: "Sunni", seats: 2, minorDistrict: "Dinnieh" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Minnieh" },
+    { sect: "Alawite", seats: 1, minorDistrict: "Tripoli" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Tripoli" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Tripoli" }
+  ],
+  "north-iii": [
+    { sect: "Maronite", seats: 2, minorDistrict: "Batroun" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Bcharre" },
+    { sect: "Maronite", seats: 3, minorDistrict: "Zgharta" },
+    { sect: "Greek Orthodox", seats: 3, minorDistrict: "Koura" }
+  ],
+  "mount-lebanon-i": [
+    { sect: "Maronite", seats: 5, minorDistrict: "Keserwan" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Jbeil" },
+    { sect: "Shia", seats: 1, minorDistrict: "Jbeil" }
+  ],
+  "mount-lebanon-iv": [
+    { sect: "Druze", seats: 2, minorDistrict: "Aley" },
+    { sect: "Druze", seats: 2, minorDistrict: "Chouf" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Aley" },
+    { sect: "Maronite", seats: 3, minorDistrict: "Chouf" },
+    { sect: "Sunni", seats: 2, minorDistrict: "Chouf" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Aley" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Chouf" }
+  ]
+};
+
 const generatedElectionResults2022ByTemplateIdWithOverrides = Object.fromEntries(
   Object.entries(generatedElectionResults2022ByTemplateId).map(([templateId, baseline]) => {
     const override = generatedListVoteOverrides2022ByTemplateId[templateId];
+    const candidateOverride = generatedCandidateOverrides2022ByTemplateId[templateId];
+    const candidates = candidateOverride?.minorDistrictByCandidateName
+      ? (Array.isArray(baseline.candidates) ? baseline.candidates : []).map((candidate) => ({
+          ...candidate,
+          minorDistrict: candidateOverride.minorDistrictByCandidateName[candidate.name] ?? candidate.minorDistrict
+        }))
+      : baseline.candidates;
+
     if (!override) {
-      return [templateId, baseline];
+      return [
+        templateId,
+        {
+          ...baseline,
+          candidates
+        }
+      ];
     }
     return [
       templateId,
       {
         ...baseline,
+        candidates,
         ...override
       }
     ];
@@ -546,6 +909,9 @@ export function loadElectionResults2022(template) {
   }
 
   const scenario = cloneTemplate(template);
+  if (quotaOverrides2022ByTemplateId[templateId]) {
+    scenario.quotas = quotaOverrides2022ByTemplateId[templateId].map((entry) => ({ ...entry }));
+  }
   scenario.candidates = normalizeElectionBaseline(template, baseline.candidates, "2022 Imported List");
   scenario.listVotes = normalizeElectionBaselineListVotes(scenario.candidates, baseline.listVotes);
   scenario.blankVotes = getBlankVotes(2022, templateId);

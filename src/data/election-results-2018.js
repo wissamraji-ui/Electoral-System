@@ -907,6 +907,277 @@ const electionResults2018ByTemplateId = {
   "south-iii": verifiedElectionResults2018ByTemplateId["south-iii"]
 };
 
+const quotaOverrides2018ByTemplateId = {
+  "north-ii": [
+    { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
+    { sect: "Sunni", seats: 2, minorDistrict: "Dinnieh" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Minnieh" },
+    { sect: "Alawite", seats: 1, minorDistrict: "Tripoli" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Tripoli" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Tripoli" }
+  ],
+  "north-iii": [
+    { sect: "Maronite", seats: 2, minorDistrict: "Batroun" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Bcharre" },
+    { sect: "Maronite", seats: 3, minorDistrict: "Zgharta" },
+    { sect: "Greek Orthodox", seats: 3, minorDistrict: "Koura" }
+  ],
+  "mount-lebanon-i": [
+    { sect: "Maronite", seats: 5, minorDistrict: "Keserwan" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Jbeil" },
+    { sect: "Shia", seats: 1, minorDistrict: "Jbeil" }
+  ],
+  "mount-lebanon-iv": [
+    { sect: "Druze", seats: 2, minorDistrict: "Aley" },
+    { sect: "Druze", seats: 2, minorDistrict: "Chouf" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Aley" },
+    { sect: "Maronite", seats: 3, minorDistrict: "Chouf" },
+    { sect: "Sunni", seats: 2, minorDistrict: "Chouf" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Aley" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Chouf" }
+  ]
+};
+
+const candidateMinorDistrictOverrides2018ByTemplateId = {
+  "north-ii": {
+    "Kassem Ali Abdel Aziz": "Dinnieh",
+    "Nehmeh Gerges Mahfoud": "Tripoli",
+    "Layla Hassan Chahoud": "Tripoli",
+    "Dima Mohamad Rachid El Jamali": "Tripoli",
+    "Mohamd Abdel Latif Kabbara": "Tripoli",
+    "Sami Ahmad Chaouki Fatfat": "Dinnieh",
+    "Samir Adnan El Jisr": "Tripoli",
+    "Osman Mohamad Alameddine": "Minnieh",
+    "Chadi Ghassan Nechabeh": "Tripoli",
+    "Georges Tanios El Bekasini": "Tripoli",
+    "Walid Mahmoud El Sawalhi": "Tripoli",
+
+    "Jihad Mourched El Samad": "Dinnieh",
+    "Ahmad Mahmoud Omran": "Tripoli",
+    "Mohamad Safouh Ahmad Ismat Charif Yakan": "Tripoli",
+    "Faysal Omar Karami": "Tripoli",
+    "Adel Mohamad Kazem Zreika": "Tripoli",
+    "Ayman Noureddine Omar": "Tripoli",
+    "Taha Itfat Naji": "Minnieh",
+    "Rafli Antoine Diab": "Tripoli",
+    "Abdelnasser Abdel Aziz El Masri": "Tripoli",
+
+    "Mohamad Nagib Azmi Mikati": "Tripoli",
+    "Nicolas Kamil Nahas": "Tripoli",
+    "Kazem Saleh Kheir": "Minnieh",
+    "Rachid Ibrahim El Moukadem": "Tripoli",
+    "Mohamad Ahmad Talal El Fadel": "Minnieh",
+    "Mirvat Mohamad Fadel El Houz": "Tripoli",
+    "Ali Ahmad Darwish": "Tripoli",
+    "Mohamad Anas Abdallah Nadim El Jisr": "Tripoli",
+    "Jihad Ali Youssef": "Dinnieh",
+    "Jean Badawi Obeid": "Tripoli",
+    "Mohamad Toufic Mohamad Rached Sultan": "Dinnieh",
+
+    "Georges Nicolas El Jalad": "Tripoli",
+    "Mohamad Walid Abdel Kader Kamaredin": "Tripoli",
+    "Ashraf Ahmad Rifi": "Tripoli",
+    "Ali Abdel Halim El Ayoubi": "Tripoli",
+    "Mohamad Kamaleddine Salhab": "Tripoli",
+    "Halim Naim Zeani": "Tripoli",
+    "Khaled Omar Tadmouri": "Tripoli",
+    "Ossama Nadim Amoun": "Dinnieh",
+    "Bader Hussein Eid": "Dinnieh",
+    "Walid Mohamad El Masri": "Tripoli",
+    "Ragheb Mohamad Faysal Raad": "Minnieh",
+
+    "Abdel Salam Ahmad Trad": "Dinnieh",
+    "Antoine Roufael Khalifeh": "Tripoli",
+    "Mounzeh Gebran Sawan": "Tripoli",
+    "Nariman Hilal El Jamal": "Dinnieh",
+    "Ali Farouk El Samad": "Tripoli",
+    "Wassim Ali Alwan": "Minnieh",
+    "Mohamad Mesbah Aouni Ahdab": "Tripoli",
+    "Mohamad Mahmoud El hajj Ahmad": "Tripoli",
+    "Hisham Riad Ibrahim": "Tripoli",
+
+    "Ali Moustafa Harmouch": "Dinnieh",
+    "Nistas William El Kochari": "Tripoli",
+    "Khaled Kamel Roumieh": "Dinnieh",
+    "Ahmad Mohamad Chandab": "Minnieh",
+    "Mahmoud Abdel Karim Chehadeh": "Tripoli",
+    "Kamal Mohamad Saleh El Kheir": "Tripoli",
+    "Tony Farid Marouni": "Tripoli",
+
+    "Samah Yehya El Arja": "Dinnieh",
+    "Fadi Bikar El Jamal": "Tripoli",
+    "Jamal Nassereddine Hamra El Badaoui": "Dinnieh",
+    "Ayman Omar Jamal": "Minnieh",
+    "Hiba Issam Naja": "Tripoli",
+    "Abdallah Abdel Kader El Rifai": "Tripoli",
+    "Housan Hassan Khalil": "Tripoli",
+
+    "Nariman Adel El Chamaa": "Tripoli",
+    "Yahi Kamal Mawloud": "Tripoli",
+    "Mohamad Mounzir Ashraf Maaliki": "Tripoli",
+    "Wasek Abdel Razak El Moukadem": "Tripoli",
+    "Malek Faysal Moulawi": "Tripoli",
+    "Zeineddine Noureddine Dib": "Tripoli",
+    "Dani Mahmoud Osman": "Dinnieh",
+    "Farah Ibrahim Issa": "Tripoli",
+    "Moussa Asaad Khoury": "Minnieh",
+    "Ahmad Moustafa El Dhaybi": "Tripoli"
+  },
+  "north-iii": {
+    "Boutros Joseph El Khoury Hareb": "Batroun",
+    "Salim Abdallah Saade": "Koura",
+    "Tony Sleiman Franjieh": "Zgharta",
+    "Melhem Jobran Tawk": "Koura",
+    "Fayez Michel Ghosn": "Koura",
+    "Salim Beik Youssef Beik Karam": "Bcharre",
+    "Abdallah Salim Al Zakhem": "Zgharta",
+    "Roy Bahjat Issa El Khoury": "Bcharre",
+    "Estephan Boutros El Doueihy": "Zgharta",
+
+    "Fadi Youssef Saad": "Batroun",
+    "Fadi Abdallah Karam": "Koura",
+    "Marios Boutros El Beaini": "Zgharta",
+    "Sitrida Elias Tawk": "Bcharre",
+    "Samer Georges Saade": "Koura",
+    "Joseph Gerges Ishak": "Koura",
+    "Albert Jamil Andraos": "Batroun",
+    "Georges Moussi Mansour": "Zgharta",
+    "Qaysar Farid Mouawad": "Bcharre",
+    "Michel Bakhous El Douweihy": "Zgharta",
+
+    "Layal Semaan Bou Moussa": "Batroun",
+    "Fadwa Fayez Nassif": "Koura",
+    "Antonia Ramez Ghamra": "Zgharta",
+    "Maurice Romanos El Koura": "Batroun",
+    "Antoun Habib El Khoury Hareb": "Koura",
+    "Riyad Sarkis Ghazale": "Bcharre",
+    "Bassam Nadeem Ghantous": "Zgharta",
+    "Edmond Mikhael Tawk": "Bcharre",
+    "Antoine Youssef Yammine": "Zgharta",
+
+    "Gebran Gergi Bassil": "Koura",
+    "Michel Rene Mouawad": "Zgharta",
+    "Nehmeh Ibrahim Ibrahim": "Batroun",
+    "Pierre Gerges Raffoul": "Bcharre",
+    "Jawad Simon Boulos": "Zgharta",
+    "Georges Naim Atallah": "Koura",
+    "Gretta Habib Saab": "Zgharta",
+    "Nicolas Bek Fouad Bek Ghosn Ghosn": "Batroun",
+    "Said Youssef Taouk": "Bcharre",
+    "Georges Badaoui Boutros": "Koura"
+  },
+  "mount-lebanon-i": {
+    "Mahmoud Ibrahim Awad": "Jbeil",
+    "Rock Antoine Tanios Mhenna": "Keserwan",
+    "Ziad Habib Khalife Hashem": "Keserwan",
+    "Patricia Jean Elias": "Jbeil",
+    "Ziad Halim Al Hawwat": "Jbeil",
+    "Shawki Gergi Al Dakash": "Keserwan",
+    "Fadi Nagib Rouhana-Sakr": "Keserwan",
+    "Naaman Joseph Mrad": "Keserwan",
+
+    "Rabih Khalil Awad": "Jbeil",
+    "Nehme Georges Efrem": "Keserwan",
+    "Mansour Fouad Ghanem El Bonn": "Keserwan",
+    "Ziad Salim Baroud": "Jbeil",
+    "Walid Najib El Khoury": "Jbeil",
+    "Roger Gergi Azar": "Keserwan",
+    "Simon Farid Abi Ramia": "Jbeil",
+    "Shamel Rachid Roukoz": "Keserwan",
+
+    "Hussein Mohammad Zeaiter": "Jbeil",
+    "Carlos Boutros Abi Nader": "Keserwan",
+    "Michel Bechara Keyrouz": "Keserwan",
+    "Joseph Tanios Al Zayek": "Jbeil",
+    "Bassam Asad Al Hachem": "Jbeil",
+    "Joseph Tanios Zgheib": "Keserwan",
+    "Jean-Luis Louis Kordahi": "Keserwan",
+    "Zeina Joseph Al Kallab": "Keserwan",
+
+    "Mohammad Karam Al Mokdad": "Jbeil",
+    "Youssef Elias Salame": "Keserwan",
+    "Dori Nazih Daou": "Jbeil",
+    "Rania Victor Bassil": "Jbeil",
+    "Nadim Chafik Said": "Keserwan",
+    "Josephine Antoine Zgheib": "Keserwan",
+
+    "Moustapha Ali Al Husseini": "Jbeil",
+    "Farid Haykal Al Khazen": "Keserwan",
+    "Gilberte Maurice Zwein": "Keserwan",
+    "Youssef Al Maarouf Joseph Hanna Khalil": "Jbeil",
+    "Fares Antoun Said": "Jbeil",
+    "Yolande Simon Khoury": "Keserwan",
+    "Jean Nasib Al Hawat": "Keserwan",
+    "Shaker Elias Salameh": "Keserwan"
+  },
+  "mount-lebanon-iv": {
+    "Akram Hussein Sheyab": "Aley",
+    "Taymour Walid Joumblatt": "Chouf",
+    "Mohammad Kassem Rachid Al Hajjar": "Chouf",
+    "Georges Jamil Adwan": "Chouf",
+    "Bilal Ahmad Abdallah": "Chouf",
+    "Henri Pierre El Helou": "Aley",
+    "Anis Wadih Nassar": "Aley",
+    "Marwan Mohammad Hmadeh": "Chouf",
+    "Nehme Youssef Tohme": "Chouf",
+    "Naji Nabih Al Boustani": "Chouf",
+    "Ghattas Semaan El Khoury": "Chouf",
+    "Raji Najib Al Saad": "Aley",
+    "Cezar Raymond Abi Khalil": "Aley",
+    "Al Amir Talal Al Amir Majid Irslan": "Aley",
+    "Mario Aziz Aoun": "Chouf",
+    "Ghassan Amal Atallah": "Chouf",
+    "Ali Salah Eddine Al Hajj": "Chouf",
+    "Elias Chedid Hanna": "Aley",
+    "Farid Georges Philip Al Boustani": "Chouf",
+    "Tarek Mohammad Al Khateeb": "Chouf",
+    "Samir Youssef Aoun": "Chouf",
+    "Marwan Salman Al Sabiri Halawi": "Chouf",
+    "Imad Maroun El Hajj Moulaka Bil Mouallem": "Aley",
+    "Mazen Ismat Bou Dergham": "Chouf",
+    "Weam Maher Najib Wahab": "Chouf",
+    "Walid Anis Khairallah": "Aley",
+    "Zaher Anwar Al Khateeb": "Chouf",
+    "Chafik Salameh Radwan": "Aley",
+    "Souheil Khalil Bejjani": "Aley",
+    "Ziad Antoine Choueiry": "Chouf",
+    "Elias Abdel Salam Al Braj": "Chouf",
+    "Khaled Aaref Khaddaj": "Chouf",
+    "Assaad Edmond Abou Jaoudeh": "Chouf",
+    "Sleiman Mahfouz Bou Rjeili": "Chouf",
+    "Ghada Ghazi Marouni": "Chouf",
+    "Zoya Najib Jraydini": "Aley",
+    "Mohamad Sami Al Hajjar": "Aley",
+    "Rania Adel Ghaith": "Chouf",
+    "Maher Maamoun Abou Shakra": "Chouf",
+    "Alaa Anwar Al Sayyegh": "Aley",
+    "Imad Haseeb Al Qadi": "Aley",
+    "Antoine Habib Fawwaz": "Chouf",
+    "Karl Farid Bou Melham": "Chouf",
+    "Mazen Mohammad Nasereddine": "Chouf",
+    "Georges Emile Aoun": "Aley",
+    "Theodora Toni Bejjani": "Chouf",
+    "Kamil Michel Dori Chamoun": "Aley",
+    "Mazen Khalaf Shibo": "Chouf",
+    "Raafat Ahmad Shaaban": "Chouf",
+    "Joseph Haseeb Eid": "Chouf",
+    "Ghassan Naim Mghabghab": "Chouf",
+    "Sami Toufik Hmadeh": "Chouf",
+    "Daad Nassif Al Azzi": "Chouf",
+    "Antoine Nassib Bou Malham": "Aley",
+    "Alhan Walid Farhat": "Chouf",
+    "Sami Selman Al Remah": "Aley",
+    "Mark Behjat Daou": "Aley",
+    "Maya Wahid Terro": "Chouf",
+    "Fadi Fouad El Khoury": "Aley",
+    "Chekri Youssef Haddad": "Chouf",
+    "Rami Nouhad Hmadeh": "Chouf",
+    "Marwan Aziz El Metni": "Chouf",
+    "Elias Najib Ghareeb": "Chouf",
+    "Eliane Michel Azzi": "Chouf"
+  }
+};
+
 const electionResults2018DataVersion = hashVersionPayload(electionResults2018ByTemplateId);
 
 export function getElectionResults2018TemplateIds() {
@@ -930,7 +1201,17 @@ export function loadElectionResults2018(template) {
   }
 
   const scenario = cloneTemplate(template);
-  scenario.candidates = normalizeElectionBaseline(template, baseline.candidates, "2018 Report Unassigned List");
+  if (quotaOverrides2018ByTemplateId[templateId]) {
+    scenario.quotas = quotaOverrides2018ByTemplateId[templateId].map((entry) => ({ ...entry }));
+  }
+  const candidateMinorDistrictOverride = candidateMinorDistrictOverrides2018ByTemplateId[templateId];
+  const baselineCandidates = candidateMinorDistrictOverride
+    ? baseline.candidates.map((candidate) => ({
+        ...candidate,
+        minorDistrict: candidateMinorDistrictOverride[candidate.name] ?? candidate.minorDistrict
+      }))
+    : baseline.candidates;
+  scenario.candidates = normalizeElectionBaseline(template, baselineCandidates, "2018 Report Unassigned List");
   scenario.listVotes = normalizeElectionBaselineListVotes(scenario.candidates, baseline.listVotes);
   scenario.blankVotes = getBlankVotes(2018, templateId);
   scenario.invalidVotes = getInvalidVotes(2018, templateId);

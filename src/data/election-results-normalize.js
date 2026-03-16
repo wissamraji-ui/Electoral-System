@@ -7,7 +7,8 @@ function normalizeCandidate(candidate) {
     name: String(candidate?.name ?? "").trim(),
     sect: String(candidate?.sect ?? "").trim(),
     list: String(candidate?.list ?? "").trim(),
-    votes: toSafeInteger(candidate?.votes)
+    votes: toSafeInteger(candidate?.votes),
+    minorDistrict: String(candidate?.minorDistrict ?? "").trim()
   };
 }
 
@@ -72,7 +73,8 @@ export function normalizeElectionBaseline(template, baselineCandidates, fallback
             name: candidate.name,
             sect: candidate.sect,
             list: candidate.list,
-            votes: candidate.votes
+            votes: candidate.votes,
+            minorDistrict: candidate.minorDistrict
           });
         });
     });

@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import rawTemplates from "../src/data/templates.json" with { type: "json" };
+import { computeResults } from "../src/engine.js";
 import {
   getElectionResults2018TemplateIds,
   hasElectionResults2018,
@@ -86,6 +87,27 @@ test("2018 baselines can preload official list-only votes from the report", () =
   const mountLebanonOne = loadElectionResults2018(byId.get("mount-lebanon-i"));
   assert.ok(mountLebanonOne);
   assert.deepEqual(mountLebanonOne.listVotes, [{ list: "Definite Change", votes: 404 }]);
+  assert.deepEqual(mountLebanonOne.quotas, [
+    { sect: "Maronite", seats: 5, minorDistrict: "Keserwan" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Jbeil" },
+    { sect: "Shia", seats: 1, minorDistrict: "Jbeil" }
+  ]);
+  assert.equal(
+    mountLebanonOne.candidates.find((candidate) => candidate.name === "Ziad Halim Al Hawwat")?.minorDistrict,
+    "Jbeil"
+  );
+  assert.equal(
+    mountLebanonOne.candidates.find((candidate) => candidate.name === "Shawki Gergi Al Dakash")?.minorDistrict,
+    "Keserwan"
+  );
+  assert.equal(
+    mountLebanonOne.candidates.find((candidate) => candidate.name === "Moustapha Ali Al Husseini")?.minorDistrict,
+    "Jbeil"
+  );
+  assert.equal(
+    mountLebanonOne.candidates.find((candidate) => candidate.name === "Farid Haykal Al Khazen")?.minorDistrict,
+    "Keserwan"
+  );
   assert.equal(
     mountLebanonOne.candidates
       .filter((candidate) => candidate.list === "Definite Change")
@@ -124,8 +146,50 @@ test("2018 baselines can preload official list-only votes from the report", () =
     26500
   );
 
+  const northThree = loadElectionResults2018(byId.get("north-iii"));
+  assert.ok(northThree);
+  assert.deepEqual(northThree.quotas, [
+    { sect: "Maronite", seats: 2, minorDistrict: "Batroun" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Bcharre" },
+    { sect: "Maronite", seats: 3, minorDistrict: "Zgharta" },
+    { sect: "Greek Orthodox", seats: 3, minorDistrict: "Koura" }
+  ]);
+  assert.equal(
+    northThree.candidates.find((candidate) => candidate.name === "Fadi Youssef Saad")?.minorDistrict,
+    "Batroun"
+  );
+  assert.equal(
+    northThree.candidates.find((candidate) => candidate.name === "Sitrida Elias Tawk")?.minorDistrict,
+    "Bcharre"
+  );
+  assert.equal(
+    northThree.candidates.find((candidate) => candidate.name === "Tony Sleiman Franjieh")?.minorDistrict,
+    "Zgharta"
+  );
+  assert.equal(
+    northThree.candidates.find((candidate) => candidate.name === "Fadi Abdallah Karam")?.minorDistrict,
+    "Koura"
+  );
+
   const mountLebanonFour = loadElectionResults2018(byId.get("mount-lebanon-iv"));
   assert.ok(mountLebanonFour);
+  assert.deepEqual(mountLebanonFour.quotas, [
+    { sect: "Druze", seats: 2, minorDistrict: "Aley" },
+    { sect: "Druze", seats: 2, minorDistrict: "Chouf" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Aley" },
+    { sect: "Maronite", seats: 3, minorDistrict: "Chouf" },
+    { sect: "Sunni", seats: 2, minorDistrict: "Chouf" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Aley" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Chouf" }
+  ]);
+  assert.equal(
+    mountLebanonFour.candidates.find((candidate) => candidate.name === "Taymour Walid Joumblatt")?.minorDistrict,
+    "Chouf"
+  );
+  assert.equal(
+    mountLebanonFour.candidates.find((candidate) => candidate.name === "Cezar Raymond Abi Khalil")?.minorDistrict,
+    "Aley"
+  );
   assert.equal(
     mountLebanonFour.candidates
       .filter((candidate) => candidate.list === "National Unity")
@@ -216,6 +280,30 @@ test("2018 baselines can preload official list-only votes from the report", () =
       { list: "Independent Civil Society", votes: 48 }
     ]
   );
+  assert.deepEqual(northTwo.quotas, [
+    { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
+    { sect: "Sunni", seats: 2, minorDistrict: "Dinnieh" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Minnieh" },
+    { sect: "Alawite", seats: 1, minorDistrict: "Tripoli" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Tripoli" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Tripoli" }
+  ]);
+  assert.equal(
+    northTwo.candidates.find((candidate) => candidate.name === "Jihad Mourched El Samad")?.minorDistrict,
+    "Dinnieh"
+  );
+  assert.equal(
+    northTwo.candidates.find((candidate) => candidate.name === "Osman Mohamad Alameddine")?.minorDistrict,
+    "Minnieh"
+  );
+  assert.equal(
+    northTwo.candidates.find((candidate) => candidate.name === "Mohamad Nagib Azmi Mikati")?.minorDistrict,
+    "Tripoli"
+  );
+  assert.equal(
+    northTwo.candidates.find((candidate) => candidate.name === "Kazem Saleh Kheir")?.minorDistrict,
+    "Minnieh"
+  );
 
   const southOne = loadElectionResults2018(byId.get("south-i"));
   assert.ok(southOne);
@@ -228,4 +316,30 @@ test("2018 baselines can preload official list-only votes from the report", () =
       { list: "Integrity and Dignity", votes: 588 }
     ]
   );
+});
+
+test("2018 North II simulation matches the published winner set", () => {
+  const byId = new Map(rawTemplates.map((template) => [template.id, template]));
+  const northTwo = loadElectionResults2018(byId.get("north-ii"));
+  const result = computeResults(
+    northTwo.quotas,
+    northTwo.candidates,
+    northTwo.listVotes,
+    northTwo.blankVotes,
+    northTwo.invalidVotes
+  );
+
+  assert.deepEqual(result.winners.map((winner) => winner.name), [
+    "Mohamad Nagib Azmi Mikati",
+    "Mohamd Abdel Latif Kabbara",
+    "Samir Adnan El Jisr",
+    "Faysal Omar Karami",
+    "Dima Mohamad Rachid El Jamali",
+    "Jihad Mourched El Samad",
+    "Sami Ahmad Chaouki Fatfat",
+    "Osman Mohamad Alameddine",
+    "Ali Ahmad Darwish",
+    "Jean Badawi Obeid",
+    "Nicolas Kamil Nahas"
+  ]);
 });

@@ -178,6 +178,30 @@ test("2022 generated districts can also preload official list-only votes via ove
       { list: "ﻗﺎدرﻳﻦ", votes: 191 }
     ]
   );
+  assert.deepEqual(northTwo.quotas, [
+    { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
+    { sect: "Sunni", seats: 2, minorDistrict: "Dinnieh" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Minnieh" },
+    { sect: "Alawite", seats: 1, minorDistrict: "Tripoli" },
+    { sect: "Maronite", seats: 1, minorDistrict: "Tripoli" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Tripoli" }
+  ]);
+  assert.equal(
+    northTwo.candidates.find((candidate) => candidate.name === "اﺷﺮف اﺣﻤﺪ رﻳﻔﻲ")?.minorDistrict,
+    "Tripoli"
+  );
+  assert.equal(
+    northTwo.candidates.find((candidate) => candidate.name === "اﻟﺼﻤﺪﺟﻬﺎد ﻣﺮﺷﺪ")?.minorDistrict,
+    "Dinnieh"
+  );
+  assert.equal(
+    northTwo.candidates.find((candidate) => candidate.name === "اﺣﻤﺪ ﻣﺤﻤﻮد اﻟﺨﻴﺮ")?.minorDistrict,
+    "Minnieh"
+  );
+  assert.equal(
+    northTwo.candidates.find((candidate) => candidate.name === "رﻓﻠﻲ اﻧﻄﻮن دﻳﺎب")?.minorDistrict,
+    "Tripoli"
+  );
 
   const northThree = loadElectionResults2022(byId.get("north-iii"));
   assert.deepEqual(
@@ -191,6 +215,28 @@ test("2022 generated districts can also preload official list-only votes via ove
       { list: "وﻋﻲ ﺻﻮﺗﻚ", votes: 73 },
       { list: "ﻻﺋﺤﺔ وﺣﺪة اﻟﺸﻤﺎل", votes: 679 }
     ]
+  );
+  assert.deepEqual(northThree.quotas, [
+    { sect: "Maronite", seats: 2, minorDistrict: "Batroun" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Bcharre" },
+    { sect: "Maronite", seats: 3, minorDistrict: "Zgharta" },
+    { sect: "Greek Orthodox", seats: 3, minorDistrict: "Koura" }
+  ]);
+  assert.equal(
+    northThree.candidates.find((candidate) => candidate.name === "ﻏﻴﺎث ﻣﻴﺸﺎل ﻣﻴﺸﺎل ﻳﺰﺑﻚ")?.minorDistrict,
+    "Batroun"
+  );
+  assert.equal(
+    northThree.candidates.find((candidate) => candidate.name === "ﺳﺘﺮﻳﺪا اﻟﻴﺎس ﻃﻮق")?.minorDistrict,
+    "Bcharre"
+  );
+  assert.equal(
+    northThree.candidates.find((candidate) => candidate.name === "ﻃﻮﻧﻲ ﺳﻠﻴﻤﺎن ﻓﺮﻧﺠﻴﻪ")?.minorDistrict,
+    "Zgharta"
+  );
+  assert.equal(
+    northThree.candidates.find((candidate) => candidate.name === "ﻓﺎدي ﻣﻴﺸﺎل ﻏﺼﻦ")?.minorDistrict,
+    "Koura"
   );
 
   const metn = loadElectionResults2022(byId.get("mount-lebanon-ii"));
@@ -228,6 +274,27 @@ test("2022 generated districts can also preload official list-only votes via ove
       { list: "ﻛﻨﺎ ورح ﻧﺒﻘﻰ", votes: 657 }
     ]
   );
+  assert.deepEqual(keserwanJbeil.quotas, [
+    { sect: "Maronite", seats: 5, minorDistrict: "Keserwan" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Jbeil" },
+    { sect: "Shia", seats: 1, minorDistrict: "Jbeil" }
+  ]);
+  assert.equal(
+    keserwanJbeil.candidates.find((candidate) => candidate.name === "زﻳﺎد ﺣﻠﻴﻢ اﻟﺤﻮاط")?.minorDistrict,
+    "Jbeil"
+  );
+  assert.equal(
+    keserwanJbeil.candidates.find((candidate) => candidate.name === "ﺷﻮﻗﻲ ﺟﺮﺟﻲ اﻟﺪﻛﺎش")?.minorDistrict,
+    "Keserwan"
+  );
+  assert.equal(
+    keserwanJbeil.candidates.find((candidate) => candidate.name === "راﺋﺪ ﻋﻜﻴﻒ ﺑﺮّو")?.minorDistrict,
+    "Jbeil"
+  );
+  assert.equal(
+    keserwanJbeil.candidates.find((candidate) => candidate.name === "ﻧﺪى ﻧﻬﺎد اﻟﺒﺴﺘﺎﻧﻲ")?.minorDistrict,
+    "Keserwan"
+  );
 
   const baalbackHermel = loadElectionResults2022(byId.get("bekaa-iii"));
   assert.deepEqual(
@@ -254,6 +321,27 @@ test("2022 generated districts can also preload official list-only votes via ove
       { list: "ﺳﻴﺎدة وﻃﻦ", votes: 88 },
       { list: "اﻟﺠﺒﻞ ﻳﻨﺘﻔﺾ", votes: 78 }
     ]
+  );
+  assert.deepEqual(choufAley.quotas, [
+    { sect: "Druze", seats: 2, minorDistrict: "Aley" },
+    { sect: "Druze", seats: 2, minorDistrict: "Chouf" },
+    { sect: "Maronite", seats: 2, minorDistrict: "Aley" },
+    { sect: "Maronite", seats: 3, minorDistrict: "Chouf" },
+    { sect: "Sunni", seats: 2, minorDistrict: "Chouf" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Aley" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Chouf" }
+  ]);
+  assert.equal(
+    choufAley.candidates.find((candidate) => candidate.name === "ﺗﻴﻤﻮر وﻟﻴﺪ ﺟﻨﺒﻼط")?.minorDistrict,
+    "Chouf"
+  );
+  assert.equal(
+    choufAley.candidates.find((candidate) => candidate.name === "اﻛﺮم ﺣﺴﻴﻦ ﺷﻬﻴﺐ")?.minorDistrict,
+    "Aley"
+  );
+  assert.equal(
+    choufAley.candidates.find((candidate) => candidate.name === "ﻧﺠﺎة ﺧﻄﺎر ﻋﻮن")?.minorDistrict,
+    "Chouf"
   );
 
   const akkar = loadElectionResults2022(byId.get("north-i"));

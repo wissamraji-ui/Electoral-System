@@ -261,6 +261,7 @@ function onAddList() {
       id: createId("candidate"),
       name: "",
       sect: slot.sect,
+      minorDistrict: slot.minorDistrict,
       list: listName,
       votes: 0
     });
@@ -423,7 +424,11 @@ function onExportScenario() {
     exportedAt: new Date().toISOString(),
     scenario: {
       regionName: state.regionName,
-      quotas: state.quotas.map((entry) => ({ sect: entry.sect, seats: entry.seats })),
+      quotas: state.quotas.map((entry) => ({
+        sect: entry.sect,
+        seats: entry.seats,
+        minorDistrict: entry.minorDistrict
+      })),
       quotasLocked: state.quotasLocked,
       blankVotes: state.blankVotes,
       invalidVotes: state.invalidVotes,
@@ -435,7 +440,8 @@ function onExportScenario() {
         name: candidate.name,
         sect: candidate.sect,
         list: candidate.list,
-        votes: candidate.votes
+        votes: candidate.votes,
+        minorDistrict: candidate.minorDistrict
       }))
     }
   };
@@ -665,14 +671,21 @@ function getCurrentTemplateId() {
 }
 
 function buildQuotaSignature(quotas) {
-  return (Array.isArray(quotas) ? quotas : [])
-    .map((entry) => ({
-      sect: normalizeSect(entry?.sect),
-      seats: clampInteger(entry?.seats, 0)
-    }))
-    .filter((entry) => entry.sect && entry.seats > 0)
-    .sort((a, b) => a.sect.localeCompare(b.sect, "en", { sensitivity: "base" }))
-    .map((entry) => `${entry.sect}:${entry.seats}`)
+  const aggregatedBySect = new Map();
+
+  (Array.isArray(quotas) ? quotas : []).forEach((entry) => {
+    const sect = normalizeSect(entry?.sect);
+    const seats = clampInteger(entry?.seats, 0);
+    if (!sect || seats <= 0) {
+      return;
+    }
+
+    aggregatedBySect.set(sect, (aggregatedBySect.get(sect) ?? 0) + seats);
+  });
+
+  return Array.from(aggregatedBySect.entries())
+    .sort((a, b) => a[0].localeCompare(b[0], "en", { sensitivity: "base" }))
+    .map(([sect, seats]) => `${sect}:${seats}`)
     .join("|");
 }
 
@@ -691,7 +704,7 @@ function renderQuotaTable() {
       <tr data-id="${escapeHtml(entry.id)}">
         <td>
           <div class="quota-cell-main">
-            <span class="quota-sect-name">${escapeHtml(entry.sect)}</span>
+            <span class="quota-sect-name">${escapeHtml(formatQuotaLabel(entry))}</span>
             <span class="quota-seat-inline">${entry.seats} seat${entry.seats === 1 ? "" : "s"}</span>
           </div>
         </td>
@@ -743,15 +756,14 @@ function renderCandidateTable() {
   elements.candidateTableBody.innerHTML = state.candidates
     .map((candidate) => {
       const listKey = normalizeListKey(candidate.list);
-      const sectKey = normalizeSect(candidate.sect);
-      const counterKey = `${listKey}::${sectKey}`;
+      const counterKey = `${listKey}::${buildQuotaKey(candidate.sect, candidate.minorDistrict)}`;
       const slotNumber = (slotCounter.get(counterKey) ?? 0) + 1;
       slotCounter.set(counterKey, slotNumber);
 
       return `
         <tr data-id="${escapeHtml(candidate.id)}">
           <td>${renderListChip(candidate.list)}</td>
-          <td><span class="sect-slot-label">${escapeHtml(candidate.sect)} #${slotNumber}</span></td>
+          <td><span class="sect-slot-label">${escapeHtml(formatQuotaLabel(candidate))} #${slotNumber}</span></td>
           <td class="candidate-name-cell"><input class="row-edit candidate-name" type="text" value="${escapeHtml(
             candidate.name
           )}" placeholder="Candidate full name" /></td>
@@ -850,13 +862,14 @@ function buildCandidateSlotsFromQuotas(quotas) {
 
   quotas.forEach((quota) => {
     const sect = String(quota?.sect ?? "").trim();
+    const minorDistrict = String(quota?.minorDistrict ?? "").trim();
     const seats = clampInteger(quota?.seats, 0);
     if (!sect || seats <= 0) {
       return;
     }
 
     for (let index = 1; index <= seats; index += 1) {
-      slots.push({ sect });
+      slots.push({ sect, minorDistrict });
     }
   });
 
@@ -918,9 +931,17 @@ function renderMetrics() {
     { label: "Candidates", value: String(summary.totalCandidates) },
     { label: "Total Votes", value: formatNumber(summary.totalVotes) },
     { label: "Blank Votes", value: formatNumber(summary.blankVotes) },
-    { label: "EQ Vote Base", value: formatNumber(summary.eqVotes) },
+    { label: "Qualification EQ Vote Base", value: formatNumber(summary.qualificationEqVotes) },
     { label: "Invalid Votes", value: formatNumber(summary.invalidVotes) },
-    { label: "Electoral Quotient (EQ)", value: summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-" },
+    {
+      label: "Qualification EQ",
+      value: summary.qualificationQuotient > 0 ? formatDecimal(summary.qualificationQuotient) : "-"
+    },
+    { label: "Allocation EQ Vote Base", value: formatNumber(summary.eqVotes) },
+    {
+      label: "Allocation EQ",
+      value: summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-"
+    },
     { label: "Total Lists", value: String(totalListCount) },
     { label: "Qualified Lists", value: String(summary.qualifiedListCount) }
   ];
@@ -1002,7 +1023,7 @@ function renderWinnersTable() {
       (winner) => `
       <tr>
         <td>${winner.seatNumber}</td>
-        <td>${escapeHtml(winner.sect)}</td>
+        <td>${escapeHtml(winner.seatLabel ?? winner.sect)}</td>
         <td>${escapeHtml(winner.name)}</td>
         <td>${renderListChip(winner.list)}</td>
         <td>${formatNumber(winner.votes)}</td>
@@ -1162,7 +1183,9 @@ function renderSeatGainThresholds() {
 
 function getClosestRacesData() {
   const winnerKeys = new Set(
-    simulation.winners.map((winner) => buildCandidateIdentityKey(winner.name, winner.list, winner.sect))
+    simulation.winners.map((winner) =>
+      buildCandidateIdentityKey(winner.name, winner.list, winner.sect, winner.minorDistrict)
+    )
   );
   const qualifiedLists = new Set(
     simulation.listAllocation.filter((row) => row.qualified).map((row) => row.list)
@@ -1170,9 +1193,9 @@ function getClosestRacesData() {
 
   return state.quotas
     .map((quota) => {
-      const sectKey = normalizeSect(quota.sect);
+      const quotaKey = buildQuotaKey(quota.sect, quota.minorDistrict);
       const electedForSect = simulation.winners
-        .filter((winner) => normalizeSect(winner.sect) === sectKey)
+        .filter((winner) => buildQuotaKey(winner.sect, winner.minorDistrict) === quotaKey)
         .sort((a, b) => a.votes - b.votes);
       const winningCutoff = electedForSect[0];
       if (!winningCutoff) {
@@ -1181,13 +1204,15 @@ function getClosestRacesData() {
 
       const challenger = state.candidates
         .filter((candidate) => {
-          if (normalizeSect(candidate.sect) !== sectKey) {
+          if (buildQuotaKey(candidate.sect, candidate.minorDistrict) !== quotaKey) {
             return false;
           }
           if (!qualifiedLists.has(candidate.list)) {
             return false;
           }
-          return !winnerKeys.has(buildCandidateIdentityKey(candidate.name, candidate.list, candidate.sect));
+          return !winnerKeys.has(
+            buildCandidateIdentityKey(candidate.name, candidate.list, candidate.sect, candidate.minorDistrict)
+          );
         })
         .sort((a, b) => b.votes - a.votes || a.name.localeCompare(b.name, "en", { sensitivity: "base" }))[0];
 
@@ -1196,7 +1221,7 @@ function getClosestRacesData() {
       }
 
       return {
-        sect: quota.sect,
+        sect: formatQuotaLabel(quota),
         winnerName: winningCutoff.name,
         winnerList: winningCutoff.list,
         winnerVotes: winningCutoff.votes,
@@ -1254,8 +1279,13 @@ function getSeatThresholdRows() {
   });
 }
 
-function buildCandidateIdentityKey(name, list, sect) {
-  return [String(name ?? "").trim(), String(list ?? "").trim(), String(sect ?? "").trim()].join("::");
+function buildCandidateIdentityKey(name, list, sect, minorDistrict = "") {
+  return [
+    String(name ?? "").trim(),
+    String(list ?? "").trim(),
+    String(sect ?? "").trim(),
+    String(minorDistrict ?? "").trim()
+  ].join("::");
 }
 
 function createId(prefix) {
@@ -1278,6 +1308,22 @@ function normalizeSect(value) {
     .toLowerCase();
 }
 
+function normalizeMinorDistrict(value) {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase();
+}
+
+function buildQuotaKey(sect, minorDistrict = "") {
+  return `${normalizeSect(sect)}::${normalizeMinorDistrict(minorDistrict)}`;
+}
+
+function formatQuotaLabel(entry) {
+  const sect = String(entry?.sect ?? "").trim();
+  const minorDistrict = String(entry?.minorDistrict ?? "").trim();
+  return minorDistrict ? `${sect} (${minorDistrict})` : sect;
+}
+
 function normalizeState(input) {
   const base = {
     regionName: String(input?.regionName ?? ""),
@@ -1293,16 +1339,17 @@ function normalizeState(input) {
   if (Array.isArray(input?.quotas)) {
     for (const raw of input.quotas) {
       const sect = String(raw?.sect ?? "").trim();
+      const minorDistrict = String(raw?.minorDistrict ?? "").trim();
       const seats = clampInteger(raw?.seats, 0);
       if (!sect || seats <= 0) {
         continue;
       }
 
-      const key = normalizeSect(sect);
+      const key = buildQuotaKey(sect, minorDistrict);
       if (quotaAccumulator.has(key)) {
         quotaAccumulator.get(key).seats += seats;
       } else {
-        quotaAccumulator.set(key, { id: raw?.id || createId("quota"), sect, seats });
+        quotaAccumulator.set(key, { id: raw?.id || createId("quota"), sect, seats, minorDistrict });
       }
     }
   }
@@ -1323,7 +1370,8 @@ function normalizeState(input) {
         name,
         sect,
         list,
-        votes: clampInteger(raw?.votes, 0)
+        votes: clampInteger(raw?.votes, 0),
+        minorDistrict: String(raw?.minorDistrict ?? "").trim()
       });
     }
   }
@@ -1647,7 +1695,19 @@ function buildPrintableReportHtml(fileName) {
       ${renderPrintableMetric("Invalid Votes", formatNumber(summary.invalidVotes))}
       ${renderPrintableMetric("List-Only Votes", formatNumber(listOnlyVotes))}
       ${renderPrintableMetric(
-        "Electoral Quotient (EQ)",
+        "Qualification EQ Vote Base",
+        formatNumber(summary.qualificationEqVotes)
+      )}
+      ${renderPrintableMetric(
+        "Qualification EQ",
+        summary.qualificationQuotient > 0 ? formatDecimal(summary.qualificationQuotient) : "-"
+      )}
+      ${renderPrintableMetric(
+        "Allocation EQ Vote Base",
+        formatNumber(summary.eqVotes)
+      )}
+      ${renderPrintableMetric(
+        "Allocation EQ",
         summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-"
       )}
       ${renderPrintableMetric("Total Lists", String(totalListCount))}
@@ -1833,7 +1893,10 @@ function buildPdfReportLines() {
         ? state.listVotes.reduce((sum, entry) => sum + clampInteger(entry?.votes, 0), 0)
         : 0
     )}`,
-    `- Electoral Quotient (EQ): ${summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-"}`,
+    `- Qualification EQ Vote Base: ${formatNumber(summary.qualificationEqVotes)}`,
+    `- Qualification EQ: ${summary.qualificationQuotient > 0 ? formatDecimal(summary.qualificationQuotient) : "-"}`,
+    `- Allocation EQ Vote Base: ${formatNumber(summary.eqVotes)}`,
+    `- Allocation EQ: ${summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-"}`,
     `- Total Lists: ${totalListCount}`,
     `- Qualified Lists: ${summary.qualifiedListCount}`,
     "",

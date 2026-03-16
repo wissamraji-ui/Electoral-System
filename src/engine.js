@@ -8,6 +8,20 @@ function normalizeName(name) {
   return String(name ?? "").trim();
 }
 
+function normalizeMinorDistrict(value) {
+  return String(value ?? "").trim();
+}
+
+function normalizeQuotaKeyPart(value) {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase();
+}
+
+function buildQuotaKey(sect, minorDistrict = "") {
+  return `${normalizeQuotaKeyPart(sect)}::${normalizeQuotaKeyPart(minorDistrict)}`;
+}
+
 function toVoteNumber(value) {
   const numeric = Number(value);
   return Number.isFinite(numeric) && numeric >= 0 ? Math.floor(numeric) : 0;
@@ -21,6 +35,10 @@ function normalizeListKey(value) {
 }
 
 function compareCandidates(a, b) {
+  if (b.rankingScore !== a.rankingScore) {
+    return b.rankingScore - a.rankingScore;
+  }
+
   if (b.votes !== a.votes) {
     return b.votes - a.votes;
   }
@@ -129,7 +147,8 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
     ? quotas
         .map((entry) => ({
           sect: normalizeName(entry?.sect),
-          seats: Math.max(0, Math.floor(Number(entry?.seats) || 0))
+          seats: Math.max(0, Math.floor(Number(entry?.seats) || 0)),
+          minorDistrict: normalizeMinorDistrict(entry?.minorDistrict)
         }))
         .filter((entry) => entry.sect && entry.seats > 0)
     : [];
@@ -141,7 +160,8 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
           name: normalizeName(candidate?.name),
           sect: normalizeName(candidate?.sect),
           list: normalizeName(candidate?.list),
-          votes: toVoteNumber(candidate?.votes)
+          votes: toVoteNumber(candidate?.votes),
+          minorDistrict: normalizeMinorDistrict(candidate?.minorDistrict)
         }))
         .filter((candidate) => candidate.name && candidate.sect && candidate.list)
     : [];
@@ -223,27 +243,32 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
   const safeBlankVotes = toVoteNumber(blankVotes);
   const safeInvalidVotes = toVoteNumber(invalidVotes);
   const eqVotes = totalVotes + safeBlankVotes;
-  const electoralQuotient = totalSeats > 0 && eqVotes > 0 ? eqVotes / totalSeats : 0;
+  const qualificationQuotient = totalSeats > 0 && eqVotes > 0 ? eqVotes / totalSeats : 0;
 
   if (totalSeats > 0 && eqVotes === 0 && safeCandidates.length > 0) {
     warnings.push("No votes entered. EQ cannot be applied until vote totals are above zero.");
   }
 
-  const qualifiedLists = electoralQuotient > 0 ? listAllocation.filter((entry) => entry.votes >= electoralQuotient) : [];
+  const qualifiedLists =
+    qualificationQuotient > 0 ? listAllocation.filter((entry) => entry.votes >= qualificationQuotient) : [];
   qualifiedLists.forEach((entry) => {
     entry.qualified = true;
   });
 
-  if (electoralQuotient > 0 && listAllocation.length > 0 && qualifiedLists.length === 0) {
+  if (qualificationQuotient > 0 && listAllocation.length > 0 && qualifiedLists.length === 0) {
     warnings.push("No list reached the electoral quotient (EQ), so no seats can be distributed.");
   }
 
   const disqualifiedLists = listAllocation.filter((entry) => !entry.qualified);
-  if (disqualifiedLists.length > 0 && electoralQuotient > 0) {
+  if (disqualifiedLists.length > 0 && qualificationQuotient > 0) {
     warnings.push(
       `Lists below EQ and excluded: ${disqualifiedLists.map((entry) => entry.list).join(", ")}.`
     );
   }
+
+  const qualifiedVotes = qualifiedLists.reduce((sum, entry) => sum + entry.votes, 0);
+  const allocationEqVotes = qualifiedLists.length > 0 ? qualifiedVotes + safeBlankVotes : eqVotes;
+  const electoralQuotient = totalSeats > 0 && allocationEqVotes > 0 ? allocationEqVotes / totalSeats : 0;
 
   let allocatedBaseSeats = 0;
   if (electoralQuotient > 0) {
@@ -271,64 +296,52 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
       .map((entry) => [entry.list, entry.seats])
   );
 
+  const minorDistrictVoteTotals = new Map();
+  safeCandidates.forEach((candidate) => {
+    if (!candidate.minorDistrict) {
+      return;
+    }
+
+    minorDistrictVoteTotals.set(
+      candidate.minorDistrict,
+      (minorDistrictVoteTotals.get(candidate.minorDistrict) ?? 0) + candidate.votes
+    );
+  });
+
   const selectedCandidates = [];
   const selectedIds = new Set();
-  const sectQuotaMap = new Map(safeQuotas.map((quota) => [normalizeSect(quota.sect), quota.seats]));
+  const quotaSeatMap = new Map(safeQuotas.map((quota) => [buildQuotaKey(quota.sect, quota.minorDistrict), quota.seats]));
   const rankedQualifiedCandidates = safeCandidates
-    .filter((candidate) => qualifiedSeatMap.has(candidate.list) && sectQuotaMap.has(normalizeSect(candidate.sect)))
+    .filter(
+      (candidate) =>
+        qualifiedSeatMap.has(candidate.list) && quotaSeatMap.has(buildQuotaKey(candidate.sect, candidate.minorDistrict))
+    )
+    .map((candidate) => {
+      const rankingBase = candidate.minorDistrict ? minorDistrictVoteTotals.get(candidate.minorDistrict) ?? 0 : 0;
+      return {
+        ...candidate,
+        rankingScore: rankingBase > 0 ? candidate.votes / rankingBase : candidate.votes
+      };
+    })
     .sort(compareCandidates);
 
-  if (rankedQualifiedCandidates.length > 0 && qualifiedSeatMap.size > 0 && sectQuotaMap.size > 0) {
-    const listNames = Array.from(qualifiedSeatMap.keys()).sort((a, b) =>
-      a.localeCompare(b, "en", { sensitivity: "base" })
-    );
-    const sectKeys = Array.from(sectQuotaMap.keys()).sort((a, b) =>
-      a.localeCompare(b, "en", { sensitivity: "base" })
-    );
+  if (rankedQualifiedCandidates.length > 0 && qualifiedSeatMap.size > 0 && quotaSeatMap.size > 0) {
+    const remainingSeatsByList = new Map(qualifiedSeatMap);
+    const remainingSeatsByQuota = new Map(quotaSeatMap);
 
-    const listNodeStart = 1;
-    const candidateNodeStart = listNodeStart + listNames.length;
-    const sectNodeStart = candidateNodeStart + rankedQualifiedCandidates.length;
-    const sink = sectNodeStart + sectKeys.length;
-    const graph = createGraph(sink + 1);
+    rankedQualifiedCandidates.forEach((candidate) => {
+      const listSeatsLeft = remainingSeatsByList.get(candidate.list) ?? 0;
+      const quotaKey = buildQuotaKey(candidate.sect, candidate.minorDistrict);
+      const quotaSeatsLeft = remainingSeatsByQuota.get(quotaKey) ?? 0;
 
-    const listNodeMap = new Map(listNames.map((listName, index) => [listName, listNodeStart + index]));
-    const sectNodeMap = new Map(sectKeys.map((sectKey, index) => [sectKey, sectNodeStart + index]));
-
-    listNames.forEach((listName) => {
-      addEdge(graph, 0, listNodeMap.get(listName), qualifiedSeatMap.get(listName) ?? 0, 0);
-    });
-
-    const maxVotes = Math.max(...rankedQualifiedCandidates.map((candidate) => candidate.votes), 0);
-    const candidateEdgeRefs = [];
-
-    rankedQualifiedCandidates.forEach((candidate, index) => {
-      const candidateNode = candidateNodeStart + index;
-      const listNode = listNodeMap.get(candidate.list);
-      const sectNode = sectNodeMap.get(normalizeSect(candidate.sect));
-      const voteCost = maxVotes - candidate.votes;
-      const inboundEdgeIndex = addEdge(graph, listNode, candidateNode, 1, voteCost);
-      addEdge(graph, candidateNode, sectNode, 1, 0);
-
-      candidateEdgeRefs.push({
-        candidate,
-        listNode,
-        inboundEdgeIndex
-      });
-    });
-
-    sectKeys.forEach((sectKey) => {
-      addEdge(graph, sectNodeMap.get(sectKey), sink, sectQuotaMap.get(sectKey) ?? 0, 0);
-    });
-
-    runMinCostMaxFlow(graph, 0, sink);
-
-    candidateEdgeRefs.forEach((entry) => {
-      const edge = graph[entry.listNode][entry.inboundEdgeIndex];
-      if (edge.capacity === 0) {
-        selectedCandidates.push(entry.candidate);
-        selectedIds.add(entry.candidate.id);
+      if (listSeatsLeft <= 0 || quotaSeatsLeft <= 0) {
+        return;
       }
+
+      selectedCandidates.push(candidate);
+      selectedIds.add(candidate.id);
+      remainingSeatsByList.set(candidate.list, listSeatsLeft - 1);
+      remainingSeatsByQuota.set(quotaKey, quotaSeatsLeft - 1);
     });
   }
 
@@ -337,18 +350,19 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
   let seatIndex = 0;
 
   for (const quota of safeQuotas) {
-    const sectKey = normalizeSect(quota.sect);
+    const quotaKey = buildQuotaKey(quota.sect, quota.minorDistrict);
     const electedForSect = selectedCandidates
-      .filter((candidate) => normalizeSect(candidate.sect) === sectKey)
+      .filter((candidate) => buildQuotaKey(candidate.sect, candidate.minorDistrict) === quotaKey)
       .sort(compareCandidates);
     const nonElectedForSect = rankedQualifiedCandidates
-      .filter((candidate) => normalizeSect(candidate.sect) === sectKey && !selectedIds.has(candidate.id))
+      .filter((candidate) => buildQuotaKey(candidate.sect, candidate.minorDistrict) === quotaKey && !selectedIds.has(candidate.id))
       .sort(compareCandidates);
+    const quotaLabel = quota.minorDistrict ? `${quota.sect} (${quota.minorDistrict})` : quota.sect;
 
     const remaining = Math.max(0, quota.seats - electedForSect.length);
     if (remaining > 0) {
       warnings.push(
-        `Unfilled seats in ${quota.sect}: ${remaining} seat${remaining > 1 ? "s" : ""} without valid list/sect coverage.`
+        `Unfilled seats in ${quotaLabel}: ${remaining} seat${remaining > 1 ? "s" : ""} without valid list/sect coverage.`
       );
     }
 
@@ -360,7 +374,7 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
           electedForSect[electedForSect.length - 1].name,
           ...tiedOutside.map((candidate) => candidate.name)
         ].join(", ");
-        warnings.push(`Tie at cutoff in ${quota.sect}: ${tiedNames}.`);
+        warnings.push(`Tie at cutoff in ${quotaLabel}: ${tiedNames}.`);
       }
     }
 
@@ -372,7 +386,8 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
       winners.push({
         seatNumber: seatIndex,
         sect: quota.sect,
-        seatLabel: `${quota.sect} Seat ${index + 1}`,
+        minorDistrict: quota.minorDistrict,
+        seatLabel: `${quotaLabel} Seat ${index + 1}`,
         name: candidate.name,
         list: candidate.list,
         votes: candidate.votes,
@@ -382,6 +397,7 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
 
     sectCoverage.push({
       sect: quota.sect,
+      minorDistrict: quota.minorDistrict,
       requiredSeats: quota.seats,
       electedSeats: electedForSect.length,
       remaining
@@ -424,7 +440,9 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
       totalVotes,
       blankVotes: safeBlankVotes,
       invalidVotes: safeInvalidVotes,
-      eqVotes,
+      eqVotes: allocationEqVotes,
+      qualificationEqVotes: eqVotes,
+      qualificationQuotient,
       coveragePct,
       electoralQuotient,
       qualifiedListCount: qualifiedLists.length,
