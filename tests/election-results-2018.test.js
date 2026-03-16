@@ -70,7 +70,16 @@ test("2018 baselines can preload official list-only votes from the report", () =
 
   const zahle = loadElectionResults2018(byId.get("bekaa-i"));
   assert.ok(zahle);
-  assert.deepEqual(zahle.listVotes, []);
+  assert.deepEqual(
+    zahle.listVotes,
+    [
+      { list: "Zahle for Everyone", votes: 935 },
+      { list: "Zahle Choice & Decision", votes: 668 },
+      { list: "Zahle Our Cause", votes: 397 },
+      { list: "Popular Bloc", votes: 322 },
+      { list: "Kulluna Watani", votes: 121 }
+    ]
+  );
   assert.equal(zahle.blankVotes, 545);
   assert.equal(zahle.invalidVotes, 2414);
 

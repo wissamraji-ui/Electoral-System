@@ -22,6 +22,13 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 8, Bekaa 1 (Zahle)
   "bekaa-i": {
+    listVotes: [
+      { list: "Zahle for Everyone", votes: 935 },
+      { list: "Zahle Choice & Decision", votes: 668 },
+      { list: "Zahle Our Cause", votes: 397 },
+      { list: "Popular Bloc", votes: 322 },
+      { list: "Kulluna Watani", votes: 121 }
+    ],
     candidates: [
       { name: "Michel Georges Daher", sect: "Greek Catholic", list: "Zahle for Everyone", votes: 9742 },
       { name: "Assem Fayez Araji", sect: "Sunni", list: "Zahle for Everyone", votes: 7224 },
