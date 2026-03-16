@@ -77,7 +77,8 @@ initialize().catch((error) => {
 
 async function initialize() {
   templates = await loadRegionTemplates();
-  state = loadState() ?? createEmptyState();
+  clearState();
+  state = createEmptyState();
   savedScenarios = loadSavedScenarios();
 
   populateTemplateSelect();
