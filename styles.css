@@ -959,6 +959,13 @@ tbody tr:last-child td {
   font-size: 0.8rem;
 }
 
+.build-id-badge {
+  margin-top: 0.45rem;
+  font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, monospace;
+  font-size: 0.78rem;
+  color: #6f7d8a;
+}
+
 @media (max-width: 1180px) {
   .layout {
     grid-template-columns: 1fr;

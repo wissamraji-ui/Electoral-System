@@ -66,7 +66,8 @@ const elements = {
   listSeatSummary: document.getElementById("listSeatSummary"),
   shareComparison: document.getElementById("shareComparison"),
   closestRaces: document.getElementById("closestRaces"),
-  seatGainThresholds: document.getElementById("seatGainThresholds")
+  seatGainThresholds: document.getElementById("seatGainThresholds"),
+  buildIdBadge: document.getElementById("buildIdBadge")
 };
 
 let idCounter = Date.now();
@@ -629,6 +630,7 @@ function renderAll() {
   applyDistrictSelectionVisibility();
   syncTemplateSelection();
   renderPresetStatus();
+  renderBuildIdBadge();
   elements.regionNameInput.value = state.regionName;
   renderQuotaTable();
   renderListBuilder();
@@ -636,6 +638,14 @@ function renderAll() {
   renderCandidateListVoteTotals();
   renderSavedScenarios();
   renderResults();
+}
+
+function renderBuildIdBadge() {
+  if (!elements.buildIdBadge) {
+    return;
+  }
+
+  elements.buildIdBadge.textContent = `Build ${BUILD_ID}`;
 }
 
 function renderPresetStatus() {
