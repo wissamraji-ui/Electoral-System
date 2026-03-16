@@ -128,8 +128,18 @@ test("2022 generated districts can also preload official list-only votes via ove
       { list: "ﻣﻌﺎً اﻗﻮى", votes: 548 },
       { list: "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ", votes: 764 },
       { list: "ﻧﺤﻮ اﻟﺪوﻟﺔ", votes: 269 },
-      { list: "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ", votes: 470 }
+      { list: "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ", votes: 470 },
+      { list: "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن", votes: 55 }
     ]
+  );
+  assert.equal(
+    metn.candidates
+      .filter((candidate) => candidate.list === "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      metn.listVotes
+        .filter((entry) => entry.list === "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    667
   );
 
   const keserwanJbeil = loadElectionResults2022(byId.get("mount-lebanon-i"));

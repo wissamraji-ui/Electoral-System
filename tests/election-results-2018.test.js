@@ -83,6 +83,34 @@ test("2018 baselines can preload official list-only votes from the report", () =
     26980
   );
 
+  const mountLebanonTwo = loadElectionResults2018(byId.get("mount-lebanon-ii"));
+  assert.ok(mountLebanonTwo);
+  assert.equal(
+    mountLebanonTwo.candidates
+      .filter((candidate) => candidate.list === "Kulluna Watani")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      mountLebanonTwo.listVotes
+        .filter((entry) => entry.list === "Kulluna Watani")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    5027
+  );
+
+  const mountLebanonThree = loadElectionResults2018(byId.get("mount-lebanon-iii"));
+  assert.ok(mountLebanonThree);
+  assert.equal(
+    mountLebanonThree.candidates.find((candidate) => candidate.name === "Cynthia Ahmad Riad El Asmar")?.votes,
+    200
+  );
+  assert.equal(
+    mountLebanonThree.candidates
+      .filter((candidate) => candidate.list === "Baabda Unity & Development")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      mountLebanonThree.listVotes
+        .filter((entry) => entry.list === "Baabda Unity & Development")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    26500
+  );
+
   const beirutTwo = loadElectionResults2018(byId.get("beirut-ii"));
   assert.ok(beirutTwo);
   assert.deepEqual(

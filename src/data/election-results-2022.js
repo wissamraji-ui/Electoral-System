@@ -378,7 +378,8 @@ const generatedListVoteOverrides2022ByTemplateId = {
       { list: "ﻣﻌﺎً اﻗﻮى", votes: 548 },
       { list: "ﻣﺘﻦ اﻟﺘﻐﻴﻴﺮ", votes: 764 },
       { list: "ﻧﺤﻮ اﻟﺪوﻟﺔ", votes: 269 },
-      { list: "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ", votes: 470 }
+      { list: "ﻛﻨﺎ ورح ﻧﺒﻘﻰ ﻟﻠﻤﺘﻦ", votes: 470 },
+      { list: "ﻣﺘﻨﻴﻮن ﺳﻴﺎدﻳﻮن", votes: 55 }
     ]
   },
   "mount-lebanon-iii": {

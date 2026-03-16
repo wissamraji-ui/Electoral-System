@@ -523,6 +523,7 @@ const verifiedElectionResults2018ByTemplateId = {
   // Page 34, Mount Lebanon 2 (Metn)
   "mount-lebanon-ii": {
     listVotes: [
+      { list: "Kulluna Watani", votes: 215 },
       { list: "Metn Heart of Lebanon", votes: 266 },
       { list: "Metn Pulse", votes: 624 },
       { list: "Strong Metn", votes: 832 },
@@ -755,6 +756,9 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 36, Mount Lebanon 3 (Baabda)
   "mount-lebanon-iii": {
+    listVotes: [
+      { list: "Baabda Unity & Development", votes: 376 }
+    ],
     candidates: [
       { name: "Ali Fadel Ammar", sect: "Shia", list: "National Accord", votes: 13692 },
       { name: "Alain Joseph Aoun", sect: "Maronite", list: "National Accord", votes: 10200 },
@@ -766,7 +770,7 @@ const verifiedElectionResults2018ByTemplateId = {
       { name: "Pierre Rachid Bou Assi", sect: "Maronite", list: "Baabda Unity & Development", votes: 13498 },
       { name: "Hadi Mohammad Rafik Abou El Hassan", sect: "Druze", list: "Baabda Unity & Development", votes: 11844 },
       { name: "Salah Mahmoud Al Harake", sect: "Shia", list: "Baabda Unity & Development", votes: 468 },
-      { name: "Cynthia Ahmad Riad El Asmar", sect: "Maronite", list: "Baabda Unity & Development", votes: 976 },
+      { name: "Cynthia Ahmad Riad El Asmar", sect: "Maronite", list: "Baabda Unity & Development", votes: 200 },
       { name: "Joseph Michel Odaimi", sect: "Maronite", list: "Baabda Unity & Development", votes: 114 },
 
       { name: "Ramzeh Jamil Bou Khaled", sect: "Maronite", list: "Together for Baabda", votes: 2586 },
