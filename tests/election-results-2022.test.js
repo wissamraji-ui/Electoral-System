@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import rawTemplates from "../src/data/templates.json" with { type: "json" };
+import { computeResults } from "../src/engine.js";
 import { hasElectionResults2022, loadElectionResults2022 } from "../src/data/election-results-2022.js";
 
 test("2022 baselines keep list-only vote support available even when a district has no preset values yet", () => {
@@ -63,6 +64,23 @@ test("2022 audited districts preload official list-only votes from the report to
       { list: "معاً للتغيير", votes: 1057 },
       { list: "القرار الحر", votes: 474 }
     ]
+  );
+  assert.deepEqual(southTwo.quotas, [
+    { sect: "Shia", seats: 4, minorDistrict: "Tyre" },
+    { sect: "Shia", seats: 2, minorDistrict: "Zahrani" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Zahrani" }
+  ]);
+  assert.equal(
+    southTwo.candidates.find((candidate) => candidate.name === "نبيه مصطفى بري")?.minorDistrict,
+    "Zahrani"
+  );
+  assert.equal(
+    southTwo.candidates.find((candidate) => candidate.name === "حسن محمد علي عز الدين")?.minorDistrict,
+    "Tyre"
+  );
+  assert.equal(
+    southTwo.candidates.find((candidate) => candidate.name === "ميشال حنا موسى")?.minorDistrict,
+    "Zahrani"
   );
 
   const southOne = loadElectionResults2022(byId.get("south-i"));
@@ -376,4 +394,26 @@ test("2022 generated districts can also preload official list-only votes via ove
     ]
   );
   assert.ok(akkar.candidates.some((candidate) => candidate.list === "ﻋﻜﺎﺭ ﺗﻨﺘﻔﺾ"));
+});
+
+test("2022 South II simulation matches the published winner set", () => {
+  const byId = new Map(rawTemplates.map((template) => [template.id, template]));
+  const southTwo = loadElectionResults2022(byId.get("south-ii"));
+  const result = computeResults(
+    southTwo.quotas,
+    southTwo.candidates,
+    southTwo.listVotes,
+    southTwo.blankVotes,
+    southTwo.invalidVotes
+  );
+
+  assert.deepEqual(result.winners.map((winner) => winner.name), [
+    "حسن محمد علي عز الدين",
+    "حسين سعيد جشي",
+    "علي يوسف خريس",
+    "عنايه محمد عز الدين",
+    "نبيه مصطفى بري",
+    "علي عادل عسيران",
+    "ميشال حنا موسى"
+  ]);
 });

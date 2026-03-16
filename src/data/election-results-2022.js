@@ -253,30 +253,30 @@ const manualElectionResults2022ByTemplateId = {
   // Attachment: https://elections.gov.lb/api/Media/A201E7BE-8CEC-4C5E-8A9D-15F0D72A8D46.pdf
   "south-ii": {
     candidates: [
-      { name: "نبيه مصطفى بري", sect: "Shia", list: "الأمل و الوفاء", votes: 42091 },
-      { name: "علي عادل عسيران", sect: "Shia", list: "الأمل و الوفاء", votes: 2294 },
-      { name: "ميشال حنا موسى", sect: "Greek Catholic", list: "الأمل و الوفاء", votes: 1364 },
-      { name: "حسن محمد علي عز الدين", sect: "Shia", list: "الأمل و الوفاء", votes: 27927 },
-      { name: "علي يوسف خريس", sect: "Shia", list: "الأمل و الوفاء", votes: 16964 },
-      { name: "حسين سعيد جشي", sect: "Shia", list: "الأمل و الوفاء", votes: 27416 },
-      { name: "عنايه محمد عز الدين", sect: "Shia", list: "الأمل و الوفاء", votes: 15266 },
+      { name: "نبيه مصطفى بري", sect: "Shia", list: "الأمل و الوفاء", votes: 42091, minorDistrict: "Zahrani" },
+      { name: "علي عادل عسيران", sect: "Shia", list: "الأمل و الوفاء", votes: 2294, minorDistrict: "Zahrani" },
+      { name: "ميشال حنا موسى", sect: "Greek Catholic", list: "الأمل و الوفاء", votes: 1364, minorDistrict: "Zahrani" },
+      { name: "حسن محمد علي عز الدين", sect: "Shia", list: "الأمل و الوفاء", votes: 27927, minorDistrict: "Tyre" },
+      { name: "علي يوسف خريس", sect: "Shia", list: "الأمل و الوفاء", votes: 16964, minorDistrict: "Tyre" },
+      { name: "حسين سعيد جشي", sect: "Shia", list: "الأمل و الوفاء", votes: 27416, minorDistrict: "Tyre" },
+      { name: "عنايه محمد عز الدين", sect: "Shia", list: "الأمل و الوفاء", votes: 15266, minorDistrict: "Tyre" },
 
-      { name: "حسن احمد حسن خليل", sect: "Shia", list: "الدولة الحاضنة", votes: 816 },
-      { name: "بشرا ايوب خليل", sect: "Shia", list: "الدولة الحاضنة", votes: 2476 },
-      { name: "رياض سعيد الاسعد", sect: "Shia", list: "الدولة الحاضنة", votes: 1945 },
-      { name: "يوسف مصطفى خليفه", sect: "Shia", list: "الدولة الحاضنة", votes: 709 },
+      { name: "حسن احمد حسن خليل", sect: "Shia", list: "الدولة الحاضنة", votes: 816, minorDistrict: "Zahrani" },
+      { name: "بشرا ايوب خليل", sect: "Shia", list: "الدولة الحاضنة", votes: 2476, minorDistrict: "Tyre" },
+      { name: "رياض سعيد الاسعد", sect: "Shia", list: "الدولة الحاضنة", votes: 1945, minorDistrict: "Zahrani" },
+      { name: "يوسف مصطفى خليفه", sect: "Shia", list: "الدولة الحاضنة", votes: 709, minorDistrict: "Tyre" },
 
-      { name: "حاتم فوزي حلاوي", sect: "Shia", list: "معاً للتغيير", votes: 1649 },
-      { name: "ساره علي سويدان", sect: "Shia", list: "معاً للتغيير", votes: 834 },
-      { name: "محمد يوسف ايوب", sect: "Shia", list: "معاً للتغيير", votes: 195 },
-      { name: "رؤى بشير الفارس", sect: "Shia", list: "معاً للتغيير", votes: 1088 },
-      { name: "هشام بولص حايك", sect: "Greek Catholic", list: "معاً للتغيير", votes: 3987 },
-      { name: "علي محمد خليفه", sect: "Shia", list: "معاً للتغيير", votes: 595 },
-      { name: "ايمن محمود مروه", sect: "Shia", list: "معاً للتغيير", votes: 656 },
+      { name: "حاتم فوزي حلاوي", sect: "Shia", list: "معاً للتغيير", votes: 1649, minorDistrict: "Zahrani" },
+      { name: "ساره علي سويدان", sect: "Shia", list: "معاً للتغيير", votes: 834, minorDistrict: "Tyre" },
+      { name: "محمد يوسف ايوب", sect: "Shia", list: "معاً للتغيير", votes: 195, minorDistrict: "Tyre" },
+      { name: "رؤى بشير الفارس", sect: "Shia", list: "معاً للتغيير", votes: 1088, minorDistrict: "Tyre" },
+      { name: "هشام بولص حايك", sect: "Greek Catholic", list: "معاً للتغيير", votes: 3987, minorDistrict: "Zahrani" },
+      { name: "علي محمد خليفه", sect: "Shia", list: "معاً للتغيير", votes: 595, minorDistrict: "Tyre" },
+      { name: "ايمن محمود مروه", sect: "Shia", list: "معاً للتغيير", votes: 656, minorDistrict: "Tyre" },
 
-      { name: "قاسم سليمان داوود", sect: "Shia", list: "القرار الحر", votes: 208 },
-      { name: "داوود علي فرج", sect: "Shia", list: "القرار الحر", votes: 320 },
-      { name: "روبار ملحم كنعان", sect: "Greek Catholic", list: "القرار الحر", votes: 4238 }
+      { name: "قاسم سليمان داوود", sect: "Shia", list: "القرار الحر", votes: 208, minorDistrict: "Tyre" },
+      { name: "داوود علي فرج", sect: "Shia", list: "القرار الحر", votes: 320, minorDistrict: "Tyre" },
+      { name: "روبار ملحم كنعان", sect: "Greek Catholic", list: "القرار الحر", votes: 4238, minorDistrict: "Zahrani" }
     ],
     listVotes: [
       { list: "الأمل و الوفاء", votes: 4920 },
@@ -545,6 +545,34 @@ const generatedCandidateOverrides2022ByTemplateId = {
       "Charbel Maroun Massaad": "Jezzine",
       "Kamil Farid Serhal": "Jezzine",
       "Jamil Iskandar Dagher": "Jezzine"
+    }
+  },
+  "south-ii": {
+    minorDistrictByCandidateName: {
+      "نبيه مصطفى بري": "Zahrani",
+      "علي عادل عسيران": "Zahrani",
+      "ميشال حنا موسى": "Zahrani",
+      "حسن محمد علي عز الدين": "Tyre",
+      "علي يوسف خريس": "Tyre",
+      "حسين سعيد جشي": "Tyre",
+      "عنايه محمد عز الدين": "Tyre",
+
+      "حسن احمد حسن خليل": "Zahrani",
+      "بشرا ايوب خليل": "Tyre",
+      "رياض سعيد الاسعد": "Zahrani",
+      "يوسف مصطفى خليفه": "Tyre",
+
+      "حاتم فوزي حلاوي": "Zahrani",
+      "ساره علي سويدان": "Tyre",
+      "محمد يوسف ايوب": "Tyre",
+      "رؤى بشير الفارس": "Tyre",
+      "هشام بولص حايك": "Zahrani",
+      "علي محمد خليفه": "Tyre",
+      "ايمن محمود مروه": "Tyre",
+
+      "قاسم سليمان داوود": "Tyre",
+      "داوود علي فرج": "Tyre",
+      "روبار ملحم كنعان": "Zahrani"
     }
   },
   "north-ii": {
@@ -868,6 +896,11 @@ const quotaOverrides2022ByTemplateId = {
     { sect: "Sunni", seats: 2, minorDistrict: "Saida" },
     { sect: "Maronite", seats: 2, minorDistrict: "Jezzine" },
     { sect: "Greek Catholic", seats: 1, minorDistrict: "Jezzine" }
+  ],
+  "south-ii": [
+    { sect: "Shia", seats: 4, minorDistrict: "Tyre" },
+    { sect: "Shia", seats: 2, minorDistrict: "Zahrani" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Zahrani" }
   ],
   "north-ii": [
     { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },

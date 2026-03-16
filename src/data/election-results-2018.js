@@ -913,6 +913,11 @@ const quotaOverrides2018ByTemplateId = {
     { sect: "Maronite", seats: 2, minorDistrict: "Jezzine" },
     { sect: "Greek Catholic", seats: 1, minorDistrict: "Jezzine" }
   ],
+  "south-ii": [
+    { sect: "Shia", seats: 4, minorDistrict: "Tyre" },
+    { sect: "Shia", seats: 2, minorDistrict: "Saida Villages" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Saida Villages" }
+  ],
   "north-ii": [
     { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
     { sect: "Sunni", seats: 2, minorDistrict: "Dinnieh" },
@@ -965,6 +970,22 @@ const candidateMinorDistrictOverrides2018ByTemplateId = {
     "Abdel Rahman Nazih El Bizri": "Saida",
     "Selim Antoine Khoury": "Jezzine",
     "Bassam Ibrahim Hammoud": "Saida"
+  },
+  "south-ii": {
+    "Nabih Moustafa Berri": "Saida Villages",
+    "Nouaf Mahmoud El Mousawi": "Tyre",
+    "Hussein Said Jechi": "Tyre",
+    "Inaya Mohamad Eizzidine": "Tyre",
+    "Ali Youssef Khreiss": "Tyre",
+    "Michel Hanna Moussa": "Saida Villages",
+    "Ali Adel Ossairan": "Saida Villages",
+
+    "Wissam Nabih El Hajj": "Saida Villages",
+    "Riad Said El Assaad": "Saida Villages",
+    "Raed Jaafar Ataya": "Tyre",
+    "Abdel Naser Hassan Faran": "Tyre",
+    "Ahmad Mohamad Said Mroueh": "Tyre",
+    "Lina Hassan El Houssaini": "Tyre"
   },
   "north-ii": {
     "Kassem Ali Abdel Aziz": "Dinnieh",

@@ -15,10 +15,13 @@ import {
   hasElectionResults2018,
   loadElectionResults2018
 } from "./data/election-results-2018.js";
+import { BUILD_ID } from "./generated/build-meta.js";
 import { computeResults } from "./engine.js";
 
 const STORAGE_KEY = "lebanon-electoral-simulator:v1";
 const SAVED_SCENARIOS_KEY = "lebanon-electoral-simulator:saved:v1";
+const BUILD_RELOAD_STORAGE_KEY = "lebanon-electoral-simulator:last-build-reload";
+const BUILD_QUERY_PARAM = "__build";
 const EXPORT_VERSION = 2;
 const STATE_SCHEMA_VERSION = 3;
 const CURRENT_DATA_VERSION = [
@@ -79,6 +82,7 @@ initialize().catch((error) => {
 });
 
 async function initialize() {
+  await ensureLatestBuild();
   templates = await loadRegionTemplates();
   clearState();
   state = createEmptyState();
@@ -88,6 +92,52 @@ async function initialize() {
   bindEvents();
   runSimulation();
   renderAll();
+}
+
+async function ensureLatestBuild() {
+  if (typeof window === "undefined" || typeof fetch !== "function") {
+    return;
+  }
+
+  try {
+    const response = await fetch(`/build-meta.json?ts=${Date.now()}`, {
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+    const payload = await response.json();
+    const latestBuildId = String(payload?.buildId ?? "").trim();
+    if (!latestBuildId) {
+      return;
+    }
+
+    const currentUrl = new URL(window.location.href);
+    if (latestBuildId === BUILD_ID) {
+      if (currentUrl.searchParams.has(BUILD_QUERY_PARAM)) {
+        currentUrl.searchParams.delete(BUILD_QUERY_PARAM);
+        window.history.replaceState({}, "", currentUrl);
+      }
+
+      sessionStorage.removeItem(BUILD_RELOAD_STORAGE_KEY);
+      return;
+    }
+
+    const lastReloadedBuildId = sessionStorage.getItem(BUILD_RELOAD_STORAGE_KEY);
+    if (lastReloadedBuildId === latestBuildId) {
+      console.warn("A newer deploy was detected, but the forced refresh already ran once for this build.");
+      return;
+    }
+
+    sessionStorage.setItem(BUILD_RELOAD_STORAGE_KEY, latestBuildId);
+    currentUrl.searchParams.set(BUILD_QUERY_PARAM, latestBuildId);
+    window.location.replace(currentUrl.toString());
+    await new Promise(() => {});
+  } catch (error) {
+    console.error("Unable to verify latest build version", error);
+  }
 }
 
 function bindEvents() {

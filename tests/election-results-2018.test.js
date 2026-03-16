@@ -333,6 +333,26 @@ test("2018 baselines can preload official list-only votes from the report", () =
     southOne.candidates.find((candidate) => candidate.name === "Ajaj Jerji Haddad")?.minorDistrict,
     "Jezzine"
   );
+
+  const southTwo = loadElectionResults2018(byId.get("south-ii"));
+  assert.ok(southTwo);
+  assert.deepEqual(southTwo.quotas, [
+    { sect: "Shia", seats: 4, minorDistrict: "Tyre" },
+    { sect: "Shia", seats: 2, minorDistrict: "Saida Villages" },
+    { sect: "Greek Catholic", seats: 1, minorDistrict: "Saida Villages" }
+  ]);
+  assert.equal(
+    southTwo.candidates.find((candidate) => candidate.name === "Nabih Moustafa Berri")?.minorDistrict,
+    "Saida Villages"
+  );
+  assert.equal(
+    southTwo.candidates.find((candidate) => candidate.name === "Ali Youssef Khreiss")?.minorDistrict,
+    "Tyre"
+  );
+  assert.equal(
+    southTwo.candidates.find((candidate) => candidate.name === "Michel Hanna Moussa")?.minorDistrict,
+    "Saida Villages"
+  );
 });
 
 test("2018 North II simulation matches the published winner set", () => {
@@ -358,5 +378,27 @@ test("2018 North II simulation matches the published winner set", () => {
     "Ali Ahmad Darwish",
     "Jean Badawi Obeid",
     "Nicolas Kamil Nahas"
+  ]);
+});
+
+test("2018 South II simulation matches the published winner set", () => {
+  const byId = new Map(rawTemplates.map((template) => [template.id, template]));
+  const southTwo = loadElectionResults2018(byId.get("south-ii"));
+  const result = computeResults(
+    southTwo.quotas,
+    southTwo.candidates,
+    southTwo.listVotes,
+    southTwo.blankVotes,
+    southTwo.invalidVotes
+  );
+
+  assert.deepEqual(result.winners.map((winner) => winner.name), [
+    "Nouaf Mahmoud El Mousawi",
+    "Hussein Said Jechi",
+    "Inaya Mohamad Eizzidine",
+    "Ali Youssef Khreiss",
+    "Nabih Moustafa Berri",
+    "Ali Adel Ossairan",
+    "Michel Hanna Moussa"
   ]);
 });
