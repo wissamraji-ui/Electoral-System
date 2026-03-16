@@ -5,6 +5,18 @@ import {
 } from "./election-results-normalize.js";
 import generatedElectionResults2022ByTemplateId from "./election-results-2022.generated.json" with { type: "json" };
 
+function hashVersionPayload(value) {
+  const json = JSON.stringify(value);
+  let hash = 2166136261;
+
+  for (let index = 0; index < json.length; index += 1) {
+    hash ^= json.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return `v${(hash >>> 0).toString(16)}`;
+}
+
 // Hand-cleaned overrides for districts already reviewed from the official 2022 PDFs.
 // Remaining districts are loaded from generated official extracts in
 // election-results-2022.generated.json.
@@ -504,8 +516,14 @@ const electionResults2022ByTemplateId = {
   ...manualElectionResults2022ByTemplateId
 };
 
+const electionResults2022DataVersion = hashVersionPayload(electionResults2022ByTemplateId);
+
 export function hasElectionResults2022(templateId) {
   return Boolean(templateId && electionResults2022ByTemplateId[templateId]);
+}
+
+export function getElectionResults2022DataVersion() {
+  return electionResults2022DataVersion;
 }
 
 export function loadElectionResults2022(template) {

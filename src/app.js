@@ -1,11 +1,30 @@
-import { cloneTemplate, createEmptyState, loadRegionTemplates } from "./data/templates.js";
-import { hasElectionResults2022, loadElectionResults2022 } from "./data/election-results-2022.js";
-import { hasElectionResults2018, loadElectionResults2018 } from "./data/election-results-2018.js";
+import {
+  cloneTemplate,
+  createEmptyState,
+  getTemplatesDataVersion,
+  loadRegionTemplates
+} from "./data/templates.js";
+import {
+  getElectionResults2022DataVersion,
+  hasElectionResults2022,
+  loadElectionResults2022
+} from "./data/election-results-2022.js";
+import {
+  getElectionResults2018DataVersion,
+  hasElectionResults2018,
+  loadElectionResults2018
+} from "./data/election-results-2018.js";
 import { computeResults } from "./engine.js";
 
 const STORAGE_KEY = "lebanon-electoral-simulator:v1";
 const SAVED_SCENARIOS_KEY = "lebanon-electoral-simulator:saved:v1";
 const EXPORT_VERSION = 1;
+const STATE_SCHEMA_VERSION = 2;
+const CURRENT_DATA_VERSION = [
+  `templates:${getTemplatesDataVersion()}`,
+  `results-2018:${getElectionResults2018DataVersion()}`,
+  `results-2022:${getElectionResults2022DataVersion()}`
+].join("|");
 
 const elements = {
   templateSelect: document.getElementById("templateSelect"),
@@ -56,8 +75,7 @@ initialize().catch((error) => {
 
 async function initialize() {
   templates = await loadRegionTemplates();
-  clearState();
-  state = createEmptyState();
+  state = loadState() ?? createEmptyState();
   savedScenarios = loadSavedScenarios();
 
   populateTemplateSelect();
@@ -1103,7 +1121,14 @@ function normalizeImportedState(parsed) {
 
 function saveState() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        schemaVersion: STATE_SCHEMA_VERSION,
+        dataVersion: CURRENT_DATA_VERSION,
+        state
+      })
+    );
   } catch (error) {
     console.error("Unable to save state", error);
   }
@@ -1117,7 +1142,16 @@ function loadState() {
     }
 
     const parsed = JSON.parse(raw);
-    return normalizeState(parsed);
+    if (
+      parsed?.schemaVersion !== STATE_SCHEMA_VERSION ||
+      parsed?.dataVersion !== CURRENT_DATA_VERSION ||
+      !parsed?.state
+    ) {
+      clearState();
+      return null;
+    }
+
+    return normalizeState(parsed.state);
   } catch (error) {
     console.error("Unable to load state", error);
     return null;

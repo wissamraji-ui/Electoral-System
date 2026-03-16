@@ -1,5 +1,19 @@
 import rawTemplates from "./templates.json" with { type: "json" };
 
+function hashVersionPayload(value) {
+  const json = JSON.stringify(value);
+  let hash = 2166136261;
+
+  for (let index = 0; index < json.length; index += 1) {
+    hash ^= json.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return `v${(hash >>> 0).toString(16)}`;
+}
+
+const templatesDataVersion = hashVersionPayload(rawTemplates);
+
 function normalizeTemplate(rawTemplate, index) {
   const id = String(rawTemplate?.id ?? "").trim() || `template-${index + 1}`;
   const name = String(rawTemplate?.name ?? "").trim() || `Template ${index + 1}`;
@@ -19,6 +33,10 @@ function normalizeTemplate(rawTemplate, index) {
 export async function loadRegionTemplates() {
   const templates = Array.isArray(rawTemplates) ? rawTemplates : [];
   return templates.map(normalizeTemplate).filter((template) => template.quotas.length > 0);
+}
+
+export function getTemplatesDataVersion() {
+  return templatesDataVersion;
 }
 
 export function createEmptyState() {

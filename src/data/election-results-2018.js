@@ -4,6 +4,18 @@ import {
   normalizeElectionBaselineListVotes
 } from "./election-results-normalize.js";
 
+function hashVersionPayload(value) {
+  const json = JSON.stringify(value);
+  let hash = 2166136261;
+
+  for (let index = 0; index < json.length; index += 1) {
+    hash ^= json.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return `v${(hash >>> 0).toString(16)}`;
+}
+
 const verifiedElectionResults2018ByTemplateId = {
   // Hand-cleaned from rendered page image of:
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
@@ -874,8 +886,14 @@ const electionResults2018ByTemplateId = {
   "south-iii": verifiedElectionResults2018ByTemplateId["south-iii"]
 };
 
+const electionResults2018DataVersion = hashVersionPayload(electionResults2018ByTemplateId);
+
 export function getElectionResults2018TemplateIds() {
   return Object.keys(electionResults2018ByTemplateId).sort();
+}
+
+export function getElectionResults2018DataVersion() {
+  return electionResults2018DataVersion;
 }
 
 export function hasElectionResults2018(templateId) {
