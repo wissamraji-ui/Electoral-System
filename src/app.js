@@ -65,8 +65,14 @@ const elements = {
   winnersTableBody: document.getElementById("winnersTableBody"),
   listSeatSummary: document.getElementById("listSeatSummary"),
   shareComparison: document.getElementById("shareComparison"),
+  listVoteBars: document.getElementById("listVoteBars"),
   closestRaces: document.getElementById("closestRaces"),
+  sectQuotaBars: document.getElementById("sectQuotaBars"),
   seatGainThresholds: document.getElementById("seatGainThresholds"),
+  seatPieChart: document.getElementById("seatPieChart"),
+  competitivenessChart: document.getElementById("competitivenessChart"),
+  listSectMap: document.getElementById("listSectMap"),
+  candidateLeaderboard: document.getElementById("candidateLeaderboard"),
   buildIdBadge: document.getElementById("buildIdBadge")
 };
 
@@ -1091,8 +1097,14 @@ function renderWinnersTable() {
 function renderDistrictVisualAnalytics() {
   renderListSeatSummary();
   renderShareComparison();
+  renderListVoteBars();
   renderClosestRaces();
+  renderSectQuotaBars();
   renderSeatGainThresholds();
+  renderSeatPieChart();
+  renderCompetitivenessChart();
+  renderListSectMap();
+  renderCandidateLeaderboard();
 }
 
 function renderListSeatSummary() {
@@ -1172,6 +1184,39 @@ function renderShareComparison() {
     .join("");
 }
 
+function renderListVoteBars() {
+  const rows = Array.isArray(simulation.listAllocation)
+    ? simulation.listAllocation.filter((row) => row.votes > 0).sort((a, b) => b.votes - a.votes)
+    : [];
+
+  if (rows.length === 0) {
+    elements.listVoteBars.innerHTML = '<p class="empty">Vote bars appear after votes are entered.</p>';
+    return;
+  }
+
+  const maxVotes = Math.max(...rows.map((row) => row.votes), 1);
+  elements.listVoteBars.innerHTML = rows
+    .map((row) => {
+      const palette = getListPalette(row.list);
+      const width = (row.votes / maxVotes) * 100;
+      return `
+        <div class="vote-bar-row">
+          <div class="vote-bar-head">
+            ${renderListChip(row.list)}
+            <span class="vote-bar-value">${formatNumber(row.votes)} votes</span>
+          </div>
+          <div class="vote-bar-track">
+            <div
+              class="vote-bar-fill"
+              style="width:${Math.max(width, 4)}%;--vote-bar:${palette.dot};--vote-bar-glow:${palette.border};"
+            ></div>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
 function renderClosestRaces() {
   const races = getClosestRacesData();
   if (races.length === 0) {
@@ -1200,6 +1245,40 @@ function renderClosestRaces() {
             </div>
           </div>
         </article>
+      `
+    )
+    .join("");
+}
+
+function renderSectQuotaBars() {
+  const rows = getSectQuotaBarRows();
+  if (rows.length === 0) {
+    elements.sectQuotaBars.innerHTML = '<p class="empty">Sect quota bars appear once sect seats are allocated.</p>';
+    return;
+  }
+
+  elements.sectQuotaBars.innerHTML = rows
+    .map(
+      (row) => `
+        <div class="quota-bar-row">
+          <div class="quota-bar-head">
+            <strong>${escapeHtml(row.label)}</strong>
+            <span class="quota-bar-meta">${escapeHtml(row.meta)}</span>
+          </div>
+          <div class="quota-bar-track">
+            ${row.slots
+              .map(
+                (slot) => `
+                  <div
+                    class="quota-bar-slot ${slot.empty ? "quota-bar-slot-empty" : ""}"
+                    style="${slot.style}"
+                    title="${escapeHtml(slot.title)}"
+                  ></div>
+                `
+              )
+              .join("")}
+          </div>
+        </div>
       `
     )
     .join("");
@@ -1236,20 +1315,194 @@ function renderSeatGainThresholds() {
     .join("");
 }
 
+function renderSeatPieChart() {
+  const rows = Array.isArray(simulation.listAllocation)
+    ? simulation.listAllocation.filter((row) => row.seats > 0).sort((a, b) => b.seats - a.seats || b.votes - a.votes)
+    : [];
+
+  if (rows.length === 0) {
+    elements.seatPieChart.innerHTML = '<p class="empty">Seat pie chart appears once seats are allocated.</p>';
+    return;
+  }
+
+  const totalSeats = Math.max(1, rows.reduce((sum, row) => sum + row.seats, 0));
+  let running = 0;
+  const slices = rows
+    .map((row) => {
+      const palette = getListPalette(row.list);
+      const start = running;
+      const share = (row.seats / totalSeats) * 100;
+      running += share;
+      const end = running;
+      return {
+        list: row.list,
+        seats: row.seats,
+        share,
+        top: `${palette.dot} ${start}% ${end}%`,
+        side: `${darkenColor(palette.dot, 0.78)} ${start}% ${end}%`
+      };
+    });
+
+  const topGradient = `conic-gradient(${slices.map((slice) => slice.top).join(", ")})`;
+  const sideGradient = `conic-gradient(${slices.map((slice) => slice.side).join(", ")})`;
+
+  elements.seatPieChart.innerHTML = `
+    <div class="seat-pie-shell">
+      <div class="seat-pie-figure">
+        <div class="seat-pie-base" style="--seat-pie:${sideGradient};"></div>
+        <div class="seat-pie-top" style="--seat-pie:${topGradient};"></div>
+        <div class="seat-pie-hole"></div>
+        <div class="seat-pie-center">
+          <strong>${formatNumber(totalSeats)}</strong>
+          <span>Seats</span>
+        </div>
+      </div>
+      <div class="seat-pie-legend">
+        ${slices
+          .map(
+            (slice) => `
+              <div class="seat-pie-legend-row">
+                <span class="seat-pie-legend-chip">${renderListChip(slice.list)}</span>
+                <span class="seat-pie-legend-meta">${slice.seats} seat${slice.seats === 1 ? "" : "s"} · ${formatDecimal(slice.share)}%</span>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderCompetitivenessChart() {
+  const races = getClosestRacesDataForScenario(state, simulation, Number.POSITIVE_INFINITY);
+  if (races.length === 0) {
+    elements.competitivenessChart.innerHTML = '<p class="empty">Competitiveness lines appear when at least one challenger is available.</p>';
+    return;
+  }
+
+  const maxGap = Math.max(...races.map((race) => race.gap), 1);
+  elements.competitivenessChart.innerHTML = races
+    .map((race) => {
+      const width = Math.max((race.gap / maxGap) * 100, 6);
+      const winnerPalette = getListPalette(race.winnerList);
+      const challengerPalette = getListPalette(race.challengerList);
+      return `
+        <div class="lollipop-row">
+          <div class="lollipop-head">
+            <strong>${escapeHtml(race.sect)}</strong>
+            <span class="lollipop-gap">${formatNumber(race.gap)} vote gap</span>
+          </div>
+          <div class="lollipop-line-shell">
+            <span class="lollipop-dot lollipop-dot-start" style="--lollipop-dot:${winnerPalette.dot};"></span>
+            <div class="lollipop-line">
+              <div class="lollipop-line-fill" style="width:${width}%;--lollipop-line:${winnerPalette.dot};"></div>
+            </div>
+            <span class="lollipop-dot lollipop-dot-end" style="--lollipop-dot:${challengerPalette.dot};"></span>
+          </div>
+          <div class="lollipop-meta">
+            <span>${escapeHtml(race.winnerName)} · ${escapeHtml(race.winnerList)}</span>
+            <span>${escapeHtml(race.challengerName)} · ${escapeHtml(race.challengerList)}</span>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderListSectMap() {
+  const rows = getListSectMapRows();
+  if (rows.length === 0) {
+    elements.listSectMap.innerHTML = '<p class="empty">List sect capture appears once winners are assigned.</p>';
+    return;
+  }
+
+  elements.listSectMap.innerHTML = rows
+    .map(
+      (row) => `
+        <div class="sect-map-row">
+          <div class="sect-map-head">
+            ${renderListChip(row.list)}
+            <span class="sect-map-meta">${row.totalSeats} seat${row.totalSeats === 1 ? "" : "s"}</span>
+          </div>
+          <div class="sect-map-track">
+            ${row.segments
+              .map(
+                (segment) => `
+                  <div
+                    class="sect-map-segment"
+                    style="width:${segment.width}%;${segment.style}"
+                    title="${escapeHtml(segment.title)}"
+                  >
+                    <span>${escapeHtml(segment.shortLabel)}</span>
+                  </div>
+                `
+              )
+              .join("")}
+          </div>
+          <div class="sect-map-legend">${row.legend.join("")}</div>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderCandidateLeaderboard() {
+  const groups = getCandidateLeaderboardGroups();
+  if (groups.length === 0) {
+    elements.candidateLeaderboard.innerHTML = '<p class="empty">Candidate ribbons appear once candidate votes are available.</p>';
+    return;
+  }
+
+  elements.candidateLeaderboard.innerHTML = groups
+    .map(
+      (group) => `
+        <div class="leaderboard-group">
+          <div class="leaderboard-group-head">
+            <strong>${escapeHtml(group.sect)}</strong>
+            <span class="leaderboard-group-meta">${group.candidates.length} candidate${group.candidates.length === 1 ? "" : "s"}</span>
+          </div>
+          <div class="leaderboard-ribbons">
+            ${group.candidates
+              .map(
+                (candidate) => `
+                  <div class="leaderboard-ribbon ${candidate.isWinner ? "leaderboard-ribbon-winner" : ""}" style="${candidate.style}">
+                    <div class="leaderboard-ribbon-main">
+                      <span class="leaderboard-ribbon-name ${getTextDirectionClass(candidate.name)}">${escapeHtml(candidate.name)}</span>
+                      <span class="leaderboard-ribbon-votes">${formatNumber(candidate.votes)}</span>
+                    </div>
+                    <div class="leaderboard-ribbon-meta">
+                      <span>${escapeHtml(candidate.list)}</span>
+                      <span>${candidate.isWinner ? "Winner" : "Runner-up"}</span>
+                    </div>
+                  </div>
+                `
+              )
+              .join("")}
+          </div>
+        </div>
+      `
+    )
+    .join("");
+}
+
 function getClosestRacesData() {
+  return getClosestRacesDataForScenario(state, simulation, 4);
+}
+
+function getClosestRacesDataForScenario(scenarioState, scenarioSimulation, limit = 4) {
   const winnerKeys = new Set(
-    simulation.winners.map((winner) =>
+    scenarioSimulation.winners.map((winner) =>
       buildCandidateIdentityKey(winner.name, winner.list, winner.sect, winner.minorDistrict)
     )
   );
   const qualifiedLists = new Set(
-    simulation.listAllocation.filter((row) => row.qualified).map((row) => row.list)
+    scenarioSimulation.listAllocation.filter((row) => row.qualified).map((row) => row.list)
   );
 
-  return state.quotas
+  return scenarioState.quotas
     .map((quota) => {
       const quotaKey = buildQuotaKey(quota.sect, quota.minorDistrict);
-      const electedForSect = simulation.winners
+      const electedForSect = scenarioSimulation.winners
         .filter((winner) => buildQuotaKey(winner.sect, winner.minorDistrict) === quotaKey)
         .sort((a, b) => a.votes - b.votes);
       const winningCutoff = electedForSect[0];
@@ -1257,7 +1510,7 @@ function getClosestRacesData() {
         return null;
       }
 
-      const challenger = state.candidates
+      const challenger = scenarioState.candidates
         .filter((candidate) => {
           if (buildQuotaKey(candidate.sect, candidate.minorDistrict) !== quotaKey) {
             return false;
@@ -1288,7 +1541,117 @@ function getClosestRacesData() {
     })
     .filter(Boolean)
     .sort((a, b) => a.gap - b.gap || b.winnerVotes - a.winnerVotes)
-    .slice(0, 4);
+    .slice(0, limit);
+}
+
+function getSectQuotaBarRows() {
+  return state.quotas.map((quota) => {
+    const quotaKey = buildQuotaKey(quota.sect, quota.minorDistrict);
+    const winners = simulation.winners.filter(
+      (winner) => buildQuotaKey(winner.sect, winner.minorDistrict) === quotaKey
+    );
+    const slots = Array.from({ length: quota.seats }, (_, index) => {
+      const winner = winners[index];
+      if (!winner) {
+        return {
+          empty: true,
+          title: `${formatQuotaLabel(quota)} seat ${index + 1} unfilled`,
+          style: ""
+        };
+      }
+
+      const palette = getListPalette(winner.list);
+      return {
+        empty: false,
+        title: `${winner.name} · ${winner.list}`,
+        style: `--quota-slot:${palette.dot};--quota-slot-edge:${palette.border};`
+      };
+    });
+
+    return {
+      label: formatQuotaLabel(quota),
+      meta: `${winners.length}/${quota.seats} filled`,
+      slots
+    };
+  });
+}
+
+function getListSectMapRows() {
+  const winnersByList = new Map();
+  simulation.winners.forEach((winner) => {
+    if (!winnersByList.has(winner.list)) {
+      winnersByList.set(winner.list, []);
+    }
+    winnersByList.get(winner.list).push(winner);
+  });
+
+  return Array.from(winnersByList.entries())
+    .map(([list, winners]) => {
+      const totalSeats = winners.length;
+      const bySect = new Map();
+      winners.forEach((winner) => {
+        const key = formatQuotaLabel(winner);
+        bySect.set(key, (bySect.get(key) ?? 0) + 1);
+      });
+
+      const segments = Array.from(bySect.entries())
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "en", { sensitivity: "base" }))
+        .map(([label, seats]) => {
+          const palette = getSectPalette(label);
+          return {
+            width: Math.max((seats / totalSeats) * 100, 10),
+            title: `${label} · ${seats} seat${seats === 1 ? "" : "s"}`,
+            shortLabel: buildSectShortLabel(label),
+            style: `--sect-segment:${palette.fill};--sect-segment-edge:${palette.edge};--sect-segment-text:${palette.text};`
+          };
+        });
+
+      const legend = Array.from(bySect.entries())
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "en", { sensitivity: "base" }))
+        .map(([label, seats]) => `<span class="sect-map-legend-chip">${escapeHtml(label)} · ${seats}</span>`);
+
+      return { list, totalSeats, segments, legend };
+    })
+    .sort((a, b) => b.totalSeats - a.totalSeats || a.list.localeCompare(b.list, "en", { sensitivity: "base" }));
+}
+
+function getCandidateLeaderboardGroups() {
+  const winnerKeys = new Set(
+    simulation.winners.map((winner) =>
+      buildCandidateIdentityKey(winner.name, winner.list, winner.sect, winner.minorDistrict)
+    )
+  );
+
+  const grouped = new Map();
+  state.candidates
+    .filter((candidate) => candidate.votes > 0)
+    .forEach((candidate) => {
+      const key = formatQuotaLabel(candidate);
+      if (!grouped.has(key)) {
+        grouped.set(key, []);
+      }
+      grouped.get(key).push(candidate);
+    });
+
+  return Array.from(grouped.entries())
+    .map(([sect, candidates]) => ({
+      sect,
+      candidates: candidates
+        .sort((a, b) => b.votes - a.votes || a.name.localeCompare(b.name, "en", { sensitivity: "base" }))
+        .slice(0, 4)
+        .map((candidate) => {
+          const palette = getListPalette(candidate.list);
+          const isWinner = winnerKeys.has(
+            buildCandidateIdentityKey(candidate.name, candidate.list, candidate.sect, candidate.minorDistrict)
+          );
+          return {
+            ...candidate,
+            isWinner,
+            style: `--leaderboard-fill:${palette.dot};--leaderboard-edge:${palette.border};--leaderboard-text:${palette.text};--leaderboard-bg:${palette.bg};`
+          };
+        })
+    }))
+    .sort((a, b) => a.sect.localeCompare(b.sect, "en", { sensitivity: "base" }));
 }
 
 function getSeatThresholdRows() {
@@ -2229,6 +2592,36 @@ function getListPalette(listName) {
     text: `hsl(${hue} 60% 26%)`,
     dot: `hsl(${hue} 72% 42%)`
   };
+}
+
+function getSectPalette(label) {
+  const seed = Array.from(String(label ?? "")).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  const hue = seed % 360;
+  return {
+    fill: `hsl(${hue} 62% 88%)`,
+    edge: `hsl(${hue} 52% 72%)`,
+    text: `hsl(${hue} 62% 24%)`
+  };
+}
+
+function buildSectShortLabel(label) {
+  return String(label ?? "")
+    .split(/[\s(/-]+/)
+    .filter(Boolean)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("")
+    .slice(0, 4);
+}
+
+function darkenColor(color, factor = 0.8) {
+  const match = String(color).match(/^hsl\(([-\d.]+)\s+([-\d.]+)%\s+([-\d.]+)%\)$/i);
+  if (!match) {
+    return color;
+  }
+
+  const [, hue, saturation, lightness] = match;
+  const nextLightness = Math.max(0, Math.min(100, Number(lightness) * factor));
+  return `hsl(${hue} ${saturation}% ${nextLightness}%)`;
 }
 
 function renderListChip(listName) {
