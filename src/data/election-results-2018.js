@@ -297,7 +297,8 @@ const verifiedElectionResults2018ByTemplateId = {
       { list: "Future for Akkar", votes: 1684 },
       { list: "Decision to Akkar", votes: 312 },
       { list: "Akkar's Decision", votes: 65 },
-      { list: "Strong Akkar", votes: 622 }
+      { list: "Strong Akkar", votes: 622 },
+      { list: "Lebanon Sovereignty", votes: 143 }
     ],
     candidates: [
       { name: "Walid Wajih El Baarini", sect: "Sunni", list: "Future for Akkar", votes: 20426 },
@@ -333,15 +334,15 @@ const verifiedElectionResults2018ByTemplateId = {
       { name: "Joseph Wehbe Wehbe", sect: "Greek Orthodox", list: "Lebanon Sovereignty", votes: 730 },
       { name: "Ahmad Hassan Jawhar", sect: "Sunni", list: "Lebanon Sovereignty", votes: 1059 },
       { name: "Ibrahim Merheb Merheb", sect: "Sunni", list: "Lebanon Sovereignty", votes: 539 },
+      { name: "Ziad Saoud Bitar", sect: "Maronite", list: "Lebanon Sovereignty", votes: 442 },
+      { name: "Bader Ali Ismail", sect: "Sunni", list: "Lebanon Sovereignty", votes: 380 },
+      { name: "Mohamad Ibrahim Roustom", sect: "Alawite", list: "Lebanon Sovereignty", votes: 383 },
 
       { name: "Nidal Karam El Skaff", sect: "Greek Orthodox", list: "Women of Akkar", votes: 158 },
       { name: "Roula Mohamad El Mrad", sect: "Sunni", list: "Women of Akkar", votes: 119 },
       { name: "Golaye Khaled El Assad", sect: "Sunni", list: "Women of Akkar", votes: 75 },
-      { name: "Marie Salem Salem El Khoury", sect: "Maronite", list: "Women of Akkar", votes: 46 },
-      { name: "Souad Hassan Salah", sect: "Sunni", list: "Women of Akkar", votes: 36 },
-      { name: "Ziad Saoud Bitar", sect: "Maronite", list: "Women of Akkar", votes: 442 },
-      { name: "Bader Ali Ismail", sect: "Sunni", list: "Women of Akkar", votes: 380 },
-      { name: "Mohamad Ibrahim Roustom", sect: "Alawite", list: "Women of Akkar", votes: 383 }
+      { name: "Marie Salem Salem El Khoury", sect: "Maronite", list: "Women of Akkar", votes: 110 },
+      { name: "Souad Hassan Salah", sect: "Sunni", list: "Women of Akkar", votes: 36 }
     ]
   },
 

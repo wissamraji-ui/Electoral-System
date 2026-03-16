@@ -132,6 +132,45 @@ test("2018 baselines can preload official list-only votes from the report", () =
     5446
   );
 
+  const northOne = loadElectionResults2018(byId.get("north-i"));
+  assert.ok(northOne);
+  assert.equal(
+    northOne.candidates.filter((candidate) => candidate.list === "Strong Akkar").length,
+    7
+  );
+  assert.equal(
+    northOne.candidates
+      .filter((candidate) => candidate.list === "Strong Akkar")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      northOne.listVotes
+        .filter((entry) => entry.list === "Strong Akkar")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    34430
+  );
+  assert.equal(
+    northOne.candidates.filter((candidate) => candidate.list === "Women of Akkar").length,
+    5
+  );
+  assert.equal(
+    northOne.candidates.find((candidate) => candidate.name === "Marie Salem Salem El Khoury")?.votes,
+    110
+  );
+  assert.equal(
+    northOne.candidates
+      .filter((candidate) => candidate.list === "Women of Akkar")
+      .reduce((sum, candidate) => sum + candidate.votes, 0),
+    498
+  );
+  assert.equal(
+    northOne.candidates
+      .filter((candidate) => candidate.list === "Lebanon Sovereignty")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      northOne.listVotes
+        .filter((entry) => entry.list === "Lebanon Sovereignty")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    4713
+  );
+
   const beirutTwo = loadElectionResults2018(byId.get("beirut-ii"));
   assert.ok(beirutTwo);
   assert.deepEqual(
