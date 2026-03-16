@@ -121,6 +121,45 @@ test("2022 generated districts can also preload official list-only votes via ove
       { list: "ﻗﺎدرﻳﻦ", votes: 40 }
     ]
   );
+  assert.deepEqual(
+    bekaaTwo.candidates
+      .filter((candidate) => candidate.list === "اﻟﻐﺪ اﻷﻓﻀﻞ")
+      .map((candidate) => ({ name: candidate.name, votes: candidate.votes })),
+    [
+      { name: "ﻣﺮادﺣﺴﻦ ﻋﺒﺪ اﻟﺮﺣﻴﻢ", votes: 9157 },
+      { name: "ﻗﺒﻼن ﻋﺒﺪ اﻟﻤﻨﻌﻢ ﻗﺒﻼن", votes: 10143 },
+      { name: "اﻳﻠﻲ ﻧﺠﻴﺐ ﻓﺮزﻟﻲ", votes: 2304 },
+      { name: "ﻃﺎرق ﺳﻠﻴﻢ داود", votes: 2670 },
+      { name: "ﺷﺮﺑﻞ ﻛﻤﻴﻞ ﻣﺎرون", votes: 3576 }
+    ]
+  );
+  assert.equal(
+    bekaaTwo.candidates
+      .filter((candidate) => candidate.list === "اﻟﻐﺪ اﻷﻓﻀﻞ")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      bekaaTwo.listVotes
+        .filter((entry) => entry.list === "اﻟﻐﺪ اﻷﻓﻀﻞ")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    28920
+  );
+  assert.equal(
+    bekaaTwo.candidates
+      .filter((candidate) => candidate.list === "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      bekaaTwo.listVotes
+        .filter((entry) => entry.list === "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    19054
+  );
+  assert.equal(
+    bekaaTwo.candidates
+      .filter((candidate) => candidate.list === "ﻻﺋﺤﺔ ﺳﻬﻠﻨﺎ و اﻟﺠﺒﻞ")
+      .reduce((sum, candidate) => sum + candidate.votes, 0) +
+      bekaaTwo.listVotes
+        .filter((entry) => entry.list === "ﻻﺋﺤﺔ ﺳﻬﻠﻨﺎ و اﻟﺠﺒﻞ")
+        .reduce((sum, entry) => sum + entry.votes, 0),
+    11397
+  );
 
   const northTwo = loadElectionResults2022(byId.get("north-ii"));
   assert.deepEqual(
