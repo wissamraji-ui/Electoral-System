@@ -291,35 +291,35 @@ const manualElectionResults2022ByTemplateId = {
   // Attachment: https://elections.gov.lb/api/Media/D7ED8488-058B-4D77-8F6D-99FF8D46E7E2.pdf
   "south-iii": {
     candidates: [
-      { name: "محمد حسن رعد", sect: "Shia", list: "الأمل و الوفاء", votes: 48543 },
-      { name: "هاني حسن قبيسي", sect: "Shia", list: "الأمل و الوفاء", votes: 20195 },
-      { name: "ناصر فوزي جابر", sect: "Shia", list: "الأمل و الوفاء", votes: 6236 },
-      { name: "علي حسن خليل", sect: "Shia", list: "الأمل و الوفاء", votes: 13155 },
-      { name: "علي رشيد فياض", sect: "Shia", list: "الأمل و الوفاء", votes: 37047 },
-      { name: "قاسم عمر هاشم", sect: "Sunni", list: "الأمل و الوفاء", votes: 1215 },
-      { name: "مروان سليم خير الدين", sect: "Druze", list: "الأمل و الوفاء", votes: 2634 },
-      { name: "اسعد حليم حردان", sect: "Greek Orthodox", list: "الأمل و الوفاء", votes: 1859 },
-      { name: "حسن نظام الدين فضل الله", sect: "Shia", list: "الأمل و الوفاء", votes: 43324 },
-      { name: "ايوب فهد حميد", sect: "Shia", list: "الأمل و الوفاء", votes: 6745 },
-      { name: "اشرف نزيه هاشم بيضون", sect: "Shia", list: "الأمل و الوفاء", votes: 10540 },
+      { name: "محمد حسن رعد", sect: "Shia", list: "الأمل و الوفاء", votes: 48543, minorDistrict: "Nabatieh" },
+      { name: "هاني حسن قبيسي", sect: "Shia", list: "الأمل و الوفاء", votes: 20195, minorDistrict: "Bint Jbeil" },
+      { name: "ناصر فوزي جابر", sect: "Shia", list: "الأمل و الوفاء", votes: 6236, minorDistrict: "Nabatieh" },
+      { name: "علي حسن خليل", sect: "Shia", list: "الأمل و الوفاء", votes: 13155, minorDistrict: "Marjeyoun" },
+      { name: "علي رشيد فياض", sect: "Shia", list: "الأمل و الوفاء", votes: 37047, minorDistrict: "Nabatieh" },
+      { name: "قاسم عمر هاشم", sect: "Sunni", list: "الأمل و الوفاء", votes: 1215, minorDistrict: "Hasbaya" },
+      { name: "مروان سليم خير الدين", sect: "Druze", list: "الأمل و الوفاء", votes: 2634, minorDistrict: "Hasbaya" },
+      { name: "اسعد حليم حردان", sect: "Greek Orthodox", list: "الأمل و الوفاء", votes: 1859, minorDistrict: "Marjeyoun" },
+      { name: "حسن نظام الدين فضل الله", sect: "Shia", list: "الأمل و الوفاء", votes: 43324, minorDistrict: "Bint Jbeil" },
+      { name: "ايوب فهد حميد", sect: "Shia", list: "الأمل و الوفاء", votes: 6745, minorDistrict: "Hasbaya" },
+      { name: "اشرف نزيه هاشم بيضون", sect: "Shia", list: "الأمل و الوفاء", votes: 10540, minorDistrict: "Bint Jbeil" },
 
-      { name: "علي حسن وهبي", sect: "Shia", list: "معاً نحو التغيير", votes: 1806 },
-      { name: "وسيم فؤاد غندور", sect: "Shia", list: "معاً نحو التغيير", votes: 2206 },
-      { name: "وفيق خضر ريحان", sect: "Shia", list: "معاً نحو التغيير", votes: 3071 },
-      { name: "حسن عادل جابر بزي", sect: "Shia", list: "معاً نحو التغيير", votes: 1354 },
-      { name: "خليل حسن ذيب", sect: "Shia", list: "معاً نحو التغيير", votes: 417 },
-      { name: "علي احمد مراد", sect: "Shia", list: "معاً نحو التغيير", votes: 2960 },
-      { name: "ابراهيم محمود عبد الله", sect: "Shia", list: "معاً نحو التغيير", votes: 651 },
-      { name: "الياس فارس جراده", sect: "Greek Orthodox", list: "معاً نحو التغيير", votes: 9218 },
-      { name: "فراس اسماعيل حمدان", sect: "Druze", list: "معاً نحو التغيير", votes: 4859 },
-      { name: "محمد عبد اللطيف قعدان", sect: "Sunni", list: "معاً نحو التغيير", votes: 1059 },
-      { name: "نزار ابراهيم رمال", sect: "Shia", list: "معاً نحو التغيير", votes: 465 },
+      { name: "علي حسن وهبي", sect: "Shia", list: "معاً نحو التغيير", votes: 1806, minorDistrict: "Nabatieh" },
+      { name: "وسيم فؤاد غندور", sect: "Shia", list: "معاً نحو التغيير", votes: 2206, minorDistrict: "Bint Jbeil" },
+      { name: "وفيق خضر ريحان", sect: "Shia", list: "معاً نحو التغيير", votes: 3071, minorDistrict: "Nabatieh" },
+      { name: "حسن عادل جابر بزي", sect: "Shia", list: "معاً نحو التغيير", votes: 1354, minorDistrict: "Bint Jbeil" },
+      { name: "خليل حسن ذيب", sect: "Shia", list: "معاً نحو التغيير", votes: 417, minorDistrict: "Nabatieh" },
+      { name: "علي احمد مراد", sect: "Shia", list: "معاً نحو التغيير", votes: 2960, minorDistrict: "Marjeyoun" },
+      { name: "ابراهيم محمود عبد الله", sect: "Shia", list: "معاً نحو التغيير", votes: 651, minorDistrict: "Hasbaya" },
+      { name: "الياس فارس جراده", sect: "Greek Orthodox", list: "معاً نحو التغيير", votes: 9218, minorDistrict: "Marjeyoun" },
+      { name: "فراس اسماعيل حمدان", sect: "Druze", list: "معاً نحو التغيير", votes: 4859, minorDistrict: "Hasbaya" },
+      { name: "محمد عبد اللطيف قعدان", sect: "Sunni", list: "معاً نحو التغيير", votes: 1059, minorDistrict: "Hasbaya" },
+      { name: "نزار ابراهيم رمال", sect: "Shia", list: "معاً نحو التغيير", votes: 465, minorDistrict: "Marjeyoun" },
 
-      { name: "عباس محمد شرف الدين", sect: "Shia", list: "صوت الجنوب", votes: 74 },
-      { name: "كريم علي حمدان", sect: "Druze", list: "صوت الجنوب", votes: 7 },
-      { name: "رياض حسين عيسى", sect: "Sunni", list: "صوت الجنوب", votes: 18 },
-      { name: "محمود حسن شعيب", sect: "Shia", list: "صوت الجنوب", votes: 48 },
-      { name: "حسين جهاد الشاعر", sect: "Shia", list: "صوت الجنوب", votes: 192 }
+      { name: "عباس محمد شرف الدين", sect: "Shia", list: "صوت الجنوب", votes: 74, minorDistrict: "Bint Jbeil" },
+      { name: "كريم علي حمدان", sect: "Druze", list: "صوت الجنوب", votes: 7, minorDistrict: "Hasbaya" },
+      { name: "رياض حسين عيسى", sect: "Sunni", list: "صوت الجنوب", votes: 18, minorDistrict: "Hasbaya" },
+      { name: "محمود حسن شعيب", sect: "Shia", list: "صوت الجنوب", votes: 48, minorDistrict: "Nabatieh" },
+      { name: "حسين جهاد الشاعر", sect: "Shia", list: "صوت الجنوب", votes: 192, minorDistrict: "Bint Jbeil" }
     ],
     listVotes: [
       { list: "الأمل و الوفاء", votes: 6329 },
@@ -573,6 +573,39 @@ const generatedCandidateOverrides2022ByTemplateId = {
       "قاسم سليمان داوود": "Tyre",
       "داوود علي فرج": "Tyre",
       "روبار ملحم كنعان": "Zahrani"
+    }
+  },
+  "south-iii": {
+    minorDistrictByCandidateName: {
+      "محمد حسن رعد": "Nabatieh",
+      "هاني حسن قبيسي": "Bint Jbeil",
+      "ناصر فوزي جابر": "Nabatieh",
+      "علي حسن خليل": "Marjeyoun",
+      "علي رشيد فياض": "Nabatieh",
+      "قاسم عمر هاشم": "Hasbaya",
+      "مروان سليم خير الدين": "Hasbaya",
+      "اسعد حليم حردان": "Marjeyoun",
+      "حسن نظام الدين فضل الله": "Bint Jbeil",
+      "ايوب فهد حميد": "Hasbaya",
+      "اشرف نزيه هاشم بيضون": "Bint Jbeil",
+
+      "عباس محمد شرف الدين": "Bint Jbeil",
+      "كريم علي حمدان": "Hasbaya",
+      "رياض حسين عيسى": "Hasbaya",
+      "محمود حسن شعيب": "Nabatieh",
+      "حسين جهاد الشاعر": "Bint Jbeil",
+
+      "علي حسن وهبي": "Nabatieh",
+      "وسيم فؤاد غندور": "Bint Jbeil",
+      "وفيق خضر ريحان": "Nabatieh",
+      "حسن عادل جابر بزي": "Bint Jbeil",
+      "خليل حسن ذيب": "Nabatieh",
+      "علي احمد مراد": "Marjeyoun",
+      "ابراهيم محمود عبد الله": "Hasbaya",
+      "الياس فارس جراده": "Marjeyoun",
+      "فراس اسماعيل حمدان": "Hasbaya",
+      "محمد عبد اللطيف قعدان": "Hasbaya",
+      "نزار ابراهيم رمال": "Marjeyoun"
     }
   },
   "north-ii": {
@@ -901,6 +934,15 @@ const quotaOverrides2022ByTemplateId = {
     { sect: "Shia", seats: 4, minorDistrict: "Tyre" },
     { sect: "Shia", seats: 2, minorDistrict: "Zahrani" },
     { sect: "Greek Catholic", seats: 1, minorDistrict: "Zahrani" }
+  ],
+  "south-iii": [
+    { sect: "Shia", seats: 3, minorDistrict: "Nabatieh" },
+    { sect: "Shia", seats: 3, minorDistrict: "Bint Jbeil" },
+    { sect: "Shia", seats: 1, minorDistrict: "Marjeyoun" },
+    { sect: "Shia", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Druze", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun" }
   ],
   "north-ii": [
     { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },

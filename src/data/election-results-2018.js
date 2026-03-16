@@ -918,6 +918,15 @@ const quotaOverrides2018ByTemplateId = {
     { sect: "Shia", seats: 2, minorDistrict: "Saida Villages" },
     { sect: "Greek Catholic", seats: 1, minorDistrict: "Saida Villages" }
   ],
+  "south-iii": [
+    { sect: "Shia", seats: 3, minorDistrict: "Nabatieh" },
+    { sect: "Shia", seats: 3, minorDistrict: "Bint Jbeil" },
+    { sect: "Shia", seats: 1, minorDistrict: "Marjeyoun" },
+    { sect: "Shia", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Druze", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun" }
+  ],
   "north-ii": [
     { sect: "Sunni", seats: 5, minorDistrict: "Tripoli" },
     { sect: "Sunni", seats: 2, minorDistrict: "Dinnieh" },
@@ -986,6 +995,59 @@ const candidateMinorDistrictOverrides2018ByTemplateId = {
     "Abdel Naser Hassan Faran": "Tyre",
     "Ahmad Mohamad Said Mroueh": "Tyre",
     "Lina Hassan El Houssaini": "Tyre"
+  },
+  "south-iii": {
+    "Fadi Kalim Salameh": "Marjeyoun",
+    "Rami Selman Oleik": "Bint Jbeil",
+    "Ali Mohamad Hassan El Amin": "Nabatieh",
+    "Imad Mohamad Kamiha": "Marjeyoun",
+    "Ahmad Sami Ismail": "Hasbaya",
+
+    "Mohamad Hassan Raad": "Nabatieh",
+    "Yassin Kamel Jaber": "Nabatieh",
+    "Hassan Nizamddine Fadlallah": "Bint Jbeil",
+    "Ayoub Fahed Hmayid": "Hasbaya",
+    "Ali Rachid Fayad": "Nabatieh",
+    "Anwar Mohamad El Khalil": "Hasbaya",
+    "Hani Hassan Kobaisi": "Bint Jbeil",
+    "Kassem Omar Hachem": "Hasbaya",
+    "Ali Hassan Khalil": "Marjeyoun",
+    "Assad Halim Hardan": "Marjeyoun",
+    "Ali Ahmad Bazzi": "Bint Jbeil",
+
+    "Jamil Mohamad Ali Balout": "Bint Jbeil",
+    "Akram Mohamad Kais": "Hasbaya",
+    "Fadi Issam Abou Jamra": "Marjeyoun",
+    "Salah Mahdi Noureddine": "Nabatieh",
+    "Rima Ali Hmed": "Hasbaya",
+
+    "Ali Hussein Hajj Ali": "Nabatieh",
+    "Abbas Ali Srour": "Bint Jbeil",
+    "Hala Philip Abou Qesm": "Marjeyoun",
+    "Hussein Mohamad Amin Baydoun": "Bint Jbeil",
+    "Ahmad Mohamad Mrad": "Nabatieh",
+    "Ghassan Mhanna Hadifeh": "Hasbaya",
+    "Said Mohamad Issa": "Hasbaya",
+
+    "Imad Fouad El Khatib": "Hasbaya",
+    "Mohamad Moustafa Kaddouh": "Nabatieh",
+    "Wissam Kamal Chrouf": "Hasbaya",
+    "Nadim Samih Ossairan": "Marjeyoun",
+    "Chadi Gerges Massaad": "Marjeyoun",
+    "Hicham Mahmoud Moughid Jaber": "Marjeyoun",
+    "Moustafa Ali Badreddine": "Bint Jbeil",
+    "Abbas Mohamad Charafeddine": "Bint Jbeil",
+    "Hussein Jihad El Chaer": "Bint Jbeil",
+    "Merhef Ahmad Ramadan": "Hasbaya",
+
+    "Ahmad Mohamad Kamel El Assad": "Hasbaya",
+    "Adnan Hassan El Khatib": "Hasbaya",
+    "Abir Ghaleb Ramadan": "Hasbaya",
+    "Abdallah Mahmoud El Salman": "Marjeyoun",
+    "Jamil Mohamad Farjallah Faraj": "Marjeyoun",
+    "Rabah Kazem Abi Haidar": "Nabatieh",
+    "Maneeh Elias Saab": "Marjeyoun",
+    "Kanj Mahmoud Alameddine": "Hasbaya"
   },
   "north-ii": {
     "Kassem Ali Abdel Aziz": "Dinnieh",

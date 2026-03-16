@@ -353,6 +353,34 @@ test("2018 baselines can preload official list-only votes from the report", () =
     southTwo.candidates.find((candidate) => candidate.name === "Michel Hanna Moussa")?.minorDistrict,
     "Saida Villages"
   );
+
+  const southThree = loadElectionResults2018(byId.get("south-iii"));
+  assert.ok(southThree);
+  assert.deepEqual(southThree.quotas, [
+    { sect: "Shia", seats: 3, minorDistrict: "Nabatieh" },
+    { sect: "Shia", seats: 3, minorDistrict: "Bint Jbeil" },
+    { sect: "Shia", seats: 1, minorDistrict: "Marjeyoun" },
+    { sect: "Shia", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Druze", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun" }
+  ]);
+  assert.equal(
+    southThree.candidates.find((candidate) => candidate.name === "Mohamad Hassan Raad")?.minorDistrict,
+    "Nabatieh"
+  );
+  assert.equal(
+    southThree.candidates.find((candidate) => candidate.name === "Hassan Nizamddine Fadlallah")?.minorDistrict,
+    "Bint Jbeil"
+  );
+  assert.equal(
+    southThree.candidates.find((candidate) => candidate.name === "Assad Halim Hardan")?.minorDistrict,
+    "Marjeyoun"
+  );
+  assert.equal(
+    southThree.candidates.find((candidate) => candidate.name === "Kassem Omar Hachem")?.minorDistrict,
+    "Hasbaya"
+  );
 });
 
 test("2018 North II simulation matches the published winner set", () => {

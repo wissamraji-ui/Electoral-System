@@ -83,6 +83,41 @@ test("2022 audited districts preload official list-only votes from the report to
     "Zahrani"
   );
 
+  const southThree = loadElectionResults2022(byId.get("south-iii"));
+  assert.deepEqual(
+    southThree.listVotes,
+    [
+      { list: "الأمل و الوفاء", votes: 6329 },
+      { list: "معاً نحو التغيير", votes: 2318 },
+      { list: "صوت الجنوب", votes: 613 }
+    ]
+  );
+  assert.deepEqual(southThree.quotas, [
+    { sect: "Shia", seats: 3, minorDistrict: "Nabatieh" },
+    { sect: "Shia", seats: 3, minorDistrict: "Bint Jbeil" },
+    { sect: "Shia", seats: 1, minorDistrict: "Marjeyoun" },
+    { sect: "Shia", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Sunni", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Druze", seats: 1, minorDistrict: "Hasbaya" },
+    { sect: "Greek Orthodox", seats: 1, minorDistrict: "Marjeyoun" }
+  ]);
+  assert.equal(
+    southThree.candidates.find((candidate) => candidate.name === "محمد حسن رعد")?.minorDistrict,
+    "Nabatieh"
+  );
+  assert.equal(
+    southThree.candidates.find((candidate) => candidate.name === "حسن نظام الدين فضل الله")?.minorDistrict,
+    "Bint Jbeil"
+  );
+  assert.equal(
+    southThree.candidates.find((candidate) => candidate.name === "الياس فارس جراده")?.minorDistrict,
+    "Marjeyoun"
+  );
+  assert.equal(
+    southThree.candidates.find((candidate) => candidate.name === "فراس اسماعيل حمدان")?.minorDistrict,
+    "Hasbaya"
+  );
+
   const southOne = loadElectionResults2022(byId.get("south-i"));
   assert.deepEqual(
     southOne.listVotes,
@@ -115,15 +150,6 @@ test("2022 audited districts preload official list-only votes from the report to
   );
   assert.equal(new Set(southOne.candidates.map((candidate) => candidate.list)).size, 7);
 
-  const southThree = loadElectionResults2022(byId.get("south-iii"));
-  assert.deepEqual(
-    southThree.listVotes,
-    [
-      { list: "الأمل و الوفاء", votes: 6329 },
-      { list: "معاً نحو التغيير", votes: 2318 },
-      { list: "صوت الجنوب", votes: 613 }
-    ]
-  );
 });
 
 test("2022 generated districts can also preload official list-only votes via overrides", () => {
