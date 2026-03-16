@@ -115,17 +115,12 @@ async function ensureLatestBuild() {
       return;
     }
 
-    const currentUrl = new URL(window.location.href);
     if (latestBuildId === BUILD_ID) {
-      if (currentUrl.searchParams.has(BUILD_QUERY_PARAM)) {
-        currentUrl.searchParams.delete(BUILD_QUERY_PARAM);
-        window.history.replaceState({}, "", currentUrl);
-      }
-
       sessionStorage.removeItem(BUILD_RELOAD_STORAGE_KEY);
       return;
     }
 
+    const currentUrl = new URL(window.location.href);
     const lastReloadedBuildId = sessionStorage.getItem(BUILD_RELOAD_STORAGE_KEY);
     if (lastReloadedBuildId === latestBuildId) {
       console.warn("A newer deploy was detected, but the forced refresh already ran once for this build.");

@@ -6,6 +6,34 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <script>
+      (function () {
+        var BUILD_QUERY_PARAM = "__build";
+        var CHECK_TS_PARAM = "__ts";
+        var currentUrl = new URL(window.location.href);
+
+        fetch("/build-meta.json?" + CHECK_TS_PARAM + "=" + Date.now(), { cache: "no-store" })
+          .then(function (response) {
+            return response.ok ? response.json() : null;
+          })
+          .then(function (payload) {
+            var latestBuildId = payload && typeof payload.buildId === "string" ? payload.buildId.trim() : "";
+            if (!latestBuildId) {
+              return;
+            }
+
+            if (currentUrl.searchParams.get(BUILD_QUERY_PARAM) === latestBuildId) {
+              return;
+            }
+
+            currentUrl.searchParams.set(BUILD_QUERY_PARAM, latestBuildId);
+            window.location.replace(currentUrl.toString());
+          })
+          .catch(function (error) {
+            console.error("Unable to verify latest build before app load", error);
+          });
+      })();
+    </script>
     <title>Lebanon Electoral Law Simulator</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
