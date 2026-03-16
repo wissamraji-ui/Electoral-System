@@ -449,16 +449,17 @@ function onExportScenario() {
 
 function onExportPdf() {
   runSimulation();
-  const lines = buildPdfReportLines();
-  const bytes = buildPlainTextPdf(lines);
   const fileName = `electoral-simulation-${slugify(state.regionName || "custom")}.pdf`;
-  const blob = new Blob([bytes], { type: "application/pdf" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = fileName;
-  link.click();
-  URL.revokeObjectURL(url);
+  const printWindow = window.open("", "_blank");
+
+  if (!printWindow) {
+    window.alert("Unable to open the print preview. Allow pop-ups for this site and try again.");
+    return;
+  }
+
+  printWindow.document.open();
+  printWindow.document.write(buildPrintableReportHtml(fileName));
+  printWindow.document.close();
 }
 
 async function onImportScenario(event) {
@@ -1248,6 +1249,334 @@ function formatDecimal(value) {
   }
 
   return numeric.toLocaleString("en-US", { maximumFractionDigits: 2 });
+}
+
+function buildPrintableReportHtml(fileName) {
+  const summary = simulation.summary;
+  const totalListCount = Array.isArray(simulation.listAllocation) ? simulation.listAllocation.length : 0;
+  const districtLabel = state.regionName.trim() || "Unnamed region";
+  const generatedAt = new Date().toLocaleString("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  });
+  const listOnlyVotes = Array.isArray(state.listVotes)
+    ? state.listVotes.reduce((sum, entry) => sum + clampInteger(entry?.votes, 0), 0)
+    : 0;
+  const listRows = Array.isArray(simulation.listAllocation)
+    ? [...simulation.listAllocation].sort((a, b) => {
+        if (b.seats !== a.seats) {
+          return b.seats - a.seats;
+        }
+        if (b.votes !== a.votes) {
+          return b.votes - a.votes;
+        }
+        return a.list.localeCompare(b.list, "en", { sensitivity: "base" });
+      })
+    : [];
+  const winnerRows = Array.isArray(simulation.winners) ? simulation.winners : [];
+  const sectCoverageRows = Array.isArray(simulation.sectCoverage) ? simulation.sectCoverage : [];
+  const warningRows = Array.isArray(simulation.warnings) ? simulation.warnings : [];
+
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>${escapeHtml(fileName)}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #16202a;
+        --muted: #5f6b76;
+        --line: #d6dde5;
+        --panel: #f7f9fb;
+        --accent: #0f5b8d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 24px;
+        color: var(--ink);
+        background: #fff;
+        font: 14px/1.45 "Arial Unicode MS", "Geeza Pro", "Diwan Kufi", "Noto Naskh Arabic", Arial, sans-serif;
+      }
+
+      h1, h2 {
+        margin: 0 0 12px;
+        line-height: 1.2;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      h2 {
+        margin-top: 28px;
+        font-size: 16px;
+        color: var(--accent);
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .meta {
+        margin-top: 8px;
+        color: var(--muted);
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .metric {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+      }
+
+      .metric-label {
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .metric-value {
+        margin-top: 6px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+      }
+
+      th, td {
+        padding: 9px 10px;
+        border: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: var(--panel);
+      }
+
+      .empty {
+        color: var(--muted);
+      }
+
+      .rtl {
+        direction: rtl;
+        text-align: right;
+        unicode-bidi: plaintext;
+      }
+
+      .warning-list {
+        margin: 12px 0 0;
+        padding-left: 18px;
+      }
+
+      .footer-note {
+        margin-top: 28px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      @media print {
+        body {
+          padding: 14mm;
+        }
+
+        .page-break {
+          break-before: page;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Lebanon Electoral Simulation Report</h1>
+    <p class="meta">Generated: ${escapeHtml(generatedAt)}</p>
+    <p class="meta">District: <span class="${getTextDirectionClass(districtLabel)}">${escapeHtml(districtLabel)}</span></p>
+
+    <section class="metrics">
+      ${renderPrintableMetric("Total Seats", String(summary.totalSeats))}
+      ${renderPrintableMetric("Filled Seats", String(summary.filledSeats))}
+      ${renderPrintableMetric("Seat Coverage", `${summary.coveragePct}%`)}
+      ${renderPrintableMetric("Candidates", String(summary.totalCandidates))}
+      ${renderPrintableMetric("Total Votes", formatNumber(summary.totalVotes))}
+      ${renderPrintableMetric("Blank Votes", formatNumber(summary.blankVotes))}
+      ${renderPrintableMetric("Invalid Votes", formatNumber(summary.invalidVotes))}
+      ${renderPrintableMetric("List-Only Votes", formatNumber(listOnlyVotes))}
+      ${renderPrintableMetric(
+        "Electoral Quotient (EQ)",
+        summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-"
+      )}
+      ${renderPrintableMetric("Total Lists", String(totalListCount))}
+      ${renderPrintableMetric("Qualified Lists", String(summary.qualifiedListCount))}
+    </section>
+
+    <h2>List EQ Allocation</h2>
+    ${renderPrintableListAllocationTable(listRows)}
+
+    <h2 class="page-break">Winning Candidates</h2>
+    ${renderPrintableWinnersTable(winnerRows)}
+
+    <h2>Sect Coverage</h2>
+    ${renderPrintableSectCoverageTable(sectCoverageRows)}
+
+    <h2>Warnings</h2>
+    ${renderPrintableWarnings(warningRows)}
+
+    <p class="footer-note">Use the browser print dialog and choose “Save as PDF”.</p>
+    <script>
+      window.addEventListener("load", () => {
+        window.print();
+      });
+      window.addEventListener("afterprint", () => {
+        window.close();
+      });
+    </script>
+  </body>
+</html>`;
+}
+
+function renderPrintableMetric(label, value) {
+  return `
+    <article class="metric">
+      <div class="metric-label">${escapeHtml(label)}</div>
+      <div class="metric-value ${getTextDirectionClass(value)}">${escapeHtml(value)}</div>
+    </article>
+  `;
+}
+
+function renderPrintableListAllocationTable(rows) {
+  if (!rows.length) {
+    return '<p class="empty">No list allocation available.</p>';
+  }
+
+  return `
+    <table>
+      <thead>
+        <tr>
+          <th>List</th>
+          <th>Total Votes</th>
+          <th>Status</th>
+          <th>Seats</th>
+          <th>Base Seats</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows
+          .map(
+            (row) => `
+              <tr>
+                <td class="${getTextDirectionClass(row.list)}">${escapeHtml(row.list)}</td>
+                <td>${formatNumber(row.votes)}</td>
+                <td>${row.qualified ? "Qualified" : "Below EQ"}</td>
+                <td>${row.seats}</td>
+                <td>${row.baseSeats}</td>
+              </tr>
+            `
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderPrintableWinnersTable(rows) {
+  if (!rows.length) {
+    return '<p class="empty">No winners in current simulation.</p>';
+  }
+
+  return `
+    <table>
+      <thead>
+        <tr>
+          <th>Seat</th>
+          <th>Sect</th>
+          <th>Name</th>
+          <th>List</th>
+          <th>Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows
+          .map(
+            (row) => `
+              <tr>
+                <td>${row.seatNumber}</td>
+                <td>${escapeHtml(row.sect)}</td>
+                <td class="${getTextDirectionClass(row.name)}">${escapeHtml(row.name)}</td>
+                <td class="${getTextDirectionClass(row.list)}">${escapeHtml(row.list)}</td>
+                <td>${formatNumber(row.votes)}</td>
+              </tr>
+            `
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderPrintableSectCoverageTable(rows) {
+  if (!rows.length) {
+    return '<p class="empty">No sect coverage available.</p>';
+  }
+
+  return `
+    <table>
+      <thead>
+        <tr>
+          <th>Sect</th>
+          <th>Required</th>
+          <th>Elected</th>
+          <th>Remaining</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows
+          .map(
+            (row) => `
+              <tr>
+                <td>${escapeHtml(row.sect)}</td>
+                <td>${row.requiredSeats}</td>
+                <td>${row.electedSeats}</td>
+                <td>${row.remaining}</td>
+              </tr>
+            `
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderPrintableWarnings(rows) {
+  if (!rows.length) {
+    return '<p class="empty">None.</p>';
+  }
+
+  return `
+    <ul class="warning-list">
+      ${rows.map((warning) => `<li>${escapeHtml(warning)}</li>`).join("")}
+    </ul>
+  `;
+}
+
+function getTextDirectionClass(value) {
+  return /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(String(value ?? "")) ? "rtl" : "";
 }
 
 function buildPdfReportLines() {
