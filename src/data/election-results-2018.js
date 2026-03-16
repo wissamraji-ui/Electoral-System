@@ -53,6 +53,13 @@ const verifiedElectionResults2018ByTemplateId = {
   // /Users/raji/Desktop/2018 Parliamentary Elections Results.pdf
   // Page 27, Beirut 1
   "beirut-i": {
+    listVotes: [
+      { list: "We are Beirut", votes: 25 },
+      { list: "Loyalty to Beirut", votes: 11 },
+      { list: "Beirut One", votes: 348 },
+      { list: "Strong Beirut One", votes: 323 },
+      { list: "Kulluna Watani", votes: 144 }
+    ],
     candidates: [
       { name: "Sibou Yeghya Mekhjian", sect: "Armenian Orthodox", list: "We are Beirut", votes: 564 },
       { name: "Michelle Gebran Tueini", sect: "Greek Orthodox", list: "We are Beirut", votes: 428 },

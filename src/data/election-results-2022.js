@@ -51,7 +51,7 @@ const manualElectionResults2022ByTemplateId = {
       { name: "موسى خوري", sect: "Maronite", list: "قادرين", votes: 91 },
       { name: "مارلين غريّب الدين", sect: "Greek Orthodox", list: "قادرين", votes: 56 },
       { name: "شربل نحاس", sect: "Greek Catholic", list: "قادرين", votes: 1265 },
-      { name: "روي ابراهيم", sect: "Minorities", list: "قادرين", votes: 396 },
+      { name: "روي ابراهيم", sect: "Minorities", list: "قادرين", votes: 98 },
 
       { name: "جاك جندو", sect: "Minorities", list: "بيروت مدينتي", votes: 226 },
       { name: "بيار الجميّل", sect: "Maronite", list: "بيروت مدينتي", votes: 160 },

@@ -53,6 +53,19 @@ test("2018 baselines load only for manually audited districts", async () => {
 test("2018 baselines can preload official list-only votes from the report", () => {
   const byId = new Map(rawTemplates.map((template) => [template.id, template]));
 
+  const beirutOne = loadElectionResults2018(byId.get("beirut-i"));
+  assert.ok(beirutOne);
+  assert.deepEqual(
+    beirutOne.listVotes,
+    [
+      { list: "We are Beirut", votes: 25 },
+      { list: "Loyalty to Beirut", votes: 11 },
+      { list: "Beirut One", votes: 348 },
+      { list: "Strong Beirut One", votes: 323 },
+      { list: "Kulluna Watani", votes: 144 }
+    ]
+  );
+
   const zahle = loadElectionResults2018(byId.get("bekaa-i"));
   assert.ok(zahle);
   assert.deepEqual(zahle.listVotes, []);

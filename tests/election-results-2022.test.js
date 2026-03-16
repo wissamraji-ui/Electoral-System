@@ -18,6 +18,12 @@ test("2022 audited districts preload official list-only votes from the report to
   const byId = new Map(rawTemplates.map((template) => [template.id, template]));
 
   const beirutOne = loadElectionResults2022(byId.get("beirut-i"));
+  assert.equal(
+    beirutOne.candidates
+      .filter((candidate) => candidate.list === "قادرين")
+      .reduce((sum, candidate) => sum + candidate.votes, 0),
+    1510
+  );
   assert.deepEqual(
     beirutOne.listVotes,
     [
