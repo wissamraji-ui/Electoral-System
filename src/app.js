@@ -59,7 +59,11 @@ const elements = {
   metricsGrid: document.getElementById("metricsGrid"),
   alertsBox: document.getElementById("alertsBox"),
   listAllocationBody: document.getElementById("listAllocationBody"),
-  winnersTableBody: document.getElementById("winnersTableBody")
+  winnersTableBody: document.getElementById("winnersTableBody"),
+  listSeatSummary: document.getElementById("listSeatSummary"),
+  shareComparison: document.getElementById("shareComparison"),
+  closestRaces: document.getElementById("closestRaces"),
+  seatGainThresholds: document.getElementById("seatGainThresholds")
 };
 
 let idCounter = Date.now();
@@ -899,6 +903,7 @@ function renderResults() {
   renderAlerts();
   renderListAllocationTable();
   renderWinnersTable();
+  renderDistrictVisualAnalytics();
 }
 
 function renderMetrics() {
@@ -1005,6 +1010,252 @@ function renderWinnersTable() {
     `
     )
     .join("");
+}
+
+function renderDistrictVisualAnalytics() {
+  renderListSeatSummary();
+  renderShareComparison();
+  renderClosestRaces();
+  renderSeatGainThresholds();
+}
+
+function renderListSeatSummary() {
+  const rows = Array.isArray(simulation.listAllocation)
+    ? simulation.listAllocation.filter((row) => row.seats > 0).sort((a, b) => b.seats - a.seats || b.votes - a.votes)
+    : [];
+
+  if (rows.length === 0) {
+    elements.listSeatSummary.innerHTML = '<p class="empty">Seat share appears after seats are allocated.</p>';
+    return;
+  }
+
+  const totalSeats = Math.max(1, simulation.summary.totalSeats);
+  elements.listSeatSummary.innerHTML = rows
+    .map((row) => {
+      const palette = getListPalette(row.list);
+      const seatShare = Math.round((row.seats / totalSeats) * 100);
+      const voteShare = simulation.summary.totalVotes > 0 ? Math.round((row.votes / simulation.summary.totalVotes) * 100) : 0;
+
+      return `
+        <div class="list-seat-row">
+          <div class="list-seat-row-top">
+            ${renderListChip(row.list)}
+            <span class="list-seat-figures">${row.seats}/${totalSeats} seats</span>
+          </div>
+          <div class="list-seat-bar">
+            <div class="list-seat-bar-fill" style="width:${Math.max((row.seats / totalSeats) * 100, 6)}%;--seat-bar:${palette.dot};"></div>
+          </div>
+          <div class="list-seat-row-meta">
+            <span>Seat share ${seatShare}%</span>
+            <span>Vote share ${voteShare}%</span>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderShareComparison() {
+  const rows = Array.isArray(simulation.listAllocation)
+    ? simulation.listAllocation.filter((row) => row.votes > 0).sort((a, b) => b.votes - a.votes)
+    : [];
+
+  if (rows.length === 0) {
+    elements.shareComparison.innerHTML = '<p class="empty">Share comparison appears after votes are entered.</p>';
+    return;
+  }
+
+  const totalSeats = Math.max(1, simulation.summary.totalSeats);
+  const totalVotes = Math.max(1, simulation.summary.totalVotes);
+  elements.shareComparison.innerHTML = rows
+    .map((row) => {
+      const palette = getListPalette(row.list);
+      const voteShare = (row.votes / totalVotes) * 100;
+      const seatShare = (row.seats / totalSeats) * 100;
+      const delta = seatShare - voteShare;
+      const statusLabel = delta > 1 ? "Overrepresented" : delta < -1 ? "Underrepresented" : "Near proportional";
+
+      return `
+        <div class="share-row">
+          <div class="share-row-head">
+            ${renderListChip(row.list)}
+            <span class="share-row-status">${statusLabel}</span>
+          </div>
+          <div class="share-track">
+            <div class="share-bar share-bar-votes" style="width:${Math.max(voteShare, row.votes > 0 ? 3 : 0)}%;--share-bar:${palette.border};"></div>
+            <div class="share-bar share-bar-seats" style="width:${Math.max(seatShare, row.seats > 0 ? 3 : 0)}%;--share-bar:${palette.dot};"></div>
+          </div>
+          <div class="share-row-meta">
+            <span>Votes ${formatDecimal(voteShare)}%</span>
+            <span>Seats ${formatDecimal(seatShare)}%</span>
+            <span class="${delta >= 0 ? "share-positive" : "share-negative"}">${delta >= 0 ? "+" : ""}${formatDecimal(delta)} pts</span>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderClosestRaces() {
+  const races = getClosestRacesData();
+  if (races.length === 0) {
+    elements.closestRaces.innerHTML = '<p class="empty">Closest races appear when at least one challenger is available.</p>';
+    return;
+  }
+
+  elements.closestRaces.innerHTML = races
+    .map(
+      (race) => `
+        <article class="race-card">
+          <div class="race-card-head">
+            <span class="race-sect">${escapeHtml(race.sect)}</span>
+            <span class="race-gap">${formatNumber(race.gap)} vote gap</span>
+          </div>
+          <div class="race-main">
+            <div>
+              <div class="race-label">Winner</div>
+              <strong class="${getTextDirectionClass(race.winnerName)}">${escapeHtml(race.winnerName)}</strong>
+              <div class="race-meta">${escapeHtml(race.winnerList)} · ${formatNumber(race.winnerVotes)} votes</div>
+            </div>
+            <div>
+              <div class="race-label">Closest challenger</div>
+              <strong class="${getTextDirectionClass(race.challengerName)}">${escapeHtml(race.challengerName)}</strong>
+              <div class="race-meta">${escapeHtml(race.challengerList)} · ${formatNumber(race.challengerVotes)} votes</div>
+            </div>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderSeatGainThresholds() {
+  const rows = getSeatThresholdRows();
+  if (rows.length === 0) {
+    elements.seatGainThresholds.innerHTML = '<p class="empty">Thresholds appear once lists and votes are available.</p>';
+    return;
+  }
+
+  elements.seatGainThresholds.innerHTML = rows
+    .map(
+      (row) => `
+        <div class="threshold-row">
+          <div class="threshold-row-head">
+            ${renderListChip(row.list)}
+            <span class="threshold-seat-count">${row.seats} seat${row.seats === 1 ? "" : "s"}</span>
+          </div>
+          <div class="threshold-grid">
+            <div class="threshold-box">
+              <span class="threshold-label">To gain seat</span>
+              <strong>${row.toGainSeat === null ? "-" : formatNumber(row.toGainSeat)}</strong>
+            </div>
+            <div class="threshold-box">
+              <span class="threshold-label">Seat at risk in</span>
+              <strong>${row.seatAtRisk === null ? "-" : formatNumber(row.seatAtRisk)}</strong>
+            </div>
+          </div>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function getClosestRacesData() {
+  const winnerKeys = new Set(
+    simulation.winners.map((winner) => buildCandidateIdentityKey(winner.name, winner.list, winner.sect))
+  );
+  const qualifiedLists = new Set(
+    simulation.listAllocation.filter((row) => row.qualified).map((row) => row.list)
+  );
+
+  return state.quotas
+    .map((quota) => {
+      const sectKey = normalizeSect(quota.sect);
+      const electedForSect = simulation.winners
+        .filter((winner) => normalizeSect(winner.sect) === sectKey)
+        .sort((a, b) => a.votes - b.votes);
+      const winningCutoff = electedForSect[0];
+      if (!winningCutoff) {
+        return null;
+      }
+
+      const challenger = state.candidates
+        .filter((candidate) => {
+          if (normalizeSect(candidate.sect) !== sectKey) {
+            return false;
+          }
+          if (!qualifiedLists.has(candidate.list)) {
+            return false;
+          }
+          return !winnerKeys.has(buildCandidateIdentityKey(candidate.name, candidate.list, candidate.sect));
+        })
+        .sort((a, b) => b.votes - a.votes || a.name.localeCompare(b.name, "en", { sensitivity: "base" }))[0];
+
+      if (!challenger) {
+        return null;
+      }
+
+      return {
+        sect: quota.sect,
+        winnerName: winningCutoff.name,
+        winnerList: winningCutoff.list,
+        winnerVotes: winningCutoff.votes,
+        challengerName: challenger.name,
+        challengerList: challenger.list,
+        challengerVotes: challenger.votes,
+        gap: Math.max(0, winningCutoff.votes - challenger.votes)
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.gap - b.gap || b.winnerVotes - a.winnerVotes)
+    .slice(0, 4);
+}
+
+function getSeatThresholdRows() {
+  const rows = Array.isArray(simulation.listAllocation)
+    ? simulation.listAllocation.filter((row) => row.votes > 0).sort((a, b) => b.votes - a.votes)
+    : [];
+  const qualifiedRows = rows.filter((row) => row.qualified);
+  const awardedByRemainder = qualifiedRows.filter((row) => row.seats > row.baseSeats);
+  const nonAwardedQualified = qualifiedRows.filter((row) => row.seats === row.baseSeats);
+  const lowestWinningRemainder = awardedByRemainder.length
+    ? Math.min(...awardedByRemainder.map((row) => row.remainderVotes))
+    : null;
+  const highestLosingRemainder = nonAwardedQualified.length
+    ? Math.max(...nonAwardedQualified.map((row) => row.remainderVotes))
+    : null;
+
+  return rows.map((row) => {
+    let toGainSeat = null;
+    let seatAtRisk = null;
+
+    if (!row.qualified) {
+      toGainSeat = simulation.summary.electoralQuotient > 0 ? Math.max(0, Math.ceil(simulation.summary.electoralQuotient - row.votes)) : null;
+    } else if (lowestWinningRemainder !== null) {
+      toGainSeat = Math.max(0, Math.floor(lowestWinningRemainder - row.remainderVotes) + 1);
+    }
+
+    if (row.seats > row.baseSeats && highestLosingRemainder !== null) {
+      seatAtRisk = Math.max(0, Math.floor(row.remainderVotes - highestLosingRemainder) + 1);
+    } else if (row.baseSeats > 0) {
+      seatAtRisk = Math.max(1, Math.floor(row.remainderVotes) + 1);
+    }
+
+    if (toGainSeat === 0) {
+      toGainSeat = row.seats > 0 ? 1 : 0;
+    }
+
+    return {
+      list: row.list,
+      seats: row.seats,
+      toGainSeat,
+      seatAtRisk
+    };
+  });
+}
+
+function buildCandidateIdentityKey(name, list, sect) {
+  return [String(name ?? "").trim(), String(list ?? "").trim(), String(sect ?? "").trim()].join("::");
 }
 
 function createId(prefix) {

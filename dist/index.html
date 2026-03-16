@@ -7,8 +7,8 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>Lebanon Electoral Law Simulator</title>
-    <script type="module" crossorigin src="/assets/index-Dq5xcDms.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Cr0U10ud.css">
+    <script type="module" crossorigin src="/assets/index-DAzwTqnr.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DqhNXq1I.css">
   </head>
   <body>
     <div class="noise-bg"></div>
@@ -191,6 +191,47 @@
               <tbody id="winnersTableBody"></tbody>
             </table>
           </div>
+
+          <section class="visual-analytics-shell">
+            <div class="panel-title-row visual-analytics-title-row">
+              <h3>District Visual Analytics</h3>
+              <span class="tag">Seat Map Summary</span>
+            </div>
+
+            <div class="visual-analytics-grid">
+              <article class="visual-card">
+                <div class="visual-card-header">
+                  <h4>List Seat Share</h4>
+                  <p>Seats won out of the district total.</p>
+                </div>
+                <div id="listSeatSummary" class="list-seat-summary"></div>
+              </article>
+
+              <article class="visual-card">
+                <div class="visual-card-header">
+                  <h4>Vote Share vs Seat Share</h4>
+                  <p>See where seat power runs ahead of vote weight.</p>
+                </div>
+                <div id="shareComparison" class="share-comparison"></div>
+              </article>
+
+              <article class="visual-card">
+                <div class="visual-card-header">
+                  <h4>Closest Races</h4>
+                  <p>The tightest sect contests in the current run.</p>
+                </div>
+                <div id="closestRaces" class="closest-races"></div>
+              </article>
+
+              <article class="visual-card">
+                <div class="visual-card-header">
+                  <h4>Seat Gain Thresholds</h4>
+                  <p>How close each list is to gaining or risking a seat.</p>
+                </div>
+                <div id="seatGainThresholds" class="seat-thresholds"></div>
+              </article>
+            </div>
+          </section>
         </div>
       </section>
     </main>

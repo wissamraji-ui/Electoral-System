@@ -524,6 +524,205 @@ tbody tr:last-child td {
   padding: 0.5rem 0.6rem;
 }
 
+.visual-analytics-shell {
+  margin-top: 1rem;
+}
+
+.visual-analytics-title-row {
+  margin-bottom: 0.55rem;
+}
+
+.visual-analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.visual-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+  overflow: hidden;
+}
+
+.visual-card-header {
+  padding: 0.72rem 0.78rem 0.5rem;
+  border-bottom: 1px solid #e7edf3;
+  background: #f4f7fa;
+}
+
+.visual-card-header h4 {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #17354b;
+}
+
+.visual-card-header p {
+  margin: 0.18rem 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.list-seat-summary {
+  display: grid;
+  gap: 0.68rem;
+  padding: 0.78rem;
+}
+
+.list-seat-row {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.list-seat-row-top,
+.list-seat-row-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.list-seat-figures,
+.list-seat-row-meta {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.list-seat-bar {
+  width: 100%;
+  height: 0.62rem;
+  border-radius: 999px;
+  background: #e8eef3;
+  overflow: hidden;
+}
+
+.list-seat-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--seat-bar, #4d6881);
+}
+
+.share-comparison,
+.closest-races,
+.seat-thresholds {
+  display: grid;
+  gap: 0.68rem;
+  padding: 0.78rem;
+}
+
+.share-row,
+.threshold-row {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.share-row-head,
+.threshold-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.share-row-status,
+.threshold-seat-count,
+.race-meta,
+.race-gap {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.share-track {
+  position: relative;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.share-bar {
+  height: 0.54rem;
+  border-radius: 999px;
+  background: var(--share-bar, #9db0c1);
+}
+
+.share-bar-votes {
+  opacity: 0.45;
+}
+
+.share-bar-seats {
+  opacity: 0.95;
+}
+
+.share-row-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.share-positive {
+  color: #1d6a4f;
+  font-weight: 700;
+}
+
+.share-negative {
+  color: #9b4a1d;
+  font-weight: 700;
+}
+
+.race-card {
+  border: 1px solid #e5ebf1;
+  border-radius: 12px;
+  background: #fbfdff;
+  padding: 0.72rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.race-card-head,
+.race-main {
+  display: grid;
+  gap: 0.38rem;
+}
+
+.race-main {
+  grid-template-columns: 1fr 1fr;
+}
+
+.race-sect {
+  color: #17354b;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.race-label,
+.threshold-label {
+  color: var(--muted);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.threshold-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.threshold-box {
+  border: 1px solid #e5ebf1;
+  border-radius: 10px;
+  background: #fbfdff;
+  padding: 0.58rem 0.62rem;
+  display: grid;
+  gap: 0.16rem;
+}
+
+.threshold-box strong {
+  color: #17354b;
+  font-size: 0.92rem;
+}
+
 .quota-cell-main {
   display: flex;
   align-items: center;
@@ -780,6 +979,16 @@ tbody tr:last-child td {
   }
 
   .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .visual-analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .race-main,
+  .threshold-grid,
+  .share-row-meta {
     grid-template-columns: 1fr;
   }
 
