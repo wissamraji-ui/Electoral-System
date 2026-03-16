@@ -3,7 +3,6 @@ import {
   normalizeElectionBaseline,
   normalizeElectionBaselineListVotes
 } from "./election-results-normalize.js";
-import { getInvalidVotes } from "./invalid-votes.js";
 
 function hashVersionPayload(value) {
   const json = JSON.stringify(value);
@@ -634,8 +633,11 @@ const verifiedElectionResults2018ByTemplateId = {
       { list: "The Future is for the North", votes: 1923 },
       { list: "National Dignity", votes: 911 },
       { list: "Determination", votes: 2433 },
-      { list: "A Sovereign Lebanon", votes: 468 },
-      { list: "People's Decision", votes: 426 }
+      { list: "A Sovereign Lebanon", votes: 831 },
+      { list: "Independent Decision", votes: 384 },
+      { list: "People's Decision", votes: 364 },
+      { list: "Kulluna Watani", votes: 191 },
+      { list: "Independent Civil Society", votes: 48 }
     ],
     candidates: [
       { name: "Kassem Ali Abdel Aziz", sect: "Sunni", list: "The Future is for the North", votes: 6382 },
@@ -922,7 +924,6 @@ export function loadElectionResults2018(template) {
   const scenario = cloneTemplate(template);
   scenario.candidates = normalizeElectionBaseline(template, baseline.candidates, "2018 Report Unassigned List");
   scenario.listVotes = normalizeElectionBaselineListVotes(scenario.candidates, baseline.listVotes);
-  scenario.invalidVotes = getInvalidVotes(2018, templateId);
 
   return scenario;
 }

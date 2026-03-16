@@ -4,7 +4,6 @@ import {
   normalizeElectionBaselineListVotes
 } from "./election-results-normalize.js";
 import generatedElectionResults2022ByTemplateId from "./election-results-2022.generated.json" with { type: "json" };
-import { getInvalidVotes } from "./invalid-votes.js";
 
 function hashVersionPayload(value) {
   const json = JSON.stringify(value);
@@ -487,6 +486,8 @@ const generatedListVoteOverrides2022ByTemplateId = {
       { list: "إﻧﻘﺎذ وﻃﻦ", votes: 1482 },
       { list: "ﻟﻠﻨﺎس", votes: 690 },
       { list: "ﻟﺒﻨﺎن ﻟﻨﺎ", votes: 716 },
+      { list: "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ", votes: 701 },
+      { list: "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ", votes: 536 },
       { list: "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ", votes: 66 },
       { list: "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء", votes: 55 },
       { list: "ﻗﺎدرﻳﻦ", votes: 191 }
@@ -541,7 +542,6 @@ export function loadElectionResults2022(template) {
   const scenario = cloneTemplate(template);
   scenario.candidates = normalizeElectionBaseline(template, baseline.candidates, "2022 Imported List");
   scenario.listVotes = normalizeElectionBaselineListVotes(scenario.candidates, baseline.listVotes);
-  scenario.invalidVotes = getInvalidVotes(2022, templateId);
 
   return scenario;
 }

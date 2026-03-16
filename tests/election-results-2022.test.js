@@ -12,7 +12,6 @@ test("2022 baselines keep list-only vote support available even when a district 
 
   assert.ok(loaded);
   assert.ok(Array.isArray(loaded.listVotes));
-  assert.equal(loaded.invalidVotes, 1615);
 });
 
 test("2022 audited districts preload official list-only votes from the report totals", () => {
@@ -118,6 +117,24 @@ test("2022 generated districts can also preload official list-only votes via ove
       { list: "اﻟﻘﺮار اﻟﻮﻃﻨﻲ اﻟﻤﺴﺘﻘﻞ", votes: 472 },
       { list: "ﻧﺤﻮ اﻟﺘﻐﻴﻴﺮ", votes: 23 },
       { list: "ﻗﺎدرﻳﻦ", votes: 40 }
+    ]
+  );
+
+  const northTwo = loadElectionResults2022(byId.get("north-ii"));
+  assert.deepEqual(
+    northTwo.listVotes,
+    [
+      { list: "اﻻرادة اﻟﺸﻌﺒﻴﺔ", votes: 1493 },
+      { list: "اﻟﺠﻤﻬﻮرﻳﺔ اﻟﺜﺎﻟﺜﺔ", votes: 453 },
+      { list: "ﻃﻤﻮح اﻟﺸﺒﺎب", votes: 40 },
+      { list: "إﻧﻘﺎذ وﻃﻦ", votes: 1482 },
+      { list: "ﻟﻠﻨﺎس", votes: 690 },
+      { list: "ﻟﺒﻨﺎن ﻟﻨﺎ", votes: 716 },
+      { list: "ﻟﻠﺴﻴﺎدة ﻟﻠﻌﺪاﻟﺔ.. اﻧﺘﻔﺾ", votes: 701 },
+      { list: "اﻟﺘﻐﻴﻴﺮ اﻟﺤﻘﻴﻘﻲ", votes: 536 },
+      { list: "ﻓﺠﺮ اﻟﺘﻐﻴﻴﺮ", votes: 66 },
+      { list: "اﻹﺳﺘﻘﺮار واﻹﻧﻤﺎء", votes: 55 },
+      { list: "ﻗﺎدرﻳﻦ", votes: 191 }
     ]
   );
 

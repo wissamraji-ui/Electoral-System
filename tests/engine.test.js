@@ -140,23 +140,3 @@ test("keeps list-only-only lists in EQ calculations", () => {
   assert.equal(byList.get("Beta")?.listVotes, 15);
   assert.equal(byList.get("Beta")?.votes, 15);
 });
-
-test("calculates EQ from valid votes after subtracting invalid votes", () => {
-  const quotas = [{ sect: "Sunni", seats: 2 }];
-  const candidates = [
-    { name: "A1", sect: "Sunni", list: "Alpha", votes: 60 },
-    { name: "B1", sect: "Sunni", list: "Beta", votes: 50 },
-    { name: "C1", sect: "Sunni", list: "Cedar", votes: 10 }
-  ];
-
-  const result = computeResults(quotas, candidates, [], 20);
-  const byList = new Map(result.listAllocation.map((row) => [row.list, row]));
-
-  assert.equal(result.summary.totalVotes, 120);
-  assert.equal(result.summary.invalidVotes, 20);
-  assert.equal(result.summary.validVotes, 100);
-  assert.equal(result.summary.electoralQuotient, 50);
-  assert.equal(byList.get("Alpha")?.qualified, true);
-  assert.equal(byList.get("Beta")?.qualified, true);
-  assert.equal(byList.get("Cedar")?.qualified, false);
-});

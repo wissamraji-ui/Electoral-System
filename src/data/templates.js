@@ -45,7 +45,6 @@ export function createEmptyState() {
     quotas: [],
     candidates: [],
     listVotes: [],
-    invalidVotes: 0,
     quotasLocked: false
   };
 }
@@ -56,7 +55,6 @@ export function cloneTemplate(template) {
     quotas: template.quotas.map((entry) => ({ ...entry })),
     candidates: [],
     listVotes: [],
-    invalidVotes: 0,
     quotasLocked: true
   };
 }
