@@ -67,12 +67,19 @@
             <span class="tag">Template Seat Map</span>
           </div>
 
-          <div class="grid-two">
-            <label class="field">
-              <span>Template</span>
-              <select id="templateSelect"></select>
-            </label>
-            <div class="preset-actions">
+          <div id="districtLaunchpad" class="district-launchpad">
+            <div class="launchpad-hero">
+              <label class="field field-large">
+                <span>District Template</span>
+                <select id="templateSelect"></select>
+              </label>
+              <p class="launchpad-copy">
+                Start by choosing a district. The seat map, candidate builder, and simulation
+                analytics appear after a template is loaded.
+              </p>
+            </div>
+
+            <div class="preset-actions launchpad-actions">
               <div class="preset-actions-main">
                 <button id="load2022PresetBtn" class="btn btn-secondary" type="button">
                   Load 2022 Results
@@ -80,24 +87,28 @@
                 <button id="load2018PresetBtn" class="btn btn-secondary" type="button">
                   Load 2018 Results
                 </button>
-              </div>
-              <div class="new-simulation-row">
                 <button id="loadNewSimulationBtn" class="pill-button" type="button">
                   Add New Simulation
                 </button>
               </div>
             </div>
+
+            <div id="launchpadHelper" class="launchpad-grid">
+              <article class="instruction-card">
+                <h4>How to start</h4>
+                <p>Pick a district, then either load a verified election baseline or create a fresh simulation.</p>
+                <ul class="instruction-list">
+                  <li>Choose a district template from the selector above.</li>
+                  <li>Load <code>2018</code> or <code>2022</code> results after selecting a district.</li>
+                  <li>Add a new simulation if you want a blank custom scenario.</li>
+                </ul>
+              </article>
+            </div>
           </div>
 
-          <p id="presetStatusNote" class="muted preset-status-note">
-            Choose a district template to check whether a 2022 baseline is available.
-          </p>
-
-          <p id="districtSelectionNotice" class="selection-notice">
-            Select a district template to continue.
-          </p>
-
           <div id="districtConfigDetails" hidden>
+            <p id="presetStatusNote" class="muted preset-status-note"></p>
+
             <label class="field">
               <span>Region / District Name</span>
               <input id="regionNameInput" type="text" placeholder="Example: Beirut II" />
@@ -191,9 +202,13 @@
           <span class="tag">Deterministic Output</span>
         </div>
 
-        <p id="resultsSelectionNotice" class="selection-notice">
-          Simulation results appear after a district template is loaded.
-        </p>
+        <div id="resultsSelectionNotice" class="selection-empty-state">
+          <h3>Simulation workspace is waiting for a district</h3>
+          <p>
+            Load a district template first. Metrics, winners, seat allocation tables, and visual
+            analytics stay collapsed until the district is defined.
+          </p>
+        </div>
 
         <div id="resultsWorkspace" hidden>
           <div class="metrics" id="metricsGrid"></div>

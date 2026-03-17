@@ -33,11 +33,12 @@ const CURRENT_DATA_VERSION = [
 
 const elements = {
   templateSelect: document.getElementById("templateSelect"),
+  districtLaunchpad: document.getElementById("districtLaunchpad"),
+  launchpadHelper: document.getElementById("launchpadHelper"),
   loadNewSimulationBtn: document.getElementById("loadNewSimulationBtn"),
   load2022PresetBtn: document.getElementById("load2022PresetBtn"),
   load2018PresetBtn: document.getElementById("load2018PresetBtn"),
   presetStatusNote: document.getElementById("presetStatusNote"),
-  districtSelectionNotice: document.getElementById("districtSelectionNotice"),
   districtConfigDetails: document.getElementById("districtConfigDetails"),
   simulationInputs: document.getElementById("simulationInputs"),
   regionNameInput: document.getElementById("regionNameInput"),
@@ -185,31 +186,39 @@ function populateTemplateSelect() {
     return;
   }
 
-  elements.templateSelect.disabled = false;
-  const currentTemplateId = getCurrentTemplateId();
-  elements.templateSelect.innerHTML = [
+  const optionsMarkup = [
     '<option value="">Choose a district template</option>',
     ...templates.map(
       (template) => `<option value="${escapeHtml(template.id)}">${escapeHtml(template.name)}</option>`
     )
   ].join("");
+
+  elements.templateSelect.disabled = false;
+  const currentTemplateId = getCurrentTemplateId();
+  elements.templateSelect.innerHTML = optionsMarkup;
   elements.templateSelect.value = currentTemplateId;
 }
 
-function onTemplateSelectChange() {
+function onTemplateSelectChange(event) {
   if (templates.length === 0) {
     return;
   }
 
-  const templateId = elements.templateSelect.value;
+  const target = event?.target;
+  const templateId = target instanceof HTMLSelectElement ? target.value : getCurrentTemplateId();
   if (!templateId) {
-    elements.templateSelect.value = getCurrentTemplateId();
+    syncTemplateSelection();
     return;
   }
 
+  loadTemplateById(templateId);
+}
+
+function loadTemplateById(templateId) {
   const template = templates.find((item) => item.id === templateId);
 
   if (!template) {
+    syncTemplateSelection();
     return;
   }
 
@@ -219,7 +228,7 @@ function onTemplateSelectChange() {
       "Loading a template will replace current region, quotas, and candidates. Continue?"
     );
     if (!confirmed) {
-      elements.templateSelect.value = getCurrentTemplateId();
+      syncTemplateSelection();
       return;
     }
   }
@@ -712,7 +721,8 @@ function syncTemplateSelection() {
 
 function applyDistrictSelectionVisibility() {
   const hasDistrict = state.quotas.length > 0;
-  elements.districtSelectionNotice.hidden = hasDistrict;
+  document.body.classList.toggle("district-loaded", hasDistrict);
+  elements.launchpadHelper.hidden = hasDistrict;
   elements.resultsSelectionNotice.hidden = hasDistrict;
   elements.districtConfigDetails.hidden = !hasDistrict;
   elements.simulationInputs.hidden = !hasDistrict;
