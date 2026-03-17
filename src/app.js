@@ -22,6 +22,7 @@ const STORAGE_KEY = "lebanon-electoral-simulator:v1";
 const SAVED_SCENARIOS_KEY = "lebanon-electoral-simulator:saved:v1";
 const BUILD_RELOAD_STORAGE_KEY = "lebanon-electoral-simulator:last-build-reload";
 const BUILD_QUERY_PARAM = "__build";
+const SHARE_SCENARIO_QUERY_PARAM = "scenario";
 const EXPORT_VERSION = 2;
 const STATE_SCHEMA_VERSION = 3;
 const CURRENT_DATA_VERSION = [
@@ -30,6 +31,54 @@ const CURRENT_DATA_VERSION = [
   `results-2018:${getElectionResults2018DataVersion()}`,
   `results-2022:${getElectionResults2022DataVersion()}`
 ].join("|");
+
+const GLOSSARY_TERMS = {
+  quota: {
+    title: "Quota",
+    body:
+      "A fixed number of seats assigned to a sect in a district. The simulator must fill those seats according to the district's legal seat map."
+  },
+  "preferential-vote": {
+    title: "Preferential Vote",
+    body:
+      "The vote a voter gives to an individual candidate on a list. These votes help decide which candidates take the seats won by their list."
+  },
+  "confessional-seat": {
+    title: "Confessional Seat",
+    body:
+      "A parliamentary seat reserved for a specific sect under Lebanon's confessional allocation system."
+  },
+  "list-threshold": {
+    title: "List Threshold",
+    body:
+      "The minimum level of support a list needs to remain competitive for seat allocation. In this simulator, that threshold is represented through the qualifying electoral quotient."
+  },
+  "minor-district": {
+    title: "Minor District",
+    body:
+      "A sub-district inside a larger electoral district. Some seats are tied to both a sect and a specific minor district."
+  },
+  "qualifying-list": {
+    title: "Qualifying List",
+    body:
+      "A list that clears the qualifying electoral quotient and remains eligible for seat allocation."
+  },
+  "base-seats": {
+    title: "Base Seats",
+    body:
+      "The whole-number seats a list wins before any leftover seats are assigned by largest remainder."
+  },
+  eq: {
+    title: "EQ",
+    body:
+      "EQ means electoral quotient. It is the vote divisor used to determine which lists qualify and how seats are allocated."
+  },
+  list: {
+    title: "List",
+    body:
+      "A slate of candidates running together. Lebanese voters choose among lists and then give a preferential vote to a candidate within a list."
+  }
+};
 
 const elements = {
   templateSelect: document.getElementById("templateSelect"),
@@ -51,6 +100,7 @@ const elements = {
   candidateTableBody: document.getElementById("candidateTableBody"),
   listVoteTotalsBody: document.getElementById("listVoteTotalsBody"),
   runSimulationBtn: document.getElementById("runSimulationBtn"),
+  shareUrlBtn: document.getElementById("shareUrlBtn"),
   exportBtn: document.getElementById("exportBtn"),
   exportPdfBtn: document.getElementById("exportPdfBtn"),
   importBtn: document.getElementById("importBtn"),
@@ -75,7 +125,8 @@ const elements = {
   competitivenessChart: document.getElementById("competitivenessChart"),
   listSectMap: document.getElementById("listSectMap"),
   candidateLeaderboard: document.getElementById("candidateLeaderboard"),
-  buildIdBadge: document.getElementById("buildIdBadge")
+  buildIdBadge: document.getElementById("buildIdBadge"),
+  glossaryTooltip: document.getElementById("glossaryTooltip")
 };
 
 let idCounter = Date.now();
@@ -84,6 +135,7 @@ let state = createEmptyState();
 let simulation = computeResults(state.quotas, state.candidates, state.listVotes, state.blankVotes, state.invalidVotes);
 const listColorIndexByKey = new Map();
 let savedScenarios = [];
+let activeGlossaryTrigger = null;
 
 initialize().catch((error) => {
   console.error("Initialization failed:", error);
@@ -93,8 +145,7 @@ initialize().catch((error) => {
 async function initialize() {
   await ensureLatestBuild();
   templates = await loadRegionTemplates();
-  clearState();
-  state = createEmptyState();
+  state = loadSharedScenarioFromUrl() ?? createEmptyState();
   savedScenarios = loadSavedScenarios();
 
   populateTemplateSelect();
@@ -149,6 +200,10 @@ function bindEvents() {
   elements.loadNewSimulationBtn.addEventListener("click", onLoadNewSimulation);
   elements.load2022PresetBtn.addEventListener("click", onLoad2022Preset);
   elements.load2018PresetBtn.addEventListener("click", onLoad2018Preset);
+  document.addEventListener("click", onDocumentClick);
+  document.addEventListener("keydown", onDocumentKeyDown);
+  window.addEventListener("resize", hideGlossaryTooltip);
+  window.addEventListener("scroll", hideGlossaryTooltip, true);
   elements.regionNameInput.addEventListener("input", () => {
     state.regionName = elements.regionNameInput.value;
     saveState();
@@ -170,6 +225,7 @@ function bindEvents() {
     renderResults();
   });
 
+  elements.shareUrlBtn.addEventListener("click", onCopyShareUrl);
   elements.exportBtn.addEventListener("click", onExportScenario);
   elements.exportPdfBtn.addEventListener("click", onExportPdf);
   elements.importBtn.addEventListener("click", () => elements.importFileInput.click());
@@ -253,6 +309,41 @@ function onLoad2018Preset() {
     hasResults: hasElectionResults2018,
     loadResults: loadElectionResults2018
   });
+}
+
+function onDocumentClick(event) {
+  const target = event.target;
+  if (!(target instanceof Element)) {
+    return;
+  }
+
+  const trigger = target.closest("[data-glossary-key]");
+  if (trigger instanceof HTMLElement) {
+    const glossaryKey = String(trigger.dataset.glossaryKey ?? "").trim();
+    if (!glossaryKey) {
+      return;
+    }
+
+    if (activeGlossaryTrigger === trigger) {
+      hideGlossaryTooltip();
+      return;
+    }
+
+    showGlossaryTooltip(trigger, glossaryKey);
+    return;
+  }
+
+  if (elements.glossaryTooltip instanceof HTMLElement && target.closest("#glossaryTooltip")) {
+    return;
+  }
+
+  hideGlossaryTooltip();
+}
+
+function onDocumentKeyDown(event) {
+  if (event.key === "Escape") {
+    hideGlossaryTooltip();
+  }
 }
 
 function loadPreset({ yearLabel, hasResults, loadResults }) {
@@ -485,28 +576,7 @@ function onExportScenario() {
   const payload = {
     version: EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
-    scenario: {
-      regionName: state.regionName,
-      quotas: state.quotas.map((entry) => ({
-        sect: entry.sect,
-        seats: entry.seats,
-        minorDistrict: entry.minorDistrict
-      })),
-      quotasLocked: state.quotasLocked,
-      blankVotes: state.blankVotes,
-      invalidVotes: state.invalidVotes,
-      listVotes: state.listVotes.map((entry) => ({
-        list: entry.list,
-        votes: entry.votes
-      })),
-      candidates: state.candidates.map((candidate) => ({
-        name: candidate.name,
-        sect: candidate.sect,
-        list: candidate.list,
-        votes: candidate.votes,
-        minorDistrict: candidate.minorDistrict
-      }))
-    }
+    scenario: createSerializableScenario(state)
   };
 
   const fileName = `electoral-scenario-${slugify(state.regionName || "custom")}.json`;
@@ -517,6 +587,22 @@ function onExportScenario() {
   link.download = fileName;
   link.click();
   URL.revokeObjectURL(url);
+}
+
+async function onCopyShareUrl() {
+  const shareUrl = buildShareableScenarioUrl(state);
+
+  try {
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      await navigator.clipboard.writeText(shareUrl);
+      window.alert("Shareable URL copied to clipboard.");
+      return;
+    }
+  } catch (error) {
+    console.error("Unable to copy share URL to clipboard", error);
+  }
+
+  window.prompt("Copy this shareable URL:", shareUrl);
 }
 
 function onExportPdf() {
@@ -638,6 +724,7 @@ function onSavedScenariosListClick(event) {
 }
 
 function renderAll() {
+  hideGlossaryTooltip();
   rebuildListColorIndex();
   applyDistrictSelectionVisibility();
   syncTemplateSelection();
@@ -658,6 +745,54 @@ function renderBuildIdBadge() {
   }
 
   elements.buildIdBadge.textContent = `Build ${BUILD_ID}`;
+}
+
+function showGlossaryTooltip(trigger, glossaryKey) {
+  if (!(elements.glossaryTooltip instanceof HTMLElement)) {
+    return;
+  }
+
+  const entry = GLOSSARY_TERMS[glossaryKey];
+  if (!entry) {
+    return;
+  }
+
+  hideGlossaryTooltip();
+  activeGlossaryTrigger = trigger;
+  activeGlossaryTrigger.setAttribute("aria-expanded", "true");
+  elements.glossaryTooltip.innerHTML = `
+    <strong>${escapeHtml(entry.title)}</strong>
+    <p>${escapeHtml(entry.body)}</p>
+  `;
+  elements.glossaryTooltip.hidden = false;
+
+  const triggerRect = trigger.getBoundingClientRect();
+  const tooltipRect = elements.glossaryTooltip.getBoundingClientRect();
+  const top = Math.min(
+    window.innerHeight - tooltipRect.height - 12,
+    triggerRect.bottom + 10
+  );
+  const left = Math.min(
+    window.innerWidth - tooltipRect.width - 12,
+    Math.max(12, triggerRect.left)
+  );
+
+  elements.glossaryTooltip.style.top = `${Math.max(12, top)}px`;
+  elements.glossaryTooltip.style.left = `${left}px`;
+}
+
+function hideGlossaryTooltip() {
+  if (activeGlossaryTrigger instanceof HTMLElement) {
+    activeGlossaryTrigger.setAttribute("aria-expanded", "false");
+  }
+
+  activeGlossaryTrigger = null;
+  if (!(elements.glossaryTooltip instanceof HTMLElement)) {
+    return;
+  }
+
+  elements.glossaryTooltip.hidden = true;
+  elements.glossaryTooltip.innerHTML = "";
 }
 
 function renderPresetStatus() {
@@ -1030,14 +1165,14 @@ function renderMetrics() {
       value: summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-"
     },
     { label: "Total Lists", value: String(totalListCount) },
-    { label: "Qualified Lists", value: String(summary.qualifiedListCount) }
+    { label: "Qualified Lists", glossaryKey: "qualifying-list", value: String(summary.qualifiedListCount) }
   ];
 
   elements.metricsGrid.innerHTML = cards
     .map(
       (card) => `
       <article class="metric-card">
-        <p>${escapeHtml(card.label)}</p>
+        <p>${card.glossaryKey ? renderGlossaryTerm(card.glossaryKey, card.label) : escapeHtml(card.label)}</p>
         <strong>${escapeHtml(card.value)}</strong>
       </article>
     `
@@ -1051,7 +1186,7 @@ function renderAlerts() {
   );
 
   const infoAlert = [
-    '<div class="alert alert-info">Model: seats are first allocated to lists using EQ (electoral quotient) and largest remainder. Candidate winners are then selected by vote rank within sect quotas and each list seat cap.</div>'
+    `<div class="alert alert-info">Model: seats are first allocated to lists using ${renderGlossaryTerm("eq", "EQ")} (electoral quotient) and largest remainder. Candidate winners are then selected by vote rank within sect ${renderGlossaryTerm("quota", "quotas")} and each list seat cap.</div>`
   ];
 
   const successAlert =
@@ -1828,6 +1963,88 @@ function normalizeImportedState(parsed) {
   }
 
   return normalizeState(parsed);
+}
+
+function createSerializableScenario(inputState) {
+  const snapshot = normalizeState(inputState);
+  return {
+    regionName: snapshot.regionName,
+    quotas: snapshot.quotas.map((entry) => ({
+      sect: entry.sect,
+      seats: entry.seats,
+      minorDistrict: entry.minorDistrict
+    })),
+    quotasLocked: snapshot.quotasLocked,
+    blankVotes: snapshot.blankVotes,
+    invalidVotes: snapshot.invalidVotes,
+    listVotes: snapshot.listVotes.map((entry) => ({
+      list: entry.list,
+      votes: entry.votes
+    })),
+    candidates: snapshot.candidates.map((candidate) => ({
+      name: candidate.name,
+      sect: candidate.sect,
+      list: candidate.list,
+      votes: candidate.votes,
+      minorDistrict: candidate.minorDistrict
+    }))
+  };
+}
+
+function buildShareableScenarioUrl(inputState) {
+  const currentUrl = new URL(window.location.href);
+  currentUrl.searchParams.set(
+    SHARE_SCENARIO_QUERY_PARAM,
+    encodeScenarioPayload({
+      version: EXPORT_VERSION,
+      scenario: createSerializableScenario(inputState)
+    })
+  );
+
+  return currentUrl.toString();
+}
+
+function loadSharedScenarioFromUrl() {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  try {
+    const currentUrl = new URL(window.location.href);
+    const encodedScenario = currentUrl.searchParams.get(SHARE_SCENARIO_QUERY_PARAM);
+    if (!encodedScenario) {
+      return null;
+    }
+
+    const parsed = JSON.parse(decodeScenarioPayload(encodedScenario));
+    return normalizeImportedState(parsed);
+  } catch (error) {
+    console.error("Unable to load shared scenario from URL", error);
+    window.alert("The shared scenario URL could not be decoded. Loading the default app state instead.");
+    return null;
+  }
+}
+
+function encodeScenarioPayload(payload) {
+  const json = JSON.stringify(payload);
+  const bytes = new TextEncoder().encode(json);
+  let binary = "";
+
+  bytes.forEach((value) => {
+    binary += String.fromCharCode(value);
+  });
+
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function decodeScenarioPayload(value) {
+  const normalized = String(value ?? "")
+    .replace(/-/g, "+")
+    .replace(/_/g, "/");
+  const padded = normalized + "=".repeat((4 - (normalized.length % 4)) % 4);
+  const binary = atob(padded);
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
 }
 
 function saveState() {
@@ -2648,6 +2865,10 @@ function darkenColor(color, factor = 0.8) {
   const [, hue, saturation, lightness] = match;
   const nextLightness = Math.max(0, Math.min(100, Number(lightness) * factor));
   return `hsl(${hue} ${saturation}% ${nextLightness}%)`;
+}
+
+function renderGlossaryTerm(glossaryKey, label) {
+  return `<button type="button" class="glossary-term" data-glossary-key="${escapeHtml(glossaryKey)}" aria-expanded="false">${escapeHtml(label)}</button>`;
 }
 
 function renderListChip(listName) {

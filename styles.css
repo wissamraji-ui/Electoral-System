@@ -91,6 +91,12 @@ body {
   gap: 1.1rem;
 }
 
+.prelayout-helper {
+  max-width: 1640px;
+  margin: 0 auto;
+  padding: 0 0.8rem 1rem;
+}
+
 .panel {
   background: linear-gradient(180deg, var(--surface) 0%, #f3f7fb 100%);
   border: 1px solid var(--line);
@@ -125,6 +131,52 @@ body {
   font-weight: 700;
   letter-spacing: 0.02em;
   white-space: nowrap;
+}
+
+.glossary-term {
+  display: inline;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  color: #1a5a84;
+  font: inherit;
+  font-weight: 600;
+  line-height: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.16em;
+  cursor: pointer;
+}
+
+.glossary-term:hover,
+.glossary-term:focus-visible {
+  color: #0f3d5a;
+}
+
+.glossary-tooltip {
+  position: fixed;
+  z-index: 30;
+  width: min(320px, calc(100vw - 24px));
+  border: 1px solid #c9d8e4;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 20px 38px rgba(18, 38, 56, 0.16);
+  padding: 0.8rem 0.9rem;
+}
+
+.glossary-tooltip strong {
+  display: block;
+  color: #17354b;
+  font-size: 0.84rem;
+  margin-bottom: 0.3rem;
+}
+
+.glossary-tooltip p {
+  margin: 0;
+  color: #466073;
+  font-size: 0.8rem;
+  line-height: 1.55;
 }
 
 .embedded-config .tag {
@@ -233,8 +285,8 @@ select:focus {
   height: 2.35rem;
   padding: 0 0.9rem;
   font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   white-space: nowrap;
   box-shadow: 0 8px 18px rgba(28, 45, 58, 0.08);
   transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease, background 0.14s ease;
@@ -305,6 +357,13 @@ select:focus {
   padding: 0.95rem;
 }
 
+.instruction-card-prominent {
+  box-shadow: var(--shadow);
+  background:
+    radial-gradient(circle at top right, rgba(208, 108, 59, 0.1), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), #f4f8fb);
+}
+
 .instruction-card h4 {
   margin: 0;
   font-size: 0.92rem;
@@ -371,8 +430,8 @@ select:focus {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, #e9f0f5 100%);
   color: #234158;
   font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.03em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   box-shadow: 0 8px 18px rgba(28, 45, 58, 0.08);
   transition:
@@ -1265,7 +1324,7 @@ tbody tr:hover td {
 
 .sect-slot-label {
   color: #20435d;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.84rem;
 }
 
@@ -1279,7 +1338,7 @@ tbody tr:hover td {
   background: var(--list-chip-bg, #eef3f8);
   color: var(--list-chip-text, #2c3e50);
   font-size: 0.76rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
 }
 
@@ -1323,6 +1382,12 @@ tbody tr:hover td {
   height: 2.35rem;
   font-size: 0.93rem;
   min-width: 0;
+}
+
+.candidate-name-cell .row-edit,
+.candidate-name {
+  font-weight: 500;
+  letter-spacing: 0.005em;
 }
 
 .candidate-grid-table th:nth-child(1) {

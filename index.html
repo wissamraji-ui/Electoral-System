@@ -45,14 +45,27 @@
         <h1>Lebanese Parliamentary Elections Simulator</h1>
       </div>
       <p class="subtitle">
-        Configure district quotas by sect, enter candidate votes, and simulate winners.
+        Configure district <button type="button" class="glossary-term" data-glossary-key="quota">quotas</button> by sect, enter candidate votes, and simulate winners.
       </p>
       <p class="intro-copy">
         This tool simulates Lebanese parliamentary seat allocation by district using list votes,
-        preferential votes, and the district's fixed confessional seat quotas. Select a district,
+        <button type="button" class="glossary-term" data-glossary-key="preferential-vote">preferential votes</button>, and the district's fixed
+        <button type="button" class="glossary-term" data-glossary-key="confessional-seat">confessional seat</button> quotas. Select a district,
         load or enter vote data, then run the simulation to see how seats and winners change.
       </p>
     </header>
+
+    <section id="launchpadHelper" class="prelayout-helper">
+      <article class="instruction-card instruction-card-prominent">
+        <h4>How to start</h4>
+        <p>Pick a district, then either load a verified election baseline or create a fresh simulation.</p>
+        <ul class="instruction-list">
+          <li>Choose a district template from the selector above.</li>
+          <li>Load <code>2018</code> or <code>2022</code> results after selecting a district.</li>
+          <li>Add a new simulation if you want a blank custom scenario.</li>
+        </ul>
+      </article>
+    </section>
 
     <main class="layout">
       <section class="panel panel-candidates">
@@ -93,17 +106,6 @@
               </div>
             </div>
 
-            <div id="launchpadHelper" class="launchpad-grid">
-              <article class="instruction-card">
-                <h4>How to start</h4>
-                <p>Pick a district, then either load a verified election baseline or create a fresh simulation.</p>
-                <ul class="instruction-list">
-                  <li>Choose a district template from the selector above.</li>
-                  <li>Load <code>2018</code> or <code>2022</code> results after selecting a district.</li>
-                  <li>Add a new simulation if you want a blank custom scenario.</li>
-                </ul>
-              </article>
-            </div>
           </div>
 
           <div id="districtConfigDetails" hidden>
@@ -115,7 +117,7 @@
             </label>
 
             <div class="quota-header">
-              <h3>Seat Quotas By Sect</h3>
+              <h3><button type="button" class="glossary-term" data-glossary-key="quota">Seat Quotas</button> By Sect</h3>
               <p>Total seats: <strong id="totalSeatsValue">0</strong></p>
             </div>
 
@@ -135,7 +137,7 @@
         <div id="simulationInputs" hidden>
           <div class="candidate-form">
             <label class="field">
-              <span>Party / List Name</span>
+              <span><button type="button" class="glossary-term" data-glossary-key="list">Party / List</button> Name</span>
               <input id="listNameInput" type="text" placeholder="Example: Reform List" />
             </label>
             <button id="addListBtn" class="btn btn-primary">Add List Candidates</button>
@@ -158,14 +160,14 @@
           </div>
 
           <div class="table-shell list-totals-shell">
-            <h3>List Vote Totals (Live)</h3>
+            <h3><button type="button" class="glossary-term" data-glossary-key="list">List</button> Vote Totals (Live)</h3>
             <table>
               <thead>
                 <tr>
-                  <th>Party / List</th>
+                  <th><button type="button" class="glossary-term" data-glossary-key="list">Party / List</button></th>
                   <th>Filled / Slots</th>
-                  <th>Candidate Votes</th>
-                  <th>Votes for list</th>
+                  <th><button type="button" class="glossary-term" data-glossary-key="preferential-vote">Candidate Votes</button></th>
+                  <th>Votes for <button type="button" class="glossary-term" data-glossary-key="list">list</button></th>
                   <th>Total Votes</th>
                 </tr>
               </thead>
@@ -175,6 +177,7 @@
 
           <div class="button-row">
             <button id="runSimulationBtn" class="btn btn-accent">Run Simulation</button>
+            <button id="shareUrlBtn" class="btn btn-secondary">Copy Share URL</button>
             <button id="exportBtn" class="btn btn-secondary">Export JSON</button>
             <button id="exportPdfBtn" class="btn btn-secondary">Export PDF</button>
             <button id="importBtn" class="btn btn-secondary">Import JSON</button>
@@ -219,11 +222,11 @@
             <table>
               <thead>
                 <tr>
-                  <th>Party / List</th>
+                  <th><button type="button" class="glossary-term" data-glossary-key="list">Party / List</button></th>
                   <th>Votes</th>
                   <th>EQ Status</th>
                   <th>Seats</th>
-                  <th>Base Seats</th>
+                  <th><button type="button" class="glossary-term" data-glossary-key="base-seats">Base Seats</button></th>
                 </tr>
               </thead>
               <tbody id="listAllocationBody"></tbody>
@@ -235,11 +238,11 @@
             <table>
               <thead>
                 <tr>
-                  <th>Seat</th>
+                  <th><button type="button" class="glossary-term" data-glossary-key="confessional-seat">Seat</button></th>
                   <th>Sect</th>
                   <th>Candidate</th>
-                  <th>Party / List</th>
-                  <th>Votes</th>
+                  <th><button type="button" class="glossary-term" data-glossary-key="list">Party / List</button></th>
+                  <th><button type="button" class="glossary-term" data-glossary-key="preferential-vote">Votes</button></th>
                 </tr>
               </thead>
               <tbody id="winnersTableBody"></tbody>
@@ -345,6 +348,8 @@
       </p>
       <p id="buildIdBadge" class="build-id-badge"></p>
     </footer>
+
+    <div id="glossaryTooltip" class="glossary-tooltip" hidden aria-live="polite"></div>
 
     <script type="module" src="./src/app.js"></script>
   </body>
