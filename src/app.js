@@ -1165,7 +1165,7 @@ function renderMetrics() {
       value: summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-"
     },
     { label: "Total Lists", value: String(totalListCount) },
-    { label: "Qualified Lists", glossaryKey: "qualifying-list", value: String(summary.qualifiedListCount) }
+    { label: "Qualified Lists", value: String(summary.qualifiedListCount) }
   ];
 
   elements.metricsGrid.innerHTML = cards
