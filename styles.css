@@ -74,6 +74,14 @@ body {
   line-height: 1.72;
 }
 
+.intro-copy {
+  margin: 0.75rem 0 0;
+  max-width: 78ch;
+  color: #29465d;
+  font-size: 0.98rem;
+  line-height: 1.72;
+}
+
 .layout {
   max-width: 1640px;
   margin: 0 auto;
@@ -183,8 +191,55 @@ select:focus {
 
 .preset-actions {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.preset-actions-main {
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.4rem;
+}
+
+.new-simulation-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+
+.pill-button {
+  border: 1px solid #d7e1e8;
+  background: rgba(255, 255, 255, 0.78);
+  color: #506577;
+  border-radius: 999px;
+  height: 2.35rem;
+  padding: 0 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  box-shadow: 0 8px 18px rgba(28, 45, 58, 0.08);
+  transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease, background 0.14s ease;
+  cursor: pointer;
+}
+
+.pill-button:hover {
+  transform: translateY(-1px);
+  border-color: #b5c6d4;
+  background: linear-gradient(180deg, #ffffff, #edf4f8);
+  box-shadow: 0 14px 26px rgba(28, 45, 58, 0.1);
+}
+
+.pill-button:disabled {
+  cursor: not-allowed;
+  background: #edf1f4;
+  border-color: #d6dde3;
+  color: #8a99a6;
+  box-shadow: none;
+  transform: none;
 }
 
 .preset-status-note {

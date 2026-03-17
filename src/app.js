@@ -33,6 +33,7 @@ const CURRENT_DATA_VERSION = [
 
 const elements = {
   templateSelect: document.getElementById("templateSelect"),
+  loadNewSimulationBtn: document.getElementById("loadNewSimulationBtn"),
   load2022PresetBtn: document.getElementById("load2022PresetBtn"),
   load2018PresetBtn: document.getElementById("load2018PresetBtn"),
   presetStatusNote: document.getElementById("presetStatusNote"),
@@ -144,6 +145,7 @@ async function ensureLatestBuild() {
 
 function bindEvents() {
   elements.templateSelect.addEventListener("change", onTemplateSelectChange);
+  elements.loadNewSimulationBtn.addEventListener("click", onLoadNewSimulation);
   elements.load2022PresetBtn.addEventListener("click", onLoad2022Preset);
   elements.load2018PresetBtn.addEventListener("click", onLoad2018Preset);
   elements.regionNameInput.addEventListener("input", () => {
@@ -655,6 +657,7 @@ function renderPresetStatus() {
   const hasPreset2022 = hasDistrict && hasElectionResults2022(templateId);
   const hasPreset2018 = hasDistrict && hasElectionResults2018(templateId);
 
+  elements.loadNewSimulationBtn.disabled = !hasDistrict;
   elements.load2022PresetBtn.disabled = !hasPreset2022;
   elements.load2018PresetBtn.disabled = !hasPreset2018;
 
@@ -684,6 +687,19 @@ function renderPresetStatus() {
 
   elements.presetStatusNote.textContent =
     "No verified 2018 baseline is currently exposed. 2022 remains available where loaded, and 2018 will stay disabled until the report mappings are manually audited.";
+}
+
+function onLoadNewSimulation() {
+  if (state.quotas.length === 0) {
+    window.alert("Choose a district template first.");
+    return;
+  }
+
+  elements.addListBtn.scrollIntoView({ behavior: "smooth", block: "center" });
+  window.setTimeout(() => {
+    elements.listNameInput.focus();
+    elements.listNameInput.select();
+  }, 220);
 }
 
 function syncTemplateSelection() {
