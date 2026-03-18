@@ -3,9 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#EE161F" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23ffffff'/%3E%3CclipPath id='r'%3E%3Crect width='64' height='64' rx='12'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23r)'%3E%3Crect width='64' height='16' y='0' fill='%23EE161F'/%3E%3Crect width='64' height='16' y='48' fill='%23EE161F'/%3E%3Cpath d='M32 14c-1.6 4-4 6.8-7.3 8.8 1.8.1 3.2-.3 4.8-.8-1.9 3-5 4.8-8.9 6.6 1.6.9 4.1.3 6-.4-2 3.2-5.2 5.6-10 8.4 2 1.2 5.7.7 8.8-.4-1.9 2.3-4.7 4.1-8.5 6 2.7 1.2 7.5.4 11-1.6.8 2.1.5 5-1.1 7.4 2.8-1 5-2.8 6.2-5 1.2 2.2 3.4 4 6.2 5-1.6-2.4-1.9-5.3-1.1-7.4 3.5 2 8.3 2.8 11 1.6-3.8-1.9-6.6-3.7-8.5-6 3.1 1.1 6.8 1.6 8.8.4-4.8-2.8-8-5.2-10-8.4 1.9.7 4.4 1.3 6 .4-3.9-1.8-7-3.6-8.9-6.6 1.6.5 3 .9 4.8.8C36 20.8 33.6 18 32 14Z' fill='%230F8F4F'/%3E%3Cpath d='M29.6 45.7c1-1.7 1.6-3.6 1.7-5.5h1.4c.1 1.9.7 3.8 1.7 5.5l4.4 5.3h-2.8l-3.3-2.9-.7 3h-2l-.7-3-3.3 2.9h-2.8Z' fill='%230F8F4F'/%3E%3C/g%3E%3C/svg%3E"
+    />
     <script>
       (function () {
         var BUILD_QUERY_PARAM = "__build";
@@ -41,8 +47,30 @@
     <div class="noise-bg"></div>
     <header class="topbar">
       <div class="brand">
-        <p class="kicker">Lebanon Electoral Platform</p>
-        <h1>Lebanese Parliamentary Elections Simulator</h1>
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <rect width="64" height="64" rx="12" fill="#ffffff"></rect>
+            <clipPath id="brandFlagClip">
+              <rect width="64" height="64" rx="12"></rect>
+            </clipPath>
+            <g clip-path="url(#brandFlagClip)">
+              <rect width="64" height="16" y="0" fill="#EE161F"></rect>
+              <rect width="64" height="16" y="48" fill="#EE161F"></rect>
+              <path
+                d="M32 14c-1.6 4-4 6.8-7.3 8.8 1.8.1 3.2-.3 4.8-.8-1.9 3-5 4.8-8.9 6.6 1.6.9 4.1.3 6-.4-2 3.2-5.2 5.6-10 8.4 2 1.2 5.7.7 8.8-.4-1.9 2.3-4.7 4.1-8.5 6 2.7 1.2 7.5.4 11-1.6.8 2.1.5 5-1.1 7.4 2.8-1 5-2.8 6.2-5 1.2 2.2 3.4 4 6.2 5-1.6-2.4-1.9-5.3-1.1-7.4 3.5 2 8.3 2.8 11 1.6-3.8-1.9-6.6-3.7-8.5-6 3.1 1.1 6.8 1.6 8.8.4-4.8-2.8-8-5.2-10-8.4 1.9.7 4.4 1.3 6 .4-3.9-1.8-7-3.6-8.9-6.6 1.6.5 3 .9 4.8.8C36 20.8 33.6 18 32 14Z"
+                fill="#0F8F4F"
+              ></path>
+              <path
+                d="M29.6 45.7c1-1.7 1.6-3.6 1.7-5.5h1.4c.1 1.9.7 3.8 1.7 5.5l4.4 5.3h-2.8l-3.3-2.9-.7 3h-2l-.7-3-3.3 2.9h-2.8Z"
+                fill="#0F8F4F"
+              ></path>
+            </g>
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <p class="kicker">Lebanon Electoral Platform</p>
+          <h1>Lebanese Parliamentary Elections Simulator</h1>
+        </div>
       </div>
       <p class="subtitle">
         Configure district <button type="button" class="glossary-term" data-glossary-key="quota">quotas</button> by sect, enter candidate votes, and simulate winners.
@@ -146,13 +174,23 @@
           <div id="listChips" class="list-chip-manager"></div>
 
           <div class="table-shell candidate-table-shell">
+            <div class="table-controls">
+              <label class="field table-filter-field">
+                <span>Filter List</span>
+                <select id="candidateListFilter"></select>
+              </label>
+              <label class="field table-filter-field">
+                <span>Filter Sect</span>
+                <select id="candidateSectFilter"></select>
+              </label>
+            </div>
             <table class="candidate-grid-table">
               <thead>
                 <tr>
-                  <th>Party / List</th>
-                  <th>Sect</th>
+                  <th><button type="button" class="table-sort" data-table="candidate" data-sort-key="list">Party / List</button></th>
+                  <th><button type="button" class="table-sort" data-table="candidate" data-sort-key="sect">Sect</button></th>
                   <th>Name</th>
-                  <th>Votes</th>
+                  <th><button type="button" class="table-sort" data-table="candidate" data-sort-key="votes">Votes</button></th>
                 </tr>
               </thead>
               <tbody id="candidateTableBody"></tbody>
@@ -219,11 +257,25 @@
 
           <div class="table-shell">
             <h3>List EQ Allocation</h3>
+            <div class="table-controls">
+              <label class="field table-filter-field">
+                <span>Filter List</span>
+                <select id="listAllocationListFilter"></select>
+              </label>
+              <label class="field table-filter-field">
+                <span>Status</span>
+                <select id="listAllocationStatusFilter">
+                  <option value="">All statuses</option>
+                  <option value="qualified">Qualified</option>
+                  <option value="below-eq">Below EQ</option>
+                </select>
+              </label>
+            </div>
             <table>
               <thead>
                 <tr>
-                  <th><button type="button" class="glossary-term" data-glossary-key="list">Party / List</button></th>
-                  <th>Votes</th>
+                  <th><button type="button" class="table-sort" data-table="allocation" data-sort-key="list">Party / List</button></th>
+                  <th><button type="button" class="table-sort" data-table="allocation" data-sort-key="votes">Votes</button></th>
                   <th>EQ Status</th>
                   <th>Seats</th>
                   <th><button type="button" class="glossary-term" data-glossary-key="base-seats">Base Seats</button></th>
@@ -235,14 +287,23 @@
 
           <div class="table-shell">
             <h3>Winning Candidates</h3>
+            <div class="table-controls">
+              <label class="field table-filter-field">
+                <span>Filter List</span>
+                <select id="winnersListFilter"></select>
+              </label>
+              <label class="field table-filter-field">
+                <span>Filter Sect</span>
+                <select id="winnersSectFilter"></select>
+              </label>
+            </div>
             <table>
               <thead>
                 <tr>
-                  <th><button type="button" class="glossary-term" data-glossary-key="confessional-seat">Seat</button></th>
-                  <th>Sect</th>
+                  <th><button type="button" class="table-sort" data-table="winners" data-sort-key="sect">Sect</button></th>
                   <th>Candidate</th>
-                  <th><button type="button" class="glossary-term" data-glossary-key="list">Party / List</button></th>
-                  <th><button type="button" class="glossary-term" data-glossary-key="preferential-vote">Votes</button></th>
+                  <th><button type="button" class="table-sort" data-table="winners" data-sort-key="list">Party / List</button></th>
+                  <th><button type="button" class="table-sort" data-table="winners" data-sort-key="votes">Votes</button></th>
                 </tr>
               </thead>
               <tbody id="winnersTableBody"></tbody>

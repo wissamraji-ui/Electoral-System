@@ -97,6 +97,8 @@ const elements = {
   addListBtn: document.getElementById("addListBtn"),
   listBuilderMeta: document.getElementById("listBuilderMeta"),
   listChips: document.getElementById("listChips"),
+  candidateListFilter: document.getElementById("candidateListFilter"),
+  candidateSectFilter: document.getElementById("candidateSectFilter"),
   candidateTableBody: document.getElementById("candidateTableBody"),
   listVoteTotalsBody: document.getElementById("listVoteTotalsBody"),
   runSimulationBtn: document.getElementById("runSimulationBtn"),
@@ -113,7 +115,11 @@ const elements = {
   resultsWorkspace: document.getElementById("resultsWorkspace"),
   metricsGrid: document.getElementById("metricsGrid"),
   alertsBox: document.getElementById("alertsBox"),
+  listAllocationListFilter: document.getElementById("listAllocationListFilter"),
+  listAllocationStatusFilter: document.getElementById("listAllocationStatusFilter"),
   listAllocationBody: document.getElementById("listAllocationBody"),
+  winnersListFilter: document.getElementById("winnersListFilter"),
+  winnersSectFilter: document.getElementById("winnersSectFilter"),
   winnersTableBody: document.getElementById("winnersTableBody"),
   listSeatSummary: document.getElementById("listSeatSummary"),
   shareComparison: document.getElementById("shareComparison"),
@@ -136,6 +142,12 @@ let simulation = computeResults(state.quotas, state.candidates, state.listVotes,
 const listColorIndexByKey = new Map();
 let savedScenarios = [];
 let activeGlossaryTrigger = null;
+let loadingPresetYear = "";
+const tableUiState = {
+  candidate: { sortKey: "list", sortDir: "asc", listFilter: "", sectFilter: "" },
+  allocation: { sortKey: "votes", sortDir: "desc", listFilter: "", statusFilter: "" },
+  winners: { sortKey: "votes", sortDir: "desc", listFilter: "", sectFilter: "" }
+};
 
 initialize().catch((error) => {
   console.error("Initialization failed:", error);
@@ -201,6 +213,7 @@ function bindEvents() {
   elements.load2022PresetBtn.addEventListener("click", onLoad2022Preset);
   elements.load2018PresetBtn.addEventListener("click", onLoad2018Preset);
   document.addEventListener("click", onDocumentClick);
+  document.addEventListener("click", onTableSortClick);
   document.addEventListener("keydown", onDocumentKeyDown);
   window.addEventListener("resize", hideGlossaryTooltip);
   window.addEventListener("scroll", hideGlossaryTooltip, true);
@@ -216,6 +229,12 @@ function bindEvents() {
   elements.candidateTableBody.addEventListener("change", onCandidateTableChange);
   elements.listVoteTotalsBody.addEventListener("input", onListVoteTotalsInput);
   elements.listVoteTotalsBody.addEventListener("change", onListVoteTotalsChange);
+  elements.candidateListFilter?.addEventListener("change", onTableFilterChange);
+  elements.candidateSectFilter?.addEventListener("change", onTableFilterChange);
+  elements.listAllocationListFilter?.addEventListener("change", onTableFilterChange);
+  elements.listAllocationStatusFilter?.addEventListener("change", onTableFilterChange);
+  elements.winnersListFilter?.addEventListener("change", onTableFilterChange);
+  elements.winnersSectFilter?.addEventListener("change", onTableFilterChange);
 
   elements.runSimulationBtn.addEventListener("click", () => {
     syncCandidateTableStateFromDom();
@@ -233,6 +252,19 @@ function bindEvents() {
   elements.resetBtn.addEventListener("click", onResetScenario);
   elements.saveScenarioBtn.addEventListener("click", onSaveScenario);
   elements.savedScenariosList.addEventListener("click", onSavedScenariosListClick);
+}
+
+function onTableFilterChange() {
+  tableUiState.candidate.listFilter = elements.candidateListFilter?.value ?? "";
+  tableUiState.candidate.sectFilter = elements.candidateSectFilter?.value ?? "";
+  tableUiState.allocation.listFilter = elements.listAllocationListFilter?.value ?? "";
+  tableUiState.allocation.statusFilter = elements.listAllocationStatusFilter?.value ?? "";
+  tableUiState.winners.listFilter = elements.winnersListFilter?.value ?? "";
+  tableUiState.winners.sectFilter = elements.winnersSectFilter?.value ?? "";
+
+  renderCandidateTable();
+  renderListAllocationTable();
+  renderWinnersTable();
 }
 
 function populateTemplateSelect() {
@@ -295,16 +327,16 @@ function loadTemplateById(templateId) {
   renderAll();
 }
 
-function onLoad2022Preset() {
-  loadPreset({
+async function onLoad2022Preset() {
+  await loadPreset({
     yearLabel: "2022",
     hasResults: hasElectionResults2022,
     loadResults: loadElectionResults2022
   });
 }
 
-function onLoad2018Preset() {
-  loadPreset({
+async function onLoad2018Preset() {
+  await loadPreset({
     yearLabel: "2018",
     hasResults: hasElectionResults2018,
     loadResults: loadElectionResults2018
@@ -346,7 +378,7 @@ function onDocumentKeyDown(event) {
   }
 }
 
-function loadPreset({ yearLabel, hasResults, loadResults }) {
+async function loadPreset({ yearLabel, hasResults, loadResults }) {
   const templateId = getCurrentTemplateId();
   if (!templateId) {
     window.alert("Choose a district template first.");
@@ -374,16 +406,25 @@ function loadPreset({ yearLabel, hasResults, loadResults }) {
     }
   }
 
-  const scenario = loadResults(template);
-  if (!scenario) {
-    window.alert(`The ${yearLabel} baseline could not be loaded for this district.`);
-    return;
-  }
+  setPresetLoadingState(yearLabel);
 
-  state = normalizeState(scenario);
-  runSimulation();
-  saveState();
-  renderAll();
+  try {
+    await waitForNextPaint();
+    await delay(180);
+
+    const scenario = loadResults(template);
+    if (!scenario) {
+      window.alert(`The ${yearLabel} baseline could not be loaded for this district.`);
+      return;
+    }
+
+    state = normalizeState(scenario);
+    runSimulation();
+    saveState();
+    renderAll();
+  } finally {
+    clearPresetLoadingState();
+  }
 }
 
 function onAddList() {
@@ -460,6 +501,37 @@ function onListVoteTotalsChange(event) {
   updateListVoteEntryFromEvent(event, true);
 }
 
+function onTableSortClick(event) {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  const trigger = target.closest(".table-sort");
+  if (!(trigger instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  const table = String(trigger.dataset.table ?? "").trim();
+  const sortKey = String(trigger.dataset.sortKey ?? "").trim();
+  if (!table || !sortKey || !tableUiState[table]) {
+    return;
+  }
+
+  const nextState = tableUiState[table];
+  nextState.sortDir = nextState.sortKey === sortKey && nextState.sortDir === "asc" ? "desc" : "asc";
+  nextState.sortKey = sortKey;
+  updateSortButtonStates();
+
+  if (table === "candidate") {
+    renderCandidateTable();
+  } else if (table === "allocation") {
+    renderListAllocationTable();
+  } else if (table === "winners") {
+    renderWinnersTable();
+  }
+}
+
 function updateListVoteEntryFromEvent(event, persist) {
   const target = event.target;
   if (!(target instanceof HTMLInputElement) || !target.classList.contains("list-only-votes")) {
@@ -481,6 +553,82 @@ function updateListVoteEntryFromEvent(event, persist) {
   }
 
   renderResults();
+}
+
+function populateFilterSelect(selectElement, values, currentValue, defaultLabel) {
+  if (!(selectElement instanceof HTMLSelectElement)) {
+    return;
+  }
+
+  const options = [
+    `<option value="">${escapeHtml(defaultLabel)}</option>`,
+    ...values.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`)
+  ];
+
+  selectElement.innerHTML = options.join("");
+  selectElement.value = values.includes(currentValue) ? currentValue : "";
+}
+
+function sortRows(rows, tableName, accessorMap, fallbackCompare) {
+  const { sortKey, sortDir } = tableUiState[tableName];
+  const direction = sortDir === "asc" ? 1 : -1;
+  const accessor = accessorMap[sortKey];
+
+  if (!accessor) {
+    return [...rows];
+  }
+
+  return [...rows].sort((a, b) => {
+    const left = accessor(a);
+    const right = accessor(b);
+
+    if (typeof left === "number" || typeof right === "number") {
+      const diff = Number(left || 0) - Number(right || 0);
+      if (diff !== 0) {
+        return diff * direction;
+      }
+    } else {
+      const diff = String(left ?? "").localeCompare(String(right ?? ""), "en", { sensitivity: "base" });
+      if (diff !== 0) {
+        return diff * direction;
+      }
+    }
+
+    return fallbackCompare(a, b);
+  });
+}
+
+function updateSortButtonStates() {
+  const triggers = document.querySelectorAll(".table-sort");
+  triggers.forEach((trigger) => {
+    if (!(trigger instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    const table = String(trigger.dataset.table ?? "").trim();
+    const sortKey = String(trigger.dataset.sortKey ?? "").trim();
+    const config = tableUiState[table];
+    if (!config) {
+      trigger.dataset.sortState = "none";
+      return;
+    }
+
+    trigger.dataset.sortState = config.sortKey === sortKey ? config.sortDir : "none";
+  });
+}
+
+function buildVoteSparkline(value, maxValue, color) {
+  const width = maxValue > 0 ? Math.max((value / maxValue) * 100, value > 0 ? 5 : 0) : 0;
+  return `
+    <span class="mini-bar" aria-hidden="true">
+      <span class="mini-bar-fill" style="width:${width}%;--mini-bar:${color};"></span>
+    </span>
+  `;
+}
+
+function buildListRowStyle(listName) {
+  const palette = getListPalette(listName);
+  return `--list-row-accent:${palette.dot};--list-row-tint:${palette.bg};`;
 }
 
 function onCandidateTableChange(event) {
@@ -726,6 +874,7 @@ function onSavedScenariosListClick(event) {
 function renderAll() {
   hideGlossaryTooltip();
   rebuildListColorIndex();
+  updateSortButtonStates();
   applyDistrictSelectionVisibility();
   syncTemplateSelection();
   renderPresetStatus();
@@ -800,10 +949,16 @@ function renderPresetStatus() {
   const hasDistrict = Boolean(templateId);
   const hasPreset2022 = hasDistrict && hasElectionResults2022(templateId);
   const hasPreset2018 = hasDistrict && hasElectionResults2018(templateId);
+  const isLoading2022 = loadingPresetYear === "2022";
+  const isLoading2018 = loadingPresetYear === "2018";
 
   elements.loadNewSimulationBtn.disabled = !hasDistrict;
-  elements.load2022PresetBtn.disabled = !hasPreset2022;
-  elements.load2018PresetBtn.disabled = !hasPreset2018;
+  elements.load2022PresetBtn.disabled = !hasPreset2022 || Boolean(loadingPresetYear);
+  elements.load2018PresetBtn.disabled = !hasPreset2018 || Boolean(loadingPresetYear);
+  elements.load2022PresetBtn.dataset.loading = String(isLoading2022);
+  elements.load2018PresetBtn.dataset.loading = String(isLoading2018);
+  elements.load2022PresetBtn.textContent = isLoading2022 ? "Loading 2022..." : "Load 2022 Results";
+  elements.load2018PresetBtn.textContent = isLoading2018 ? "Loading 2018..." : "Load 2018 Results";
 
   if (!hasDistrict) {
     elements.presetStatusNote.textContent =
@@ -954,44 +1109,90 @@ function renderListBuilder() {
 
   elements.listChips.innerHTML = listRows
     .map(
-      (row) => `
+      (row) => {
+        const fillRate = slotsPerList > 0 ? (row.filled / slotsPerList) * 100 : 0;
+
+        return `
         <div class="list-manager-item">
           ${renderListChip(row.list)}
-          <span class="list-manager-count">${row.filled} filled</span>
+          <span class="list-manager-count">${row.filled} filled (${formatDecimal(fillRate)}%)</span>
           <button class="btn btn-danger btn-small" data-action="remove-list" data-list-key="${escapeHtml(row.key)}">
             Remove
           </button>
         </div>
-      `
+      `;
+      }
     )
     .join("");
 }
 
 function renderCandidateTable() {
   if (state.candidates.length === 0) {
+    populateFilterSelect(elements.candidateListFilter, [], "", "All lists");
+    populateFilterSelect(elements.candidateSectFilter, [], "", "All sects");
     elements.candidateTableBody.innerHTML =
       '<tr><td colspan="4" class="empty">Add a list to auto-generate candidate slots by sect.</td></tr>';
     return;
   }
 
+  const candidateLists = Array.from(
+    new Set(state.candidates.map((candidate) => String(candidate.list ?? "").trim()).filter(Boolean))
+  ).sort((a, b) => a.localeCompare(b, "en", { sensitivity: "base" }));
+  const candidateSects = Array.from(new Set(state.candidates.map((candidate) => formatQuotaLabel(candidate)))).sort((a, b) =>
+    a.localeCompare(b, "en", { sensitivity: "base" })
+  );
+  populateFilterSelect(elements.candidateListFilter, candidateLists, tableUiState.candidate.listFilter, "All lists");
+  populateFilterSelect(elements.candidateSectFilter, candidateSects, tableUiState.candidate.sectFilter, "All sects");
+
+  const filteredRows = state.candidates.filter((candidate) => {
+    const listMatch = !tableUiState.candidate.listFilter || String(candidate.list ?? "").trim() === tableUiState.candidate.listFilter;
+    const sectMatch = !tableUiState.candidate.sectFilter || formatQuotaLabel(candidate) === tableUiState.candidate.sectFilter;
+    return listMatch && sectMatch;
+  });
+
   const slotCounter = new Map();
-  elements.candidateTableBody.innerHTML = state.candidates
+  const maxVotes = Math.max(0, ...filteredRows.map((candidate) => clampInteger(candidate.votes, 0)));
+  const sortedRows = sortRows(
+    filteredRows,
+    "candidate",
+    {
+      list: (candidate) => String(candidate.list ?? "").trim(),
+      sect: (candidate) => formatQuotaLabel(candidate),
+      votes: (candidate) => clampInteger(candidate.votes, 0)
+    },
+    (a, b) =>
+      String(a.list ?? "").localeCompare(String(b.list ?? ""), "en", { sensitivity: "base" }) ||
+      formatQuotaLabel(a).localeCompare(formatQuotaLabel(b), "en", { sensitivity: "base" }) ||
+      String(a.name ?? "").localeCompare(String(b.name ?? ""), "en", { sensitivity: "base" })
+  );
+
+  if (sortedRows.length === 0) {
+    elements.candidateTableBody.innerHTML =
+      '<tr><td colspan="4" class="empty">No candidates match the current filters.</td></tr>';
+    return;
+  }
+
+  elements.candidateTableBody.innerHTML = sortedRows
     .map((candidate) => {
       const listKey = normalizeListKey(candidate.list);
       const counterKey = `${listKey}::${buildQuotaKey(candidate.sect, candidate.minorDistrict)}`;
       const slotNumber = (slotCounter.get(counterKey) ?? 0) + 1;
       slotCounter.set(counterKey, slotNumber);
+      const palette = getListPalette(candidate.list);
 
       return `
-        <tr data-id="${escapeHtml(candidate.id)}">
+        <tr data-id="${escapeHtml(candidate.id)}" class="list-accent-row" style="${buildListRowStyle(candidate.list)}">
           <td>${renderListChip(candidate.list)}</td>
           <td><span class="sect-slot-label">${escapeHtml(formatQuotaLabel(candidate))} #${slotNumber}</span></td>
           <td class="candidate-name-cell"><input class="row-edit candidate-name" type="text" value="${escapeHtml(
             candidate.name
           )}" placeholder="Candidate full name" /></td>
-          <td class="candidate-votes-cell"><input class="row-edit candidate-votes" type="number" min="0" step="1" value="${
-            candidate.votes
-          }" /></td>
+          <td class="candidate-votes-cell">
+            <div class="table-number-with-bar">
+              <input class="row-edit candidate-votes" type="number" min="0" step="1" value="${candidate.votes}" />
+              ${buildVoteSparkline(clampInteger(candidate.votes, 0), maxVotes, palette.dot)}
+            </div>
+          </td>
         </tr>
       `;
     })
@@ -1200,30 +1401,56 @@ function renderAlerts() {
 function renderListAllocationTable() {
   const rows = Array.isArray(simulation.listAllocation) ? simulation.listAllocation : [];
   if (rows.length === 0) {
+    populateFilterSelect(elements.listAllocationListFilter, [], "", "All lists");
     elements.listAllocationBody.innerHTML =
       '<tr><td colspan="5" class="empty">Add candidates with party/list names to compute EQ allocation.</td></tr>';
     return;
   }
 
-  const sorted = [...rows].sort((a, b) => {
-    if (b.seats !== a.seats) {
-      return b.seats - a.seats;
-    }
-    if (b.votes !== a.votes) {
-      return b.votes - a.votes;
-    }
-    return a.list.localeCompare(b.list, "en", { sensitivity: "base" });
+  const lists = Array.from(new Set(rows.map((row) => String(row.list ?? "").trim()).filter(Boolean))).sort((a, b) =>
+    a.localeCompare(b, "en", { sensitivity: "base" })
+  );
+  populateFilterSelect(elements.listAllocationListFilter, lists, tableUiState.allocation.listFilter, "All lists");
+
+  const filtered = rows.filter((row) => {
+    const listMatch = !tableUiState.allocation.listFilter || String(row.list ?? "").trim() === tableUiState.allocation.listFilter;
+    const statusMatch =
+      !tableUiState.allocation.statusFilter ||
+      (tableUiState.allocation.statusFilter === "qualified" ? row.qualified : !row.qualified);
+    return listMatch && statusMatch;
   });
+  const maxVotes = Math.max(0, ...filtered.map((row) => Number(row.votes || 0)));
+  const sorted = sortRows(
+    filtered,
+    "allocation",
+    {
+      list: (row) => row.list,
+      votes: (row) => Number(row.votes || 0)
+    },
+    (a, b) => b.seats - a.seats || b.votes - a.votes || a.list.localeCompare(b.list, "en", { sensitivity: "base" })
+  );
+
+  if (sorted.length === 0) {
+    elements.listAllocationBody.innerHTML =
+      '<tr><td colspan="5" class="empty">No list allocation rows match the current filters.</td></tr>';
+    return;
+  }
 
   elements.listAllocationBody.innerHTML = sorted
     .map((row) => {
       const statusClass = row.qualified ? "pill pill-qualified" : "pill pill-disqualified";
       const statusLabel = row.qualified ? "Qualified" : "Below EQ";
+      const palette = getListPalette(row.list);
 
       return `
-        <tr>
+        <tr class="list-accent-row" style="${buildListRowStyle(row.list)}">
           <td>${renderListChip(row.list)}</td>
-          <td>${formatNumber(row.votes)}</td>
+          <td>
+            <div class="table-number-with-bar">
+              <span class="table-value-strong">${formatNumber(row.votes)}</span>
+              ${buildVoteSparkline(Number(row.votes || 0), maxVotes, palette.dot)}
+            </div>
+          </td>
           <td><span class="${statusClass}">${statusLabel}</span></td>
           <td>${row.seats}</td>
           <td>${row.baseSeats}</td>
@@ -1235,22 +1462,66 @@ function renderListAllocationTable() {
 
 function renderWinnersTable() {
   if (simulation.winners.length === 0) {
+    populateFilterSelect(elements.winnersListFilter, [], "", "All lists");
+    populateFilterSelect(elements.winnersSectFilter, [], "", "All sects");
     elements.winnersTableBody.innerHTML =
-      '<tr><td colspan="5" class="empty">Run with valid quotas and candidates to display winners.</td></tr>';
+      '<tr><td colspan="4" class="empty">Run with valid quotas and candidates to display winners.</td></tr>';
     return;
   }
 
-  elements.winnersTableBody.innerHTML = simulation.winners
+  const winnerLists = Array.from(new Set(simulation.winners.map((winner) => String(winner.list ?? "").trim()).filter(Boolean))).sort((a, b) =>
+    a.localeCompare(b, "en", { sensitivity: "base" })
+  );
+  const winnerSects = Array.from(new Set(simulation.winners.map((winner) => String(winner.seatLabel ?? winner.sect).trim()))).sort((a, b) =>
+    a.localeCompare(b, "en", { sensitivity: "base" })
+  );
+  populateFilterSelect(elements.winnersListFilter, winnerLists, tableUiState.winners.listFilter, "All lists");
+  populateFilterSelect(elements.winnersSectFilter, winnerSects, tableUiState.winners.sectFilter, "All sects");
+
+  const filteredWinners = simulation.winners.filter((winner) => {
+    const listMatch = !tableUiState.winners.listFilter || String(winner.list ?? "").trim() === tableUiState.winners.listFilter;
+    const sectMatch = !tableUiState.winners.sectFilter || String(winner.seatLabel ?? winner.sect).trim() === tableUiState.winners.sectFilter;
+    return listMatch && sectMatch;
+  });
+  const maxVotes = Math.max(0, ...filteredWinners.map((winner) => Number(winner.votes || 0)));
+  const sortedWinners = sortRows(
+    filteredWinners,
+    "winners",
+    {
+      list: (winner) => winner.list,
+      sect: (winner) => String(winner.seatLabel ?? winner.sect),
+      votes: (winner) => Number(winner.votes || 0)
+    },
+    (a, b) =>
+      Number(a.seatNumber || 0) - Number(b.seatNumber || 0) ||
+      b.votes - a.votes ||
+      a.name.localeCompare(b.name, "en", { sensitivity: "base" })
+  );
+
+  if (sortedWinners.length === 0) {
+    elements.winnersTableBody.innerHTML =
+      '<tr><td colspan="4" class="empty">No winning candidates match the current filters.</td></tr>';
+    return;
+  }
+
+  elements.winnersTableBody.innerHTML = sortedWinners
     .map(
-      (winner) => `
-      <tr>
-        <td>${winner.seatNumber}</td>
+      (winner) => {
+        const palette = getListPalette(winner.list);
+        return `
+      <tr class="list-accent-row winner-row" style="${buildListRowStyle(winner.list)}">
         <td>${escapeHtml(winner.seatLabel ?? winner.sect)}</td>
-        <td>${escapeHtml(winner.name)}</td>
+        <td><strong class="winner-name">${escapeHtml(winner.name)}</strong></td>
         <td>${renderListChip(winner.list)}</td>
-        <td>${formatNumber(winner.votes)}</td>
+        <td>
+          <div class="table-number-with-bar">
+            <span class="table-value-strong">${formatNumber(winner.votes)}</span>
+            ${buildVoteSparkline(Number(winner.votes || 0), maxVotes, palette.dot)}
+          </div>
+        </td>
       </tr>
-    `
+    `;
+      }
     )
     .join("");
 }
@@ -1839,6 +2110,28 @@ function buildCandidateIdentityKey(name, list, sect, minorDistrict = "") {
     String(sect ?? "").trim(),
     String(minorDistrict ?? "").trim()
   ].join("::");
+}
+
+function setPresetLoadingState(yearLabel) {
+  loadingPresetYear = String(yearLabel ?? "").trim();
+  renderPresetStatus();
+}
+
+function clearPresetLoadingState() {
+  loadingPresetYear = "";
+  renderPresetStatus();
+}
+
+function waitForNextPaint() {
+  return new Promise((resolve) => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(resolve);
+    });
+  });
+}
+
+function delay(ms) {
+  return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
 function createId(prefix) {
@@ -2804,9 +3097,12 @@ function rebuildListColorIndex() {
 
   const keys = Array.from(
     new Set(
-      state.candidates
-        .map((candidate) => normalizeListKey(candidate?.list))
-        .filter(Boolean)
+      [
+        ...state.candidates.map((candidate) => normalizeListKey(candidate?.list)),
+        ...state.listVotes.map((entry) => normalizeListKey(entry?.list)),
+        ...(Array.isArray(simulation.listAllocation) ? simulation.listAllocation.map((row) => normalizeListKey(row?.list)) : []),
+        ...(Array.isArray(simulation.winners) ? simulation.winners.map((row) => normalizeListKey(row?.list)) : [])
+      ].filter(Boolean)
     )
   ).sort((a, b) => a.localeCompare(b, "en", { sensitivity: "base" }));
 
