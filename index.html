@@ -7,8 +7,20 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      document.documentElement.classList.add("app-booting");
+
+      window.__markStylesReady = function () {
+        document.documentElement.classList.remove("app-booting");
+        document.documentElement.classList.add("styles-ready");
+      };
+    </script>
+    <link rel="stylesheet" href="./styles.css" onload="window.__markStylesReady && window.__markStylesReady()" />
     <style>
+      html.app-booting body {
+        visibility: hidden;
+      }
+
       body {
         margin: 0;
       }

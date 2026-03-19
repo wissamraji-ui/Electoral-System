@@ -7,7 +7,19 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <script>
+      document.documentElement.classList.add("app-booting");
+
+      window.__markStylesReady = function () {
+        document.documentElement.classList.remove("app-booting");
+        document.documentElement.classList.add("styles-ready");
+      };
+    </script>
     <style>
+      html.app-booting body {
+        visibility: hidden;
+      }
+
       body {
         margin: 0;
       }
@@ -69,7 +81,7 @@
     <title>Lebanese Parliamentary Elections Simulator</title>
     <script>
       (function () {
-        var fallbackBuild = {"buildId":"build-1773924754068","entryJs":"/assets/index-uST146HS.js","entryCss":"/assets/index-BGZ5Puw6.css"};
+        var fallbackBuild = {"buildId":"build-1773924988294","entryJs":"/assets/index-CN4xf5fZ.js","entryCss":"/assets/index-BGZ5Puw6.css"};
         var booted = false;
 
         function appendStylesheet(href) {
