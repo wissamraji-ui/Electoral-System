@@ -14,6 +14,14 @@
         document.documentElement.classList.remove("app-booting");
         document.documentElement.classList.add("styles-ready");
       };
+
+      window.addEventListener("DOMContentLoaded", function () {
+        window.setTimeout(function () {
+          if (document.documentElement.classList.contains("app-booting")) {
+            window.__markStylesReady();
+          }
+        }, 250);
+      });
     </script>
     <style>
       html.app-booting body {
@@ -81,7 +89,7 @@
     <title>Lebanese Parliamentary Elections Simulator</title>
     <script>
       (function () {
-        var fallbackBuild = {"buildId":"build-1773924988294","entryJs":"/assets/index-CN4xf5fZ.js","entryCss":"/assets/index-BGZ5Puw6.css"};
+        var fallbackBuild = {"buildId":"build-1773925153698","entryJs":"/assets/index-Dn8q7Seg.js","entryCss":"/assets/index-BGZ5Puw6.css"};
         var booted = false;
 
         function appendStylesheet(href) {
