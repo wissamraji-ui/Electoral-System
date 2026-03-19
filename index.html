@@ -7,6 +7,33 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .brand-mark {
+        width: 76px;
+        height: 76px;
+        flex: 0 0 76px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .brand-mark svg {
+        display: block;
+        width: 58px;
+        height: 58px;
+      }
+    </style>
     <link
       rel="icon"
       type="image/svg+xml"
@@ -41,14 +68,13 @@
       })();
     </script>
     <title>Lebanese Parliamentary Elections Simulator</title>
-    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="noise-bg"></div>
     <header class="topbar">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img">
+          <svg viewBox="0 0 64 64" role="img" width="58" height="58">
             <rect width="64" height="64" rx="12" fill="#ffffff"></rect>
             <clipPath id="brandFlagClip">
               <rect width="64" height="64" rx="12"></rect>
