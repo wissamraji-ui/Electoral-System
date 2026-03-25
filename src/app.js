@@ -1465,7 +1465,7 @@ function renderWinnersTable() {
     populateFilterSelect(elements.winnersListFilter, [], "", "All lists");
     populateFilterSelect(elements.winnersSectFilter, [], "", "All sects");
     elements.winnersTableBody.innerHTML =
-      '<tr><td colspan="4" class="empty">Run with valid quotas and candidates to display winners.</td></tr>';
+      '<tr><td colspan="5" class="empty">Run with valid quotas and candidates to display winners.</td></tr>';
     return;
   }
 
@@ -1490,7 +1490,8 @@ function renderWinnersTable() {
     {
       list: (winner) => winner.list,
       sect: (winner) => String(winner.seatLabel ?? winner.sect),
-      votes: (winner) => Number(winner.votes || 0)
+      votes: (winner) => Number(winner.votes || 0),
+      voteSharePct: (winner) => Number(winner.voteSharePct || 0)
     },
     (a, b) =>
       Number(a.seatNumber || 0) - Number(b.seatNumber || 0) ||
@@ -1500,7 +1501,7 @@ function renderWinnersTable() {
 
   if (sortedWinners.length === 0) {
     elements.winnersTableBody.innerHTML =
-      '<tr><td colspan="4" class="empty">No winning candidates match the current filters.</td></tr>';
+      '<tr><td colspan="5" class="empty">No winning candidates match the current filters.</td></tr>';
     return;
   }
 
@@ -1519,6 +1520,7 @@ function renderWinnersTable() {
             ${buildVoteSparkline(Number(winner.votes || 0), maxVotes, palette.dot)}
           </div>
         </td>
+        <td>${formatDecimal(winner.voteSharePct)}%</td>
       </tr>
     `;
       }
@@ -2455,6 +2457,12 @@ function formatDecimal(value) {
   return numeric.toLocaleString("en-US", { maximumFractionDigits: 2 });
 }
 
+function formatWinnerVoteLabel(winner) {
+  const votes = formatNumber(winner?.votes);
+  const share = Number(winner?.voteSharePct);
+  return Number.isFinite(share) ? `${votes} (${formatDecimal(share)}%)` : votes;
+}
+
 function buildPrintableReportHtml(fileName) {
   const summary = simulation.summary;
   const totalListCount = Array.isArray(simulation.listAllocation) ? simulation.listAllocation.length : 0;
@@ -2725,6 +2733,7 @@ function renderPrintableWinnersTable(rows) {
           <th>Name</th>
           <th>List</th>
           <th>Votes</th>
+          <th>Vote %</th>
         </tr>
       </thead>
       <tbody>
@@ -2737,6 +2746,7 @@ function renderPrintableWinnersTable(rows) {
                 <td class="${getTextDirectionClass(row.name)}">${escapeHtml(row.name)}</td>
                 <td class="${getTextDirectionClass(row.list)}">${escapeHtml(row.list)}</td>
                 <td>${formatNumber(row.votes)}</td>
+                <td>${formatDecimal(row.voteSharePct)}%</td>
               </tr>
             `
           )
@@ -2861,7 +2871,7 @@ function buildPdfReportLines() {
   } else {
     simulation.winners.forEach((winner) => {
       lines.push(
-        `- Seat #${winner.seatNumber} (${winner.sect}): ${winner.name} | ${winner.list} | votes ${formatNumber(winner.votes)}`
+        `- Seat #${winner.seatNumber} (${winner.sect}): ${winner.name} | ${winner.list} | votes ${formatWinnerVoteLabel(winner)}`
       );
     });
   }

@@ -181,6 +181,28 @@ test("ranks candidates by minor-district vote share when a district is split", (
   const result = computeResults(quotas, candidates, listVotes);
 
   assert.deepEqual(result.winners.map((winner) => winner.name), ["Aley Candidate", "Chouf Candidate"]);
+  assert.equal(result.winners[0].voteShareBase, 1000);
+  assert.equal(result.winners[0].voteSharePct, 50);
+  assert.equal(result.winners[1].voteShareBase, 2000);
+  assert.equal(result.winners[1].voteSharePct, 30);
+});
+
+test("uses district candidate votes as the winner percentage base when there is no minor district", () => {
+  const quotas = [{ sect: "Sunni", seats: 3 }];
+  const candidates = [
+    { name: "A1", sect: "Sunni", list: "Alpha", votes: 60 },
+    { name: "A2", sect: "Sunni", list: "Alpha", votes: 30 },
+    { name: "B1", sect: "Sunni", list: "Beta", votes: 70 },
+    { name: "C1", sect: "Sunni", list: "Cedar", votes: 40 }
+  ];
+
+  const result = computeResults(quotas, candidates);
+
+  assert.deepEqual(result.winners.map((winner) => winner.name), ["B1", "A1", "A2"]);
+  assert.equal(result.winners[0].voteShareBase, 200);
+  assert.equal(result.winners[0].voteSharePct, 35);
+  assert.equal(result.winners[1].voteShareBase, 200);
+  assert.equal(result.winners[1].voteSharePct, 30);
 });
 
 test("respects sect quotas split across multiple minor districts", () => {

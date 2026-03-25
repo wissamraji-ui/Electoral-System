@@ -464,6 +464,7 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
       .map((entry) => [entry.list, entry.seats])
   );
 
+  const districtCandidateVotes = safeCandidates.reduce((sum, candidate) => sum + candidate.votes, 0);
   const minorDistrictVoteTotals = new Map();
   safeCandidates.forEach((candidate) => {
     if (!candidate.minorDistrict) {
@@ -550,6 +551,7 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
       seatIndex += 1;
       const nextCandidate = nonElectedForSect[0] ?? null;
       const margin = nextCandidate ? candidate.votes - nextCandidate.votes : null;
+      const voteShareBase = candidate.minorDistrict ? minorDistrictVoteTotals.get(candidate.minorDistrict) ?? 0 : districtCandidateVotes;
 
       winners.push({
         seatNumber: seatIndex,
@@ -559,6 +561,8 @@ export function computeResults(quotas, candidates, listVotes = [], blankVotes = 
         name: candidate.name,
         list: candidate.list,
         votes: candidate.votes,
+        voteShareBase,
+        voteSharePct: voteShareBase > 0 ? (candidate.votes / voteShareBase) * 100 : 0,
         margin
       });
     });
