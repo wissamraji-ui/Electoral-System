@@ -132,6 +132,12 @@
         padding: 0 0.8rem 1rem;
       }
 
+      .prelayout-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 1rem;
+      }
+
       .layout {
         display: grid;
         grid-template-columns: 1.42fr 1.18fr;
@@ -187,6 +193,70 @@
         color: #26445d;
         font-size: 0.83rem;
         line-height: 1.55;
+      }
+
+      .explainer-card {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top right, rgba(15, 143, 79, 0.12), transparent 30%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96), #f5f7f0);
+      }
+
+      .explainer-card::after {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 6px;
+        background: linear-gradient(180deg, #ee161f 0%, #ee161f 50%, #0f8f4f 50%, #0f8f4f 100%);
+      }
+
+      .explainer-card h4,
+      .explainer-card p,
+      .explainer-steps {
+        position: relative;
+        z-index: 1;
+      }
+
+      .explainer-steps {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .explainer-step {
+        min-width: 0;
+        padding: 0.85rem;
+        border: 1px solid #d9e2da;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .explainer-step strong {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.8rem;
+        height: 1.8rem;
+        margin-bottom: 0.55rem;
+        border-radius: 999px;
+        background: #17354b;
+        color: #fff;
+        font-size: 0.78rem;
+      }
+
+      .explainer-step h5 {
+        margin: 0 0 0.3rem;
+        color: #173324;
+        font-size: 0.84rem;
+      }
+
+      .explainer-step p {
+        margin: 0;
+        color: #4f6255;
+        font-size: 0.77rem;
+        line-height: 1.5;
       }
 
       .launchpad-hero {
@@ -281,7 +351,18 @@
       }
 
       @media (max-width: 980px) {
+        .prelayout-grid,
         .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .explainer-steps {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .explainer-steps {
           grid-template-columns: 1fr;
         }
       }
@@ -362,15 +443,44 @@
     </header>
 
     <section id="launchpadHelper" class="prelayout-helper">
-      <article class="instruction-card instruction-card-prominent">
-        <h4>How to start</h4>
-        <p>Pick a district, then either load a verified election baseline or create a fresh simulation.</p>
-        <ul class="instruction-list">
-          <li>Choose a district template from the selector above.</li>
-          <li>Load <code>2018</code> or <code>2022</code> results after selecting a district.</li>
-          <li>Add a new simulation if you want a blank custom scenario.</li>
-        </ul>
-      </article>
+      <div class="prelayout-grid">
+        <article class="instruction-card instruction-card-prominent">
+          <h4>How to start</h4>
+          <p>Pick a district, then either load a verified election baseline or create a fresh simulation.</p>
+          <ul class="instruction-list">
+            <li>Choose a district template from the selector above.</li>
+            <li>Load <code>2018</code> or <code>2022</code> results after selecting a district.</li>
+            <li>Add a new simulation if you want a blank custom scenario.</li>
+          </ul>
+        </article>
+
+        <article class="instruction-card explainer-card" aria-label="How the electoral system works">
+          <h4>How the system works</h4>
+          <p>A quick map of the district-level logic before seats are assigned.</p>
+          <div class="explainer-steps">
+            <section class="explainer-step">
+              <strong>1</strong>
+              <h5>District chosen</h5>
+              <p>Load a district template to lock in its fixed sect quotas and candidate slots.</p>
+            </section>
+            <section class="explainer-step">
+              <strong>2</strong>
+              <h5>Electoral quotient</h5>
+              <p>Total valid list votes are divided by district seats to set the qualification threshold.</p>
+            </section>
+            <section class="explainer-step">
+              <strong>3</strong>
+              <h5>Lists qualify or fail</h5>
+              <p>Lists below the quotient drop out. Qualified lists then receive seats from their vote strength.</p>
+            </section>
+            <section class="explainer-step">
+              <strong>4</strong>
+              <h5>Preferential votes decide winners</h5>
+              <p>Within the winning lists, candidates compete for each sect seat using preferential votes.</p>
+            </section>
+          </div>
+        </article>
+      </div>
     </section>
 
     <main class="layout">

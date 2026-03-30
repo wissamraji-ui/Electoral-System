@@ -152,6 +152,12 @@ body {
   padding: 0 0.8rem 1rem;
 }
 
+.prelayout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1rem;
+}
+
 .panel {
   background: linear-gradient(180deg, var(--surface) 0%, #f3f7fb 100%);
   border: 1px solid var(--line);
@@ -446,6 +452,70 @@ select:focus {
 
 .instruction-list li + li {
   margin-top: 0.35rem;
+}
+
+.explainer-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top right, rgba(15, 143, 79, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), #f5f7f0);
+}
+
+.explainer-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  background: linear-gradient(180deg, #ee161f 0%, #ee161f 50%, #0f8f4f 50%, #0f8f4f 100%);
+}
+
+.explainer-card h4,
+.explainer-card p,
+.explainer-steps {
+  position: relative;
+  z-index: 1;
+}
+
+.explainer-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.explainer-step {
+  min-width: 0;
+  padding: 0.85rem;
+  border: 1px solid #d9e2da;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.explainer-step strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-bottom: 0.55rem;
+  border-radius: 999px;
+  background: #17354b;
+  color: #fff;
+  font-size: 0.78rem;
+}
+
+.explainer-step h5 {
+  margin: 0 0 0.3rem;
+  color: #173324;
+  font-size: 0.84rem;
+}
+
+.explainer-step p {
+  margin: 0;
+  color: #4f6255;
+  font-size: 0.77rem;
+  line-height: 1.5;
 }
 
 .launchpad-actions {
@@ -1727,8 +1797,13 @@ tbody tr:hover td {
 }
 
 @media (max-width: 1180px) {
+  .prelayout-grid,
   .layout {
     grid-template-columns: 1fr;
+  }
+
+  .explainer-steps {
+    grid-template-columns: 1fr 1fr;
   }
 
   .candidate-form {
@@ -1759,6 +1834,10 @@ tbody tr:hover td {
   }
 
   .candidate-form {
+    grid-template-columns: 1fr;
+  }
+
+  .explainer-steps {
     grid-template-columns: 1fr;
   }
 
