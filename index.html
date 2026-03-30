@@ -787,6 +787,59 @@
               </article>
             </div>
           </section>
+
+          <section class="comparison-shell">
+            <div class="panel-title-row comparison-title-row">
+              <div>
+                <h3>Baseline vs Scenario</h3>
+                <p class="comparison-intro">Compare the current run against a verified baseline or a saved simulation.</p>
+              </div>
+              <span class="tag">Delta View</span>
+            </div>
+
+            <div class="comparison-controls">
+              <label class="field table-filter-field comparison-select-field">
+                <span>Comparison Baseline</span>
+                <select id="comparisonSourceSelect"></select>
+              </label>
+            </div>
+
+            <div id="comparisonSummary" class="comparison-summary"></div>
+
+            <div class="comparison-grid">
+              <article class="visual-card comparison-card">
+                <div class="visual-card-header">
+                  <h4>Seat Changes</h4>
+                  <p>Which lists gained or lost seats versus the baseline.</p>
+                </div>
+                <div id="comparisonSeatChanges" class="comparison-card-body"></div>
+              </article>
+
+              <article class="visual-card comparison-card">
+                <div class="visual-card-header">
+                  <h4>Vote Share Changes</h4>
+                  <p>List-by-list vote share movement in percentage points.</p>
+                </div>
+                <div id="comparisonVoteChanges" class="comparison-card-body"></div>
+              </article>
+
+              <article class="visual-card comparison-card">
+                <div class="visual-card-header">
+                  <h4>Candidate Swaps</h4>
+                  <p>Seats where the winning candidate changed.</p>
+                </div>
+                <div id="comparisonCandidateSwaps" class="comparison-card-body"></div>
+              </article>
+
+              <article class="visual-card comparison-card">
+                <div class="visual-card-header">
+                  <h4>Closest Flipped Seats</h4>
+                  <p>The tightest changed seats in the current comparison.</p>
+                </div>
+                <div id="comparisonClosestFlips" class="comparison-card-body"></div>
+              </article>
+            </div>
+          </section>
         </div>
       </section>
     </main>
