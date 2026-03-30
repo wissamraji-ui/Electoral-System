@@ -1011,6 +1011,38 @@ function onLoadNewSimulation() {
     return;
   }
 
+  const templateId = getCurrentTemplateId();
+  const template = templates.find((entry) => entry.id === templateId) ?? null;
+  const hasExistingScenarioData =
+    state.candidates.length > 0 ||
+    state.listVotes.some((entry) => clampInteger(entry?.votes, 0) > 0) ||
+    state.blankVotes > 0 ||
+    state.invalidVotes > 0;
+
+  if (hasExistingScenarioData) {
+    const confirmed = window.confirm(
+      "Add New Simulation will clear the current lists, candidate votes, and year baseline data for this district. Continue?"
+    );
+    if (!confirmed) {
+      return;
+    }
+  }
+
+  state = template
+    ? normalizeState(cloneTemplate(template))
+    : normalizeState({
+        regionName: state.regionName,
+        quotas: state.quotas,
+        candidates: [],
+        listVotes: [],
+        blankVotes: 0,
+        invalidVotes: 0,
+        quotasLocked: true
+      });
+
+  runSimulation();
+  saveState();
+  renderAll();
   elements.addListBtn.scrollIntoView({ behavior: "smooth", block: "center" });
   window.setTimeout(() => {
     elements.listNameInput.focus();
