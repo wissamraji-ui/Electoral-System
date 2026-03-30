@@ -103,6 +103,7 @@ const elements = {
   listVoteTotalsBody: document.getElementById("listVoteTotalsBody"),
   runSimulationBtn: document.getElementById("runSimulationBtn"),
   shareUrlBtn: document.getElementById("shareUrlBtn"),
+  publishViewBtn: document.getElementById("publishViewBtn"),
   exportBtn: document.getElementById("exportBtn"),
   exportPdfBtn: document.getElementById("exportPdfBtn"),
   importBtn: document.getElementById("importBtn"),
@@ -246,6 +247,7 @@ function bindEvents() {
   });
 
   elements.shareUrlBtn.addEventListener("click", onCopyShareUrl);
+  elements.publishViewBtn.addEventListener("click", onOpenPublishView);
   elements.exportBtn.addEventListener("click", onExportScenario);
   elements.exportPdfBtn.addEventListener("click", onExportPdf);
   elements.importBtn.addEventListener("click", () => elements.importFileInput.click());
@@ -767,6 +769,20 @@ function onExportPdf() {
   printWindow.document.open();
   printWindow.document.write(buildPrintableReportHtml(fileName));
   printWindow.document.close();
+}
+
+function onOpenPublishView() {
+  runSimulation();
+  const viewWindow = window.open("", "_blank");
+
+  if (!viewWindow) {
+    window.alert("Unable to open the publish view. Allow pop-ups for this site and try again.");
+    return;
+  }
+
+  viewWindow.document.open();
+  viewWindow.document.write(buildPublishModeHtml());
+  viewWindow.document.close();
 }
 
 async function onImportScenario(event) {
@@ -2577,6 +2593,625 @@ function formatWinnerVoteLabel(winner) {
   const votes = formatNumber(winner?.votes);
   const share = Number(winner?.voteSharePct);
   return Number.isFinite(share) ? `${votes} (${formatDecimal(share)}%)` : votes;
+}
+
+function buildPublishModeHtml() {
+  const summary = simulation.summary;
+  const districtLabel = state.regionName.trim() || "Unnamed region";
+  const generatedAt = new Date().toLocaleString("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  });
+  const qualifiedLists = Array.isArray(simulation.listAllocation)
+    ? simulation.listAllocation.filter((row) => row.qualified)
+    : [];
+  const listRows = Array.isArray(simulation.listAllocation)
+    ? [...simulation.listAllocation].sort((a, b) => b.seats - a.seats || b.votes - a.votes)
+    : [];
+  const topList = listRows[0] ?? null;
+  const winners = Array.isArray(simulation.winners) ? simulation.winners : [];
+  const closestRaces = getClosestRacesDataForScenario(state, simulation, 3);
+  const seatFlipRows = getSeatFlipRadarRows().slice(0, 3);
+  const seatShareRows = listRows.filter((row) => row.seats > 0).slice(0, 8);
+  const voteShareRows = listRows.filter((row) => row.votes > 0).slice(0, 8);
+  const sectRows = getListSectMapRows().slice(0, 6);
+
+  const headline = topList
+    ? `${topList.list} leads ${districtLabel} with ${topList.seats} of ${summary.totalSeats} seats.`
+    : `No seat allocation is available yet for ${districtLabel}.`;
+
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${escapeHtml(`${districtLabel} Publish View`)}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #16252f;
+        --muted: #60707d;
+        --line: #d9e0e5;
+        --surface: rgba(255, 255, 255, 0.92);
+        --surface-soft: #f4f7f9;
+        --accent: #ee161f;
+        --accent-2: #0f8f4f;
+        --shadow: 0 20px 44px rgba(25, 40, 51, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        padding: 28px;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.82), transparent 34%),
+          linear-gradient(180deg, #f7f4ee 0%, #eeece4 100%);
+        font: 14px/1.5 "IBM Plex Sans", "Avenir Next", "Segoe UI", Arial, sans-serif;
+      }
+
+      .page {
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 28px;
+        border: 1px solid rgba(183, 41, 46, 0.14);
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 252, 248, 0.94));
+        box-shadow: var(--shadow);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 10px;
+        background: linear-gradient(90deg, #ee161f 0%, #ee161f 34%, #ffffff 34%, #ffffff 66%, #0f8f4f 66%, #0f8f4f 100%);
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1, h2, h3, p { margin: 0; }
+
+      h1 {
+        font-size: clamp(34px, 5vw, 56px);
+        line-height: 0.96;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-headline {
+        margin-top: 16px;
+        max-width: 18ch;
+        font-size: clamp(22px, 3vw, 34px);
+        line-height: 1.08;
+      }
+
+      .hero-meta {
+        margin-top: 14px;
+        color: var(--muted);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .hero-actions button {
+        border: 1px solid #cfd8df;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--ink);
+        padding: 10px 16px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .metric {
+        padding: 14px 15px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface-soft);
+      }
+
+      .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 6px;
+        font-size: 22px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+
+      .panel h2 {
+        font-size: 18px;
+        letter-spacing: -0.02em;
+      }
+
+      .panel-copy {
+        margin-top: 6px;
+        color: var(--muted);
+      }
+
+      .section {
+        margin-top: 18px;
+      }
+
+      .section-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .winners-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .winner-row, .headline-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: start;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .winner-row strong, .headline-row strong {
+        display: block;
+        font-size: 15px;
+      }
+
+      .winner-row span, .headline-row span {
+        display: block;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .winner-votes {
+        white-space: nowrap;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .chart-stack {
+        display: grid;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .chart-row {
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .chart-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      .chart-head strong {
+        font-size: 14px;
+      }
+
+      .chart-head span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .bar-track {
+        height: 12px;
+        border-radius: 999px;
+        background: #e9eef2;
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: inherit;
+      }
+
+      .dual-track {
+        display: grid;
+        gap: 6px;
+      }
+
+      .dual-bar {
+        height: 10px;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .dual-bar-votes { background: #dbe7ef; }
+      .dual-bar-seats { background: #e2efe8; }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+      }
+
+      .risk {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 88px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .risk-high { background: rgba(183, 67, 67, 0.14); color: #962f2f; }
+      .risk-medium { background: rgba(210, 137, 33, 0.14); color: #8b5a08; }
+      .risk-safe { background: rgba(15, 143, 79, 0.14); color: #0c6d3c; }
+
+      .empty {
+        color: var(--muted);
+        margin-top: 14px;
+      }
+
+      .rtl {
+        direction: rtl;
+        text-align: right;
+        unicode-bidi: plaintext;
+      }
+
+      @media print {
+        body { padding: 12mm; background: #fff; }
+        .hero-actions { display: none; }
+        .panel { box-shadow: none; }
+      }
+
+      @media (max-width: 860px) {
+        .metrics,
+        .grid,
+        .section-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <p class="eyebrow">Publish View</p>
+        <h1 class="${getTextDirectionClass(districtLabel)}">${escapeHtml(districtLabel)}</h1>
+        <p class="hero-headline ${getTextDirectionClass(headline)}">${escapeHtml(headline)}</p>
+        <p class="hero-meta">Generated ${escapeHtml(generatedAt)}. Read-only summary view built from the current simulation state.</p>
+        <div class="hero-actions">
+          <button type="button" onclick="window.print()">Print / Save PDF</button>
+          <button type="button" onclick="window.close()">Close</button>
+        </div>
+        <div class="metrics">
+          ${renderPublishMetric("Total Seats", String(summary.totalSeats))}
+          ${renderPublishMetric("Filled Seats", String(summary.filledSeats))}
+          ${renderPublishMetric("Qualified Lists", String(summary.qualifiedListCount))}
+          ${renderPublishMetric("Total Votes", formatNumber(summary.totalVotes))}
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <h2>Winning Candidates</h2>
+          <p class="panel-copy">The full winning slate for the current district run.</p>
+          ${renderPublishWinners(winners)}
+        </article>
+
+        <article class="panel">
+          <h2>Headline Summary</h2>
+          <p class="panel-copy">A compact briefing for publication or sharing.</p>
+          <div class="winners-list">
+            ${renderPublishHeadlineRow("Lead List", topList ? `${topList.list} with ${topList.seats} seats` : "No current leader")}
+            ${renderPublishHeadlineRow("Qualification EQ", summary.qualificationQuotient > 0 ? formatDecimal(summary.qualificationQuotient) : "-")}
+            ${renderPublishHeadlineRow("Allocation EQ", summary.electoralQuotient > 0 ? formatDecimal(summary.electoralQuotient) : "-")}
+            ${renderPublishHeadlineRow("Competitive Seats", String(seatFlipRows.length))}
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="section-grid">
+          <article class="panel">
+            <h2>Top 3 Closest Contests</h2>
+            <p class="panel-copy">The narrowest sect margins in the current run.</p>
+            ${renderPublishClosestContests(closestRaces)}
+          </article>
+
+          <article class="panel">
+            <h2>Seat Flip Radar</h2>
+            <p class="panel-copy">The seats most vulnerable to changing hands.</p>
+            ${renderPublishSeatFlipRadar(seatFlipRows)}
+          </article>
+
+          <article class="panel">
+            <h2>Seat Distribution</h2>
+            <p class="panel-copy">Current seat standing by list.</p>
+            ${renderPublishSeatChart(seatShareRows, Math.max(1, summary.totalSeats))}
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-grid">
+          <article class="panel">
+            <h2>Vote vs Seat Share</h2>
+            <p class="panel-copy">Where seat power runs ahead of vote weight.</p>
+            ${renderPublishVoteSeatChart(voteShareRows, Math.max(1, summary.totalVotes), Math.max(1, summary.totalSeats))}
+          </article>
+
+          <article class="panel">
+            <h2>Sect Capture Snapshot</h2>
+            <p class="panel-copy">Which sect seats each leading list currently holds.</p>
+            ${renderPublishSectCaptureChart(sectRows)}
+          </article>
+
+          <article class="panel">
+            <h2>Publishing Notes</h2>
+            <p class="panel-copy">Context that helps external readers interpret the page.</p>
+            <div class="winners-list">
+              ${renderPublishHeadlineRow("Model", "List seats are allocated by electoral quotient, then candidates win within sect quotas.")}
+              ${renderPublishHeadlineRow("Blank Votes", formatNumber(summary.blankVotes))}
+              ${renderPublishHeadlineRow("Invalid Votes", formatNumber(summary.invalidVotes))}
+              ${renderPublishHeadlineRow("Qualified Lists", qualifiedLists.map((row) => row.list).join(", ") || "None")}
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>`;
+}
+
+function renderPublishMetric(label, value) {
+  return `
+    <article class="metric">
+      <span>${escapeHtml(label)}</span>
+      <strong class="${getTextDirectionClass(value)}">${escapeHtml(value)}</strong>
+    </article>
+  `;
+}
+
+function renderPublishHeadlineRow(label, value) {
+  return `
+    <div class="headline-row">
+      <div>
+        <strong>${escapeHtml(label)}</strong>
+        <span class="${getTextDirectionClass(value)}">${escapeHtml(value)}</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderPublishWinners(rows) {
+  if (!rows.length) {
+    return '<p class="empty">No winners in current simulation.</p>';
+  }
+
+  return `
+    <div class="winners-list">
+      ${rows
+        .map(
+          (row) => `
+            <div class="winner-row">
+              <div>
+                <strong class="${getTextDirectionClass(row.name)}">${escapeHtml(row.name)}</strong>
+                <span>${escapeHtml(row.seatLabel ?? row.sect)}</span>
+                <span class="${getTextDirectionClass(row.list)}">${escapeHtml(row.list)}</span>
+              </div>
+              <div class="winner-votes">${escapeHtml(formatWinnerVoteLabel(row))}</div>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderPublishClosestContests(rows) {
+  if (!rows.length) {
+    return '<p class="empty">No close contests available.</p>';
+  }
+
+  return `
+    <div class="winners-list">
+      ${rows
+        .map(
+          (row) => `
+            <div class="winner-row">
+              <div>
+                <strong>${escapeHtml(row.sect)}</strong>
+                <span class="${getTextDirectionClass(row.winnerName)}">${escapeHtml(row.winnerName)} vs ${escapeHtml(row.challengerName)}</span>
+                <span>${escapeHtml(row.winnerList)} vs ${escapeHtml(row.challengerList)}</span>
+              </div>
+              <div class="winner-votes">${formatNumber(row.gap)} votes</div>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderPublishSeatFlipRadar(rows) {
+  if (!rows.length) {
+    return '<p class="empty">No seat fragility data available.</p>';
+  }
+
+  return `
+    <div class="winners-list">
+      ${rows
+        .map(
+          (row) => `
+            <div class="winner-row">
+              <div>
+                <strong>${escapeHtml(row.sect)}</strong>
+                <span class="${getTextDirectionClass(row.winnerName)}">${escapeHtml(row.winnerName)}</span>
+                <span>${escapeHtml(row.winnerList)} · ${formatNumber(row.gap)} vote gap</span>
+              </div>
+              <div class="risk ${escapeHtml(row.riskClass.replace("seat-flip-risk-", "risk-"))}">${escapeHtml(row.riskLabel)}</div>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderPublishSeatChart(rows, totalSeats) {
+  if (!rows.length) {
+    return '<p class="empty">No seat distribution available.</p>';
+  }
+
+  return `
+    <div class="chart-stack">
+      ${rows
+        .map((row) => {
+          const palette = getListPalette(row.list);
+          const width = Math.max((row.seats / totalSeats) * 100, 4);
+          return `
+            <div class="chart-row">
+              <div class="chart-head">
+                <strong class="${getTextDirectionClass(row.list)}">${escapeHtml(row.list)}</strong>
+                <span>${row.seats} seat${row.seats === 1 ? "" : "s"}</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:${width}%;background:${palette.dot};"></div>
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
+
+function renderPublishVoteSeatChart(rows, totalVotes, totalSeats) {
+  if (!rows.length) {
+    return '<p class="empty">No vote-share chart available.</p>';
+  }
+
+  return `
+    <div class="chart-stack">
+      ${rows
+        .map((row) => {
+          const palette = getListPalette(row.list);
+          const voteWidth = Math.max((row.votes / totalVotes) * 100, 3);
+          const seatWidth = Math.max((row.seats / totalSeats) * 100, row.seats > 0 ? 3 : 0);
+          return `
+            <div class="chart-row">
+              <div class="chart-head">
+                <strong class="${getTextDirectionClass(row.list)}">${escapeHtml(row.list)}</strong>
+                <span>Votes ${formatDecimal((row.votes / totalVotes) * 100)}% | Seats ${formatDecimal((row.seats / totalSeats) * 100)}%</span>
+              </div>
+              <div class="dual-track">
+                <div class="dual-bar dual-bar-votes">
+                  <div class="bar-fill" style="width:${voteWidth}%;background:${palette.border};"></div>
+                </div>
+                <div class="dual-bar dual-bar-seats">
+                  <div class="bar-fill" style="width:${seatWidth}%;background:${palette.dot};"></div>
+                </div>
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+      <div class="legend">
+        <span class="chip"><span class="dot" style="background:#7c9ab0;"></span>Vote share</span>
+        <span class="chip"><span class="dot" style="background:#0f8f4f;"></span>Seat share</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderPublishSectCaptureChart(rows) {
+  if (!rows.length) {
+    return '<p class="empty">No sect capture summary available.</p>';
+  }
+
+  return `
+    <div class="chart-stack">
+      ${rows
+        .map((row) => `
+          <div class="chart-row">
+            <div class="chart-head">
+              <strong class="${getTextDirectionClass(row.list)}">${escapeHtml(row.list)}</strong>
+              <span>${row.totalSeats} seat${row.totalSeats === 1 ? "" : "s"}</span>
+            </div>
+            <div class="legend">
+              ${row.legend.join("")}
+            </div>
+          </div>
+        `)
+        .join("")}
+    </div>
+  `;
 }
 
 function buildPrintableReportHtml(fileName) {
