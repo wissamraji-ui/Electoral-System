@@ -115,18 +115,13 @@ const elements = {
   resultsWorkspace: document.getElementById("resultsWorkspace"),
   metricsGrid: document.getElementById("metricsGrid"),
   alertsBox: document.getElementById("alertsBox"),
-  comparisonSourceSelect: document.getElementById("comparisonSourceSelect"),
-  comparisonSummary: document.getElementById("comparisonSummary"),
-  comparisonSeatChanges: document.getElementById("comparisonSeatChanges"),
-  comparisonVoteChanges: document.getElementById("comparisonVoteChanges"),
-  comparisonCandidateSwaps: document.getElementById("comparisonCandidateSwaps"),
-  comparisonClosestFlips: document.getElementById("comparisonClosestFlips"),
   listAllocationListFilter: document.getElementById("listAllocationListFilter"),
   listAllocationStatusFilter: document.getElementById("listAllocationStatusFilter"),
   listAllocationBody: document.getElementById("listAllocationBody"),
   winnersListFilter: document.getElementById("winnersListFilter"),
   winnersSectFilter: document.getElementById("winnersSectFilter"),
   winnersTableBody: document.getElementById("winnersTableBody"),
+  seatFlipRadar: document.getElementById("seatFlipRadar"),
   listSeatSummary: document.getElementById("listSeatSummary"),
   shareComparison: document.getElementById("shareComparison"),
   listVoteBars: document.getElementById("listVoteBars"),
@@ -149,7 +144,6 @@ const listColorIndexByKey = new Map();
 let savedScenarios = [];
 let activeGlossaryTrigger = null;
 let loadingPresetYear = "";
-let comparisonSourceId = "";
 const tableUiState = {
   candidate: { sortKey: "list", sortDir: "asc", listFilter: "", sectFilter: "" },
   allocation: { sortKey: "votes", sortDir: "desc", listFilter: "", statusFilter: "" },
@@ -242,7 +236,6 @@ function bindEvents() {
   elements.listAllocationStatusFilter?.addEventListener("change", onTableFilterChange);
   elements.winnersListFilter?.addEventListener("change", onTableFilterChange);
   elements.winnersSectFilter?.addEventListener("change", onTableFilterChange);
-  elements.comparisonSourceSelect?.addEventListener("change", onComparisonSourceChange);
 
   elements.runSimulationBtn.addEventListener("click", () => {
     syncCandidateTableStateFromDom();
@@ -273,11 +266,6 @@ function onTableFilterChange() {
   renderCandidateTable();
   renderListAllocationTable();
   renderWinnersTable();
-}
-
-function onComparisonSourceChange() {
-  comparisonSourceId = elements.comparisonSourceSelect?.value ?? "";
-  renderComparisonPanel();
 }
 
 function populateTemplateSelect() {
@@ -1350,7 +1338,6 @@ function runSimulation() {
 function renderResults() {
   renderMetrics();
   renderAlerts();
-  renderComparisonPanel();
   renderListAllocationTable();
   renderWinnersTable();
   renderDistrictVisualAnalytics();
@@ -1412,386 +1399,6 @@ function renderAlerts() {
   elements.alertsBox.innerHTML = [...successAlert, ...warningAlerts, ...infoAlert].join("");
 }
 
-function renderComparisonPanel() {
-  if (
-    !elements.comparisonSourceSelect ||
-    !elements.comparisonSummary ||
-    !elements.comparisonSeatChanges ||
-    !elements.comparisonVoteChanges ||
-    !elements.comparisonCandidateSwaps ||
-    !elements.comparisonClosestFlips
-  ) {
-    return;
-  }
-
-  const options = getComparisonOptions();
-  const hasCurrentDistrict = state.quotas.length > 0;
-
-  if (!hasCurrentDistrict) {
-    elements.comparisonSourceSelect.innerHTML = '<option value="">Choose a district first</option>';
-    elements.comparisonSourceSelect.disabled = true;
-    renderComparisonEmptyState("Load a district, then compare the current scenario against a baseline or saved simulation.");
-    return;
-  }
-
-  if (options.length === 0) {
-    elements.comparisonSourceSelect.innerHTML = '<option value="">No comparison baselines available</option>';
-    elements.comparisonSourceSelect.disabled = true;
-    renderComparisonEmptyState("No verified baselines or matching saved simulations are available for this district yet.");
-    return;
-  }
-
-  const optionIds = new Set(options.map((option) => option.id));
-  if (!optionIds.has(comparisonSourceId)) {
-    comparisonSourceId = options[0].id;
-  }
-
-  elements.comparisonSourceSelect.disabled = false;
-  elements.comparisonSourceSelect.innerHTML = options
-    .map((option) => `<option value="${escapeHtml(option.id)}">${escapeHtml(option.label)}</option>`)
-    .join("");
-  elements.comparisonSourceSelect.value = comparisonSourceId;
-
-  const selectedOption = options.find((option) => option.id === comparisonSourceId) ?? options[0];
-  if (!selectedOption) {
-    renderComparisonEmptyState("Pick a baseline to compare against the current scenario.");
-    return;
-  }
-
-  const comparisonModel = buildComparisonModel(selectedOption);
-  renderComparisonSummary(comparisonModel);
-  renderComparisonSeatChanges(comparisonModel);
-  renderComparisonVoteChanges(comparisonModel);
-  renderComparisonCandidateSwaps(comparisonModel);
-  renderComparisonClosestFlips(comparisonModel);
-}
-
-function renderComparisonEmptyState(message) {
-  const emptyMarkup = `<p class="comparison-empty">${escapeHtml(message)}</p>`;
-  elements.comparisonSummary.innerHTML = emptyMarkup;
-  elements.comparisonSeatChanges.innerHTML = emptyMarkup;
-  elements.comparisonVoteChanges.innerHTML = emptyMarkup;
-  elements.comparisonCandidateSwaps.innerHTML = emptyMarkup;
-  elements.comparisonClosestFlips.innerHTML = emptyMarkup;
-}
-
-function getComparisonOptions() {
-  const options = [];
-  const templateId = getCurrentTemplateId();
-  const template = templates.find((entry) => entry.id === templateId) ?? null;
-  const currentSignature = buildQuotaSignature(state.quotas);
-
-  if (template && hasElectionResults2022(templateId)) {
-    const baseline = loadElectionResults2022(template);
-    if (baseline) {
-      options.push({
-        id: `preset:2022:${templateId}`,
-        label: "2022 verified baseline",
-        descriptor: "2022 Baseline",
-        scenario: normalizeState(baseline)
-      });
-    }
-  }
-
-  if (template && hasElectionResults2018(templateId)) {
-    const baseline = loadElectionResults2018(template);
-    if (baseline) {
-      options.push({
-        id: `preset:2018:${templateId}`,
-        label: "2018 verified baseline",
-        descriptor: "2018 Baseline",
-        scenario: normalizeState(baseline)
-      });
-    }
-  }
-
-  savedScenarios.forEach((entry) => {
-    const snapshot = normalizeState(entry.scenario);
-    if (buildQuotaSignature(snapshot.quotas) !== currentSignature) {
-      return;
-    }
-
-    options.push({
-      id: `saved:${entry.id}`,
-      label: `Saved simulation: ${entry.name}`,
-      descriptor: entry.name,
-      scenario: snapshot
-    });
-  });
-
-  return options;
-}
-
-function buildComparisonModel(option) {
-  const baselineState = normalizeState(option.scenario);
-  const baselineSimulation = computeResults(
-    baselineState.quotas,
-    baselineState.candidates,
-    baselineState.listVotes,
-    baselineState.blankVotes,
-    baselineState.invalidVotes
-  );
-
-  const seatChangeRows = buildComparisonSeatChangeRows(baselineSimulation, simulation);
-  const voteChangeRows = buildComparisonVoteChangeRows(baselineSimulation, simulation);
-  const candidateSwapRows = buildComparisonCandidateSwapRows(baselineSimulation, simulation);
-
-  return {
-    baselineLabel: option.descriptor,
-    baselineState,
-    baselineSimulation,
-    seatChangeRows,
-    voteChangeRows,
-    candidateSwapRows,
-    closestFlipRows: [...candidateSwapRows]
-      .sort((a, b) => a.currentGap - b.currentGap || a.baselineGap - b.baselineGap || a.seatLabel.localeCompare(b.seatLabel, "en", { sensitivity: "base" }))
-      .slice(0, 4)
-  };
-}
-
-function buildComparisonSeatChangeRows(baselineSimulation, currentSimulation) {
-  const baselineMap = new Map(
-    (baselineSimulation.listAllocation ?? []).map((row) => [normalizeListKey(row.list), row])
-  );
-  const currentMap = new Map(
-    (currentSimulation.listAllocation ?? []).map((row) => [normalizeListKey(row.list), row])
-  );
-  const keys = new Set([...baselineMap.keys(), ...currentMap.keys()]);
-
-  return Array.from(keys)
-    .map((key) => {
-      const baselineRow = baselineMap.get(key);
-      const currentRow = currentMap.get(key);
-      const list = currentRow?.list ?? baselineRow?.list ?? "";
-      const baselineSeats = Number(baselineRow?.seats ?? 0);
-      const currentSeats = Number(currentRow?.seats ?? 0);
-      const delta = currentSeats - baselineSeats;
-      return {
-        key,
-        list,
-        baselineSeats,
-        currentSeats,
-        delta,
-        currentVotes: Number(currentRow?.votes ?? 0),
-        baselineVotes: Number(baselineRow?.votes ?? 0)
-      };
-    })
-    .filter((row) => row.delta !== 0)
-    .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta) || b.currentSeats - a.currentSeats || a.list.localeCompare(b.list, "en", { sensitivity: "base" }));
-}
-
-function buildComparisonVoteChangeRows(baselineSimulation, currentSimulation) {
-  const baselineMap = new Map(
-    (baselineSimulation.listAllocation ?? []).map((row) => [normalizeListKey(row.list), row])
-  );
-  const currentMap = new Map(
-    (currentSimulation.listAllocation ?? []).map((row) => [normalizeListKey(row.list), row])
-  );
-  const baselineTotalVotes = Math.max(1, Number(baselineSimulation.summary?.totalVotes ?? 0));
-  const currentTotalVotes = Math.max(1, Number(currentSimulation.summary?.totalVotes ?? 0));
-  const keys = new Set([...baselineMap.keys(), ...currentMap.keys()]);
-
-  return Array.from(keys)
-    .map((key) => {
-      const baselineRow = baselineMap.get(key);
-      const currentRow = currentMap.get(key);
-      const list = currentRow?.list ?? baselineRow?.list ?? "";
-      const baselineShare = (Number(baselineRow?.votes ?? 0) / baselineTotalVotes) * 100;
-      const currentShare = (Number(currentRow?.votes ?? 0) / currentTotalVotes) * 100;
-      const delta = currentShare - baselineShare;
-
-      return {
-        key,
-        list,
-        baselineShare,
-        currentShare,
-        delta
-      };
-    })
-    .filter((row) => Math.abs(row.delta) >= 0.01)
-    .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta) || a.list.localeCompare(b.list, "en", { sensitivity: "base" }));
-}
-
-function buildComparisonCandidateSwapRows(baselineSimulation, currentSimulation) {
-  const baselineMap = new Map((baselineSimulation.winners ?? []).map((winner) => [winner.seatLabel, winner]));
-  const currentMap = new Map((currentSimulation.winners ?? []).map((winner) => [winner.seatLabel, winner]));
-  const seatLabels = Array.from(new Set([...baselineMap.keys(), ...currentMap.keys()]));
-
-  return seatLabels
-    .map((seatLabel) => {
-      const baselineWinner = baselineMap.get(seatLabel) ?? null;
-      const currentWinner = currentMap.get(seatLabel) ?? null;
-      if (!baselineWinner || !currentWinner) {
-        return null;
-      }
-
-      const sameWinner =
-        buildCandidateIdentityKey(
-          baselineWinner.name,
-          baselineWinner.list,
-          baselineWinner.sect,
-          baselineWinner.minorDistrict
-        ) ===
-        buildCandidateIdentityKey(
-          currentWinner.name,
-          currentWinner.list,
-          currentWinner.sect,
-          currentWinner.minorDistrict
-        );
-
-      if (sameWinner) {
-        return null;
-      }
-
-      return {
-        seatLabel,
-        baselineWinner,
-        currentWinner,
-        baselineGap: Number.isFinite(Number(baselineWinner.margin)) ? Number(baselineWinner.margin) : Number.POSITIVE_INFINITY,
-        currentGap: Number.isFinite(Number(currentWinner.margin)) ? Number(currentWinner.margin) : Number.POSITIVE_INFINITY
-      };
-    })
-    .filter(Boolean)
-    .sort((a, b) => a.seatLabel.localeCompare(b.seatLabel, "en", { sensitivity: "base" }));
-}
-
-function renderComparisonSummary(model) {
-  const topVoteMover = model.voteChangeRows[0] ?? null;
-  const summaryCards = [
-    { label: "Baseline", value: model.baselineLabel },
-    { label: "Seat Flips", value: String(model.candidateSwapRows.length) },
-    { label: "Lists With Seat Change", value: String(model.seatChangeRows.length) },
-    {
-      label: "Largest Vote Shift",
-      value: topVoteMover ? `${topVoteMover.list} (${formatSignedDelta(topVoteMover.delta)} pts)` : "No change"
-    }
-  ];
-
-  elements.comparisonSummary.innerHTML = summaryCards
-    .map(
-      (card) => `
-        <article class="comparison-summary-card">
-          <span>${escapeHtml(card.label)}</span>
-          <strong>${escapeHtml(card.value)}</strong>
-        </article>
-      `
-    )
-    .join("");
-}
-
-function renderComparisonSeatChanges(model) {
-  if (model.seatChangeRows.length === 0) {
-    elements.comparisonSeatChanges.innerHTML = '<p class="comparison-empty">No list seat changes against this baseline.</p>';
-    return;
-  }
-
-  elements.comparisonSeatChanges.innerHTML = model.seatChangeRows
-    .map(
-      (row) => `
-        <div class="comparison-row">
-          <div class="comparison-row-head">
-            ${renderListChip(row.list)}
-            ${renderComparisonDeltaBadge(row.delta, "seat")}
-          </div>
-          <div class="comparison-row-meta">
-            <span>${row.baselineSeats} baseline seat${row.baselineSeats === 1 ? "" : "s"}</span>
-            <span>${row.currentSeats} current seat${row.currentSeats === 1 ? "" : "s"}</span>
-          </div>
-        </div>
-      `
-    )
-    .join("");
-}
-
-function renderComparisonVoteChanges(model) {
-  if (model.voteChangeRows.length === 0) {
-    elements.comparisonVoteChanges.innerHTML = '<p class="comparison-empty">No vote share movement against this baseline.</p>';
-    return;
-  }
-
-  elements.comparisonVoteChanges.innerHTML = model.voteChangeRows
-    .slice(0, 8)
-    .map(
-      (row) => `
-        <div class="comparison-row">
-          <div class="comparison-row-head">
-            ${renderListChip(row.list)}
-            ${renderComparisonDeltaBadge(row.delta, "pts")}
-          </div>
-          <div class="comparison-row-meta">
-            <span>Baseline ${formatDecimal(row.baselineShare)}%</span>
-            <span>Current ${formatDecimal(row.currentShare)}%</span>
-          </div>
-        </div>
-      `
-    )
-    .join("");
-}
-
-function renderComparisonCandidateSwaps(model) {
-  if (model.candidateSwapRows.length === 0) {
-    elements.comparisonCandidateSwaps.innerHTML = '<p class="comparison-empty">No winning candidate swaps against this baseline.</p>';
-    return;
-  }
-
-  elements.comparisonCandidateSwaps.innerHTML = model.candidateSwapRows
-    .map((row) => renderComparisonSwapRow(row))
-    .join("");
-}
-
-function renderComparisonClosestFlips(model) {
-  if (model.closestFlipRows.length === 0) {
-    elements.comparisonClosestFlips.innerHTML = '<p class="comparison-empty">No flipped seats to rank by closeness.</p>';
-    return;
-  }
-
-  elements.comparisonClosestFlips.innerHTML = model.closestFlipRows
-    .map((row) => renderComparisonSwapRow(row, true))
-    .join("");
-}
-
-function renderComparisonSwapRow(row, emphasizeGap = false) {
-  const gapLabel = emphasizeGap
-    ? `Current margin ${formatComparisonGap(row.currentGap)}`
-    : `Baseline margin ${formatComparisonGap(row.baselineGap)} | Current margin ${formatComparisonGap(row.currentGap)}`;
-
-  return `
-    <div class="comparison-row">
-      <div class="comparison-swap-head">
-        <strong>${escapeHtml(row.seatLabel)}</strong>
-        <span class="comparison-delta comparison-delta-negative">Changed</span>
-      </div>
-      <div class="comparison-swap-body">
-        <div class="comparison-swap-track">
-          <div class="comparison-swap-side">
-            <span>Baseline</span>
-            <strong class="${getTextDirectionClass(row.baselineWinner.name)}">${escapeHtml(row.baselineWinner.name)}</strong>
-            <em>${escapeHtml(row.baselineWinner.list)} · ${formatNumber(row.baselineWinner.votes)} votes</em>
-          </div>
-          <div class="comparison-swap-arrow" aria-hidden="true">→</div>
-          <div class="comparison-swap-side">
-            <span>Current</span>
-            <strong class="${getTextDirectionClass(row.currentWinner.name)}">${escapeHtml(row.currentWinner.name)}</strong>
-            <em>${escapeHtml(row.currentWinner.list)} · ${formatNumber(row.currentWinner.votes)} votes</em>
-          </div>
-        </div>
-        <div class="comparison-swap-meta">
-          <span>${gapLabel}</span>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderComparisonDeltaBadge(value, suffix) {
-  const deltaClass =
-    value > 0 ? "comparison-delta comparison-delta-positive" :
-      value < 0 ? "comparison-delta comparison-delta-negative" :
-        "comparison-delta comparison-delta-neutral";
-  const label = `${formatSignedDelta(value)} ${suffix}`;
-  return `<span class="${deltaClass}">${escapeHtml(label)}</span>`;
-}
-
 function formatSignedDelta(value) {
   const numeric = Number(value);
   if (!Number.isFinite(numeric)) {
@@ -1808,10 +1415,6 @@ function formatSignedDelta(value) {
   }
 
   return "0";
-}
-
-function formatComparisonGap(value) {
-  return Number.isFinite(Number(value)) ? `${formatNumber(value)} votes` : "No challenger";
 }
 
 function renderListAllocationTable() {
@@ -1945,6 +1548,7 @@ function renderWinnersTable() {
 }
 
 function renderDistrictVisualAnalytics() {
+  renderSeatFlipRadar();
   renderListSeatSummary();
   renderShareComparison();
   renderListVoteBars();
@@ -1955,6 +1559,38 @@ function renderDistrictVisualAnalytics() {
   renderCompetitivenessChart();
   renderListSectMap();
   renderCandidateLeaderboard();
+}
+
+function renderSeatFlipRadar() {
+  if (!elements.seatFlipRadar) {
+    return;
+  }
+
+  const rows = getSeatFlipRadarRows();
+  if (rows.length === 0) {
+    elements.seatFlipRadar.innerHTML = '<p class="empty">Seat fragility appears when at least one seat has a credible challenger.</p>';
+    return;
+  }
+
+  elements.seatFlipRadar.innerHTML = rows
+    .map(
+      (row) => `
+        <article class="seat-flip-row">
+          <div class="seat-flip-head">
+            <div>
+              <div class="seat-flip-seat">${escapeHtml(row.sect)}</div>
+              <strong class="${getTextDirectionClass(row.winnerName)}">${escapeHtml(row.winnerName)}</strong>
+            </div>
+            <span class="seat-flip-risk ${escapeHtml(row.riskClass)}">${escapeHtml(row.riskLabel)}</span>
+          </div>
+          <div class="seat-flip-meta">
+            <span>${escapeHtml(row.winnerList)} · ${formatNumber(row.gap)} vote gap · ${formatDecimal(row.marginPct)}% margin</span>
+            ${row.note ? `<span class="seat-flip-note">${escapeHtml(row.note)}</span>` : ""}
+          </div>
+        </article>
+      `
+    )
+    .join("");
 }
 
 function renderListSeatSummary() {
@@ -2337,6 +1973,70 @@ function renderCandidateLeaderboard() {
 
 function getClosestRacesData() {
   return getClosestRacesDataForScenario(state, simulation, 4);
+}
+
+function getSeatFlipRadarRows() {
+  const races = getClosestRacesDataForScenario(state, simulation, Number.POSITIVE_INFINITY);
+
+  return races
+    .map((race) => {
+      const winner = (simulation.winners ?? []).find(
+        (entry) =>
+          String(entry.name ?? "").trim() === String(race.winnerName).trim() &&
+          String(entry.list ?? "").trim() === String(race.winnerList).trim() &&
+          String(entry.seatLabel ?? "").startsWith(String(race.sect).trim())
+      );
+      const marginBase = Math.max(
+        1,
+        Number(winner?.voteShareBase ?? race.winnerVotes + race.challengerVotes)
+      );
+      const marginPct = (race.gap / marginBase) * 100;
+      const risk = getSeatRiskLabel(marginPct);
+
+      return {
+        sect: race.sect,
+        winnerName: race.winnerName,
+        winnerList: race.winnerList,
+        gap: race.gap,
+        marginPct,
+        riskLabel: risk.label,
+        riskClass: risk.className,
+        note: ""
+      };
+    })
+    .sort((a, b) => {
+      const riskDelta = getSeatRiskRank(a.riskLabel) - getSeatRiskRank(b.riskLabel);
+      if (riskDelta !== 0) {
+        return riskDelta;
+      }
+
+      return a.gap - b.gap || a.marginPct - b.marginPct;
+    })
+    .slice(0, 5);
+}
+
+function getSeatRiskLabel(marginPct) {
+  if (marginPct <= 0.75) {
+    return { label: "High Risk", className: "seat-flip-risk-high" };
+  }
+
+  if (marginPct <= 2) {
+    return { label: "Medium Risk", className: "seat-flip-risk-medium" };
+  }
+
+  return { label: "Safe", className: "seat-flip-risk-safe" };
+}
+
+function getSeatRiskRank(label) {
+  if (label === "High Risk") {
+    return 0;
+  }
+
+  if (label === "Medium Risk") {
+    return 1;
+  }
+
+  return 2;
 }
 
 function getClosestRacesDataForScenario(scenarioState, scenarioSimulation, limit = 4) {
